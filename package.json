@@ -8,6 +8,7 @@
   },
   "scripts": {
     "sandcastle": "tsx --env-file=.sandcastle/secrets.env .sandcastle/main.mts",
-    "sandcastle:check": "tsc -p .sandcastle"
+    "sandcastle:check": "tsc -p .sandcastle",
+    "sandcastle:build": "sandcastle docker build-image --image-name sandcastle:moon-dataset --dockerfile .sandcastle/Dockerfile"
   }
 }

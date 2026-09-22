@@ -24,6 +24,18 @@ reviewer 阶段通过 `@.sandcastle/CODING_STANDARDS.md` 加载本文件，因�
   `moondata.toml`）的解析已收在 `moondata.config`，新代码走它。
 - 955 GB 影像数据不在仓库内。任何测试或默认代码路径都不得假设数据根存在。
 
+## 沙箱里的数据根
+
+- 数据根已按 `MOONDATA_DATA_ROOT=/mnt/data` **只读**挂进沙箱。所以镶嵌、重投影、
+  裁切、以及对着既有产物的逐字节验收，都能在沙箱里真的跑，不必假装。
+- **`/mnt/data` 下一个字节都不许写。** 那 919 GB 原始影像不可再生，挂载本身是只读的，
+  尝试写入会直接报错。中间产物和输出一律写到工作区内（会被 git 看到）或 `/tmp`。
+- 布局：`/mnt/data/raw/ROI_*/`（原始影像，919 GB）、
+  `/mnt/data/Processed_Data/{Train,Val,Test}/`（既有 patch 产物，37 GB / 22934 个文件）。
+- 读大影像的随机块（GDAL 的常规访问方式）速度正常。但**遍历大量小文件很慢**——
+  bind mount 的 `stat` 只有约 511 次/s，比宿主慢两个数量级。全量逐字节验收 22934 个
+  文件约需 10 分钟，这是已知代价，不是卡死，别中途放弃或改小验收范围来绕。
+
 ## 风格
 
 - 模块开头写 `from __future__ import annotations`。
@@ -36,7 +48,9 @@ reviewer 阶段通过 `@.sandcastle/CODING_STANDARDS.md` 加载本文件，因�
 ## 测试
 
 - 测试放 `tests/`，用 pytest。`pyproject.toml` 已配好 `pythonpath = ["src"]`。
-- 测试不得依赖 GDAL/pyproj，也不得依赖真实数据根——沙箱里两者都没有。
+- 测试不得依赖 GDAL/pyproj，也不得依赖真实数据根。沙箱里两者都有，但只装了文档档
+  （`environment.yml`，无地理库）、也没挂数据盘的人必须还能把测试跑全绿。需要真实
+  数据或地理库才能验的东西，走命令行端到端跑，不要写成单测。
 - 测试 fixture 里的路径必须平台中立：用 `tmp_path` 派生并以 `.as_posix()` 写入，
   不要写 `F:/...` 这类盘符路径。盘符在 Linux 上是相对路径，沙箱是 Linux 容器。
   （`.as_posix()` 而非 `str()`：Windows 的反斜杠在 TOML 字符串里是转义符。）

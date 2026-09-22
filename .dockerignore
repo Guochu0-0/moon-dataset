@@ -1,0 +1,6 @@
+# 构建镜像时 context 是仓库根（见 .sandcastle/Dockerfile 里的 --dockerfile 说明），
+# 而 Dockerfile 只需要 environment-data.yml 一个文件。其余一律别传。
+
+*
+
+!environment-data.yml

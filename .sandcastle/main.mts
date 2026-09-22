@@ -83,14 +83,42 @@ type Plan = z.infer<typeof planSchema>;
 // plan→execute→merge 的最大轮数。
 const MAX_ITERATIONS = 10;
 
-// 沙箱就绪后、agent 启动前跑。镜像里已有一个装了 numpy+pytest 的 venv 并挂在 PATH 上
-// （见 Dockerfile），这里只把仓库本身装成可编辑模式，让 `pytest` 能 import moondata。
-// --no-deps：依赖已在镜像里，避免每次重新解析。
+// 沙箱就绪后、agent 启动前跑。镜像里已有一个装了 GDAL/pyproj/quarto/pytest 的 conda
+// 环境并挂在 PATH 上（见 Dockerfile），这里只把仓库本身装成可编辑模式，让 `pytest`
+// 能 import moondata。--no-deps：依赖已在镜像里，避免每次重新解析。
 const hooks = {
   sandbox: {
     onSandboxReady: [{ command: "pip install -e . --no-deps" }],
   },
 };
+
+// ---------------------------------------------------------------------------
+// 沙箱
+//
+// 数据根整份只读挂进去，agent 因此能真的跑完四步流程、并对着 Processed_Data 里的
+// 既有产物做逐字节验收。只读是硬要求：那 919 GB 原始影像不可再生。
+//
+// MOONDATA_DATA_ROOT 走 provider 的 env，命中 moondata.config 的第二层优先级，
+// 所以本机那个 gitignore 掉的 moondata.toml 不用进容器。
+//
+// 性能实测（3000 个小文件 stat）：宿主原生 58k 次/s、容器原生 394k 次/s、
+// 经 bind mount 仅 511 次/s。慢 100 倍以上的是小文件元数据，而不是吞吐——
+// GDAL 按块随机读影像实测容器反而略快于宿主（64 KB 块 1082 vs 828 次/s）。
+// 代价落在全量逐字节验收上：22934 个 patch 跑一遍约 10 分钟。
+// 想消掉它只能让数据落在容器原生文件系统上，但 sandcastle 的 mounts 只接受宿主
+// 路径、够不着 named volume，而数据在仓库外也 COPY 不进镜像。故暂时接受。
+// ---------------------------------------------------------------------------
+
+const DATA_ROOT_HOST = "G:/Lunar_Optical_SAR_Registration_Dataset";
+const DATA_ROOT_SANDBOX = "/mnt/data";
+
+const sandboxProvider = () =>
+  docker({
+    mounts: [
+      { hostPath: DATA_ROOT_HOST, sandboxPath: DATA_ROOT_SANDBOX, readonly: true },
+    ],
+    env: { MOONDATA_DATA_ROOT: DATA_ROOT_SANDBOX },
+  });
 
 // ---------------------------------------------------------------------------
 // 主循环
@@ -104,7 +132,7 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
   // -------------------------------------------------------------------------
   const plan = await sandcastle.run({
     hooks,
-    sandbox: docker(),
+    sandbox: sandboxProvider(),
     name: "planner",
     // 结构化输出要求 maxIterations 为 1；planner 只读不写，一轮够了。
     maxIterations: 1,
@@ -136,7 +164,7 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
     issues.map(async (issue) => {
       const sandbox = await sandcastle.createSandbox({
         branch: issue.branch,
-        sandbox: docker(),
+        sandbox: sandboxProvider(),
         hooks,
       });
 
@@ -212,7 +240,7 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
   // -------------------------------------------------------------------------
   await sandcastle.run({
     hooks,
-    sandbox: docker(),
+    sandbox: sandboxProvider(),
     name: "merger",
     maxIterations: 1,
     agent: mergerAgent(),

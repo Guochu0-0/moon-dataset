@@ -1,3 +1,7 @@
 # data/ 下是不可再生的关键资产，按字节原样存储：
 # 禁止任何行尾转换与文本处理，否则校验和与源文件不再一致。
 data/** -text
+
+# Dockerfile 的 RUN 里是 sh 脚本：行尾续行符 `\` 后面跟上 `\r` 会让构建以很难懂的
+# 方式失败。core.autocrlf=true 会在 checkout 时把文本文件转成 CRLF，这里显式钉回 LF。
+.sandcastle/Dockerfile text eol=lf
