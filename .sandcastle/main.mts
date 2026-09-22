@@ -1,21 +1,15 @@
-// Parallel Planner with Review —— 按角色分配 agent 的四阶段编排
+// 按角色分配 agent 的四阶段编排。跑法：npm run sandcastle
 //
-// 阶段 1（Plan）：  读 ready-for-agent 的 issue，建依赖图，输出 <plan> JSON。
-// 阶段 2（Execute + Review）：每个未被阻塞的 issue 各起一个沙箱，implementer 先跑，
-//                    产出 commit 后 reviewer 在同一沙箱同一分支上跑。全部并发。
-// 阶段 3（Merge）：  一个 agent 把所有产出分支合回当前分支并关 issue。
+// Plan：读 ready-for-agent 的 issue，建依赖图，输出 <plan> JSON。
+// Execute + Review：每个未被阻塞的 issue 各起一个沙箱，implementer 先跑，产出 commit
+//   后 reviewer 在同一沙箱同一分支上跑。全部并发。
+// Merge：把所有产出分支合回当前分支并关 issue。
 //
-// 外层循环最多跑 MAX_ITERATIONS 轮，让上一轮合并后新解锁的 issue 能被接上。
-//
-// 跑法：npm run sandcastle
+// 外层循环让上一轮合并后新解锁的 issue 能被接上。
 
 import * as sandcastle from "@ai-hero/sandcastle";
 import { docker } from "@ai-hero/sandcastle/sandboxes/docker";
 import { z } from "zod";
-
-// ---------------------------------------------------------------------------
-// 凭据
-// ---------------------------------------------------------------------------
 
 const requireEnv = (key: string): string => {
   const value = process.env[key];
@@ -27,32 +21,17 @@ const requireEnv = (key: string): string => {
   return value;
 };
 
-// 凭据只下发给 agent 自己，不经 .sandcastle/.env 全量注入沙箱——那个文件里声明的
-// 每个 key 都会进到每一个沙箱，包括本不需要它的那些。
+// 凭据只下发给 agent，不放进 .sandcastle/.env——那个文件里的每个 key 都会注入每一个
+// 沙箱，包括本不需要它的。
 const claudeEnv = () => ({
   CLAUDE_CODE_OAUTH_TOKEN: requireEnv("CLAUDE_CODE_OAUTH_TOKEN"),
 });
 
-// ---------------------------------------------------------------------------
-// 把 agent 的 env 随命令一起送进容器
-//
-// sandcastle 只在 `docker run` 那一刻注入 env，之后一律是 `docker exec`，不带 -e。
-// 而 createSandbox() 建容器时把 agentProviderEnv 写死成了 {}，sandbox.run() 也从不
-// 读 provider.env——于是走 createSandbox 的 implementer 和 reviewer 拿不到任何模型
-// 凭据，claude 直接以 "Not logged in" 退出。planner/merger 走顶层 sandcastle.run()，
-// 容器由它自己创建、env 在 docker run 时注入，所以不受影响。这正是头一次跑
-// planner 正常、implementer 全挂的原因。
-//
-// 这里把 env 拼成 `KEY=v claude ...` 的命令前缀，跟着 sh -c 一起进容器。前缀只作用
-// 于单条命令，不在容器里留下痕迹——四个角色眼下用的是同一套凭据，但只要以后有一个
-// 换了 provider（比如 implementer 再改回按量付费的端点），塞进 docker env 的做法就
-// 会让它的 ANTHROPIC_BASE_URL 留在容器里，把共用同一沙箱的 reviewer 也悄悄改道过去。
-// 那是不报错、也看不出来的静默降级。
-//
-// 凭据不会进日志：sandcastle 只记 stdout/stderr 的解析结果，不记命令本身。
-// ---------------------------------------------------------------------------
-
-// POSIX sh 的单引号里没有任何转义，所以碰到 ' 只能先闭合、拼一个转义过的单引号、再开。
+// sandcastle 只在 `docker run` 那一刻注入 env，此后一律 `docker exec` 不带 -e；而
+// createSandbox() 把 agentProviderEnv 写死成了 {}。所以光给 claudeCode 传 env 不够，
+// 走 createSandbox 的 implementer/reviewer 会拿不到凭据、以 "Not logged in" 退出。
+// 这里把 env 拼成 `KEY=v claude ...` 的命令前缀一起送进去。
+// POSIX sh 的单引号内无转义，碰到 ' 只能先闭合、拼一个转义过的单引号、再开。
 const shQuote = (value: string) => `'${value.replaceAll("'", `'\\''`)}'`;
 
 const withInlineEnv = <T extends sandcastle.AgentProvider>(
@@ -69,27 +48,14 @@ const withInlineEnv = <T extends sandcastle.AgentProvider>(
   },
 });
 
-// ---------------------------------------------------------------------------
-// agent
-//
-// 四个角色统一用 claude-opus-5，走订阅（不按 token 计费）。
-//
-// implementer 原本配的是 DeepSeek——它跑量最大，按量付费更划算。实跑下来产出质量
-// 不够：这个项目的实现任务要同时拿住地理库的坐标约定、仓库自己的分层约束和逐字节
-// 可复现的验收标准，省下的那点钱抵不过返工。真要再省，改这一处的模型名即可，
-// withInlineEnv 已经能让同一沙箱里的两个角色各用各的凭据。
-// ---------------------------------------------------------------------------
-
-// 规划：依赖分析要判断哪些 issue 会改到重叠文件，错判直接导致合并冲突。
 const plannerAgent = () =>
   withInlineEnv(
     sandcastle.claudeCode("claude-opus-5", { env: claudeEnv() }),
     claudeEnv(),
   );
 
-// 实现：跑量最大的一环，每个 issue 最多 100 轮。
-// captureSessions 关掉：四个角色同为 claudeCode provider，会话会写进同一个
-// ~/.claude 存储，混在一起后 resume/fork 容易接错。
+// captureSessions 关掉：四个角色同为 claudeCode provider，会话会写进同一个 ~/.claude
+// 存储，混在一起后 resume/fork 容易接错。
 const implementerAgent = () =>
   withInlineEnv(
     sandcastle.claudeCode("claude-opus-5", {
@@ -99,23 +65,17 @@ const implementerAgent = () =>
     claudeEnv(),
   );
 
-// 审查：要对着 CODING_STANDARDS.md 判断实现是否偏离本仓库约定。
 const reviewerAgent = () =>
   withInlineEnv(
     sandcastle.claudeCode("claude-opus-5", { env: claudeEnv() }),
     claudeEnv(),
   );
 
-// 合并：要读两边改动判断冲突怎么解，解错会静默丢代码。
 const mergerAgent = () =>
   withInlineEnv(
     sandcastle.claudeCode("claude-opus-5", { env: claudeEnv() }),
     claudeEnv(),
   );
-
-// ---------------------------------------------------------------------------
-// 配置
-// ---------------------------------------------------------------------------
 
 const planSchema = z.object({
   issues: z.array(
@@ -123,24 +83,14 @@ const planSchema = z.object({
   ),
 });
 
-// run() 的重载会把 Output.object 的泛型推成 any，下游就全是隐式 any 了。
-// 显式标注 plan.output，把类型接回来。
+// run() 的重载会把 Output.object 的泛型推成 any，显式标注把类型接回来。
 type Plan = z.infer<typeof planSchema>;
 
-// plan→execute→merge 的最大轮数。
 const MAX_ITERATIONS = 10;
 
-// 沙箱就绪后、agent 启动前跑。镜像里已有一个装了 GDAL/pyproj/quarto/pytest 的 conda
-// 环境并挂在 PATH 上（见 Dockerfile），这里只把仓库本身装成可编辑模式，让 `pytest`
-// 能 import moondata。--no-deps：依赖已在镜像里，避免每次重新解析。
-//
-// --no-build-isolation 是必须的，不是优化。pyproject.toml 声明了
-// `requires = ["setuptools>=68"]`，pip 默认会为此新建一个隔离环境、从 PyPI 重新下载
-// 一份 setuptools——镜像里明明已经有 84.0.0，而且没有 pip 缓存，所以每起一个沙箱都
-// 要走一次公网。实测这一步 40.1s（其中 CPU 仅 1.2s，其余全在等网络），而 hook 的
-// 默认预算是 60s：平时勉强压线（14~20s），网络一抖就整轮抛 HookTimeoutError 崩掉。
-// 关掉隔离后用环境里现成的 setuptools，`--network none` 下 1.3s 装完，产出的
-// editable wheel 与原来一致。
+// 镜像里已有装好 GDAL/pyproj/quarto/pytest 的 conda 环境，这里只把仓库装成可编辑模式
+// 让 pytest 能 import moondata。--no-deps：依赖已在镜像里。--no-build-isolation：否则
+// pip 会为 requires=["setuptools>=68"] 联网重下一份，实测 40s，打满 hook 的 60s 预算。
 const hooks = {
   sandbox: {
     onSandboxReady: [
@@ -149,23 +99,9 @@ const hooks = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// 沙箱
-//
-// 数据根整份只读挂进去，agent 因此能真的跑完四步流程、并对着 Processed_Data 里的
-// 既有产物做逐字节验收。只读是硬要求：那 919 GB 原始影像不可再生。
-//
-// MOONDATA_DATA_ROOT 走 provider 的 env，命中 moondata.config 的第二层优先级，
-// 所以本机那个 gitignore 掉的 moondata.toml 不用进容器。
-//
-// 性能实测（3000 个小文件 stat）：宿主原生 58k 次/s、容器原生 394k 次/s、
-// 经 bind mount 仅 511 次/s。慢 100 倍以上的是小文件元数据，而不是吞吐——
-// GDAL 按块随机读影像实测容器反而略快于宿主（64 KB 块 1082 vs 828 次/s）。
-// 代价落在全量逐字节验收上：22934 个 patch 跑一遍约 10 分钟。
-// 想消掉它只能让数据落在容器原生文件系统上，但 sandcastle 的 mounts 只接受宿主
-// 路径、够不着 named volume，而数据在仓库外也 COPY 不进镜像。故暂时接受。
-// ---------------------------------------------------------------------------
-
+// 只读是硬要求：那 919 GB 原始影像不可再生。
+// MOONDATA_DATA_ROOT 走 provider env，命中 moondata.config 的第二层优先级，所以本机
+// 那个 gitignore 掉的 moondata.toml 不用进容器。
 const DATA_ROOT_HOST = "G:/Lunar_Optical_SAR_Registration_Dataset";
 const DATA_ROOT_SANDBOX = "/mnt/data";
 
@@ -177,16 +113,10 @@ const sandboxProvider = () =>
     env: { MOONDATA_DATA_ROOT: DATA_ROOT_SANDBOX },
   });
 
-// ---------------------------------------------------------------------------
-// 主循环
-// ---------------------------------------------------------------------------
-
 for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
   console.log(`\n=== Iteration ${iteration}/${MAX_ITERATIONS} ===\n`);
 
-  // -------------------------------------------------------------------------
   // 阶段 1：Plan
-  // -------------------------------------------------------------------------
   const plan = await sandcastle.run({
     hooks,
     sandbox: sandboxProvider(),
@@ -210,13 +140,9 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
     console.log(`  ${issue.id}: ${issue.title} → ${issue.branch}`);
   }
 
-  // -------------------------------------------------------------------------
   // 阶段 2：Execute + Review
-  //
-  // 每个 issue 用 createSandbox() 起一个沙箱，implementer 和 reviewer 共享它，
-  // 因此 reviewer 看到的就是 implementer 刚提交的那个分支。
-  // allSettled：一个流水线失败不影响其余。
-  // -------------------------------------------------------------------------
+  // implementer 和 reviewer 共享一个沙箱，reviewer 看到的就是 implementer 刚提交的
+  // 那个分支。allSettled：一个流水线失败不影响其余。
   const settled = await Promise.allSettled(
     issues.map(async (issue) => {
       const sandbox = await sandcastle.createSandbox({
@@ -238,7 +164,6 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
           },
         });
 
-        // 没有 commit 就没什么可审的。
         if (implement.commits.length > 0) {
           const review = await sandbox.run({
             name: `reviewer:${issue.id}`,
@@ -270,7 +195,6 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
     }
   }
 
-  // 只把真的产出了 commit 的分支交给合并阶段。
   const completedIssues = settled
     .map((outcome, i) => ({ outcome, issue: issues[i]! }))
     .filter(
@@ -292,9 +216,7 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
     continue;
   }
 
-  // -------------------------------------------------------------------------
   // 阶段 3：Merge
-  // -------------------------------------------------------------------------
   await sandcastle.run({
     hooks,
     sandbox: sandboxProvider(),
