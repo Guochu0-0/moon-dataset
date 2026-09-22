@@ -10,3 +10,6 @@ __pycache__/
 # Python 打包与测试
 *.egg-info/
 /.pytest_cache/
+
+# Node 依赖（sandcastle 是 devDependency，装在仓库根）
+/node_modules/
