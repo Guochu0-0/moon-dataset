@@ -26,6 +26,17 @@ conda env create -f environment-data.yml   # 数据处理档
 conda activate moon-dataset-data
 ```
 
+> **先把求解器换成 libmamba，否则数据处理档基本装不上。** conda 23.10 以前默认用
+> 经典 SAT 求解器，它在 `gdal + qt6 + jupyter` 这一锅上会卡到没有尽头——实测跑满
+> 40 分钟、吃掉 3.8 GB 内存仍未出解。libmamba 几十秒解完。
+>
+> ```bash
+> conda config --set solver libmamba        # 一次性设置
+> conda --version                           # 23.10 及以后已经是默认
+> ```
+>
+> 不想改全局配置的话，在建环境时加 `--solver=libmamba` 也行。
+
 两档都会把本仓库以可编辑方式装进环境，装完即有 `moondata` 命令。
 
 > 只是想读文档的话，其实**什么都不用装**：文档站的构建产物已提交，克隆后直接

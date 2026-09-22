@@ -1,7 +1,10 @@
 # 数据处理档（重）——在文档档之上加地理库，用于真正读取 955 GB 影像、重跑四步流程。
 #
+#   conda config --set solver libmamba    # conda < 23.10 必须先做这步
 #   conda env create -f environment-data.yml
 #   conda activate moon-dataset-data
+#
+# 经典 SAT 求解器在这一锅上解不动（实测 40 分钟无果），libmamba 几十秒。
 #
 # GDAL/pyproj 只从 conda-forge 装，**不要用 pip 装 GDAL**。所有对它们的调用都收在
 # moondata.raster 一层里。
