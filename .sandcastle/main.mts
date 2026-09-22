@@ -133,9 +133,19 @@ const MAX_ITERATIONS = 10;
 // 沙箱就绪后、agent 启动前跑。镜像里已有一个装了 GDAL/pyproj/quarto/pytest 的 conda
 // 环境并挂在 PATH 上（见 Dockerfile），这里只把仓库本身装成可编辑模式，让 `pytest`
 // 能 import moondata。--no-deps：依赖已在镜像里，避免每次重新解析。
+//
+// --no-build-isolation 是必须的，不是优化。pyproject.toml 声明了
+// `requires = ["setuptools>=68"]`，pip 默认会为此新建一个隔离环境、从 PyPI 重新下载
+// 一份 setuptools——镜像里明明已经有 84.0.0，而且没有 pip 缓存，所以每起一个沙箱都
+// 要走一次公网。实测这一步 40.1s（其中 CPU 仅 1.2s，其余全在等网络），而 hook 的
+// 默认预算是 60s：平时勉强压线（14~20s），网络一抖就整轮抛 HookTimeoutError 崩掉。
+// 关掉隔离后用环境里现成的 setuptools，`--network none` 下 1.3s 装完，产出的
+// editable wheel 与原来一致。
 const hooks = {
   sandbox: {
-    onSandboxReady: [{ command: "pip install -e . --no-deps" }],
+    onSandboxReady: [
+      { command: "pip install -e . --no-deps --no-build-isolation" },
+    ],
   },
 };
 
