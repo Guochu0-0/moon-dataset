@@ -30,7 +30,6 @@ class Fingerprint:
 class Snapshot:
     generated_at: str
     fingerprint: Fingerprint
-    path: Path | None = None
 
 
 def compute_fingerprint(root: Path) -> Fingerprint:
@@ -75,7 +74,6 @@ def load_snapshot(path: Path) -> Snapshot | None:
                 file_count=fingerprint["file_count"],
                 total_bytes=fingerprint["total_bytes"],
             ),
-            path=path,
         )
     except (json.JSONDecodeError, KeyError, TypeError, OSError) as error:
         raise SnapshotUnreadable(f"统计快照读不动：{path}（{error}）") from error

@@ -69,3 +69,33 @@ class TestPipelineCommandsNeedImagery:
 
         parser = build_parser()
         assert command in parser.format_help()
+
+
+class TestPipelineCommandsDoNotWalkTheDrive:
+    """「进门检查」只该 stat 一下数据根，不该为此遍历 955 GB。"""
+
+    def test_reachability_check_does_not_fingerprint(
+        self,
+        repo: Path,
+        imagery: Path,
+        monkeypatch: pytest.MonkeyPatch,
+        capsys: pytest.CaptureFixture[str],
+    ) -> None:
+        import moondata.doctor as doctor
+        from moondata.config import load_config
+
+        # 有快照在，run_doctor 才会去算指纹——没有快照的话这个测试形同虚设。
+        snapshot_path = load_config(env={}, start=repo).snapshot_path
+        snapshot_path.parent.mkdir(parents=True, exist_ok=True)
+        snapshot_path.write_text(
+            '{"generated_at": "now", "fingerprint":'
+            ' {"digest": "sha256:x", "file_count": 1, "total_bytes": 2}}',
+            encoding="utf-8",
+        )
+
+        def explode(_root: Path) -> None:
+            raise AssertionError("进门检查不该计算指纹")
+
+        monkeypatch.setattr(doctor, "compute_fingerprint", explode)
+        assert main(["patches", "--data-root", str(imagery)]) == 1
+        assert "尚未实现" in capsys.readouterr().err

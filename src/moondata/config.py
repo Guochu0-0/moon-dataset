@@ -26,7 +26,7 @@ from moondata.errors import ConfigUnreadable
 ENV_VAR = "MOONDATA_DATA_ROOT"
 CONFIG_FILENAME = "moondata.toml"
 REPO_MARKER = ".git"
-SNAPSHOT_RELPATH = Path("data") / "stats" / "snapshot.json"
+SNAPSHOT_RELPATH = Path("stats") / "snapshot.json"
 
 
 class DataRootSource(Enum):
@@ -64,7 +64,7 @@ def load_config(
     file_root = _read_config_root(config_path) if config_path is not None else None
 
     root, source, origin = _first_non_empty(
-        (cli_data_root, DataRootSource.CLI, DataRootSource.CLI.value),
+        (cli_data_root, DataRootSource.CLI, None),
         (env.get(ENV_VAR), DataRootSource.ENV, ENV_VAR),
         (file_root, DataRootSource.CONFIG_FILE, str(config_path) if config_path else None),
     )

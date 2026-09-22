@@ -33,15 +33,24 @@ class SnapshotCheck(Enum):
 
 @dataclass(frozen=True)
 class DoctorReport:
-    data_root: Path | None
-    data_root_source: DataRootSource
-    data_root_origin: str | None
+    config: Config
     reachability: Reachability
-    snapshot_path: Path
     snapshot: Snapshot | None
     snapshot_check: SnapshotCheck
     actual_fingerprint: Fingerprint | None
     note: str | None = None
+
+    @property
+    def data_root(self) -> Path | None:
+        return self.config.data_root
+
+    @property
+    def data_root_source(self) -> DataRootSource:
+        return self.config.data_root_source
+
+    @property
+    def snapshot_path(self) -> Path:
+        return self.config.snapshot_path
 
     @property
     def ok(self) -> bool:
@@ -52,18 +61,27 @@ class DoctorReport:
         )
 
 
+def probe_data_root(data_root: Path | None) -> Reachability:
+    """只 stat 一下数据根。凡是要读影像的命令在动手前用它——**不要为此去算指纹**，
+    那是一次 955 GB 的全盘遍历。"""
+    if data_root is None:
+        return Reachability.UNSET
+    if data_root.is_dir():
+        return Reachability.REACHABLE
+    if data_root.exists():
+        return Reachability.NOT_A_DIRECTORY
+    return Reachability.MISSING
+
+
 def run_doctor(config: Config) -> DoctorReport:
-    reachability = _probe(config.data_root)
+    reachability = probe_data_root(config.data_root)
 
     try:
         snapshot = load_snapshot(config.snapshot_path)
     except SnapshotUnreadable as error:
         return DoctorReport(
-            data_root=config.data_root,
-            data_root_source=config.data_root_source,
-            data_root_origin=config.data_root_origin,
+            config=config,
             reachability=reachability,
-            snapshot_path=config.snapshot_path,
             snapshot=None,
             snapshot_check=SnapshotCheck.UNREADABLE,
             actual_fingerprint=None,
@@ -72,26 +90,13 @@ def run_doctor(config: Config) -> DoctorReport:
 
     check, actual, note = _compare(config.data_root, reachability, snapshot)
     return DoctorReport(
-        data_root=config.data_root,
-        data_root_source=config.data_root_source,
-        data_root_origin=config.data_root_origin,
+        config=config,
         reachability=reachability,
-        snapshot_path=config.snapshot_path,
         snapshot=snapshot,
         snapshot_check=check,
         actual_fingerprint=actual,
         note=note,
     )
-
-
-def _probe(data_root: Path | None) -> Reachability:
-    if data_root is None:
-        return Reachability.UNSET
-    if data_root.is_dir():
-        return Reachability.REACHABLE
-    if data_root.exists():
-        return Reachability.NOT_A_DIRECTORY
-    return Reachability.MISSING
 
 
 def _compare(
@@ -114,15 +119,11 @@ def _compare(
 
 
 def format_report(report: DoctorReport) -> str:
+    origin = report.config.data_root_origin
     lines = [
         f"数据根    {report.data_root if report.data_root else '（未设置）'}",
         f"来源      {report.data_root_source.value}"
-        + (
-            f" → {report.data_root_origin}"
-            if report.data_root_origin
-            and report.data_root_origin != report.data_root_source.value
-            else ""
-        ),
+        + (f" → {origin}" if origin else ""),
         f"可达性    {report.reachability.value}",
         f"统计快照  {report.snapshot_path}",
         f"指纹      {report.snapshot_check.value}",

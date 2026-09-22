@@ -26,7 +26,7 @@ def imagery(tmp_path: Path) -> Path:
 
 
 def write_snapshot(repo: Path, digest: str, file_count: int, total_bytes: int) -> Path:
-    path = repo / "data" / "stats" / "snapshot.json"
+    path = repo / "stats" / "snapshot.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(

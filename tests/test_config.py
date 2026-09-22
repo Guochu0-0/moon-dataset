@@ -87,7 +87,7 @@ class TestDiscovery:
 
     def test_snapshot_path_defaults_under_the_repo_root(self, repo: Path) -> None:
         config = load_config(env={}, start=repo)
-        assert config.snapshot_path == repo / "data" / "stats" / "snapshot.json"
+        assert config.snapshot_path == repo / "stats" / "snapshot.json"
 
     def test_malformed_config_file_names_itself(self, repo: Path) -> None:
         path = repo / "moondata.toml"

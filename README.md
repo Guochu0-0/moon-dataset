@@ -64,9 +64,14 @@ moondata doctor
 数据根    G:\Lunar_Optical_SAR_Registration_Dataset
 来源      环境变量 MOONDATA_DATA_ROOT
 可达性    可达
-统计快照  D:\Code\moon-dataset\data\stats\snapshot.json
+统计快照  D:\Code\moon-dataset\stats\snapshot.json
 指纹      一致
 ```
+
+统计快照在仓库根的 `stats/snapshot.json`，**入库**——文档只读它、不读影像，
+所以盘没插时文档照样渲染。它不放在 `data/` 下：`data/` 装的是不可再生的关键资产，
+而快照是随时可以重新扫出来的计算产物（见 `data/README.md`）。快照本身由 issue #5
+的扫描脚本生成，本轮只定下它的位置与指纹格式。
 
 指纹刻画的是数据根的**目录形态**（相对路径 + 文件大小），不是像素内容——955 GB
 逐字节哈希不现实，而「少了一个 ROI」「patch 数量变了」这类真正会让快照失效的
@@ -86,6 +91,8 @@ src/moondata/
 ├── snapshot.py  数据指纹与统计快照
 ├── doctor.py    自检
 └── cli.py       命令行
+
+stats/snapshot.json   统计快照（入库；文档只读它，不读影像）
 ```
 
 `raster/` 与 `geometry/` 之间那条线是有意画的：地理库调用全部收在 `raster/`，

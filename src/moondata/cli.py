@@ -16,7 +16,7 @@ import sys
 from typing import Sequence
 
 from moondata.config import ENV_VAR, Config, load_config
-from moondata.doctor import Reachability, format_report, run_doctor
+from moondata.doctor import Reachability, format_report, probe_data_root, run_doctor
 from moondata.errors import DataRootUnavailable, MoonDataError, NotImplementedYet
 
 # 四步流程：子命令名 → (中文说明, 留待实现的 issue 号)
@@ -87,12 +87,12 @@ def _pipeline_step(command: str, config: Config) -> int:
 
 
 def require_data_root(config: Config) -> None:
-    """凡是要读影像的命令在动手之前调用它。"""
-    report = run_doctor(config)
-    if report.reachability is Reachability.REACHABLE:
+    """凡是要读影像的命令在动手之前调用它。只 stat，不算指纹。"""
+    reachability = probe_data_root(config.data_root)
+    if reachability is Reachability.REACHABLE:
         return
     raise DataRootUnavailable(
-        f"本命令需要读取影像，但数据根{report.reachability.value}："
+        f"本命令需要读取影像，但数据根{reachability.value}："
         f"{config.data_root if config.data_root else '（未设置）'}\n"
         f"用 `moondata doctor` 查看完整自检报告。"
     )
