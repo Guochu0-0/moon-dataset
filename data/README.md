@@ -47,8 +47,14 @@ data/
 「对齐控制点（alignment tie points）」，与 patch 旁边的「评测真值点」是两种东西**，
 不要混用。
 
-- 67 个 ROI 的控制点在 `cropped/opt_tie.pts`，ROI_73 的在 `cropped_2/opt_tie.pts`。
-- 每 ROI 19–150 对，中位数约 30 对，合计 2157 对（不含 ROI_73 的 30 对）。
+- **ROI 数量口径：这里是 68 个 ROI 目录，数据集是 67 个 ROI。** 差的一个是 **ROI_60**
+  ——它与 ROI_37 逐像素重复、已从主数据盘删除，但它的人工标注是照样标过的，
+  同样不可再生，所以原样保留在此。凡是引用「67」的地方（issue、术语表）说的都是
+  不含 ROI_60 的口径。
+- 67 个 ROI 的控制点在 `cropped/opt_tie.pts`（ROI_60 在内、ROI_73 不在内），
+  ROI_73 的在 `cropped_2/opt_tie.pts`。
+- 每 ROI 19–150 对，中位数约 30 对：`cropped/opt_tie.pts` 合计 2157 对（其中 ROI_60 占 24 对），
+  ROI_73 另有 30 对。
 - `.pts` 是像素坐标（`base x, base y, warp x, warp y, score`），`.txt` 是同一批点的
   地图坐标（米），`.prj` 是 `.txt` 所用的投影。三者的坐标符号约定不同，详见术语表。
 
