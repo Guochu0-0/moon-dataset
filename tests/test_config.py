@@ -22,25 +22,30 @@ def write_config(repo: Path, root: str) -> Path:
 
 class TestPriority:
     def test_cli_wins_over_env_and_file(self, repo: Path, tmp_path: Path) -> None:
-        write_config(repo, "F:/from-file")
+        write_config(repo, (tmp_path / "from-file").as_posix())
+        expected = tmp_path / "from-cli"
         config = load_config(
-            cli_data_root="H:/from-cli",
-            env={"MOONDATA_DATA_ROOT": "G:/from-env"},
+            cli_data_root=expected.as_posix(),
+            env={"MOONDATA_DATA_ROOT": (tmp_path / "from-env").as_posix()},
             start=repo,
         )
-        assert config.data_root == Path("H:/from-cli")
+        assert config.data_root == expected
         assert config.data_root_source is DataRootSource.CLI
 
-    def test_env_wins_over_file(self, repo: Path) -> None:
-        write_config(repo, "F:/from-file")
-        config = load_config(env={"MOONDATA_DATA_ROOT": "G:/from-env"}, start=repo)
-        assert config.data_root == Path("G:/from-env")
+    def test_env_wins_over_file(self, repo: Path, tmp_path: Path) -> None:
+        write_config(repo, (tmp_path / "from-file").as_posix())
+        expected = tmp_path / "from-env"
+        config = load_config(
+            env={"MOONDATA_DATA_ROOT": expected.as_posix()}, start=repo
+        )
+        assert config.data_root == expected
         assert config.data_root_source is DataRootSource.ENV
 
-    def test_file_used_when_nothing_overrides(self, repo: Path) -> None:
-        config_path = write_config(repo, "F:/from-file")
+    def test_file_used_when_nothing_overrides(self, repo: Path, tmp_path: Path) -> None:
+        expected = tmp_path / "from-file"
+        config_path = write_config(repo, expected.as_posix())
         config = load_config(env={}, start=repo)
-        assert config.data_root == Path("F:/from-file")
+        assert config.data_root == expected
         assert config.data_root_source is DataRootSource.CONFIG_FILE
         assert config.data_root_origin == str(config_path)
 
@@ -49,10 +54,11 @@ class TestPriority:
         assert config.data_root is None
         assert config.data_root_source is DataRootSource.UNSET
 
-    def test_empty_env_var_is_ignored(self, repo: Path) -> None:
-        write_config(repo, "F:/from-file")
+    def test_empty_env_var_is_ignored(self, repo: Path, tmp_path: Path) -> None:
+        expected = tmp_path / "from-file"
+        write_config(repo, expected.as_posix())
         config = load_config(env={"MOONDATA_DATA_ROOT": "   "}, start=repo)
-        assert config.data_root == Path("F:/from-file")
+        assert config.data_root == expected
         assert config.data_root_source is DataRootSource.CONFIG_FILE
 
 
@@ -84,17 +90,21 @@ class TestPathNormalisation:
 
 
 class TestDiscovery:
-    def test_config_file_is_found_from_a_nested_directory(self, repo: Path) -> None:
-        write_config(repo, "F:/from-file")
+    def test_config_file_is_found_from_a_nested_directory(
+        self, repo: Path, tmp_path: Path
+    ) -> None:
+        expected = tmp_path / "from-file"
+        write_config(repo, expected.as_posix())
         nested = repo / "src" / "moondata"
         nested.mkdir(parents=True)
         config = load_config(env={}, start=nested)
-        assert config.data_root == Path("F:/from-file")
+        assert config.data_root == expected
 
     def test_search_stops_at_the_repo_root_marker(self, repo: Path) -> None:
         """仓库外的同名文件不应被捡起来——否则换个工作目录行为就变了。"""
+        outside = (repo.parent / "outside").as_posix()
         (repo.parent / "moondata.toml").write_text(
-            '[data]\nroot = "F:/outside"\n', encoding="utf-8"
+            f'[data]\nroot = "{outside}"\n', encoding="utf-8"
         )
         config = load_config(env={}, start=repo)
         assert config.data_root is None
