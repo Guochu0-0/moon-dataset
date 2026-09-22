@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "moondata"
+version = "0.1.0"
+description = "CE-2 7 m DOM × Mini-RF SAR 配准数据集的处理与自检工具"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.24"]
+
+# GDAL/pyproj **不在这里**。它们用 pip 装在 Windows 上经常失败，只能由 conda 提供，
+# 见 environment-data.yml。装不上 GDAL 的人照样能装本包、读文档、跑几何层。
+
+[project.scripts]
+moondata = "moondata.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

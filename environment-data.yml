@@ -1,0 +1,23 @@
+# 数据处理档（重）——在文档档之上加地理库，用于真正读取 955 GB 影像、重跑四步流程。
+#
+#   conda env create -f environment-data.yml
+#   conda activate moon-dataset-data
+#
+# GDAL/pyproj 只从 conda-forge 装，**不要用 pip 装 GDAL**。所有对它们的调用都收在
+# moondata.raster 一层里。
+name: moon-dataset-data
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy>=1.24
+  - pandas
+  - matplotlib
+  - jupyter
+  - quarto
+  - pytest
+  - gdal>=3.6
+  - pyproj>=3.5
+  - pip
+  - pip:
+      - -e .

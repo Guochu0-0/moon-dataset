@@ -1,0 +1,21 @@
+# 文档档（轻）——阅读、渲染文档，跑几何层与自检命令。
+#
+#   conda env create -f environment.yml
+#   conda activate moon-dataset
+#
+# 刻意**不含 GDAL/pyproj**：它们在 Windows 上是接手者第一个会卡住的地方，
+# 而只想读文档或做分析的人根本用不到。要重跑数据请改用 environment-data.yml。
+name: moon-dataset
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy>=1.24
+  - pandas
+  - matplotlib
+  - jupyter
+  - quarto          # 构建文档站；构建产物已提交，只读文档的人其实也不需要它
+  - pytest
+  - pip
+  - pip:
+      - -e .
