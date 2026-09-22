@@ -3,6 +3,7 @@ __pycache__/
 
 # Quarto 构建中间产物（_site/ 是要提交的成品，不在此列）
 /.quarto/
+**/*.quarto_ipynb
 
 # 本机数据根配置（写的是本机挂载点，换台机器就不对了）。模板见 moondata.toml.example
 /moondata.toml

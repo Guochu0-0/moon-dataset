@@ -23,3 +23,11 @@ class SnapshotUnreadable(MoonDataError):
 
 class NotImplementedYet(MoonDataError):
     """子命令的骨架已就位、实现留待后续 issue。带上 issue 号，别让人猜。"""
+
+
+class DocSiteUnpatchable(MoonDataError):
+    """文档站渲染完了，但改不成离线可读的样子（多半是 Quarto 升级改了产物结构）。
+
+    宁可让构建失败：这一步的每一处失灵在成品里都是静默的——搜索框不出结果、
+    页内目录不跟随——提交出去没人会发现。
+    """

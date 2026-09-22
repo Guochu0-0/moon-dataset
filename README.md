@@ -3,6 +3,29 @@
 CE-2 7 m DOM × Mini-RF SAR 配准数据集的文档、处理代码与关键元数据。
 数据集已冻结；955 GB 影像不在本仓库内，通过可配置的数据根路径引用。
 
+## 先看文档站
+
+全部说明材料在 `_site/` 里，**构建产物随仓库提交**：克隆下来双击 `_site/index.html`
+就能读，不装任何工具链、不联网、也不用接移动硬盘。左边导航树，右边页内目录，
+右上角搜索框搜全站正文，中文可用。
+
+第一站是[术语表](CONTEXT.md)（仓库根的 `CONTEXT.md`，站点里那一页就是它渲染出来的）。
+里面钉死了两件容易出错的事：**对齐控制点**与**评测真值点**不是一回事；
+三种同名点文件对 y 的符号处理不一致。两者弄错都不会报错。
+
+改完 `.qmd` 或 `CONTEXT.md` 之后重新构建，一条命令：
+
+```bash
+quarto render
+```
+
+`_site/` 会整个重生成，**记得连同产物一起提交**——否则读者双击看到的还是旧的。
+
+> 渲染完成后 `_quarto.yml` 会自动跑一步 `python -m moondata.docsite`。Quarto 的搜索
+> 在运行时 `fetch("search.json")`、页内目录脚本按 ES 模块加载，这两件事在 `file://`
+> 下都会被浏览器拦掉，那一步把它们改成离线也能用的形式。理由写在
+> `src/moondata/docsite.py` 的模块 docstring 里。
+
 ## 装哪一档
 
 依赖分两档。**先想清楚你要干什么，再决定装哪一个**——分档的唯一理由是
@@ -108,9 +131,16 @@ src/moondata/
 ├── config.py    数据根解析
 ├── snapshot.py  数据指纹与统计快照
 ├── doctor.py    自检
+├── docsite.py   文档站构建后处理（让 file:// 下搜索可用）
 └── cli.py       命令行
 
 stats/snapshot.json   统计快照（入库；文档只读它，不读影像）
+
+_quarto.yml           文档站配置（一条 `quarto render` 走完全程）
+CONTEXT.md            术语表；同时是站点的一页
+index.qmd             站点首页
+docs/                 站点其余页面（docs/agents/ 是给 agent 的约定，不进站点）
+_site/                构建产物（入库，供离线双击阅读）
 ```
 
 `raster/` 与 `geometry/` 之间那条线是有意画的：地理库调用全部收在 `raster/`，
@@ -126,5 +156,6 @@ pytest
 
 ## 更多
 
+- `CONTEXT.md` —— 术语表
 - `AGENTS.md` —— agent 约定
 - `data/README.md` —— 纳入版本控制的不可再生关键资产
