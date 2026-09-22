@@ -46,8 +46,11 @@ def build_parser() -> argparse.ArgumentParser:
         parents=[common],
         help="自检：数据根在哪、是否可达、与统计快照的指纹是否一致",
     )
-    for name, (description, _issue) in PIPELINE_STEPS.items():
-        subcommands.add_parser(name, parents=[common], help=description)
+    for name, (description, issue) in PIPELINE_STEPS.items():
+        # help 里就写明「尚未实现」——否则 `moondata --help` 对外承诺了本轮没有的能力。
+        subcommands.add_parser(
+            name, parents=[common], help=f"{description}（尚未实现，见 issue #{issue}）"
+        )
     return parser
 
 

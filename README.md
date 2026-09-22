@@ -40,7 +40,11 @@ conda activate moon-dataset-data
 2. 环境变量 `MOONDATA_DATA_ROOT`
 3. 仓库根 `moondata.toml` 的 `[data] root`
 
-都没给则为「未设置」——这不是错误，文档渲染与快照分析本来就不需要数据根。
+都没给则为「未设置」：文档渲染与快照分析本来就不需要数据根，所以这不影响它们；
+但 `moondata doctor` 会以退出码 1 结束，因为它回答不了「数据在不在」这个问题。
+
+相对路径各按自己那层的基准解析——命令行与环境变量按当前工作目录，`moondata.toml`
+里写的按该文件所在目录。
 
 ```bash
 cp moondata.toml.example moondata.toml     # 然后改成本机路径
@@ -59,6 +63,9 @@ moondata doctor
 
 一次报全三件事：数据根解析到哪个路径（以及是哪一层给出的）、该路径是否可达、
 与统计快照的指纹是否一致。盘插着且一切正常时退出码为 0，否则为 1。
+
+> 统计快照由 issue #5 的扫描脚本生成，本轮只定下它的位置与指纹格式。在快照生成
+> 之前，「指纹」一栏一律显示「统计快照尚未生成」——这不算失败，退出码仍是 0。
 
 ```
 数据根    G:\Lunar_Optical_SAR_Registration_Dataset

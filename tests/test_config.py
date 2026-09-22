@@ -64,6 +64,20 @@ class TestPathNormalisation:
         config = load_config(env={}, start=repo)
         assert config.data_root == repo / "imagery"
 
+    def test_cli_and_env_relative_paths_resolve_against_the_working_directory(
+        self, repo: Path
+    ) -> None:
+        """`--data-root ./imagery` 的含义不该取决于仓库里有没有 moondata.toml。"""
+        write_config(repo, "./from-file")
+        here = repo / "src" / "moondata"
+        here.mkdir(parents=True)
+
+        from_cli = load_config(cli_data_root="./imagery", env={}, start=here)
+        assert from_cli.data_root == here / "imagery"
+
+        from_env = load_config(env={"MOONDATA_DATA_ROOT": "./imagery"}, start=here)
+        assert from_env.data_root == here / "imagery"
+
     def test_tilde_is_expanded(self, repo: Path) -> None:
         config = load_config(env={"MOONDATA_DATA_ROOT": "~/moon"}, start=repo)
         assert config.data_root == Path.home() / "moon"

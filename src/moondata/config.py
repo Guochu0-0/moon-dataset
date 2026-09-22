@@ -7,7 +7,9 @@
 2. 环境变量 `MOONDATA_DATA_ROOT`
 3. 仓库根的 `moondata.toml` 中的 `[data] root`
 
-都没有给则为「未设置」，这不是异常——文档渲染、统计快照分析都不需要数据根。
+都没有给则为「未设置」。这在库层面不是异常——文档渲染、统计快照分析本来就不需要
+数据根。但 `moondata doctor` 会以退出码 1 结束：它的职责是回答「数据在不在」，
+而未设置时它答不上来。
 
 `moondata.toml` 写的是本机路径，因此它不入库；仓库里提交的是 `moondata.toml.example`。
 """
@@ -63,13 +65,19 @@ def load_config(
     config_path = find_config_file(start)
     file_root = _read_config_root(config_path) if config_path is not None else None
 
-    root, source, origin = _first_non_empty(
-        (cli_data_root, DataRootSource.CLI, None),
-        (env.get(ENV_VAR), DataRootSource.ENV, ENV_VAR),
-        (file_root, DataRootSource.CONFIG_FILE, str(config_path) if config_path else None),
+    # 每层各带自己的相对路径基准：命令行与环境变量是当场敲的，按工作目录解析；
+    # 配置文件里写的路径按该文件所在目录解析，这样仓库整个搬走也不失效。
+    root, source, origin, base = _first_non_empty(
+        (cli_data_root, DataRootSource.CLI, None, start),
+        (env.get(ENV_VAR), DataRootSource.ENV, ENV_VAR, start),
+        (
+            file_root,
+            DataRootSource.CONFIG_FILE,
+            str(config_path) if config_path else None,
+            config_path.parent if config_path else start,
+        ),
     )
 
-    base = config_path.parent if config_path is not None else start
     return Config(
         data_root=_normalise(root, base) if root is not None else None,
         data_root_source=source,
@@ -119,15 +127,15 @@ def _read_config_root(config_path: Path) -> str | None:
 
 
 def _first_non_empty(
-    *candidates: tuple[str | Path | None, DataRootSource, str | None],
-) -> tuple[str | Path | None, DataRootSource, str | None]:
-    for value, source, origin in candidates:
+    *candidates: tuple[str | Path | None, DataRootSource, str | None, Path],
+) -> tuple[str | Path | None, DataRootSource, str | None, Path]:
+    for value, source, origin, base in candidates:
         if value is None:
             continue
         if isinstance(value, str) and not value.strip():
             continue  # 空环境变量按「没设」处理，而不是按「设成了空路径」
-        return value, source, origin
-    return None, DataRootSource.UNSET, None
+        return value, source, origin, base
+    return None, DataRootSource.UNSET, None, Path.cwd()
 
 
 def _normalise(value: str | Path, base: Path) -> Path:
