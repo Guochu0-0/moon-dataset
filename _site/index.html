@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b4d79caa70069ccbb7491e0308f31c0d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1b7bc991f5180c0f1de6673d32c42cb5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -135,6 +135,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="./CONTEXT.html"> 
 <span class="menu-text">术语表</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./docs/products.html"> 
+<span class="menu-text">产物文档</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -186,8 +190,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">流程文档（尚未产出，见 issue #11）</span>
   </li>
           <li class="sidebar-item">
- <span class="menu-text">产物文档（尚未产出，见 issue #5）</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="./docs/products.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">产物文档</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -304,9 +311,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>尚未产出（issue #11）</td>
 </tr>
 <tr class="even">
-<td>产物文档</td>
-<td>你拿到的是什么：目录、命名、数量</td>
-<td>尚未产出（issue #5）</td>
+<td><a href="./docs/products.html">产物文档</a></td>
+<td>你拿到的是什么：目录、命名、类型、数量、真值点覆盖</td>
+<td>已产出</td>
 </tr>
 <tr class="odd">
 <td><a href="./docs/dataset-study.html">数据集特性研究</a></td>
@@ -315,7 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>文档里将来出现的统计数字都从<strong>统计快照</strong>取值，不手写——快照由扫描脚本从真实数据生成， 所以数字不会在无人察觉时过期。</p>
+<p>文档里的统计数字都从<strong>统计快照</strong>取值，不手写——快照由 <code>moondata scan</code> 从真实数据扫描生成， 随仓库提交，所以数字不会在无人察觉时过期，移动硬盘没插时文档也照样渲染。</p>
 </section>
 <section id="怎么重新构建" class="level2">
 <h2 class="anchored" data-anchor-id="怎么重新构建">怎么重新构建</h2>

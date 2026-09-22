@@ -1,0 +1,634 @@
+{
+  "generated_at": "2026-09-23T07:25:37+08:00",
+  "fingerprint": {
+    "digest": "sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb",
+    "file_count": 24914,
+    "total_bytes": 1026629559396
+  },
+  "stats": {
+    "product_root": "Processed_Data",
+    "splits": [
+      "Train",
+      "Val",
+      "Test"
+    ],
+    "rois": {
+      "ROI_001": {
+        "split": "Train",
+        "patch_count": 40,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_002": {
+        "split": "Train",
+        "patch_count": 152,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_003": {
+        "split": "Train",
+        "patch_count": 171,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_005": {
+        "split": "Train",
+        "patch_count": 135,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_008": {
+        "split": "Train",
+        "patch_count": 291,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_009": {
+        "split": "Train",
+        "patch_count": 162,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_010": {
+        "split": "Train",
+        "patch_count": 159,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_012": {
+        "split": "Train",
+        "patch_count": 105,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_013": {
+        "split": "Train",
+        "patch_count": 54,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_015": {
+        "split": "Train",
+        "patch_count": 98,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_016": {
+        "split": "Train",
+        "patch_count": 265,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_017": {
+        "split": "Train",
+        "patch_count": 213,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_018": {
+        "split": "Train",
+        "patch_count": 117,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_021": {
+        "split": "Train",
+        "patch_count": 108,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_023": {
+        "split": "Train",
+        "patch_count": 175,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_024": {
+        "split": "Train",
+        "patch_count": 239,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_025": {
+        "split": "Train",
+        "patch_count": 222,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_026": {
+        "split": "Train",
+        "patch_count": 190,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_027": {
+        "split": "Train",
+        "patch_count": 234,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_030": {
+        "split": "Train",
+        "patch_count": 74,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_031": {
+        "split": "Train",
+        "patch_count": 149,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_033": {
+        "split": "Train",
+        "patch_count": 269,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_034": {
+        "split": "Train",
+        "patch_count": 199,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_038": {
+        "split": "Train",
+        "patch_count": 64,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_042": {
+        "split": "Train",
+        "patch_count": 21,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_043": {
+        "split": "Train",
+        "patch_count": 48,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_045": {
+        "split": "Train",
+        "patch_count": 58,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_046": {
+        "split": "Train",
+        "patch_count": 165,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_047": {
+        "split": "Train",
+        "patch_count": 31,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_048": {
+        "split": "Train",
+        "patch_count": 24,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_050": {
+        "split": "Train",
+        "patch_count": 160,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_051": {
+        "split": "Train",
+        "patch_count": 196,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_052": {
+        "split": "Train",
+        "patch_count": 170,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_053": {
+        "split": "Train",
+        "patch_count": 93,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_055": {
+        "split": "Train",
+        "patch_count": 214,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_056": {
+        "split": "Train",
+        "patch_count": 296,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_057": {
+        "split": "Train",
+        "patch_count": 229,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_058": {
+        "split": "Train",
+        "patch_count": 248,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_061": {
+        "split": "Train",
+        "patch_count": 97,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_062": {
+        "split": "Train",
+        "patch_count": 136,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_063": {
+        "split": "Train",
+        "patch_count": 103,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_064": {
+        "split": "Train",
+        "patch_count": 111,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_065": {
+        "split": "Train",
+        "patch_count": 172,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_066": {
+        "split": "Train",
+        "patch_count": 130,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_067": {
+        "split": "Train",
+        "patch_count": 120,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_068": {
+        "split": "Train",
+        "patch_count": 107,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_069": {
+        "split": "Train",
+        "patch_count": 198,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_072": {
+        "split": "Train",
+        "patch_count": 60,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_073": {
+        "split": "Train",
+        "patch_count": 119,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_074": {
+        "split": "Train",
+        "patch_count": 141,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_076": {
+        "split": "Train",
+        "patch_count": 58,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_077": {
+        "split": "Train",
+        "patch_count": 165,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_078": {
+        "split": "Train",
+        "patch_count": 167,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_079": {
+        "split": "Train",
+        "patch_count": 185,
+        "labeled_patch_count": 0,
+        "label_point_count": 0
+      },
+      "ROI_035": {
+        "split": "Val",
+        "patch_count": 214,
+        "labeled_patch_count": 172,
+        "label_point_count": 1383
+      },
+      "ROI_049": {
+        "split": "Val",
+        "patch_count": 113,
+        "labeled_patch_count": 88,
+        "label_point_count": 706
+      },
+      "ROI_070": {
+        "split": "Val",
+        "patch_count": 168,
+        "labeled_patch_count": 113,
+        "label_point_count": 910
+      },
+      "ROI_071": {
+        "split": "Val",
+        "patch_count": 40,
+        "labeled_patch_count": 30,
+        "label_point_count": 241
+      },
+      "ROI_075": {
+        "split": "Val",
+        "patch_count": 183,
+        "labeled_patch_count": 174,
+        "label_point_count": 1442
+      },
+      "ROI_080": {
+        "split": "Val",
+        "patch_count": 107,
+        "labeled_patch_count": 75,
+        "label_point_count": 607
+      },
+      "ROI_006": {
+        "split": "Test",
+        "patch_count": 81,
+        "labeled_patch_count": 67,
+        "label_point_count": 538
+      },
+      "ROI_007": {
+        "split": "Test",
+        "patch_count": 372,
+        "labeled_patch_count": 286,
+        "label_point_count": 2315
+      },
+      "ROI_011": {
+        "split": "Test",
+        "patch_count": 92,
+        "labeled_patch_count": 83,
+        "label_point_count": 706
+      },
+      "ROI_020": {
+        "split": "Test",
+        "patch_count": 112,
+        "labeled_patch_count": 91,
+        "label_point_count": 739
+      },
+      "ROI_037": {
+        "split": "Test",
+        "patch_count": 159,
+        "labeled_patch_count": 141,
+        "label_point_count": 1133
+      },
+      "ROI_054": {
+        "split": "Test",
+        "patch_count": 168,
+        "labeled_patch_count": 145,
+        "label_point_count": 1187
+      },
+      "ROI_059": {
+        "split": "Test",
+        "patch_count": 146,
+        "labeled_patch_count": 140,
+        "label_point_count": 1124
+      }
+    },
+    "removed_rois": [
+      {
+        "roi": "ROI_060",
+        "split": "Val",
+        "reason": "与 Test/ROI_037 为同一地点(PRODUCT_ID LSZ_01790_2CD_EKU_15S319_V1, CE2 tile H219_10S041W), 152 个光学 patch 中 152 个与 ROI_037 逐像素相同, 造成 Test/Val 不独立",
+        "deleted_on": "2026-09-20",
+        "patch_count": 152,
+        "labeled_patch_count": 145
+      }
+    ],
+    "counts": {
+      "excluding_removed": {
+        "Train": {
+          "roi_count": 54,
+          "patch_count": 7907,
+          "labeled_patch_count": 0,
+          "label_point_count": 0
+        },
+        "Val": {
+          "roi_count": 6,
+          "patch_count": 825,
+          "labeled_patch_count": 652,
+          "label_point_count": 5289
+        },
+        "Test": {
+          "roi_count": 7,
+          "patch_count": 1130,
+          "labeled_patch_count": 953,
+          "label_point_count": 7742
+        },
+        "all": {
+          "roi_count": 67,
+          "patch_count": 9862,
+          "labeled_patch_count": 1605,
+          "label_point_count": 13031
+        }
+      },
+      "including_removed": {
+        "Train": {
+          "roi_count": 54,
+          "patch_count": 7907,
+          "labeled_patch_count": 0,
+          "label_point_count": 0
+        },
+        "Val": {
+          "roi_count": 7,
+          "patch_count": 977,
+          "labeled_patch_count": 797,
+          "label_point_count": null
+        },
+        "Test": {
+          "roi_count": 7,
+          "patch_count": 1130,
+          "labeled_patch_count": 953,
+          "label_point_count": 7742
+        },
+        "all": {
+          "roi_count": 68,
+          "patch_count": 10014,
+          "labeled_patch_count": 1750,
+          "label_point_count": null
+        }
+      }
+    },
+    "images": {
+      "Optical": {
+        "file_count": 9862,
+        "bytes": 1270676812,
+        "dtypes": [
+          "uint8"
+        ],
+        "bands": [
+          1
+        ],
+        "sizes": [
+          [
+            512,
+            512
+          ]
+        ],
+        "compressions": [
+          "Deflate"
+        ],
+        "nodata": [
+          0.0
+        ],
+        "pixel_scales": [
+          [
+            7.5,
+            7.5
+          ]
+        ],
+        "band_ranges": [
+          {
+            "min": 1,
+            "max": 255
+          }
+        ],
+        "patches_with_negative": 0,
+        "nan_pixel_count": 0,
+        "nodata_pixel_fraction": 0.0
+      },
+      "SAR": {
+        "file_count": 9862,
+        "bytes": 38481421117,
+        "dtypes": [
+          "float32"
+        ],
+        "bands": [
+          4
+        ],
+        "sizes": [
+          [
+            512,
+            512
+          ]
+        ],
+        "compressions": [
+          "Deflate"
+        ],
+        "nodata": [
+          0.0
+        ],
+        "pixel_scales": [
+          [
+            7.5,
+            7.5
+          ]
+        ],
+        "band_ranges": [
+          {
+            "min": -0.014256278052926064,
+            "max": 9.562329292297363
+          },
+          {
+            "min": -0.022312195971608162,
+            "max": 10.007060050964355
+          },
+          {
+            "min": -3.1304166316986084,
+            "max": 3.021151304244995
+          },
+          {
+            "min": -3.234116554260254,
+            "max": 2.7401504516601562
+          }
+        ],
+        "patches_with_negative": 9862,
+        "nan_pixel_count": 0,
+        "nodata_pixel_fraction": 0.0
+      }
+    },
+    "labels": {
+      "file_count": 1605,
+      "points_per_patch": {
+        "min": 7,
+        "median": 8,
+        "max": 11
+      },
+      "columns": [
+        4
+      ],
+      "y_all_nonpositive": true,
+      "prj_kinds": {
+        "guid": 1584,
+        "wkt": 21
+      }
+    },
+    "naming": {
+      "unpaired": [],
+      "index_gaps": [
+        "Train/ROI_027"
+      ],
+      "unexpected_files": []
+    },
+    "window_manifests": {
+      "files": [
+        "windows.json",
+        "windows_train.json"
+      ],
+      "splits": {
+        "Train": {
+          "windows": 7886,
+          "unresolved": 3,
+          "product_patches": 7907
+        },
+        "Val": {
+          "windows": 977,
+          "unresolved": 0,
+          "product_patches": 977
+        },
+        "Test": {
+          "windows": 1130,
+          "unresolved": 0,
+          "product_patches": 1130
+        }
+      },
+      "differences": [
+        {
+          "roi": "ROI_027",
+          "split": "Train",
+          "windows": 234,
+          "unresolved": 3,
+          "product_patches": 234
+        },
+        {
+          "roi": "ROI_073",
+          "split": "Train",
+          "windows": 98,
+          "unresolved": 0,
+          "product_patches": 119
+        }
+      ]
+    }
+  }
+}

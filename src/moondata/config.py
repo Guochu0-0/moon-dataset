@@ -29,6 +29,10 @@ ENV_VAR = "MOONDATA_DATA_ROOT"
 CONFIG_FILENAME = "moondata.toml"
 REPO_MARKER = ".git"
 SNAPSHOT_RELPATH = Path("stats") / "snapshot.json"
+WINDOWS_RELDIR = Path("data") / "windows"
+REMOVED_MANIFEST_RELDIR = Path("data") / "metadata"
+REMOVED_MANIFEST_GLOB = "removed_*_manifest.txt"
+"""删除清单：删除某个 ROI 时留下的文件清单，见 CONTEXT.md。"""
 
 
 class DataRootSource(Enum):
@@ -48,6 +52,20 @@ class Config:
     """给出该值的具体位置：配置文件的绝对路径、或环境变量名。未设置时为 None。"""
     repo_root: Path | None
     snapshot_path: Path
+
+    def window_manifests(self) -> list[Path]:
+        """仓库里的窗口清单。不在仓库内运行时为空。"""
+        if self.repo_root is None:
+            return []
+        return sorted((self.repo_root / WINDOWS_RELDIR).glob("*.json"))
+
+    def removed_manifests(self) -> list[Path]:
+        """仓库里的删除清单。不在仓库内运行时为空。"""
+        if self.repo_root is None:
+            return []
+        return sorted(
+            (self.repo_root / REMOVED_MANIFEST_RELDIR).glob(REMOVED_MANIFEST_GLOB)
+        )
 
 
 def load_config(

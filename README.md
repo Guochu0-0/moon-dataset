@@ -98,8 +98,7 @@ moondata doctor
 一次报全三件事：数据根解析到哪个路径（以及是哪一层给出的）、该路径是否可达、
 与统计快照的指纹是否一致。盘插着且一切正常时退出码为 0，否则为 1。
 
-> 统计快照由 issue #5 的扫描脚本生成，本轮只定下它的位置与指纹格式。在快照生成
-> 之前，「指纹」一栏一律显示「统计快照尚未生成」——这不算失败，退出码仍是 0。
+> 快照若尚未生成，「指纹」一栏显示「统计快照尚未生成」——这不算失败，退出码仍是 0。
 
 ```
 数据根    G:\Lunar_Optical_SAR_Registration_Dataset
@@ -111,8 +110,25 @@ moondata doctor
 
 统计快照在仓库根的 `stats/snapshot.json`，**入库**——文档只读它、不读影像，
 所以盘没插时文档照样渲染。它不放在 `data/` 下：`data/` 装的是不可再生的关键资产，
-而快照是随时可以重新扫出来的计算产物（见 `data/README.md`）。快照本身由 issue #5
-的扫描脚本生成，本轮只定下它的位置与指纹格式。
+而快照是随时可以重新扫出来的计算产物（见 `data/README.md`）。
+
+## 重新生成统计快照
+
+```bash
+moondata scan
+quarto render
+```
+
+`scan` 读遍 `Processed_Data/` 下全部 patch（光学、SAR、评测真值点），把数量、数据类型、
+数值范围、真值点覆盖、与窗口清单的数量差连同生成时间和数据指纹写进
+`stats/snapshot.json`。它要读几十 GB，需时十来分钟。之后 `quarto render` 让文档取新值，
+**快照与 `_site/` 一起提交**。
+
+什么时候要重跑：`moondata doctor` 报指纹「不一致」时。数据集已冻结，正常情况下不该发生——
+真发生了，先查清是数据变了还是快照过期了。
+
+读 patch 不需要 GDAL：`moondata.tiff` 只用标准库与 numpy。这批 TIFF 用 tifffile 读会报
+`LIBDEFLATE_BAD_DATA`，理由见该模块 docstring。
 
 指纹刻画的是数据根的**目录形态**（相对路径 + 文件大小），不是像素内容——955 GB
 逐字节哈希不现实，而「少了一个 ROI」「patch 数量变了」这类真正会让快照失效的
@@ -129,7 +145,10 @@ src/moondata/
 ├── raster/      支撑层  唯一依赖 GDAL/pyproj 的地方
 ├── geometry/    支撑层  纯 numpy，无地理库，可被完整单测
 ├── config.py    数据根解析
-├── snapshot.py  数据指纹与统计快照
+├── snapshot.py  数据指纹与统计快照的存取
+├── stats.py     扫描 patch 产物，产出快照里的统计量
+├── tiff.py      不依赖影像库的 TIFF 读取器
+├── docvalues.py 文档页从快照取值、排版数字
 ├── doctor.py    自检
 ├── docsite.py   文档站构建后处理（让 file:// 下搜索可用）
 └── cli.py       命令行

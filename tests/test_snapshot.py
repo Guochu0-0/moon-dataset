@@ -6,7 +6,13 @@ from pathlib import Path
 import pytest
 
 from moondata.errors import DataRootUnavailable, SnapshotUnreadable
-from moondata.snapshot import Fingerprint, compute_fingerprint, load_snapshot
+from moondata.snapshot import (
+    Fingerprint,
+    Snapshot,
+    compute_fingerprint,
+    load_snapshot,
+    write_snapshot,
+)
 
 
 def make_tree(root: Path, files: dict[str, str]) -> None:
@@ -98,3 +104,45 @@ class TestLoadSnapshot:
         with pytest.raises(SnapshotUnreadable) as excinfo:
             load_snapshot(path)
         assert str(path) in str(excinfo.value)
+
+
+class TestWriteSnapshot:
+    def test_round_trips_generation_time_fingerprint_and_stats(
+        self, tmp_path: Path
+    ) -> None:
+        path = tmp_path / "stats" / "snapshot.json"
+        written = Snapshot(
+            generated_at="2026-09-23T10:00:00+08:00",
+            fingerprint=Fingerprint("sha256:abc", 2, 5),
+            stats={"counts": {"Val": {"patch_count": 3}}, "note": "中文"},
+        )
+        write_snapshot(path, written)
+        assert load_snapshot(path) == written
+
+    def test_is_committed_text_with_readable_chinese_and_a_final_newline(
+        self, tmp_path: Path
+    ) -> None:
+        """快照要提交进 git，diff 得能看。"""
+        path = tmp_path / "snapshot.json"
+        write_snapshot(
+            path, Snapshot("now", Fingerprint("sha256:abc", 2, 5), {"note": "中文"})
+        )
+        text = path.read_text(encoding="utf-8")
+        assert "中文" in text
+        assert text.endswith("}\n")
+        assert "\n  " in text
+
+    def test_older_snapshot_without_stats_still_loads(self, tmp_path: Path) -> None:
+        path = tmp_path / "snapshot.json"
+        path.write_text(
+            json.dumps(
+                {
+                    "generated_at": "now",
+                    "fingerprint": {"digest": "sha256:a", "file_count": 1, "total_bytes": 1},
+                }
+            ),
+            encoding="utf-8",
+        )
+        snapshot = load_snapshot(path)
+        assert snapshot is not None
+        assert snapshot.stats == {}

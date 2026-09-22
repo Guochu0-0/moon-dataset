@@ -6,14 +6,18 @@
 指纹刻画的是数据根的**目录形态**——相对路径与文件大小——不是像素内容。955 GB 逐字节
 哈希不现实，而「少了一个 ROI」「patch 数量变了」「某个文件被截断」这类真正会让快照
 失效的变化都体现在形态上。同一批数据换一块盘、换一个挂载点，指纹不变。
+
+统计量本身（`stats`）由 `moondata.stats` 扫出来，这里只负责存取，不解释其结构——
+文档页按键名取值，结构的定义与说明都在 `moondata.stats`。
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
+from typing import Any
 
 from moondata.errors import DataRootUnavailable, SnapshotUnreadable
 
@@ -30,6 +34,8 @@ class Fingerprint:
 class Snapshot:
     generated_at: str
     fingerprint: Fingerprint
+    stats: dict[str, Any] = field(default_factory=dict)
+    """`moondata.stats.scan_products` 的产出。只有指纹、还没扫过统计量的快照这里是空的。"""
 
 
 def compute_fingerprint(root: Path) -> Fingerprint:
@@ -74,6 +80,15 @@ def load_snapshot(path: Path) -> Snapshot | None:
                 file_count=fingerprint["file_count"],
                 total_bytes=fingerprint["total_bytes"],
             ),
+            stats=document.get("stats", {}),
         )
     except (json.JSONDecodeError, KeyError, TypeError, OSError) as error:
         raise SnapshotUnreadable(f"统计快照读不动：{path}（{error}）") from error
+
+
+def write_snapshot(path: Path, snapshot: Snapshot) -> None:
+    """快照要提交进 git，所以写成缩进过、中文不转义的 JSON，diff 才看得懂。"""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    text = json.dumps(asdict(snapshot), ensure_ascii=False, indent=2)
+    path.write_text(text + "\n", encoding="utf-8", newline="\n")

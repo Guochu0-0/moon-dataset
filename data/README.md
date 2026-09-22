@@ -21,7 +21,7 @@
 ```
 data/
 ├── README.md              本文件
-├── SHA256SUMS.txt         全部 257 个文件的 SHA-256 清单
+├── SHA256SUMS.txt         全部 258 个文件的 SHA-256 清单
 ├── tie-points/            对齐控制点，68 个 ROI 目录、254 个文件
 │   └── ROI_<n>/
 │       ├── cropped/       当年真正用于生产的那一代
@@ -31,7 +31,8 @@ data/
 │   ├── windows.json       验证集 + 测试集窗口清单
 │   └── windows_train.json 训练集窗口清单
 └── metadata/
-    └── minirf_metadata.csv  Mini-RF 逐 ROI 元数据表
+    ├── minirf_metadata.csv            Mini-RF 逐 ROI 元数据表
+    └── removed_ROI_060_manifest.txt   被删除的 ROI_060 的文件清单
 ```
 
 ## 1. 对齐控制点 `tie-points/`
@@ -115,9 +116,23 @@ data/
 ——该 ROI 与 ROI_37 逐像素重复，已从主数据盘删除。凡统计 ROI 数量的地方都要明确口径是
 「含 ROI_60 的 68」还是「不含的 67」。
 
+## 4. 删除清单 `metadata/removed_ROI_060_manifest.txt`
+
+| 项 | 值 |
+|---|---|
+| 来源 | `D:\Data\Moon\docs\removed_ROI_060_manifest.txt` |
+| 规模 | 599 行，UTF-8 |
+
+2026-09-20 删除 `Processed_Data/Val/ROI_060` 时留下的记录：头部几行 `#` 注释写明删了什么、
+为什么删、何时删，其后逐行列出被删的每个文件的相对路径。
+
+它是 ROI_060 **唯一的剩余记录**——patch 与评测真值点都已从数据盘删除。统计快照
+（`moondata scan`）靠它给出「含已删除 ROI」口径的 patch 数与带真值点的 patch 数。
+清单只有文件名，没有内容，所以 ROI_060 的评测真值点**点数已无从得知**。
+
 ## 校验
 
-`SHA256SUMS.txt` 覆盖本目录下全部 257 个文件（`README.md` 与清单自身除外）。
+`SHA256SUMS.txt` 覆盖本目录下全部 258 个文件（`README.md` 与清单自身除外）。
 
 ```bash
 cd data && sha256sum -c SHA256SUMS.txt

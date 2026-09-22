@@ -21,6 +21,14 @@ class SnapshotUnreadable(MoonDataError):
     """统计快照存在但读不动。区别于「快照尚未生成」，后者返回 None。"""
 
 
+class TiffUnreadable(MoonDataError):
+    """TIFF 文件坏了，或用了 `moondata.tiff` 不支持的编码方式。消息里带文件路径。"""
+
+
+class StatsUnavailable(MoonDataError):
+    """扫描产出统计量时遇到读不动或认不出的输入（产物目录、窗口清单、删除清单、标签文件）。"""
+
+
 class NotImplementedYet(MoonDataError):
     """子命令的骨架已就位、实现留待后续 issue。带上 issue 号，别让人猜。"""
 

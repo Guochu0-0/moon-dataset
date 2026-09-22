@@ -1,0 +1,317 @@
+---
+title: 产物文档
+subtitle: 你拿到的是什么
+execute:
+  echo: false
+---
+
+```{python}
+#| include: false
+from moondata.docvalues import dtype_label, load_stats_snapshot, num, pct, size, table
+
+snapshot = load_stats_snapshot()
+stats = snapshot.stats
+fingerprint = snapshot.fingerprint
+
+splits = stats["splits"]
+ex = stats["counts"]["excluding_removed"]
+inc = stats["counts"]["including_removed"]
+removed = stats["removed_rois"]
+removed_names = "、".join(r["roi"] for r in removed) or "（无）"
+opt = stats["images"]["Optical"]
+sar = stats["images"]["SAR"]
+labels = stats["labels"]
+naming = stats["naming"]
+windows = stats["window_manifests"]
+
+def only(values, what):
+    """快照里某项若出现不止一种取值，正文的单数说法就不成立了——宁可渲染失败。"""
+    if len(values) != 1:
+        raise ValueError(f"{what} 不唯一：{values}")
+    return values[0]
+
+patch_w, patch_h = only(opt["sizes"], "光学 patch 尺寸")
+assert [patch_w, patch_h] == only(sar["sizes"], "SAR patch 尺寸"), "光学与 SAR 尺寸不同"
+opt_scale = only(opt["pixel_scales"], "光学像素间距")
+sar_scale = only(sar["pixel_scales"], "SAR 像素间距")
+eval_splits = [s for s in splits if ex[s]["labeled_patch_count"]]
+eval_patches = sum(ex[s]["patch_count"] for s in eval_splits)
+eval_labeled = sum(ex[s]["labeled_patch_count"] for s in eval_splits)
+points = labels["points_per_patch"]
+windows_total = sum(v["windows"] for v in windows["splits"].values())
+unresolved_total = sum(v["unresolved"] for v in windows["splits"].values())
+product_total = sum(v["product_patches"] for v in windows["splits"].values())
+diff_total = sum(d["product_patches"] - d["windows"] for d in windows["differences"])
+```
+
+::: {.callout-note}
+## 本页每一个数字都来自统计快照
+
+快照 `stats/snapshot.json` 生成于 **`{python} snapshot.generated_at`**，
+所依据的数据指纹为 `{python} fingerprint.digest`
+（数据根下 `{python} num(fingerprint.file_count)` 个文件，共 `{python} size(fingerprint.total_bytes)`）。
+指纹覆盖的是**整个数据根**（含原始影像），而本页的统计量只来自其中的 patch 产物——
+所以原始影像那边有变动也会让指纹「不一致」，这时本页数字未必真的过期，重扫一次即可确认。
+
+正文里没有手写的数字：页面渲染时从快照取值，所以**移动硬盘没插也照样渲染**。
+想知道这些数字是否仍然作数，接上盘跑 `moondata doctor`，看指纹是否「一致」；
+不一致就跑 `moondata scan` 重新生成快照，再 `quarto render`。
+:::
+
+## 目录结构
+
+patch 产物在数据根下的 `{python} stats["product_root"] + "/"` 里，按**划分 → ROI → 模态**三层组织：
+
+```
+Processed_Data/
+├── Train/
+│   └── ROI_<nnn>/
+│       ├── Optical/   patch_<n>.tif    光学 patch
+│       └── SAR/       patch_<n>.tif    SAR patch
+├── Val/
+│   └── ROI_<nnn>/
+│       ├── Optical/
+│       ├── SAR/
+│       └── Label/     patch_<n>.txt    评测真值点
+│                      patch_<n>.prj    标注软件随手写下的投影文件
+└── Test/              同 Val
+```
+
+- **划分按 ROI 切，不按 patch 切**：同一个 ROI 的全部 patch 落在同一个划分里。
+- `Label/` 只出现在`{python} "、".join(eval_splits)`，训练集没有这一层——见[评测真值点覆盖](#评测真值点覆盖)。
+
+## 文件命名
+
+- ROI 目录名是 `ROI_` 加**补零到三位**的编号（`ROI_006`）。注意 `data/` 下的对齐控制点与
+  元数据表用的是**不补零**的写法（`ROI_6`），两者指同一个 ROI。
+- `patch_<n>` 的 `<n>` 是该 ROI 内的顺序编号，从零起、不补零，原则上连续（例外见下表）。
+  **同一个 ROI 里，同编号的光学、SAR、标签文件指同一块地面**——这是配对的唯一依据，
+  文件里没有别的配对信息。
+- 编号不跨 ROI：每个 ROI 都有自己的 `patch_0`。
+
+扫描时逐一复核了上面这几条：
+
+| 检查 | 结果 |
+|---|---|
+| 光学与 SAR 编号不成对的 patch | `{python} num(len(naming["unpaired"]))` 个 |
+| 编号不连续的 ROI | `{python} num(len(naming["index_gaps"]))` 个 |
+| 不符合命名规则的文件 | `{python} num(len(naming["unexpected_files"]))` 个 |
+
+```{python}
+#| output: asis
+anomalies = naming["unpaired"] + naming["index_gaps"] + naming["unexpected_files"]
+if anomalies:
+    print("具体是：\n")
+    for item in anomalies:
+        print(f"- `{item}`")
+```
+
+## 数据类型与数值范围
+
+两种 patch 都是 `{python} patch_w` × `{python} patch_h` 像素的 GeoTIFF，
+按条带存储、`{python} "/".join(opt["compressions"])` 压缩，头里带地理参考。
+
+```{python}
+#| output: asis
+def ranges(image):
+    return "<br>".join(
+        f"波段 {i}：{num(r['min'])} ~ {num(r['max'])}"
+        for i, r in enumerate(image["band_ranges"], 1)
+    )
+
+def one_or_all(values):
+    return "、".join(str(v) for v in values)
+
+print(table(
+    ["", "光学 `Optical/`", "SAR `SAR/`"],
+    [
+        ["文件数", num(opt["file_count"]), num(sar["file_count"])],
+        ["总大小", size(opt["bytes"]), size(sar["bytes"])],
+        ["数据类型", "、".join(map(dtype_label, opt["dtypes"])), "、".join(map(dtype_label, sar["dtypes"]))],
+        ["波段数", one_or_all(opt["bands"]), one_or_all(sar["bands"])],
+        ["尺寸（宽 × 高）", f"{patch_w} × {patch_h}", f"{patch_w} × {patch_h}"],
+        ["像素间距", f"{num(opt_scale[0])} m", f"{num(sar_scale[0])} m"],
+        ["nodata 值", one_or_all(opt["nodata"]), one_or_all(sar["nodata"])],
+        ["有效像素的数值范围", ranges(opt), ranges(sar)],
+        ["nodata 像素占比", pct(opt["nodata_pixel_fraction"], 1, 2), pct(sar["nodata_pixel_fraction"], 1, 2)],
+        ["含负值的 patch", num(opt["patches_with_negative"]), num(sar["patches_with_negative"])],
+        ["NaN 像素", num(opt["nan_pixel_count"]), num(sar["nan_pixel_count"])],
+    ],
+))
+```
+
+「有效像素」指不等于 nodata 值的像素；数值范围是在**全部** patch 上逐像素取的极值，不是抽样。
+nodata 像素占比按「所有波段都等于 nodata」计。
+
+几点容易踩的：
+
+- **SAR 含负值是正常的**，不是坏数据。`{python} num(sar["patches_with_negative"])` 个 SAR patch
+  里有负值。归一化、取对数之前要先想清楚怎么处理它们。
+- **光学与 SAR 的像素间距相同**，因为两者已被重采样到同一个网格上（见术语表「对齐影像」）。
+  注意它**不是** CE-2 DOM 的原生分辨率——原始光学瓦片与这里的间距不同。
+- SAR 各波段的物理含义属于数据来源，见来源文档（尚未产出，issue #7）。
+
+### 怎么读
+
+::: {.callout-warning}
+## 常见的 Python 影像库读这批 TIFF 会报解压错误
+
+tifffile（底层是 libdeflate）读它们会报 `LIBDEFLATE_BAD_DATA`。数据没坏——同一段条带字节
+交给标准库 `zlib` 能完整解出、校验和也对得上，只是 libdeflate 更挑剔。
+GDAL/rasterio 读取正常。
+:::
+
+不想装 GDAL 的话，用本仓库自带的读取器，它只依赖标准库和 numpy：
+
+```python
+from moondata.tiff import read_tiff
+
+info, optical = read_tiff("Processed_Data/Test/ROI_006/Optical/patch_0.tif")
+_, sar = read_tiff("Processed_Data/Test/ROI_006/SAR/patch_0.tif")
+optical.shape, optical.dtype   # (H, W, 1)  单波段也保留最后一维
+sar.shape, sar.dtype           # (H, W, C)，C 为上表的 SAR 波段数
+info.nodata, info.pixel_scale, info.origin
+```
+
+## 划分与数量
+
+`{python} removed_names` 因与另一个 ROI 重复已从数据盘删除（原因见下），
+所以 ROI 与 patch 的数量有**两种口径**。凡引用数字，都要说明是哪一种。
+
+```{python}
+#| output: asis
+def count_rows(counts, key):
+    return [counts[s][key] for s in splits] + [counts["all"][key]]
+
+print(table(
+    ["", *splits, "合计"],
+    [
+        ["ROI（现存）", *map(num, count_rows(ex, "roi_count"))],
+        ["ROI（含已删除）", *map(num, count_rows(inc, "roi_count"))],
+        ["patch 对（现存）", *map(num, count_rows(ex, "patch_count"))],
+        ["patch 对（含已删除）", *map(num, count_rows(inc, "patch_count"))],
+    ],
+    align="l" + "r" * (len(splits) + 1),
+))
+```
+
+「patch 对」指一张光学 patch 加一张 SAR patch。**不指明口径时，本项目说的都是「现存」**。
+
+```{python}
+#| output: asis
+for r in removed:
+    print(
+        f"\n::: {{.callout-note}}\n## 已删除的 {r['roi']}（原属 {r['split']}）\n\n"
+        f"{r['reason']}。删除于 {r['deleted_on']}；删除时它有 {num(r['patch_count'])} 个 patch 对，"
+        f"其中 {num(r['labeled_patch_count'])} 个带评测真值点。"
+        f"这两个数取自删除时留下的文件清单 `data/metadata/removed_{r['roi']}_manifest.txt`——"
+        f"清单只有文件名，所以它的评测真值点**点数未知**，含已删除口径下的点数一律记为「未知」。\n:::\n"
+    )
+```
+
+## 评测真值点覆盖
+
+**评测真值点**（术语表有专条）是人工在单个 patch 上标注的光学–SAR 同名点，用来评测配准精度。
+它**只存在于`{python} "、".join(eval_splits)`**，而且不是每个 patch 都有。
+
+```{python}
+#| output: asis
+def known(value):
+    return "未知" if value is None else num(value)
+
+rows = []
+for s in splits:
+    for label, counts in (("现存", ex), ("含已删除", inc)):
+        c = counts[s]
+        if label == "含已删除" and c == ex[s]:
+            continue
+        rows.append([
+            s if label == "现存" else f"{s}（含已删除）",
+            num(c["patch_count"]),
+            num(c["labeled_patch_count"]),
+            pct(c["labeled_patch_count"], c["patch_count"]),
+            known(c["label_point_count"]),
+        ])
+print(table(["划分", "patch 对", "有真值点的", "覆盖率", "真值点对数"], rows, align="lrrrr"))
+```
+
+- 在`{python} "、".join(eval_splits)`（现存口径）的 `{python} num(eval_patches)` 个 patch 对中，
+  `{python} num(eval_labeled)` 个带评测真值点，覆盖率 `{python} pct(eval_labeled, eval_patches)`。
+  剩下的 patch 评测时要跳过，**不能**当作「零误差」或「零个点」参与平均。
+- 每个带真值点的 patch 上有 `{python} num(points["min"])` ~ `{python} num(points["max"])` 对点，
+  中位数 `{python} num(points["median"])`。
+- **训练集没有评测真值点**：训练集不需要被评测。
+
+### 标签文件格式
+
+`Label/patch_<n>.txt` 是空白分隔的纯文本，每行一对点，
+`{python} "、".join(map(str, labels["columns"]))` 列：光学 x、光学 y、SAR x、SAR y，单位是 patch 内像素。
+
+::: {.callout-important}
+## y 坐标取负
+
+标签文件里的 y 是**负的**像素行号，与 `data/` 下的对齐控制点**不同**。
+扫描复核结果：全部标签文件的 y 列`{python} "均 ≤ 0，与约定一致" if labels["y_all_nonpositive"] else "**出现了正值，与约定不符，需要排查**"`。
+读的时候取一次负、写的时候再取一次负，中间一律用正的行号。详见术语表「坐标符号约定」。
+:::
+
+同名的 `patch_<n>.prj` 是标注软件随标签一起写出的，读标签用不到它。
+其中 `{python} num(labels["prj_kinds"].get("guid", 0))` 个只有一个 GUID 占位、不含投影信息，
+`{python} num(labels["prj_kinds"].get("wkt", 0))` 个写了完整的 WKT 投影，
+`{python} num(labels["prj_kinds"].get("other", 0))` 个是别的内容。
+
+## 与窗口清单的数量差
+
+`data/windows/` 下的**窗口清单**（`{python} "、".join(windows["files"])`）逐 ROI 记录了每个 patch 的窗口。
+按理它与产物应当一一对应，实际上对不上：
+
+```{python}
+#| output: asis
+print(table(
+    ["划分", "清单中的窗口", "清单中的 unresolved", "产物中的 patch 对"],
+    [
+        [s, num(v["windows"]), num(v["unresolved"]), num(v["product_patches"])]
+        for s, v in windows["splits"].items()
+    ],
+    align="lrrr",
+))
+```
+
+这里的产物数量按**含已删除**口径计（清单里仍有 `{python} removed_names`）。
+清单合计 `{python} num(windows_total)` 个窗口、另有 `{python} num(unresolved_total)` 个 `unresolved`
+（清单自己承认没能对上的窗口），产物合计 `{python} num(product_total)` 个 patch 对。
+差异全部集中在下面这些 ROI：
+
+```{python}
+#| output: asis
+print(table(
+    ["ROI", "划分", "清单中的窗口", "unresolved", "产物中的 patch 对", "差"],
+    [
+        [d["roi"], d["split"], num(d["windows"]), num(d["unresolved"]),
+         num(d["product_patches"]), f"{d['product_patches'] - d['windows']:+,}"]
+        for d in windows["differences"]
+    ],
+    align="llrrrr",
+))
+```
+
+「产物 − 窗口」合计 `{python} f"{diff_total:+,}"`；若把 `unresolved` 也算作清单记录过的窗口，
+合计 `{python} f"{diff_total - unresolved_total:+,}"`——此前口头流传的那个差数是后一种算法。
+
+**原因至今没查清**，这里只如实记录。在查清之前，不得为凑数修改窗口清单或产物。
+排查时可以先对照 `data/README.md` 里对齐控制点的重标记录。
+
+## 逐 ROI 数量
+
+```{python}
+#| output: asis
+print(table(
+    ["ROI", "划分", "patch 对", "有真值点的", "真值点对数"],
+    [
+        [roi, r["split"], num(r["patch_count"]), num(r["labeled_patch_count"]),
+         num(r["label_point_count"])]
+        for roi, r in sorted(stats["rois"].items())
+    ],
+    align="llrrr",
+))
+```
