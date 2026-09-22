@@ -37,6 +37,41 @@ const deepseekEnv = () => ({
 });
 
 // ---------------------------------------------------------------------------
+// 把 agent 的 env 随命令一起送进容器
+//
+// sandcastle 只在 `docker run` 那一刻注入 env，之后一律是 `docker exec`，不带 -e。
+// 而 createSandbox() 建容器时把 agentProviderEnv 写死成了 {}，sandbox.run() 也从不
+// 读 provider.env——于是走 createSandbox 的 implementer 和 reviewer 拿不到任何模型
+// 凭据，claude 直接以 "Not logged in" 退出。planner/merger 走顶层 sandcastle.run()，
+// 容器由它自己创建、env 在 docker run 时注入，所以不受影响。这正是头一次跑
+// planner 正常、implementer 全挂的原因。
+//
+// 这里把 env 拼成 `KEY=v claude ...` 的命令前缀。选它而不是塞进 docker 的 env，是
+// 因为 implementer 和 reviewer 共用一个容器却要用两套互斥的凭据：前缀只作用于单条
+// 命令，implementer 的 ANTHROPIC_BASE_URL 不会留在容器里把 reviewer 也悄悄改道到
+// DeepSeek。
+//
+// 凭据不会进日志：sandcastle 只记 stdout/stderr 的解析结果，不记命令本身。
+// ---------------------------------------------------------------------------
+
+// POSIX sh 的单引号里没有任何转义，所以碰到 ' 只能先闭合、拼一个转义过的单引号、再开。
+const shQuote = (value: string) => `'${value.replaceAll("'", `'\\''`)}'`;
+
+const withInlineEnv = <T extends sandcastle.AgentProvider>(
+  agent: T,
+  env: Record<string, string>,
+): T => ({
+  ...agent,
+  buildPrintCommand: (options: sandcastle.AgentCommandOptions) => {
+    const inner = agent.buildPrintCommand(options);
+    const prefix = Object.entries(env)
+      .map(([key, value]) => `${key}=${shQuote(value)}`)
+      .join(" ");
+    return { ...inner, command: `${prefix} ${inner.command}` };
+  },
+});
+
+// ---------------------------------------------------------------------------
 // 按角色分配 agent
 //
 // 判断依据是「推理深度 vs. 迭代次数」：planner/reviewer/merger 都是单轮、吃推理
@@ -46,25 +81,37 @@ const deepseekEnv = () => ({
 
 // 规划：依赖分析要判断哪些 issue 会改到重叠文件，错判直接导致合并冲突。
 const plannerAgent = () =>
-  sandcastle.claudeCode("claude-opus-5", { env: claudeEnv() });
+  withInlineEnv(
+    sandcastle.claudeCode("claude-opus-5", { env: claudeEnv() }),
+    claudeEnv(),
+  );
 
 // 实现：跑量最大的一环。用 DeepSeek 最强的 deepseek-v4-pro，走 Anthropic 兼容端点，
 // 复用同一个 Claude Code CLI。
 // captureSessions 关掉：它和下面几个同为 claudeCode provider，会话会写进同一个
 // ~/.claude 存储，混在一起后 resume/fork 容易接错。
 const implementerAgent = () =>
-  sandcastle.claudeCode("deepseek-v4-pro", {
-    env: deepseekEnv(),
-    captureSessions: false,
-  });
+  withInlineEnv(
+    sandcastle.claudeCode("deepseek-v4-pro", {
+      env: deepseekEnv(),
+      captureSessions: false,
+    }),
+    deepseekEnv(),
+  );
 
 // 审查：要对着 CODING_STANDARDS.md 判断实现是否偏离本仓库约定，不能用便宜模型。
 const reviewerAgent = () =>
-  sandcastle.claudeCode("claude-opus-5", { env: claudeEnv() });
+  withInlineEnv(
+    sandcastle.claudeCode("claude-opus-5", { env: claudeEnv() }),
+    claudeEnv(),
+  );
 
 // 合并：要读两边改动判断冲突怎么解，解错会静默丢代码。
 const mergerAgent = () =>
-  sandcastle.claudeCode("claude-opus-5", { env: claudeEnv() });
+  withInlineEnv(
+    sandcastle.claudeCode("claude-opus-5", { env: claudeEnv() }),
+    claudeEnv(),
+  );
 
 // ---------------------------------------------------------------------------
 // 配置
