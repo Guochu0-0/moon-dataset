@@ -76,7 +76,7 @@
     "href": "docs/products.html#与窗口清单的数量差",
     "title": "产物文档",
     "section": "与窗口清单的数量差",
-    "text": "与窗口清单的数量差\ndata/windows/ 下的窗口清单（windows.json、windows_train.json）逐 ROI 记录了每个 patch 的窗口。 按理它与产物应当一一对应，实际上对不上：\n\n\n\n划分\n清单中的窗口\n清单中的 unresolved\n产物中的 patch 对\n\n\n\n\nTrain\n7,886\n3\n7,907\n\n\nVal\n977\n0\n977\n\n\nTest\n1,130\n0\n1,130\n\n\n\n这里的产物数量按含已删除口径计（清单里仍有 ROI_060）。 清单合计 9,993 个窗口、另有 3 个 unresolved （清单自己承认没能对上的窗口），产物合计 10,014 个 patch 对。 差异全部集中在下面这些 ROI：\n\n\n\nROI\n划分\n清单中的窗口\nunresolved\n产物中的 patch 对\n差\n\n\n\n\nROI_027\nTrain\n234\n3\n234\n+0\n\n\nROI_073\nTrain\n98\n0\n119\n+21\n\n\n\n「产物 − 窗口」合计 +21；若把 unresolved 也算作清单记录过的窗口， 合计 +18——此前口头流传的那个差数是后一种算法。\n原因至今没查清，这里只如实记录。在查清之前，不得为凑数修改窗口清单或产物。 排查时可以先对照 data/README.md 里对齐控制点的重标记录。",
+    "text": "与窗口清单的数量差\ndata/windows/ 下的窗口清单（windows.json、windows_train.json）逐 ROI 记录了每个 patch 的窗口。 按理它与产物应当一一对应，实际上对不上：\n\n\n\n划分\n清单中的窗口\n清单中的 unresolved\n产物中的 patch 对\n\n\n\n\nTrain\n7,886\n3\n7,907\n\n\nVal\n977\n0\n977\n\n\nTest\n1,130\n0\n1,130\n\n\n\n这里的产物数量按含已删除口径计（清单里仍有 ROI_060）。 清单合计 9,993 个窗口、另有 3 个 unresolved （清单自己承认没能对上的窗口），产物合计 10,014 个 patch 对。 差异全部集中在下面这些 ROI：\n\n\n\nROI\n划分\n清单中的窗口\nunresolved\n产物中的 patch 对\n差\n\n\n\n\nROI_027\nTrain\n234\n3\n234\n+0\n\n\nROI_073\nTrain\n98\n0\n119\n+21\n\n\n\n「产物 − 窗口」合计 +21；若把 unresolved 也算作清单记录过的窗口， 合计 +18——此前口头流传的那个差数是后一种算法。\n这两处差异的来历（据数据集作者说明）：\n\nROI_073：清单里的窗口本身是错的。 该 ROI 最初的对齐控制点有误（见 data/README.md 中 cropped_2 的重标记录），清单里的窗口是按那批错误的点算出来的，与现有产物对不上是 预期之内的。它在训练集，正向复现不要求与这里的旧窗口一致。\nROI_027：unresolved 可能是被删掉的全黑 patch。 作者印象中，当年有几个 patch 因光照原因基本全黑而被删掉，这与该 ROI 的编号断档（见文件命名）吻合。 这一条只是回忆，尚未核实。\n\n正向复现的验收只在验证集与测试集上设门：这两个划分的清单与产物完全对得上。 训练集上的差异不影响验收，也不得为凑数修改窗口清单或产物。",
     "crumbs": [
       "首页",
       "主体文档",

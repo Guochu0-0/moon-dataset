@@ -616,7 +616,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>「产物 − 窗口」合计 +21；若把 <code>unresolved</code> 也算作清单记录过的窗口， 合计 +18——此前口头流传的那个差数是后一种算法。</p>
-<p><strong>原因至今没查清</strong>，这里只如实记录。在查清之前，不得为凑数修改窗口清单或产物。 排查时可以先对照 <code>data/README.md</code> 里对齐控制点的重标记录。</p>
+<p>这两处差异的来历（据数据集作者说明）：</p>
+<ul>
+<li><strong><code>ROI_073</code>：清单里的窗口本身是错的。</strong> 该 ROI 最初的对齐控制点有误（见 <code>data/README.md</code> 中 <code>cropped_2</code> 的重标记录），清单里的窗口是按那批错误的点算出来的，与现有产物对不上是 预期之内的。它在训练集，<strong>正向复现不要求与这里的旧窗口一致</strong>。</li>
+<li><strong><code>ROI_027</code>：<code>unresolved</code> 可能是被删掉的全黑 patch。</strong> 作者印象中，当年有几个 patch 因光照原因基本全黑而被删掉，这与该 ROI 的编号断档（见<a href="#文件命名">文件命名</a>）吻合。 这一条<strong>只是回忆，尚未核实</strong>。</li>
+</ul>
+<p>正向复现的验收只在验证集与测试集上设门：这两个划分的清单与产物完全对得上。 训练集上的差异不影响验收，也<strong>不得</strong>为凑数修改窗口清单或产物。</p>
 </section>
 <section id="逐-roi-数量" class="level2">
 <h2 class="anchored" data-anchor-id="逐-roi-数量">逐 ROI 数量</h2>
