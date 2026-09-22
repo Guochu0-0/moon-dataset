@@ -5,3 +5,10 @@ data/** -text
 # Dockerfile 的 RUN 里是 sh 脚本：行尾续行符 `\` 后面跟上 `\r` 会让构建以很难懂的
 # 方式失败。core.autocrlf=true 会在 checkout 时把文本文件转成 CRLF，这里显式钉回 LF。
 .sandcastle/Dockerfile text eol=lf
+
+# _site/ 是要提交的 Quarto 成品（见 .gitignore），但 Quarto 会把 mermaid.min.js、
+# bootstrap、图标字体一并打包进去。压缩过的 JS 是几万字符的单行，token 密度极高：
+# issue #4 只改了 3 个 .qmd，`git diff main...分支` 却展开成 3.8 MB、约 95 万 token，
+# 直接把 reviewer 顶爆（Prompt is too long）。标成 -diff 后 git 只输出一行
+# 「Binary files differ」，成品照常提交与发布，源文件的逐行改动不受影响。
+_site/** -diff

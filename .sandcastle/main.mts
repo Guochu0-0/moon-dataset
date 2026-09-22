@@ -27,13 +27,10 @@ const requireEnv = (key: string): string => {
   return value;
 };
 
-// 两套凭据各自只下发给用到它的 agent，不经 .sandcastle/.env 全量注入沙箱。
+// 凭据只下发给 agent 自己，不经 .sandcastle/.env 全量注入沙箱——那个文件里声明的
+// 每个 key 都会进到每一个沙箱，包括本不需要它的那些。
 const claudeEnv = () => ({
   CLAUDE_CODE_OAUTH_TOKEN: requireEnv("CLAUDE_CODE_OAUTH_TOKEN"),
-});
-const deepseekEnv = () => ({
-  ANTHROPIC_BASE_URL: "https://api.deepseek.com/anthropic",
-  ANTHROPIC_AUTH_TOKEN: requireEnv("DEEPSEEK_API_KEY"),
 });
 
 // ---------------------------------------------------------------------------
@@ -46,10 +43,11 @@ const deepseekEnv = () => ({
 // 容器由它自己创建、env 在 docker run 时注入，所以不受影响。这正是头一次跑
 // planner 正常、implementer 全挂的原因。
 //
-// 这里把 env 拼成 `KEY=v claude ...` 的命令前缀。选它而不是塞进 docker 的 env，是
-// 因为 implementer 和 reviewer 共用一个容器却要用两套互斥的凭据：前缀只作用于单条
-// 命令，implementer 的 ANTHROPIC_BASE_URL 不会留在容器里把 reviewer 也悄悄改道到
-// DeepSeek。
+// 这里把 env 拼成 `KEY=v claude ...` 的命令前缀，跟着 sh -c 一起进容器。前缀只作用
+// 于单条命令，不在容器里留下痕迹——四个角色眼下用的是同一套凭据，但只要以后有一个
+// 换了 provider（比如 implementer 再改回按量付费的端点），塞进 docker env 的做法就
+// 会让它的 ANTHROPIC_BASE_URL 留在容器里，把共用同一沙箱的 reviewer 也悄悄改道过去。
+// 那是不报错、也看不出来的静默降级。
 //
 // 凭据不会进日志：sandcastle 只记 stdout/stderr 的解析结果，不记命令本身。
 // ---------------------------------------------------------------------------
@@ -72,11 +70,14 @@ const withInlineEnv = <T extends sandcastle.AgentProvider>(
 });
 
 // ---------------------------------------------------------------------------
-// 按角色分配 agent
+// agent
 //
-// 判断依据是「推理深度 vs. 迭代次数」：planner/reviewer/merger 都是单轮、吃推理
-// 质量，用订阅（不按 token 计费）；implementer 每个 issue 最多 100 轮、是烧量的
-// 大头，用 DeepSeek 按量付费更划算。
+// 四个角色统一用 claude-opus-5，走订阅（不按 token 计费）。
+//
+// implementer 原本配的是 DeepSeek——它跑量最大，按量付费更划算。实跑下来产出质量
+// 不够：这个项目的实现任务要同时拿住地理库的坐标约定、仓库自己的分层约束和逐字节
+// 可复现的验收标准，省下的那点钱抵不过返工。真要再省，改这一处的模型名即可，
+// withInlineEnv 已经能让同一沙箱里的两个角色各用各的凭据。
 // ---------------------------------------------------------------------------
 
 // 规划：依赖分析要判断哪些 issue 会改到重叠文件，错判直接导致合并冲突。
@@ -86,20 +87,19 @@ const plannerAgent = () =>
     claudeEnv(),
   );
 
-// 实现：跑量最大的一环。用 DeepSeek 最强的 deepseek-v4-pro，走 Anthropic 兼容端点，
-// 复用同一个 Claude Code CLI。
-// captureSessions 关掉：它和下面几个同为 claudeCode provider，会话会写进同一个
+// 实现：跑量最大的一环，每个 issue 最多 100 轮。
+// captureSessions 关掉：四个角色同为 claudeCode provider，会话会写进同一个
 // ~/.claude 存储，混在一起后 resume/fork 容易接错。
 const implementerAgent = () =>
   withInlineEnv(
-    sandcastle.claudeCode("deepseek-v4-pro", {
-      env: deepseekEnv(),
+    sandcastle.claudeCode("claude-opus-5", {
+      env: claudeEnv(),
       captureSessions: false,
     }),
-    deepseekEnv(),
+    claudeEnv(),
   );
 
-// 审查：要对着 CODING_STANDARDS.md 判断实现是否偏离本仓库约定，不能用便宜模型。
+// 审查：要对着 CODING_STANDARDS.md 判断实现是否偏离本仓库约定。
 const reviewerAgent = () =>
   withInlineEnv(
     sandcastle.claudeCode("claude-opus-5", { env: claudeEnv() }),
