@@ -21,6 +21,7 @@ from moondata.docsite import (
     TABSETS_SCRIPT_RELPATH,
     embed_search_index,
     inline_module_scripts,
+    main,
     postprocess,
 )
 from moondata.errors import DocSiteUnpatchable
@@ -130,6 +131,12 @@ class TestRerunningTheBuild:
         embed_search_index(site)
         patched = embed_search_index(site).read_text(encoding="utf-8")
         assert patched.count("moondata:offline-search-index") == 2  # 起止各一
+
+    def test_a_second_run_over_the_same_index_changes_nothing(self, site: Path) -> None:
+        """产物是要提交的。重跑若每次多攒一行空白，git 上就会出现一份没有内容的 diff。"""
+        once = embed_search_index(site).read_text(encoding="utf-8")
+        twice = embed_search_index(site).read_text(encoding="utf-8")
+        assert twice == once
 
 
 class TestItFailsLoudly:
@@ -302,6 +309,30 @@ class TestPostprocess:
         assert 'type="module"' not in (scripted_site / "index.html").read_text(
             encoding="utf-8"
         )
+
+
+class TestTheCommandLineStep:
+    """post-render 调的是 `python -m moondata.docsite`，输出目录由 Quarto 用环境变量给。"""
+
+    def test_it_patches_the_directory_quarto_points_at(
+        self, scripted_site: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        monkeypatch.setenv("QUARTO_PROJECT_OUTPUT_DIR", str(scripted_site))
+        assert main() == 0
+        script = (scripted_site / SEARCH_SCRIPT_RELPATH).read_text(encoding="utf-8")
+        assert FETCH_ANCHOR not in script
+
+    def test_it_gives_one_chinese_line_rather_than_a_traceback(
+        self,
+        scripted_site: Path,
+        monkeypatch: pytest.MonkeyPatch,
+        capsys: pytest.CaptureFixture[str],
+    ) -> None:
+        """构建失败要看得懂：quarto render 本身没问题，是这一步做不下去。与 cli.py 一致。"""
+        (scripted_site / "search.json").unlink()
+        monkeypatch.setenv("QUARTO_PROJECT_OUTPUT_DIR", str(scripted_site))
+        assert main() == 1
+        assert "search.json" in capsys.readouterr().err
 
 
 class TestTheCommittedSiteLoadsNoModules:

@@ -68,6 +68,24 @@ BUNDLE_MARK = "/* moondata:inlined-tabsets —— 由 moondata.docsite 内联，
 MODULE_ATTRIBUTE = ' type="module"'
 
 
+def _script_src_pattern(relpath: Path) -> str:
+    """匹配加载某个脚本的 `<script src>` 开头部分。
+
+    src 带一段随页面深度而变的相对前缀（根目录页面是空，`docs/` 下的页面是 `../`），
+    所以只锚定它的后缀。
+    """
+    return r'<script src="[^"]*' + re.escape(relpath.as_posix()) + '"'
+
+
+TABSETS_TAG_RE = re.compile(
+    r"[ \t]*" + _script_src_pattern(TABSETS_SCRIPT_RELPATH) + r"[^>]*></script>\n?"
+)
+MAIN_MODULE_TAG_RE = re.compile(
+    "(" + _script_src_pattern(MAIN_SCRIPT_RELPATH) + ")" + re.escape(MODULE_ATTRIBUTE)
+)
+ANY_MODULE_TAG_RE = re.compile(r'<script src="([^"]*)"' + re.escape(MODULE_ATTRIBUTE))
+
+
 def postprocess(site_dir: Path) -> None:
     """渲染完成后必须做的两件事，都是为了让成品在 file:// 下与在服务器上一样。"""
     embed_search_index(site_dir)
@@ -76,22 +94,20 @@ def postprocess(site_dir: Path) -> None:
 
 def embed_search_index(site_dir: Path) -> Path:
     """把 `site_dir/search.json` 嵌进 `quarto-search.js`，返回被改写的那个文件路径。"""
-    site_dir = Path(site_dir)
     index_path = site_dir / SEARCH_INDEX_FILENAME
-    script_path = site_dir / SEARCH_SCRIPT_RELPATH
     if not index_path.is_file():
         raise DocSiteUnpatchable(
             f"没有找到搜索索引 search.json（{index_path}）。"
             f"站点是不是在 `search: false` 下渲染的？"
         )
-    _require(script_path, "quarto-search.js")
+    script_path = _require(site_dir / SEARCH_SCRIPT_RELPATH, "quarto-search.js")
 
     documents = json.loads(index_path.read_text(encoding="utf-8"))
     script = script_path.read_text(encoding="utf-8")
     if BEGIN_MARK in script:
         script = _replace_existing_block(script, documents)
     else:
-        script = _bypass_the_runtime_fetch(script) + _block(documents)
+        script = _append_block(_bypass_the_runtime_fetch(script), documents)
     script_path.write_text(script, encoding="utf-8")
     return script_path
 
@@ -113,13 +129,17 @@ def _replace_existing_block(script: str, documents: object) -> str:
     """重跑时只换数据，不重复改写锚点——锚点在上一次就已经被换掉了。"""
     head, _, rest = script.partition(BEGIN_MARK)
     _, _, tail = rest.partition(END_MARK)
-    return head + _block(documents) + tail
+    return _append_block(head, documents) + tail.lstrip("\n")
+
+
+def _append_block(script: str, documents: object) -> str:
+    """块与上文之间空一行，块末尾一个换行。两侧的空白在这里掐准，重跑才不会每次多攒一行。"""
+    return script.rstrip("\n") + "\n\n" + _block(documents) + "\n"
 
 
 def _block(documents: object) -> str:
     return "\n".join(
         [
-            "",
             BEGIN_MARK,
             f"const __moondataSearchDocuments = {_as_js_literal(documents)};",
             "function __moondataOfflineSearchResponse() {",
@@ -131,7 +151,6 @@ def _block(documents: object) -> str:
             "  };",
             "}",
             END_MARK,
-            "",
         ]
     )
 
@@ -148,7 +167,6 @@ def _as_js_literal(documents: object) -> str:
 
 def inline_module_scripts(site_dir: Path) -> None:
     """把 quarto.js 唯一的依赖内联进去，并把各页面上的 `type="module"` 摘掉。"""
-    site_dir = Path(site_dir)
     _bundle_main_script(site_dir)
     for page in sorted(site_dir.rglob("*.html")):
         _drop_module_attributes(page)
@@ -186,22 +204,11 @@ def _bundle_main_script(site_dir: Path) -> None:
 
 def _drop_module_attributes(page: Path) -> None:
     original = page.read_text(encoding="utf-8")
-    html = original
     # tabsets 已经内联进 quarto.js；再以经典脚本加载一遍，它的 `export` 就是语法错误。
-    html = re.sub(
-        r'[ \t]*<script src="[^"]*' + re.escape(TABSETS_SCRIPT_RELPATH.as_posix())
-        + r'"[^>]*></script>\n?',
-        "",
-        html,
-    )
+    html = TABSETS_TAG_RE.sub("", original)
     # 只摘 quarto.js 这一处。别的模块脚本留着，好让下面那道检查看见它们。
-    html = re.sub(
-        r'(<script src="[^"]*' + re.escape(MAIN_SCRIPT_RELPATH.as_posix()) + r'")'
-        + re.escape(MODULE_ATTRIBUTE),
-        r"\1",
-        html,
-    )
-    leftover = re.search(r'<script src="([^"]*)"' + re.escape(MODULE_ATTRIBUTE), html)
+    html = MAIN_MODULE_TAG_RE.sub(r"\1", html)
+    leftover = ANY_MODULE_TAG_RE.search(html)
     if leftover is not None:
         raise DocSiteUnpatchable(
             f"{page} 仍以模块方式加载 {leftover.group(1)}。"
@@ -232,7 +239,12 @@ def main() -> int:
     """`_quarto.yml` 的 post-render 调用它。Quarto 以项目根为工作目录运行本步骤，
     并通过 `QUARTO_PROJECT_OUTPUT_DIR` 告知输出目录。"""
     site_dir = Path(os.environ.get("QUARTO_PROJECT_OUTPUT_DIR") or SITE_DIRNAME)
-    postprocess(site_dir)
+    try:
+        postprocess(site_dir)
+    except DocSiteUnpatchable as error:
+        # 渲染没问题、只是这一步做不下去时，给一行中文而不是 traceback——与 cli.py 一致。
+        print(error, file=sys.stderr)
+        return 1
     print(
         f"{site_dir} 已按 file:// 离线阅读处理："
         f"搜索索引已内嵌，模块脚本已改为经典脚本"
@@ -241,9 +253,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":  # pragma: no cover
-    # 渲染没问题、只是这一步做不下去时，给一行中文而不是 traceback——与 cli.py 一致。
-    try:
-        raise SystemExit(main())
-    except DocSiteUnpatchable as error:
-        print(error, file=sys.stderr)
-        raise SystemExit(1) from None
+    raise SystemExit(main())
