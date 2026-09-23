@@ -203,7 +203,8 @@ moondata verify-windows 35            # 也可以只比某几个 ROI（含训练
   因此改了编号的窗口、同编号位置不同的窗口及其像素偏差。全部一致退出码 0，否则 1。
 - 验收门的完整跑法（首次约半小时、筛选影像共约 15 GB）：
   `moondata windows 6 7 11 20 35 37 49 54 59 60 71 75 80`，再 `moondata windows 70 --grid-crs sar`，
-  最后 `moondata verify-windows`。
+  最后 `moondata verify-windows`。2026-09-23 实跑（GDAL 3.6.2）：**14/14 个 ROI、2107 个窗口
+  逐条一致**，没有需要记为「来源不可复现」的 ROI。
 - 几何这一半另有一道不读影像的单测（`tests/test_windows.py`）：全部 67 个 ROI 的清单窗口
   都落在正向候选上、SAR 坐标逐像素相等、先后顺序不变。
 
