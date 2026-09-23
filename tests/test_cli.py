@@ -10,8 +10,8 @@ import pytest
 from moondata.cli import main
 
 REPO = Path(__file__).resolve().parents[1]
-PIPELINE_COMMANDS = ["overlap", "tiepoints", "transform", "patches"]
-IMAGERY_COMMANDS = [["overlap", "35"], ["patches"]]
+PIPELINE_COMMANDS = ["overlap", "tiepoints", "transform", "windows", "verify-windows", "patches"]
+IMAGERY_COMMANDS = [["overlap", "35"], ["windows", "35"], ["patches"]]
 
 
 @pytest.fixture

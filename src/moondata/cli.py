@@ -7,7 +7,8 @@
   生成 ROI 档案页。不碰数据盘，`quarto render` 前自动跑。
 - **只读仓库的流程步骤**：`tiepoints` 与 `transform`。对齐控制点在仓库的 `data/` 里，
   估计变换是纯几何，所以这两步既不要数据盘、也不要 GDAL。
-- **要读影像的**：四步流程里的 `overlap` 与 `patches`，读遍 patch 产物、写出统计快照的
+- **只读仓库的验收**：`verify-windows`，拿 `work/windows/` 里的正向结果对照窗口清单。
+- **要读影像的**：四步流程里的 `overlap`、`windows` 与 `patches`，读遍 patch 产物、写出统计快照的
   `scan`，以及从对齐影像画 ROI 缩略图的 `thumbnails`。
   它们进门第一件事是检查数据根，不可达就干净地退出。
 
@@ -40,16 +41,25 @@ from moondata.errors import (
     RepoRootNotFound,
     StatsUnavailable,
 )
-from moondata.geometry import TransformModel
-from moondata.manifest import ManifestRoi, load_window_manifests
+from moondata.geometry import TransformModel, plan_windows
+from moondata.manifest import ManifestRoi, load_window_manifests, write_window_manifest
 from moondata.metadata import dataset_rows, load_metadata, padded_roi
 from moondata.overlap import (
     DEFAULT_RESAMPLE,
     GridCrs,
     align,
+    align_selection,
     grid_differences,
+    has_selection,
     locate_sources,
     plan_alignment,
+)
+from moondata.patches import (
+    PATCH_SIZE,
+    SELECTION_RELDIR,
+    WINDOWS_RELDIR,
+    compare_windows,
+    select_windows,
 )
 from moondata.roipages import generate as generate_roi_pages
 from moondata.snapshot import Snapshot, compute_fingerprint, write_snapshot
@@ -60,7 +70,7 @@ from moondata.transform import DEFAULT_MODEL, compare_with_manifest, solve
 
 # 尚未实现的流程步骤：子命令名 → (中文说明, 留待实现的 issue 号)
 PENDING_STEPS: dict[str, tuple[str, int]] = {
-    "patches": ("正向算出窗口并切分 patch", 10),
+    "patches": ("在正向算出的窗口上切分 patch", 10),
 }
 ALIGNED_RELDIR = Path("work") / "aligned"
 """`overlap` 的默认输出目录（相对仓库根，不入库）。数据盘只读，产物一律写在这边。"""
@@ -139,6 +149,35 @@ def build_parser() -> argparse.ArgumentParser:
         "--verify", action="store_true", help="逐窗口对照窗口清单，看是否与既有结果一致"
     )
 
+    windows = subcommands.add_parser(
+        "windows",
+        parents=[common],
+        help="第四步前半：正向算出窗口，写进 "
+        f"{WINDOWS_RELDIR.as_posix()}/（首次每个 ROI 约两分钟，要做一对筛选影像）",
+    )
+    windows.add_argument("rois", nargs="+", metavar="roi")
+    windows.add_argument(
+        "--grid-crs",
+        choices=[c.value for c in GridCrs],
+        default=GridCrs.OPTICAL.value,
+        help="同 overlap（ROI_34/57/58/70 当年用的是 sar）",
+    )
+    windows.add_argument(
+        "--selection-dir",
+        metavar="DIR",
+        help=f"筛选影像的父目录，每 ROI 一个子目录（默认 仓库根/{SELECTION_RELDIR.as_posix()}；"
+        "已有且网格对得上就复用）",
+    )
+
+    verify_windows = subcommands.add_parser(
+        "verify-windows",
+        parents=[common],
+        help="第一级验收：正向窗口与窗口清单逐条比对（不读影像，不需要数据盘）",
+    )
+    verify_windows.add_argument(
+        "rois", nargs="*", metavar="roi", help="默认是验收门：窗口清单里全部验证集与测试集 ROI"
+    )
+
     for name, (description, issue) in PENDING_STEPS.items():
         # help 里就写明「尚未实现」——否则 `moondata --help` 对外承诺了本轮没有的能力。
         subcommands.add_parser(
@@ -166,6 +205,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _tiepoints(config, args.rois)
         if args.command == "transform":
             return _transform(config, args.rois, TransformModel(args.model), args.verify)
+        if args.command == "windows":
+            return _windows(config, args)
+        if args.command == "verify-windows":
+            return _verify_windows(config, args.rois)
         return _pipeline_step(args.command, config)
     except MoonDataError as error:
         print(error, file=sys.stderr)
@@ -329,6 +372,104 @@ def _transform(config: Config, rois: Sequence[str], model: TransformModel, verif
         for outlier in result.outliers[:5]:
             print(f"    patch_{outlier.index}：偏差 x {outlier.dx:+.2f}、y {outlier.dy:+.2f} px")
     return status
+
+
+def _windows(config: Config, args: argparse.Namespace) -> int:
+    data_root = require_data_root(config)
+    repo_root = require_repo_root(config, "对齐控制点在仓库里，正向结果也写在仓库的 work/ 下")
+    splits = {row.roi: row.split for row in load_metadata(repo_root / METADATA_RELPATH)}
+    selection_root = Path(args.selection_dir) if args.selection_dir else repo_root / SELECTION_RELDIR
+    for roi in args.rois:
+        solved = solve(load_tie_points(repo_root, _roi_arg(roi)))
+        plan = plan_alignment(locate_sources(data_root, solved.roi), GridCrs(args.grid_crs))
+        grid = plan.grid
+        print(f"{solved.roi}：网格 {grid.width}×{grid.height}，{solved.model.value} 变换 RMSE {solved.rmse:.2f} px")
+
+        selection = selection_root / solved.roi
+        if has_selection(plan, selection):
+            print(f"  复用筛选影像 {selection}")
+        else:
+            print(f"  做筛选影像（光学一次、SAR 两次最近邻）→ {selection}", file=sys.stderr)
+            align_selection(plan, selection)
+
+        geometric = plan_windows((grid.width, grid.height), (grid.width, grid.height), solved.matrix, PATCH_SIZE)
+        kept = select_windows(geometric, selection / "opt.tif", selection / "sar.tif")
+        tiled = len(geometric.windows) + geometric.out_of_bounds + geometric.low_overlap
+        print(
+            f"  铺 {tiled} 个窗口：SAR 出界 {geometric.out_of_bounds}、重叠不足 "
+            f"{geometric.low_overlap}、含 nodata {len(geometric.windows) - len(kept)}，留下 {len(kept)} 个"
+        )
+        out = repo_root / WINDOWS_RELDIR / f"{solved.roi}.json"
+        write_window_manifest(
+            out,
+            ManifestRoi(solved.roi, splits.get(solved.roi, ""), PATCH_SIZE, grid, kept),
+            provenance={
+                "tie_points": solved.tie_points.path.relative_to(repo_root).as_posix(),
+                "model": solved.model.value,
+                "matrix": solved.matrix.tolist(),
+                "grid_crs": plan.grid_crs.value,
+                "discarded": {
+                    "out_of_bounds": geometric.out_of_bounds,
+                    "low_overlap": geometric.low_overlap,
+                    "nodata": len(geometric.windows) - len(kept),
+                },
+            },
+        )
+        print(f"  已写出 {out}")
+    return 0
+
+
+GATE_SPLITS = ("Val", "Test")
+"""第一级验收设门的划分：它们的 patch 上有人工评测真值点，窗口一变就全部作废。"""
+MAX_LISTED = 5
+
+
+def _verify_windows(config: Config, rois: Sequence[str]) -> int:
+    repo_root = require_repo_root(config, "窗口清单与正向结果都在仓库里")
+    manifests = load_window_manifests(config.window_manifests())
+    forward = load_window_manifests(sorted((repo_root / WINDOWS_RELDIR).glob("*.json")))
+    targets = (
+        [_roi_arg(r) for r in rois]
+        if rois
+        else sorted(r for r, m in manifests.items() if m.split in GATE_SPLITS)
+    )
+    passed = 0
+    for roi in targets:
+        if roi not in manifests:
+            print(f"{roi}：窗口清单里没有它，无从比对")
+            continue
+        if roi not in forward:
+            print(f"{roi}：还没有正向结果，先跑 `moondata windows {roi}`")
+            continue
+        result = compare_windows(forward[roi], manifests[roi])
+        if result.consistent:
+            passed += 1
+            print(f"{roi}（{manifests[roi].split}）：{result.windows} 个窗口逐条一致")
+            continue
+        print(
+            f"{roi}（{manifests[roi].split}）：不一致——正向 {result.forward_windows} 个、"
+            f"清单 {result.windows} 个，第一个对不上的是 patch_{result.first_divergence}"
+        )
+        for problem in result.grid_differences:
+            print(f"  网格：{problem}")
+        for label, extra in (("正向多出", result.only_forward), ("正向缺少", result.only_manifest)):
+            for w in extra[:MAX_LISTED]:
+                print(f"  {label} patch_{w.index}：光学 {w.optical}、SAR {w.sar}")
+        if result.renumbered:
+            first, last = result.renumbered[0], result.renumbered[-1]
+            print(
+                f"  {len(result.renumbered)} 个窗口位置相同、编号变了"
+                f"（清单 patch_{first[0]} → 正向 patch_{first[1]} … patch_{last[0]} → patch_{last[1]}）"
+            )
+        for m in result.mismatches[:MAX_LISTED]:
+            print(
+                f"  patch_{m.index}：光学差 ({m.optical_offset[0]:+d}, {m.optical_offset[1]:+d})、"
+                f"SAR 差 ({m.sar_offset[0]:+d}, {m.sar_offset[1]:+d}) px（正向减清单）"
+            )
+        if len(result.mismatches) > MAX_LISTED:
+            print(f"  ……同编号位置不同的共 {len(result.mismatches)} 个")
+    print(f"逐条一致 {passed}/{len(targets)} 个 ROI")
+    return 0 if passed == len(targets) else 1
 
 
 def _manifest_roi(config: Config, roi: str) -> ManifestRoi | None:

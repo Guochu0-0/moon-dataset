@@ -123,7 +123,42 @@ def align(plan: AlignmentPlan, out_dir: Path, *, resample: str = DEFAULT_RESAMPL
     for name, inputs in ((OPTICAL_NAME, plan.optical_footprints), (SAR_NAME, [plan.sar_footprint])):
         backend.warp_onto(inputs, plan.grid, out_dir / name, resample=resample, nodata=NODATA)
         backend.assert_on_grid(out_dir / name, plan.grid)
-    record = {
+    _write_record(plan, out_dir, resample)
+
+
+SELECTION_RECIPE = "selection"
+"""`grid.json` 里 `resample` 一栏的值，标明这是一对筛选影像。"""
+
+
+def align_selection(plan: AlignmentPlan, out_dir: Path) -> None:
+    """按当年切片时的做法重做一对对齐影像——**筛选影像**，只用来判窗口留不留。
+
+    光学一次最近邻 warp；SAR 两次最近邻（先重投影、再裁切降采样，见
+    `gdal_backend.warp_twice_onto`）。为什么非得这样，见 `moondata.patches`。
+    """
+    backend = raster.backend()
+    backend.warp_onto(plan.optical_footprints, plan.grid, out_dir / OPTICAL_NAME, resample="near", nodata=NODATA)
+    backend.warp_twice_onto(plan.sar_footprint, plan.grid, out_dir / SAR_NAME, nodata=NODATA)
+    for name in (OPTICAL_NAME, SAR_NAME):
+        backend.assert_on_grid(out_dir / name, plan.grid)
+    _write_record(plan, out_dir, SELECTION_RECIPE)
+
+
+def has_selection(plan: AlignmentPlan, out_dir: Path) -> bool:
+    """`out_dir` 里是否已有一对落在 `plan` 网格上、由同样输入做出的筛选影像，可以直接复用。"""
+    try:
+        record = json.loads((out_dir / GRID_RECORD_NAME).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    expected = _record(plan, SELECTION_RECIPE)
+    keys = ("resample", "optical_tiles", "sar", "grid_crs", "width", "height", "geotransform")
+    return all(record.get(k) == expected[k] for k in keys) and all(
+        (out_dir / name).is_file() for name in (OPTICAL_NAME, SAR_NAME)
+    )
+
+
+def _record(plan: AlignmentPlan, resample: str) -> dict[str, Any]:
+    return {
         "roi": plan.sources.roi,
         "grid_crs": plan.grid_crs.value,
         "reference": plan.reference.name,
@@ -132,12 +167,16 @@ def align(plan: AlignmentPlan, out_dir: Path, *, resample: str = DEFAULT_RESAMPL
         "sar": plan.sources.sar.name,
         "resample": resample,
         "nodata": NODATA,
-        "gdal": backend.gdal_version(),
         "width": plan.grid.width,
         "height": plan.grid.height,
         "geotransform": list(plan.grid.geotransform),
         "crs_wkt": plan.grid.crs_wkt,
     }
+
+
+def _write_record(plan: AlignmentPlan, out_dir: Path, resample: str) -> None:
+    record = _record(plan, resample)
+    record["gdal"] = raster.backend().gdal_version()
     (out_dir / GRID_RECORD_NAME).write_text(
         json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )

@@ -5,8 +5,9 @@ from __future__ import annotations
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Sequence
+from typing import Iterator, Sequence
 
+import numpy as np
 from osgeo import gdal
 from pyproj import CRS, Transformer
 
@@ -126,6 +127,43 @@ def warp_onto(
             creationOptions=CREATION_OPTIONS,
         )
         gdal.Warp(str(output), inputs, options=options)
+
+
+def warp_twice_onto(source: Footprint, grid: PixelGrid, output: Path, *, nodata: float) -> None:
+    """当年 SAR 的对齐做法，**两次**最近邻：先重投影到网格的坐标系、分辨率由 GDAL 自定，
+    落临时文件；再从临时文件裁切降采样到 `grid` 上。
+
+    产 patch 不用它（多插值一次，有网纹）。它只用来重现当年哪些像素是 nodata——
+    单次 warp 的 nodata 边缘与它差一两个像素，贴边的窗口就会判得不一样。
+    """
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="moondata_twice_") as tmp:
+        reprojected = Path(tmp) / "reprojected.tif"
+        gdal.Warp(
+            str(reprojected), str(source.path),
+            options=gdal.WarpOptions(dstSRS=grid.crs_wkt, resampleAlg="near", dstNodata=nodata),
+        )
+        options = gdal.WarpOptions(
+            format="GTiff",
+            outputBounds=grid.bounds,
+            width=grid.width,
+            height=grid.height,
+            resampleAlg="near",
+            dstNodata=nodata,
+            creationOptions=CREATION_OPTIONS,
+        )
+        gdal.Warp(str(output), str(reprojected), options=options)
+
+
+def read_blocks(path: Path, origins: Sequence[tuple[int, int]], size: int) -> Iterator[np.ndarray]:
+    """逐个读 `size × size` 的块，左上角为 `origins`（列, 行）；形状 `(波段, 行, 列)`。
+
+    只读用得到的块，不把整幅读进内存——一幅四波段 float32 的 SAR 对齐影像动辄几个 GB。
+    """
+    dataset = _open(path)
+    for x, y in origins:
+        block = dataset.ReadAsArray(x, y, size, size)
+        yield block if block.ndim == 3 else block[np.newaxis]
 
 
 def assert_on_grid(path: Path, grid: PixelGrid) -> None:

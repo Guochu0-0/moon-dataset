@@ -180,6 +180,30 @@ moondata overlap 35 --verify          # 第一步：对齐到同一网格，写�
   ROI_65（原点差 0.27 m、多一行）与 ROI_73 的历史网格来自被旧脚本改坏的中间文件，
   **来源不可复现**，原因见 `moondata.overlap` 的模块 docstring。
 
+## 正向窗口与第一级验收（流程第四步的前半）
+
+```bash
+moondata windows 6 11 20              # 正向算出窗口，写进 work/windows/ROI_006.json 等
+moondata windows 70 --grid-crs sar    # 当年在 SAR 投影下对齐的 ROI，同 overlap
+moondata verify-windows               # 第一级验收：验证集 + 测试集，逐条比对窗口清单
+moondata verify-windows 35            # 也可以只比某几个 ROI（含训练集）
+```
+
+- `windows` 要数据处理档环境和数据盘，**全程不读窗口清单、不读任何历史 patch**：
+  对齐控制点 → 仿射变换 → 从原始输入规划网格 → 从原点铺 512 窗口、边缘余量丢弃 →
+  四角经变换、各自向零截断、取平均、再截断，得 SAR 窗口 → 丢掉出界与重叠不足 70% 的 →
+  丢掉任一边含 0 像素的 → 余下的按顺序编号。规则逐条写在 `moondata.geometry.windows`
+  与 `moondata.patches` 的 docstring 里。
+- 「含不含 0 像素」看的是**筛选影像**：按当年做法（光学一次、SAR 两次最近邻）从原始输入
+  重做的一对对齐影像，默认放在 `work/selection/<ROI>/`，首次每个 ROI 约一两分钟、约 1 GB，
+  之后复用。不能用数据盘上现在的对齐影像来判——它们已用 cubic 重做过，nodata 边缘
+  差一两个像素，验证/测试集上会多留下 11 个贴边窗口，其后的编号整体错位。
+- `verify-windows` 只读 `work/windows/` 与 `data/windows/`，**不读影像、不要数据盘、不要 GDAL**，
+  秒级完成。对不上时按 ROI 报出：网格差异、多出和缺少的窗口（带编号与坐标）、
+  因此改了编号的窗口、同编号位置不同的窗口及其像素偏差。全部一致退出码 0，否则 1。
+- 几何这一半另有一道不读影像的单测（`tests/test_windows.py`）：全部 67 个 ROI 的清单窗口
+  都落在正向候选上、SAR 坐标逐像素相等、先后顺序不变。
+
 ## 代码结构即流程图
 
 ```
@@ -190,7 +214,7 @@ src/moondata/
 ├── patches/     第四步  正向算窗口、切 patch
 ├── raster/      支撑层  唯一依赖 GDAL/pyproj 的地方
 ├── geometry/    支撑层  纯 numpy，无地理库，可被完整单测
-├── manifest.py  窗口清单的读取（只用于验收对照）
+├── manifest.py  窗口清单的读写（读只用于验收对照；正向结果按同一格式写）
 ├── config.py    数据根解析
 ├── snapshot.py  数据指纹与统计快照的存取
 ├── stats.py     扫描 patch 产物，产出快照里的统计量
