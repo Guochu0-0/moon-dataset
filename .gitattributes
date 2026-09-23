@@ -12,3 +12,8 @@ data/** -text
 # 直接把 reviewer 顶爆（Prompt is too long）。标成 -diff 后 git 只输出一行
 # 「Binary files differ」，成品照常提交与发布，源文件的逐行改动不受影响。
 _site/** -diff
+
+# ROI 档案页是生成物，测试按字节比对「提交的页面 == 生成器输出」，生成器写的是 LF。
+# core.autocrlf=true 会在 checkout 时转成 CRLF，那样测试会误报过期、`moondata pages`
+# 也会把六十几页全部重写一遍。钉回 LF。
+docs/rois/*.md text eol=lf
