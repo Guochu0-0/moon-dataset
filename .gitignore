@@ -14,3 +14,6 @@ __pycache__/
 
 # Node 依赖（sandcastle 是 devDependency，装在仓库根）
 /node_modules/
+
+# 流程步骤的产物（对齐影像等），见 moondata overlap
+/work/

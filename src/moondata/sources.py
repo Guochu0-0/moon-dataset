@@ -193,6 +193,17 @@ def parse_ce2_tile(name: str) -> Ce2Tile:
     )
 
 
+
+def corrected_lat_ts(tile_name: str, lat_ts: float) -> float | None:
+    """分幅头里的墨卡托标准纬线与它所在纬度带不符时，返回本带的值；相符则 `None`。
+
+    有 5 幅分幅的 `lat_ts` 被写成了相邻纬度带的值（见来源文档），像素与 geotransform
+    都没动，于是整幅图被放到几度之外，而且不报任何错。只比绝对值：墨卡托只取标准纬线
+    的余弦，北半球写成负值不改变结果，不算错。
+    """
+    expected = parse_ce2_tile(tile_name).band.lat_ts
+    return None if abs(abs(lat_ts) - abs(expected)) < 1e-9 else float(expected)
+
 # ---------------------------------------------------------------------------
 # 条带元数据汇总：来源文档里「原始 SAR 的几何与覆盖参数」一节的数字都从这里来。
 

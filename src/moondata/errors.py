@@ -51,3 +51,39 @@ class DocSiteUnpatchable(MoonDataError):
     宁可让构建失败：这一步的每一处失灵在成品里都是静默的——搜索框不出结果、
     页内目录不跟随——提交出去没人会发现。
     """
+
+
+class InsufficientPoints(MoonDataError):
+    """同名点数少于所选变换模型的最低要求。宁可报错，也不悄悄换一个自由度更低的模型。"""
+
+
+class DegeneratePoints(MoonDataError):
+    """同名点够数但退化（全部重合、全部共线），解不唯一。"""
+
+
+class NoOverlap(MoonDataError):
+    """光学与 SAR 在月面上没有公共范围——对不齐，也就无从切 patch。"""
+
+
+class TiePointsUnreadable(MoonDataError):
+    """对齐控制点文件找不到或认不出。消息里带 ROI 与文件路径。"""
+
+
+class WindowManifestUnreadable(MoonDataError):
+    """窗口清单（`data/windows/*.json`）读不动或结构认不出。"""
+
+
+class GeoLibraryUnavailable(MoonDataError):
+    """要读写影像，但当前环境没装 GDAL/pyproj（多半是用了文档档环境）。"""
+
+
+class RasterUnreadable(MoonDataError):
+    """影像打不开、没有坐标系、或不是北向上的正方形像元。消息里带文件路径。"""
+
+
+class GridMismatch(MoonDataError):
+    """写出的对齐影像没有落在规划的像素网格上。"""
+
+
+class RawInputsUnavailable(MoonDataError):
+    """数据根下某个 ROI 的原始输入（CE-2 分幅、Mini-RF 条带）缺失或认不出。"""

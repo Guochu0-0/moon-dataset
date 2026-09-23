@@ -9,6 +9,7 @@ from moondata.errors import MetadataUnreadable
 from moondata.metadata import MetadataRow, dataset_rows, load_metadata
 from moondata.sources import (
     CE2_BANDS,
+    corrected_lat_ts,
     decode_product_id,
     parse_ce2_tile,
     summarize_strips,
@@ -163,3 +164,31 @@ class TestStripSummary:
         summary = summarize_strips(kept)
         assert summary.count == len(kept)
         assert sum(summary.look_directions.values()) == len(kept)
+
+
+class TestCe2LatTsCorrection:
+    """5 幅分幅头里的 `lat_ts` 写成了相邻纬度带的值——读取时按幅名纠正，源文件不动。"""
+
+    @pytest.mark.parametrize(
+        ("name", "written", "expected"),
+        [
+            ("CE2_GRAS_DOM_07m_E218_31N022W_A.tif", 21.0, 35.0),
+            ("CE2_GRAS_DOM_07m_I219_24S032W_A.tif", -35.0, -21.0),
+            ("CE2_GRAS_DOM_07m_I236_24S104E_A.tif", -35.0, -21.0),
+        ],
+    )
+    def test_a_neighbouring_band_value_is_corrected(
+        self, name: str, written: float, expected: float
+    ) -> None:
+        assert corrected_lat_ts(name, written) == expected
+
+    @pytest.mark.parametrize(
+        ("name", "written"),
+        [
+            ("CE2_GRAS_DOM_07m_I241_24S144E_A.tif", -21.0),
+            # 北半球分幅写成负值：墨卡托只取标准纬线的余弦，不算错
+            ("CE2_GRAS_DOM_07m_G208_03N124E_A.tif", -7.0),
+        ],
+    )
+    def test_a_right_value_is_left_alone(self, name: str, written: float) -> None:
+        assert corrected_lat_ts(name, written) is None

@@ -41,6 +41,11 @@ def padded_roi(name: str) -> str:
     return f"ROI_{int(match.group(1)):03d}"
 
 
+
+def raw_roi_name(name: str) -> str:
+    """不补零的写法（`ROI_6`）：`raw/` 与对齐控制点目录都按它命名。"""
+    return f"ROI_{int(padded_roi(name)[4:])}"
+
 def dataset_rows(rows: list[MetadataRow]) -> list[MetadataRow]:
     """属于数据集的行。表里还留着已删除 ROI 的行（ROI_60），它的划分一栏写的是删除原因。"""
     return [row for row in rows if row.split in SPLITS]

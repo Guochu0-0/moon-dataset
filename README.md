@@ -158,6 +158,28 @@ quarto render
 
 对齐影像是 256 × 256 分块存储的，同样由 `moondata.tiff` 读取，不需要 GDAL。
 
+## 对齐与变换求解（流程前三步）
+
+```bash
+moondata transform 35 6 --verify      # 第三步：由对齐控制点求全局变换，并对照窗口清单
+moondata tiepoints 73                 # 第二步：看某个 ROI 用的是哪一代对齐控制点
+moondata overlap 35 --verify          # 第一步：对齐到同一网格，写出 work/aligned/ROI_035/
+```
+
+- `tiepoints` / `transform` 只读仓库里的 `data/tie-points/`，**不要数据盘、不要 GDAL**。
+  默认模型是最小二乘仿射——产出现有数据集的那个；`--model rigid|similarity|homography`
+  供研究对比。`--verify` 用求出的变换重算窗口清单里每个窗口的 SAR 位置，偏差在取整
+  误差（[0, 2) 像素）以内算一致；超出的窗口逐个报出编号与偏差，并以退出码 1 结束。
+  除 ROI_73（清单是按当年错误的标注算的，见 `data/README.md`）外全部一致。
+- `overlap` 要数据处理档环境（GDAL/pyproj）和数据盘。镶嵌、重投影、裁切、重采样在
+  **一次** `gdal.Warp` 里完成；5 幅 CE-2 分幅头里写错的 `lat_ts` 在读取时纠正（临时 VRT，
+  源文件只读）；写完读回核对两幅确实落在同一网格上。产物写到仓库的 `work/`（不入库），
+  `--out` 可改。`--plan-only` 只算网格、秒级完成。
+- `overlap --verify` 拿正向算出的网格对照窗口清单里的历史网格。66/68 个 ROI 一致；
+  其中 ROI_34、57、58、70 当年是在 SAR 的投影下对齐的，要加 `--grid-crs sar`。
+  ROI_65（原点差 0.27 m、多一行）与 ROI_73 的历史网格来自被旧脚本改坏的中间文件，
+  **来源不可复现**，原因见 `moondata.overlap` 的模块 docstring。
+
 ## 代码结构即流程图
 
 ```
@@ -168,6 +190,7 @@ src/moondata/
 ├── patches/     第四步  正向算窗口、切 patch
 ├── raster/      支撑层  唯一依赖 GDAL/pyproj 的地方
 ├── geometry/    支撑层  纯 numpy，无地理库，可被完整单测
+├── manifest.py  窗口清单的读取（只用于验收对照）
 ├── config.py    数据根解析
 ├── snapshot.py  数据指纹与统计快照的存取
 ├── stats.py     扫描 patch 产物，产出快照里的统计量

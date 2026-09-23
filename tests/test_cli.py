@@ -1,12 +1,17 @@
 """命令行：自检命令的退出码，以及需要影像的命令在盘不在时的降级行为。"""
 
+import os
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
 
 from moondata.cli import main
 
+REPO = Path(__file__).resolve().parents[1]
 PIPELINE_COMMANDS = ["overlap", "tiepoints", "transform", "patches"]
+IMAGERY_COMMANDS = [["overlap", "35"], ["patches"]]
 
 
 @pytest.fixture
@@ -49,16 +54,16 @@ class TestDoctorCommand:
 
 
 class TestPipelineCommandsNeedImagery:
-    @pytest.mark.parametrize("command", PIPELINE_COMMANDS)
+    @pytest.mark.parametrize("command", IMAGERY_COMMANDS)
     def test_refuse_cleanly_when_the_drive_is_detached(
         self,
-        command: str,
+        command: list[str],
         repo: Path,
         tmp_path: Path,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
         absent = tmp_path / "absent-drive"
-        assert main([command, "--data-root", str(absent)]) == 1
+        assert main([*command, "--data-root", str(absent)]) == 1
         captured = capsys.readouterr()
         assert str(absent) in captured.err
         assert "Traceback" not in captured.err
@@ -99,3 +104,55 @@ class TestPipelineCommandsDoNotWalkTheDrive:
         monkeypatch.setattr(doctor, "compute_fingerprint", explode)
         assert main(["patches", "--data-root", str(imagery)]) == 1
         assert "尚未实现" in capsys.readouterr().err
+
+
+class TestOverlapCommand:
+    def test_an_roi_without_raw_inputs_is_a_one_line_error(
+        self, repo: Path, imagery: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        assert main(["overlap", "35", "--data-root", str(imagery), "--plan-only"]) == 1
+        captured = capsys.readouterr()
+        assert "CE-2 分幅" in captured.err
+        assert "Traceback" not in captured.err
+
+    def test_importing_the_cli_does_not_load_the_geo_libraries(self) -> None:
+        """文档档环境没有 GDAL——`import moondata.cli` 若顺带加载了它，那里就什么命令都跑不了。"""
+        probe = "import sys, moondata.cli; print('osgeo' in sys.modules or 'pyproj' in sys.modules)"
+        result = subprocess.run(
+            [sys.executable, "-c", probe],
+            capture_output=True,
+            text=True,
+            cwd=REPO,
+            env={**os.environ, "PYTHONPATH": str(REPO / "src")},
+            check=True,
+        )
+        assert result.stdout.strip() == "False"
+
+
+class TestRepoOnlySteps:
+    """第二、三步只读仓库里的对齐控制点：盘不在、没装 GDAL 也照样跑。"""
+
+    @pytest.fixture
+    def in_repo(self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+        monkeypatch.chdir(REPO)
+        monkeypatch.setenv("MOONDATA_DATA_ROOT", str(tmp_path / "absent-drive"))
+
+    def test_tiepoints_lists_the_generation_in_use(
+        self, in_repo: None, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        assert main(["tiepoints", "ROI_73"]) == 0
+        assert "ROI_73/cropped_2/opt_tie.pts" in capsys.readouterr().out
+
+    def test_transform_agrees_with_the_manifest(
+        self, in_repo: None, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        assert main(["transform", "35", "ROI_006", "--verify"]) == 0
+        out = capsys.readouterr().out
+        assert out.count("与窗口清单一致") == 2
+
+    def test_a_disagreement_names_the_windows_and_exits_one(
+        self, in_repo: None, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        assert main(["transform", "73", "--verify"]) == 1
+        out = capsys.readouterr().out
+        assert "不一致" in out and "patch_0" in out
