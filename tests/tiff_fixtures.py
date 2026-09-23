@@ -26,15 +26,20 @@ def write_tiff(
     compression: int = 8,
     byteorder: str = "<",
     predictor: int = 1,
+    zlevel: int = 6,
     tile: tuple[int, int] | None = None,
     nodata: str | None = "0",
     pixel_scale: tuple[float, float, float] | None = (7.5, 7.5, 0.0),
     tiepoint: tuple[float, ...] | None = (0.0, 0.0, 0.0, 100.0, -200.0, 0.0),
+    strips_last: bool = False,
 ) -> Path:
     """把 `(H, W)` 或 `(H, W, C)` 数组写成 TIFF。
 
     给了 `tile=(宽, 高)` 就按分块写：边缘块照规范补零到整块大小，读取器必须把补的
     部分裁掉——对齐影像的宽高几乎都不是 256 的整数倍，这正是要测的地方。
+
+    默认像素在前、目录在后；`strips_last=True` 是 GDAL 的布局：头、目录、目录项的值，
+    然后才是一块接一块的像素，直到文件末尾。
     """
     if array.ndim == 2:
         array = array[:, :, np.newaxis]
@@ -56,19 +61,47 @@ def write_tiff(
                 block[: piece.shape[0], : piece.shape[1]] = piece
                 chunks.append(block)
     strips = [
-        zlib.compress(c.tobytes()) if compression in (8, 32946) else c.tobytes()
+        zlib.compress(c.tobytes(), zlevel) if compression in (8, 32946) else c.tobytes()
         for c in chunks
     ]
 
-    header_size = 8
-    offsets: list[int] = []
-    cursor = header_size
-    for strip in strips:
-        offsets.append(cursor)
-        cursor += len(strip)
-    ifd_offset = cursor + (cursor % 2)
+    def place(start: int) -> list[int]:
+        offsets = []
+        for strip in strips:
+            offsets.append(start)
+            start += len(strip)
+        return offsets
 
-    itemsize = array.dtype.itemsize
+    header_size = 8
+    if strips_last:
+        # 目录多长与偏移取什么值无关，先拿占位偏移量出长度
+        ifd_offset = header_size
+        offsets = place(header_size + len(_directory(width, height, bands, array.dtype, compression,
+            predictor, tile, rows_per_strip, place(0), strips, pixel_scale, tiepoint, nodata,
+            ifd_offset, byteorder)))
+    else:
+        offsets = place(header_size)
+        cursor = offsets[-1] + len(strips[-1])
+        ifd_offset = cursor + (cursor % 2)
+    directory = _directory(width, height, bands, array.dtype, compression, predictor, tile,
+                           rows_per_strip, offsets, strips, pixel_scale, tiepoint, nodata,
+                           ifd_offset, byteorder)
+
+    magic = b"II" if byteorder == "<" else b"MM"
+    head = magic + struct.pack(f"{byteorder}HI", 42, ifd_offset)
+    if strips_last:
+        blob = head + directory + b"".join(strips)
+    else:
+        blob = head + b"".join(strips) + b"\0" * (ifd_offset - cursor) + directory
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(blob)
+    return path
+
+
+def _directory(width, height, bands, dtype, compression, predictor, tile, rows_per_strip,
+               offsets, strips, pixel_scale, tiepoint, nodata, ifd_offset, byteorder) -> bytes:
+    """目录，连同放不进目录项、紧跟在目录之后的那些值。"""
+    itemsize = dtype.itemsize
     tags: list[tuple[int, int, list | bytes]] = [
         (256, LONG, [width]),
         (257, LONG, [height]),
@@ -78,7 +111,7 @@ def write_tiff(
         (277, SHORT, [bands]),
         (284, SHORT, [1]),
         (317, SHORT, [predictor]),
-        (339, SHORT, [SAMPLE_FORMAT[array.dtype.kind]] * bands),
+        (339, SHORT, [SAMPLE_FORMAT[dtype.kind]] * bands),
     ]
     if tile is None:
         tags += [
@@ -117,18 +150,6 @@ def write_tiff(
             field = struct.pack(f"{byteorder}I", extra_start + len(extra))
             extra += payload + (b"\0" if len(payload) % 2 else b"")
         entries += struct.pack(f"{byteorder}HHI", code, kind, count) + field
-
-    magic = b"II" if byteorder == "<" else b"MM"
-    blob = (
-        magic
-        + struct.pack(f"{byteorder}HI", 42, ifd_offset)
-        + b"".join(strips)
-        + b"\0" * (ifd_offset - cursor)
-        + struct.pack(f"{byteorder}H", len(tags))
-        + entries
-        + struct.pack(f"{byteorder}I", 0)
-        + extra
+    return (
+        struct.pack(f"{byteorder}H", len(tags)) + entries + struct.pack(f"{byteorder}I", 0) + extra
     )
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(blob)
-    return path

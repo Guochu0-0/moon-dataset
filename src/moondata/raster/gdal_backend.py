@@ -14,6 +14,7 @@ from pyproj import CRS, Transformer
 from moondata.errors import GridMismatch, RasterUnreadable
 from moondata.geometry import LonLatBox, PixelGrid
 from moondata.sources import corrected_lat_ts
+from moondata.tiff import recompress_deflate
 
 gdal.UseExceptions()
 
@@ -164,6 +165,43 @@ def read_blocks(path: Path, origins: Sequence[tuple[int, int]], size: int) -> It
     for x, y in origins:
         block = dataset.ReadAsArray(x, y, size, size)
         yield block if block.ndim == 3 else block[np.newaxis]
+
+
+PATCH_CREATION_OPTIONS = ["COMPRESS=DEFLATE"]
+"""现有 patch 的写法（当年经 rasterio：Deflate、条带式、不分块）。多波段另加像素交错。"""
+
+
+def write_patches(
+    source: Path, origins: Sequence[tuple[int, int]], size: int, outputs: Sequence[Path]
+) -> None:
+    """从 `source` 上按左上角 `origins`（列, 行）切 `size × size` 的块，逐个写成 GeoTIFF。
+
+    坐标系、nodata 照抄 `source`，地理变换平移到块的左上角。写法与现有 patch 一致到字节：
+    文件头与目录由 GDAL 写，条带的压缩流再交给标准库 zlib 重压一遍——不同构建的 GDAL
+    压出的字节不一样，理由见 `moondata.tiff.recompress_deflate`。
+    """
+    dataset = _open(source)
+    projection = dataset.GetProjection()
+    x0, dx, rx, y0, ry, dy = dataset.GetGeoTransform()
+    bands = dataset.RasterCount
+    data_type = dataset.GetRasterBand(1).DataType
+    nodata = dataset.GetRasterBand(1).GetNoDataValue()
+    options = PATCH_CREATION_OPTIONS + (["INTERLEAVE=PIXEL"] if bands > 1 else [])
+    driver = gdal.GetDriverByName("GTiff")
+    for (x, y), output in zip(origins, outputs, strict=True):
+        block = dataset.ReadAsArray(x, y, size, size)
+        block = block if block.ndim == 3 else block[np.newaxis]
+        output.parent.mkdir(parents=True, exist_ok=True)
+        patch = driver.Create(str(output), size, size, bands, data_type, options)
+        patch.SetGeoTransform((x0 + x * dx, dx, rx, y0 + y * dy, ry, dy))
+        patch.SetProjection(projection)
+        if nodata is not None:
+            for band in range(1, bands + 1):
+                patch.GetRasterBand(band).SetNoDataValue(nodata)
+        for band in range(bands):
+            patch.GetRasterBand(band + 1).WriteArray(block[band])
+        patch = None  # 关掉才落盘
+        output.write_bytes(recompress_deflate(output.read_bytes()))
 
 
 def assert_on_grid(path: Path, grid: PixelGrid) -> None:

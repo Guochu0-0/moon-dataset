@@ -14,10 +14,14 @@ zlib 挑剔。所以这里自己解析 TIFF 目录、逐条带用 `zlib` 解压�
 代价是一组看起来完全正常的错数字。
 
 对齐影像动辄几 GB，读缩略图时不能整幅进内存，所以另有 `iter_blocks` 一块一块地给。
+
+唯一的写操作是 `recompress_deflate`：把 GDAL 写出的 patch 的条带换成标准库 zlib 的压缩流，
+好与现有产物逐字节一致。它只动条带与条带表，别的字节一个不改。
 """
 
 from __future__ import annotations
 
+import io
 import struct
 import zlib
 from collections.abc import Iterator
@@ -130,6 +134,78 @@ def iter_blocks(path: str | Path) -> Iterator[tuple[int, int, np.ndarray]]:
                 yield _block(info, stream, index)
     except (OSError, struct.error) as error:
         raise TiffUnreadable(f"TIFF 读不动：{path}（{error}）") from error
+
+
+PATCH_ZLEVEL = 6
+"""现有 patch 每一条带都恰好是标准库 `zlib.compress(原始字节, 6)` 的输出。当年是经 rasterio
+写出的（rasterio 1.3.9 能原样写出同样的字节）。"""
+
+_OFFSET_TYPES = {3: "H", 4: "I"}
+"""条带偏移表与长度表可能的字段类型：SHORT 或 LONG。"""
+
+
+def recompress_deflate(data: bytes, level: int = PATCH_ZLEVEL) -> bytes:
+    """把一个 Deflate 条带式 TIFF 的每条带解开、用标准库 `zlib` 按 `level` 重新压缩，
+    其余字节原样保留，只改条带偏移表与长度表。
+
+    为什么要这一步：同样的像素、同样的 GDAL 写法，压缩流却随 GDAL 的构建而变——实测
+    conda 装的 GDAL 3.6.2 写出的条带与现有 patch 逐字节不同（多半是链了另一套 Deflate
+    实现），文件头、目录、地理标签则完全一样。压缩流交给标准库定，产物才与现有数据集逐字节一致，
+    也不随装的是哪一版 GDAL 而变。
+
+    只认 GDAL 写小文件的布局：条带按顺序首尾相接、一直排到文件末尾，其后什么都没有。
+    这样新条带变长变短都只影响条带本身的位置。其他布局一律报错——挪了条带却没改到
+    指向它们之后的偏移，文件就坏了。
+    """
+    try:
+        info = _parse(Path("<内存>"), io.BytesIO(data))
+    except struct.error as error:
+        raise TiffUnreadable(f"TIFF 读不动（{error}）") from error
+    if info.compression not in DEFLATE:
+        raise TiffUnreadable(f"只能重压缩 Deflate 条带，本文件 Compression={info.compression}")
+    if info.tiled:
+        raise TiffUnreadable("只能重压缩条带式 TIFF，本文件是分块式")
+    start = info.block_offsets[0]
+    cursor = start
+    for offset, count in zip(info.block_offsets, info.block_byte_counts):
+        if offset != cursor:
+            raise TiffUnreadable("条带不是按顺序首尾相接的，不支持这种布局")
+        cursor += count
+    if cursor != len(data):
+        raise TiffUnreadable("条带之后还有别的数据（比如目录），不支持这种布局")
+
+    strips = [
+        zlib.compress(zlib.decompress(data[o : o + c]), level)
+        for o, c in zip(info.block_offsets, info.block_byte_counts)
+    ]
+    offsets, position = [], start
+    for strip in strips:
+        offsets.append(position)
+        position += len(strip)
+    head = bytearray(data[:start])
+    _overwrite_values(head, STRIP_OFFSETS, offsets, info.byteorder)
+    _overwrite_values(head, STRIP_BYTE_COUNTS, [len(s) for s in strips], info.byteorder)
+    return bytes(head) + b"".join(strips)
+
+
+def _overwrite_values(head: bytearray, code: int, values: list[int], byteorder: str) -> None:
+    """就地改写目录项 `code` 的值（值放在目录项里或目录之后都行），个数与类型不变。"""
+    (ifd_offset,) = struct.unpack_from(f"{byteorder}I", head, 4)
+    (count,) = struct.unpack_from(f"{byteorder}H", head, ifd_offset)
+    for position in range(ifd_offset + 2, ifd_offset + 2 + 12 * count, 12):
+        entry_code, kind, n = struct.unpack_from(f"{byteorder}HHI", head, position)
+        if entry_code != code:
+            continue
+        fmt = _OFFSET_TYPES[kind]
+        if n != len(values):
+            raise TiffUnreadable(f"标签 {code} 有 {n} 个值，要写 {len(values)} 个")
+        if fmt == "H" and max(values) > 0xFFFF:
+            raise TiffUnreadable(f"标签 {code} 是 SHORT，放不下 {max(values)}")
+        size = struct.calcsize(fmt) * n
+        where = position + 8 if size <= 4 else struct.unpack_from(f"{byteorder}I", head, position + 8)[0]
+        struct.pack_into(f"{byteorder}{n}{fmt}", head, where, *values)
+        return
+    raise TiffUnreadable(f"TIFF 目录里没有标签 {code}")
 
 
 def _block(info: TiffInfo, stream, index: int) -> tuple[int, int, np.ndarray]:

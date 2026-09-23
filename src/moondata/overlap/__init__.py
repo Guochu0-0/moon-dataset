@@ -146,11 +146,20 @@ def align_selection(plan: AlignmentPlan, out_dir: Path) -> None:
 
 def has_selection(plan: AlignmentPlan, out_dir: Path) -> bool:
     """`out_dir` 里是否已有一对落在 `plan` 网格上、由同样输入做出的筛选影像，可以直接复用。"""
+    return _has_pair(plan, out_dir, SELECTION_RECIPE)
+
+
+def has_aligned(plan: AlignmentPlan, out_dir: Path, resample: str = DEFAULT_RESAMPLE) -> bool:
+    """`out_dir` 里是否已有一对 `align(plan, out_dir, resample=resample)` 的产物，可以直接复用。"""
+    return _has_pair(plan, out_dir, resample)
+
+
+def _has_pair(plan: AlignmentPlan, out_dir: Path, recipe: str) -> bool:
     try:
         record = json.loads((out_dir / GRID_RECORD_NAME).read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return False
-    expected = _record(plan, SELECTION_RECIPE)
+    expected = _record(plan, recipe)
     keys = ("resample", "optical_tiles", "sar", "grid_crs", "width", "height", "geotransform")
     return all(record.get(k) == expected[k] for k in keys) and all(
         (out_dir / name).is_file() for name in (OPTICAL_NAME, SAR_NAME)

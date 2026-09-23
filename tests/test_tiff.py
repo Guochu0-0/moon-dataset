@@ -6,7 +6,9 @@ import numpy as np
 import pytest
 
 from moondata.errors import TiffUnreadable
-from moondata.tiff import iter_blocks, read_info, read_tiff
+import zlib
+
+from moondata.tiff import iter_blocks, read_info, read_tiff, recompress_deflate
 from tiff_fixtures import write_tiff
 
 
@@ -151,3 +153,42 @@ class TestRefusesWhatItCannotReadCorrectly:
         path.write_bytes(bytes(blob))
         with pytest.raises(TiffUnreadable, match="解压"):
             read_tiff(path)
+
+
+class TestRecompressDeflate:
+    """GDAL 写结构、标准库 zlib 定压缩流：现有 patch 的每条带都是 zlib level 6 的输出，
+    而 conda 装的 GDAL 链的是另一套 Deflate 实现，像素相同、字节不同。"""
+
+    def test_every_strip_becomes_the_standard_zlib_level_6_stream(self, tmp_path: Path) -> None:
+        array = sar(height=12, width=6)
+        source = write_tiff(tmp_path / "in.tif", array, rows_per_strip=1, zlevel=1, strips_last=True)
+        out = tmp_path / "out.tif"
+        out.write_bytes(recompress_deflate(source.read_bytes()))
+        info = read_info(out)
+        blob = out.read_bytes()
+        for row, (offset, count) in enumerate(zip(info.block_offsets, info.block_byte_counts)):
+            assert blob[offset : offset + count] == zlib.compress(array[row].astype("<f4").tobytes(), 6)
+
+    def test_pixels_and_georeference_are_untouched(self, tmp_path: Path) -> None:
+        array = optical(height=40, width=16)
+        source = write_tiff(tmp_path / "in.tif", array, rows_per_strip=16, zlevel=9, strips_last=True)
+        out = tmp_path / "out.tif"
+        out.write_bytes(recompress_deflate(source.read_bytes()))
+        info, back = read_tiff(out)
+        np.testing.assert_array_equal(back[:, :, 0], array)
+        assert info.origin == (100.0, -200.0) and info.nodata == 0.0
+
+    def test_a_file_already_at_level_6_comes_back_byte_for_byte(self, tmp_path: Path) -> None:
+        source = write_tiff(tmp_path / "in.tif", optical(), rows_per_strip=4, strips_last=True)
+        assert recompress_deflate(source.read_bytes()) == source.read_bytes()
+
+    def test_a_layout_with_anything_after_the_strips_is_refused(self, tmp_path: Path) -> None:
+        # 目录在像素之后：挪动条带就会让目录的偏移全部失效，宁可报错
+        source = write_tiff(tmp_path / "in.tif", optical(), rows_per_strip=4)
+        with pytest.raises(TiffUnreadable, match="布局"):
+            recompress_deflate(source.read_bytes())
+
+    def test_uncompressed_input_is_refused(self, tmp_path: Path) -> None:
+        source = write_tiff(tmp_path / "in.tif", optical(), compression=1, strips_last=True)
+        with pytest.raises(TiffUnreadable, match="Deflate"):
+            recompress_deflate(source.read_bytes())

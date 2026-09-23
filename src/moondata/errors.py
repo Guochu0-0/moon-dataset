@@ -41,10 +41,6 @@ class RepoRootNotFound(MoonDataError):
     """命令的输入或输出在仓库里（元数据表、档案页），却不是在仓库内运行的。"""
 
 
-class NotImplementedYet(MoonDataError):
-    """子命令的骨架已就位、实现留待后续 issue。带上 issue 号，别让人猜。"""
-
-
 class DocSiteUnpatchable(MoonDataError):
     """文档站渲染完了，但改不成离线可读的样子（多半是 Quarto 升级改了产物结构）。
 

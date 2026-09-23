@@ -10,8 +10,10 @@ import pytest
 from moondata.cli import main
 
 REPO = Path(__file__).resolve().parents[1]
-PIPELINE_COMMANDS = ["overlap", "tiepoints", "transform", "windows", "verify-windows", "patches"]
-IMAGERY_COMMANDS = [["overlap", "35"], ["windows", "35"], ["patches"]]
+PIPELINE_COMMANDS = [
+    "overlap", "tiepoints", "transform", "windows", "verify-windows", "patches", "verify-patches",
+]
+IMAGERY_COMMANDS = [["overlap", "35"], ["windows", "35"], ["patches", "35"], ["verify-patches"]]
 
 
 @pytest.fixture
@@ -102,8 +104,8 @@ class TestPipelineCommandsDoNotWalkTheDrive:
             raise AssertionError("进门检查不该计算指纹")
 
         monkeypatch.setattr(doctor, "compute_fingerprint", explode)
-        assert main(["patches", "--data-root", str(imagery)]) == 1
-        assert "尚未实现" in capsys.readouterr().err
+        assert main(["patches", "35", "--data-root", str(imagery)]) == 1
+        assert "Traceback" not in capsys.readouterr().err
 
 
 class TestOverlapCommand:

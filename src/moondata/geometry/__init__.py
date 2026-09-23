@@ -5,6 +5,7 @@
 """
 
 from moondata.geometry.grid import LonLatBox, PixelGrid, overlap_region, reference_tile
+from moondata.geometry.labels import LABEL_GRID, label_points
 from moondata.geometry.transforms import TransformModel, apply_transform, estimate_transform
 from moondata.geometry.windows import (
     MIN_OVERLAP,
@@ -16,6 +17,7 @@ from moondata.geometry.windows import (
 )
 
 __all__ = [
+    "LABEL_GRID",
     "MIN_OVERLAP",
     "LonLatBox",
     "PixelGrid",
@@ -25,6 +27,7 @@ __all__ = [
     "apply_transform",
     "estimate_transform",
     "grid_windows",
+    "label_points",
     "overlap_region",
     "plan_windows",
     "reference_tile",

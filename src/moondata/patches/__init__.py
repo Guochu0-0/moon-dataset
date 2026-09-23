@@ -2,7 +2,14 @@
 
 **正向**是本项目的核心技术要求：不读取任何历史产物的位置信息，独立地从对齐控制点
 算出变换、算出窗口、切出 patch。验收分两级——窗口坐标与 `data/windows/` 中的既有
-窗口清单逐条相等（第一级，本模块）；切出的 patch 与现有产物逐字节一致（第二级，issue #10）。
+窗口清单逐条相等（第一级，本模块的 `compare_windows`）；切出的 patch 与现有产物逐字节一致
+（第二级，`moondata.patches.acceptance`）。
+
+切 patch
+--------
+`cut_patches` 在窗口上从 **cubic 那版对齐影像**切出光学与 SAR，并按全局变换写**生成标签**
+（格式见 `moondata.patches.labels`）。写 TIFF 的字节层面见 `gdal_backend.write_patches`：
+与现有产物逐字节一致靠的是「GDAL 写结构、标准库 zlib 定压缩流」。
 
 窗口怎么来
 ----------
@@ -18,7 +25,7 @@
 再裁切降采样）。数据盘上现在的对齐影像已按 cubic 重做过（去网纹），nodata 边缘与当年
 差一两个像素，拿它判「有没有 0」，贴边的窗口就会多留几个（验证/测试集上实测 11 个），
 编号随之错位。所以像素检查用 `overlap.align_selection` 按当年做法从原始输入重做一版
-**筛选影像**——它只用来决定窗口留不留，patch 的像素仍取 cubic 那版（issue #10）。
+**筛选影像**——它只用来决定窗口留不留，patch 的像素仍取 cubic 那版。
 这不是按 ROI 写的特例：全部 ROI 走同一套做法。
 """
 
@@ -30,8 +37,9 @@ from pathlib import Path
 import numpy as np
 
 from moondata import raster
-from moondata.geometry import WindowPlan
+from moondata.geometry import WindowPlan, label_points
 from moondata.manifest import ManifestRoi, ManifestWindow
+from moondata.patches.labels import write_label
 
 NODATA = 0
 """两边都按 0 判。光学是当年硬写的 `nodata = 0`（不看文件头）；SAR 是文件头里的 nodata，
@@ -43,6 +51,13 @@ WINDOWS_RELDIR = Path("work") / "windows"
 """正向算出的窗口写在这里（相对仓库根，不入库），每 ROI 一个 `<ROI>.json`，格式同窗口清单。"""
 SELECTION_RELDIR = Path("work") / "selection"
 """筛选影像的默认位置（相对仓库根，不入库）。每 ROI 约 1 GB，做一次约一两分钟，之后复用。"""
+PATCHES_RELDIR = Path("work") / "patches"
+"""切出的 patch 写在这里（相对仓库根，不入库），目录结构同数据盘上的 `Processed_Data/`：
+`<划分>/<ROI>/{Optical,SAR,Label}/patch_<n>.{tif,txt}`。"""
+OPTICAL_DIRNAME, SAR_DIRNAME, LABEL_DIRNAME = "Optical", "SAR", "Label"
+"""一个 ROI 的产物目录下的三个子目录，与数据盘上的 `Processed_Data/<划分>/<ROI>/` 相同。"""
+LEGACY_ALIGNED_RELPATH = Path("cropped") / "ce2" / "opt.tif"
+"""现有产物切自的那幅光学对齐影像，相对数据盘上的 `raw/<ROI>/`。只在验收时读。"""
 
 
 def select_windows(
@@ -57,6 +72,28 @@ def select_windows(
         if usable_pair(optical, sar):
             kept.append(ManifestWindow(len(kept), pair.optical, pair.sar))
     return kept
+
+
+def cut_patches(
+    roi: ManifestRoi, optical_path: Path, sar_path: Path, matrix, out_dir: Path
+) -> None:
+    """在 `roi` 的每个窗口上从对齐影像切一对 patch，并写生成标签，都写进 `out_dir`
+    （即 `<划分>/<ROI>/`）下的 `Optical/`、`SAR/`、`Label/`。
+
+    **切的是 cubic 那版对齐影像**（`overlap.align` 的产物），不是筛选影像。
+    标签由全局变换 `matrix` 算出（`moondata.geometry.label_points`），不是评测真值点——
+    验证集与测试集上数据盘里的 `Label/` 是人工标的，本函数不碰、也不该拿它的输出去替换。
+    """
+    backend = raster.backend()
+    for directory, source, corners in (
+        (OPTICAL_DIRNAME, optical_path, [w.optical for w in roi.windows]),
+        (SAR_DIRNAME, sar_path, [w.sar for w in roi.windows]),
+    ):
+        outputs = [out_dir / directory / f"patch_{w.index}.tif" for w in roi.windows]
+        backend.write_patches(source, corners, roi.patch_size, outputs)
+    for w in roi.windows:
+        optical, sar = label_points(matrix, w.optical, w.sar, roi.patch_size)
+        write_label(out_dir / LABEL_DIRNAME / f"patch_{w.index}.txt", optical, sar)
 
 
 def usable_pair(optical: np.ndarray, sar: np.ndarray) -> bool:
