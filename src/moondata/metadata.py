@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from moondata.errors import MetadataUnreadable
+from moondata.stats import SPLITS
 
 ROI_COLUMN = "ROI"
 SPLIT_COLUMN = "划分"
@@ -38,6 +39,11 @@ def padded_roi(name: str) -> str:
     if match is None:
         raise MetadataUnreadable(f"认不出的 ROI 名：{name!r}")
     return f"ROI_{int(match.group(1)):03d}"
+
+
+def dataset_rows(rows: list[MetadataRow]) -> list[MetadataRow]:
+    """属于数据集的行。表里还留着已删除 ROI 的行（ROI_60），它的划分一栏写的是删除原因。"""
+    return [row for row in rows if row.split in SPLITS]
 
 
 def load_metadata(path: Path) -> list[MetadataRow]:

@@ -1510,38 +1510,6 @@
         "unit": " dB"
       }
     },
-    "ROI_060": {
-      "optical": {
-        "file": "ROI_060_optical.png",
-        "source": "raw/ROI_60/cropped/ce2/opt.tif",
-        "source_size": [
-          3094,
-          34429
-        ],
-        "step": 58,
-        "shown": "灰度值",
-        "stretch": [
-          36.5347,
-          71.2772
-        ],
-        "unit": ""
-      },
-      "sar": {
-        "file": "ROI_060_sar.png",
-        "source": "raw/ROI_60/cropped/ce2/sar.tif",
-        "source_size": [
-          3094,
-          34429
-        ],
-        "step": 58,
-        "shown": "H + V 总功率（dB）",
-        "stretch": [
-          -14.3662,
-          -7.2653
-        ],
-        "unit": " dB"
-      }
-    },
     "ROI_061": {
       "optical": {
         "file": "ROI_061_optical.png",

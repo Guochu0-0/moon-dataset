@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from moondata.errors import MetadataUnreadable
-from moondata.metadata import load_metadata, padded_roi
+from moondata.metadata import dataset_rows, load_metadata, padded_roi
 
 HEADER = "ROI,划分,PRODUCT_ID,入射角_deg\n"
 
@@ -42,3 +42,10 @@ def test_an_unrecognised_roi_name_is_an_error(tmp_path: Path) -> None:
 def test_a_missing_file_is_an_error(tmp_path: Path) -> None:
     with pytest.raises(MetadataUnreadable):
         load_metadata(tmp_path / "nope.csv")
+
+
+def test_dataset_rows_leave_out_the_deleted_roi(tmp_path: Path) -> None:
+    rows = load_metadata(
+        write_csv(tmp_path, "ROI_6,Test,a,1\nROI_60,已删除(与ROI_37重复),b,1\n")
+    )
+    assert [r.roi for r in dataset_rows(rows)] == ["ROI_006"]

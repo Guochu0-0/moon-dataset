@@ -7,9 +7,9 @@ import pytest
 from moondata.errors import MetadataUnreadable
 from moondata.metadata import MetadataRow
 from moondata.roipages import (
+    KnownIssue,
     RoiPageInputs,
     load_known_issues,
-    range_resolution_issue,
     render_pages,
     write_pages,
 )
@@ -42,11 +42,6 @@ def snapshot(rois: dict, removed: list | None = None) -> Snapshot:
 
 
 ISSUES_TOML = '''
-[range_resolution]
-threshold = 2.0
-note = "旧文档记的是另一批。"
-source = "元数据表"
-
 [[issue]]
 title = "明显的局部错位"
 rois = ["ROI_6", "ROI_050"]
@@ -55,12 +50,6 @@ source = "2026-09-11 会话"
 
 [issue.details]
 ROI_50 = "约 1 km。"
-
-[[issue]]
-title = "有对齐目录，却从未被切分"
-rois = ["ROI_14"]
-text = "从未切分。"
-source = "查看数据盘"
 '''
 
 
@@ -78,7 +67,7 @@ def inputs(issues) -> RoiPageInputs:
             row(6, "Test"),
             row(50),
             row(60, "已删除(与ROI_37重复)"),
-            row(7, "Test", range_m="52.6"),
+            row(7, "Test"),
         ],
         snapshot=snapshot(
             {
@@ -86,12 +75,7 @@ def inputs(issues) -> RoiPageInputs:
                 "ROI_007": {"split": "Test", "patch_count": 10, "labeled_patch_count": 0, "label_point_count": 0},
                 "ROI_050": {"split": "Train", "patch_count": 40, "labeled_patch_count": 0, "label_point_count": 0},
             },
-            [
-                {
-                    "roi": "ROI_060", "split": "Val", "reason": "与 ROI_037 重复",
-                    "deleted_on": "2026-09-20", "patch_count": 152, "labeled_patch_count": 145,
-                }
-            ],
+            [{"roi": "ROI_060", "split": "Val", "patch_count": 152, "labeled_patch_count": 145}],
         ),
         issues=issues,
         thumbnails={
@@ -119,7 +103,7 @@ def inputs(issues) -> RoiPageInputs:
 
 class TestKnownIssues:
     def test_roi_names_are_normalised_and_details_attach_to_their_roi(self, issues) -> None:
-        misaligned = issues.issues[0]
+        misaligned = issues[0]
         assert misaligned.rois == ("ROI_006", "ROI_050")
         assert misaligned.details == {"ROI_050": "约 1 km。"}
 
@@ -139,24 +123,11 @@ class TestKnownIssues:
             load_known_issues(path)
 
 
-class TestRangeResolution:
-    def test_flags_rois_above_the_threshold_times_the_median(self, issues) -> None:
-        rows = [row(n, range_m=v) for n, v in enumerate(["18.0", "18.5", "19.0", "38.5", "36.0"], 1)]
-        issue = range_resolution_issue(rows, issues)
-        assert issue is not None
-        assert issue.rois == ("ROI_004",)  # 判定线 19.0 × 2 = 38，36.0 在线下
-        assert "38.5 m" in issue.details["ROI_004"]
-        assert "旧文档记的是另一批。" in issue.text
-
-    def test_nothing_to_flag(self, issues) -> None:
-        assert range_resolution_issue([row(1), row(2)], issues) is None
-
-
 class TestPages:
-    def test_one_page_per_metadata_row_plus_issue_only_rois_plus_the_overview(self, inputs) -> None:
+    def test_one_page_per_dataset_roi_plus_the_overview_and_none_for_the_deleted_one(self, inputs) -> None:
         pages = render_pages(inputs)
         assert sorted(pages) == [
-            "ROI_006.md", "ROI_007.md", "ROI_014.md", "ROI_050.md", "ROI_060.md", "index.md",
+            "ROI_006.md", "ROI_007.md", "ROI_050.md", "index.md",
         ]
 
     def test_a_page_carries_metadata_counts_coverage_and_thumbnails(self, inputs) -> None:
@@ -181,27 +152,15 @@ class TestPages:
         assert "约 1 km" in pages["ROI_050.md"]
         assert "约 1 km" not in pages["ROI_006.md"]
 
-    def test_the_computed_range_resolution_issue_lands_on_its_page(self, inputs) -> None:
-        page = render_pages(inputs)["ROI_007.md"]
-        assert "距离向" in page and "52.6 m" in page
-
     def test_training_rois_say_they_have_no_ground_truth_rather_than_zero(self, inputs) -> None:
         page = render_pages(inputs)["ROI_050.md"]
         assert "训练集没有评测真值点" in page
 
-    def test_the_deleted_roi_explains_its_status(self, inputs) -> None:
-        page = render_pages(inputs)["ROI_060.md"]
-        assert "已从数据盘删除" in page
-        assert "2026-09-20" in page
-        assert "与 ROI_037 重复" in page
-        assert "145 / 152" in page
-        assert "未知" in page  # 点数只剩文件名清单，无从得知
-        assert "`data/tie-points/ROI_60/`" in page
-
-    def test_a_roi_outside_the_metadata_table_says_so(self, inputs) -> None:
-        page = render_pages(inputs)["ROI_014.md"]
-        assert "不在数据集里" in page
-        assert "从未切分。" in page
+    def test_an_issue_naming_a_roi_outside_the_dataset_is_an_error(self, inputs) -> None:
+        """多半是抄错了编号；ROI_60 已删除，也不再有页面可挂。"""
+        inputs.issues.append(KnownIssue("x", ("ROI_060",), "y", "z"))
+        with pytest.raises(MetadataUnreadable, match="ROI_060"):
+            render_pages(inputs)
 
     def test_a_roi_without_thumbnails_says_why(self, inputs) -> None:
         assert "尚未生成" not in render_pages(inputs)["ROI_006.md"]
@@ -210,7 +169,7 @@ class TestPages:
 
     def test_the_overview_links_every_page(self, inputs) -> None:
         overview = render_pages(inputs)["index.md"]
-        for name in ("ROI_006", "ROI_007", "ROI_014", "ROI_050", "ROI_060"):
+        for name in ("ROI_006", "ROI_007", "ROI_050"):
             assert f"[{name}]({name}.md)" in overview
 
     def test_output_is_deterministic(self, inputs) -> None:

@@ -187,7 +187,6 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#概况" id="toc-概况" class="nav-link active" data-scroll-target="#概况">概况</a></li>
   <li><a href="#mini-rf-条带" id="toc-mini-rf-条带" class="nav-link" data-scroll-target="#mini-rf-条带">Mini-RF 条带</a></li>
-  <li><a href="#已知问题" id="toc-已知问题" class="nav-link" data-scroll-target="#已知问题">已知问题</a></li>
   <li><a href="#缩略图" id="toc-缩略图" class="nav-link" data-scroll-target="#缩略图">缩略图</a></li>
   <li><a href="#本页数字从哪来" id="toc-本页数字从哪来" class="nav-link" data-scroll-target="#本页数字从哪来">本页数字从哪来</a></li>
   </ul>
@@ -352,26 +351,6 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 <code>data/README.md</code>。</p>
-</section>
-<section id="已知问题" class="level2">
-<h2 class="anchored" data-anchor-id="已知问题">已知问题</h2>
-<div class="callout callout-style-simple callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">警告</span>SAR 距离向有效分辨率异常偏粗
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>元数据表里距离向实测有效分辨率的中位数是 18.25 m；超过它的 2 倍（36.5 m）即标注于此。方位向没有这种现象。</p>
-<p>旧参考文档 <code>DATA_REFERENCE.md</code> §1.6 记的是 ROI_7、ROI_24、ROI_42、ROI_67、ROI_80 五个（43–51 m），并称「全在 Train」。按本仓库的元数据表：ROI_27 也超过判定线，ROI_7 属测试集、ROI_80 属验证集。两处出入尚未核对。旧文档的记录还有一句：这几条的入射角、视向、模式、投影、ppd 与其余条带没有区别，也不是低对比度场景造成的——原因未查明。</p>
-<p><strong>本 ROI：</strong> 本 ROI 距离向 49.2 m，是中位数的 2.7 倍。</p>
-<p>同一条还涉及：<a href="../../docs/rois/ROI_007.html">ROI_007</a>、<a href="../../docs/rois/ROI_024.html">ROI_024</a>、<a href="../../docs/rois/ROI_027.html">ROI_027</a>、<a href="../../docs/rois/ROI_042.html">ROI_042</a>、<a href="../../docs/rois/ROI_067.html">ROI_067</a>。</p>
-<p>出处：元数据表 <code>data/metadata/minirf_metadata.csv</code> 的「实测有效分辨率_距离向_m」列</p>
-</div>
-</div>
 </section>
 <section id="缩略图" class="level2">
 <h2 class="anchored" data-anchor-id="缩略图">缩略图</h2>

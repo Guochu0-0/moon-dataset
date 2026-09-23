@@ -4,7 +4,7 @@
     "href": "docs/rois/index.html",
     "title": "ROI 档案",
     "section": "",
-    "text": "元数据表里的每个 ROI 各有一页（68 页，含已删除的 ROI_060），另有 1 页给不在数据集里、但有已知问题要记的 ROI。点 ROI 编号进入档案页。数量的两种口径见产物文档。",
+    "text": "数据集里的 67 个 ROI 各有一页，点 ROI 编号进入。划分与数量的口径见产物文档。",
     "crumbs": [
       "首页",
       "主体文档",
@@ -16,19 +16,7 @@
     "href": "docs/rois/index.html#总览",
     "title": "ROI 档案",
     "section": "总览",
-    "text": "总览\n\n\n\nROI\n划分\npatch 对\n带真值点的\n入射角\n视向\n已知问题\n\n\n\n\nROI_001\n训练集\n40\n—\n49.75°\nLEFT\n\n\n\nROI_002\n训练集\n152\n—\n51.77°\nLEFT\n轻度的局部错位\n\n\nROI_003\n训练集\n171\n—\n49.28°\nRIGHT\n轻度的局部错位\n\n\nROI_005\n训练集\n135\n—\n50.97°\nRIGHT\n\n\n\nROI_006\n测试集\n81\n67\n49.47°\nLEFT\n\n\n\nROI_007\n测试集\n372\n286\n50.66°\nRIGHT\nSAR 距离向有效分辨率异常偏粗\n\n\nROI_008\n训练集\n291\n—\n46.44°\nLEFT\n明显的局部错位\n\n\nROI_009\n训练集\n162\n—\n52.47°\nLEFT\n局部错位，错开的距离随位置变化\n\n\nROI_010\n训练集\n159\n—\n51.38°\nLEFT\n轻度的局部错位\n\n\nROI_011\n测试集\n92\n83\n51.41°\nLEFT\n目录里有别处遗留的控制点文件\n\n\nROI_012\n训练集\n105\n—\n54.71°\nLEFT\n\n\n\nROI_013\n训练集\n54\n—\n53.68°\nLEFT\n\n\n\nROI_015\n训练集\n98\n—\n50.05°\nLEFT\n轻度的局部错位\n\n\nROI_016\n训练集\n265\n—\n49.95°\nRIGHT\n明显的局部错位\n\n\nROI_017\n训练集\n213\n—\n47.76°\nLEFT\n与 ROI_054 的范围部分重叠\n\n\nROI_018\n训练集\n117\n—\n50.40°\nRIGHT\n\n\n\nROI_020\n测试集\n112\n91\n49.39°\nRIGHT\n\n\n\nROI_021\n训练集\n108\n—\n52.40°\nLEFT\n\n\n\nROI_023\n训练集\n175\n—\n50.70°\nRIGHT\n轻度的局部错位\n\n\nROI_024\n训练集\n239\n—\n52.39°\nLEFT\nSAR 距离向有效分辨率异常偏粗\n\n\nROI_025\n训练集\n222\n—\n49.50°\nRIGHT\n明显的局部错位\n\n\nROI_026\n训练集\n190\n—\n46.92°\nLEFT\n轻度的局部错位\n\n\nROI_027\n训练集\n234\n—\n48.90°\nRIGHT\n轻度的局部错位；编号缺 95、98、99；SAR 距离向有效分辨率异常偏粗\n\n\nROI_030\n训练集\n74\n—\n51.04°\nLEFT\n\n\n\nROI_031\n训练集\n149\n—\n52.87°\nLEFT\n\n\n\nROI_033\n训练集\n269\n—\n51.70°\nRIGHT\n\n\n\nROI_034\n训练集\n199\n—\n53.72°\nLEFT\n一幅 CE-2 分幅的经度差了 180°\n\n\nROI_035\n验证集\n214\n172\n50.97°\nLEFT\n\n\n\nROI_037\n测试集\n159\n141\n53.04°\nLEFT\n与 ROI_060 重复（ROI_060 已删除）\n\n\nROI_038\n训练集\n64\n—\n53.26°\nLEFT\n与 ROI_071 的范围部分重叠\n\n\nROI_042\n训练集\n21\n—\n48.20°\nRIGHT\nSAR 距离向有效分辨率异常偏粗\n\n\nROI_043\n训练集\n48\n—\n52.81°\nLEFT\n\n\n\nROI_045\n训练集\n58\n—\n51.65°\nLEFT\n\n\n\nROI_046\n训练集\n165\n—\n51.48°\nLEFT\n\n\n\nROI_047\n训练集\n31\n—\n54.92°\nLEFT\n\n\n\nROI_048\n训练集\n24\n—\n45.52°\nLEFT\n轻度的局部错位\n\n\nROI_049\n验证集\n113\n88\n52.47°\nLEFT\n\n\n\nROI_050\n训练集\n160\n—\n47.62°\nLEFT\n明显的局部错位\n\n\nROI_051\n训练集\n196\n—\n52.12°\nLEFT\n\n\n\nROI_052\n训练集\n170\n—\n48.80°\nLEFT\n明显的局部错位\n\n\nROI_053\n训练集\n93\n—\n49.57°\nLEFT\n\n\n\nROI_054\n测试集\n168\n145\n47.55°\nLEFT\n轻度的局部错位；Mini-RF 目录里有两个 SAR 文件；与 ROI_017 的范围部分重叠\n\n\nROI_055\n训练集\n214\n—\n50.53°\nRIGHT\n轻度的局部错位\n\n\nROI_056\n训练集\n296\n—\n48.59°\nLEFT\n轻度的局部错位\n\n\nROI_057\n训练集\n229\n—\n53.26°\nLEFT\nCE-2 分幅的投影参数被改错，读取时纠正\n\n\nROI_058\n训练集\n248\n—\n51.37°\nRIGHT\nCE-2 分幅的投影参数被改错，读取时纠正\n\n\nROI_059\n测试集\n146\n140\n53.67°\nLEFT\n\n\n\nROI_060\n验证集（已删除）\n152\n145\n53.04°\nLEFT\n已删除，人工标注的去向\n\n\nROI_061\n训练集\n97\n—\n52.99°\nLEFT\n\n\n\nROI_062\n训练集\n136\n—\n53.16°\nLEFT\n\n\n\nROI_063\n训练集\n103\n—\n53.16°\nLEFT\n\n\n\nROI_064\n训练集\n111\n—\n53.18°\nLEFT\n\n\n\nROI_065\n训练集\n172\n—\n53.02°\nLEFT\n轻度的局部错位；CE-2 分幅的投影参数被改错，读取时纠正\n\n\nROI_066\n训练集\n130\n—\n52.28°\nLEFT\n\n\n\nROI_067\n训练集\n120\n—\n53.71°\nLEFT\nSAR 距离向有效分辨率异常偏粗\n\n\nROI_068\n训练集\n107\n—\n52.55°\nLEFT\n轻度的局部错位\n\n\nROI_069\n训练集\n198\n—\n50.10°\nLEFT\n轻度的局部错位\n\n\nROI_070\n验证集\n168\n113\n52.72°\nLEFT\nCE-2 分幅的投影参数被改错，读取时纠正\n\n\nROI_071\n验证集\n40\n30\n52.57°\nLEFT\n与 ROI_038 的范围部分重叠\n\n\nROI_072\n训练集\n60\n—\n52.20°\nLEFT\n\n\n\nROI_073\n训练集\n119\n—\n52.96°\nLEFT\n对齐控制点重标过，patch 重新编号；CE-2 分幅的投影参数被改错，读取时纠正\n\n\nROI_074\n训练集\n141\n—\n52.10°\nLEFT\nROI_73 的一份作废控制点实为本 ROI 的\n\n\nROI_075\n验证集\n183\n174\n51.79°\nLEFT\n\n\n\nROI_076\n训练集\n58\n—\n53.25°\nLEFT\n\n\n\nROI_077\n训练集\n165\n—\n51.93°\nLEFT\n\n\n\nROI_078\n训练集\n167\n—\n48.46°\nLEFT\n轻度的局部错位\n\n\nROI_079\n训练集\n185\n—\n50.04°\nRIGHT\n轻度的局部错位\n\n\nROI_080\n验证集\n107\n75\n53.71°\nLEFT\nSAR 距离向有效分辨率异常偏粗",
-    "crumbs": [
-      "首页",
-      "主体文档",
-      "ROI 档案"
-    ]
-  },
-  {
-    "objectID": "docs/rois/index.html#不在数据集里的-roi",
-    "href": "docs/rois/index.html#不在数据集里的-roi",
-    "title": "ROI 档案",
-    "section": "不在数据集里的 ROI",
-    "text": "不在数据集里的 ROI\n\nROI_014：有对齐目录，却从未被切分（待复核）",
+    "text": "总览\n\n\n\nROI\n划分\npatch 对\n带真值点的\n入射角\n视向\n已知问题\n\n\n\n\nROI_001\n训练集\n40\n—\n49.75°\nLEFT\n\n\n\nROI_002\n训练集\n152\n—\n51.77°\nLEFT\n轻度的局部错位\n\n\nROI_003\n训练集\n171\n—\n49.28°\nRIGHT\n轻度的局部错位\n\n\nROI_005\n训练集\n135\n—\n50.97°\nRIGHT\n\n\n\nROI_006\n测试集\n81\n67\n49.47°\nLEFT\n\n\n\nROI_007\n测试集\n372\n286\n50.66°\nRIGHT\n\n\n\nROI_008\n训练集\n291\n—\n46.44°\nLEFT\n明显的局部错位\n\n\nROI_009\n训练集\n162\n—\n52.47°\nLEFT\n局部错位，错开的距离随位置变化\n\n\nROI_010\n训练集\n159\n—\n51.38°\nLEFT\n轻度的局部错位\n\n\nROI_011\n测试集\n92\n83\n51.41°\nLEFT\n目录里有别处遗留的控制点文件\n\n\nROI_012\n训练集\n105\n—\n54.71°\nLEFT\n\n\n\nROI_013\n训练集\n54\n—\n53.68°\nLEFT\n\n\n\nROI_015\n训练集\n98\n—\n50.05°\nLEFT\n轻度的局部错位\n\n\nROI_016\n训练集\n265\n—\n49.95°\nRIGHT\n明显的局部错位\n\n\nROI_017\n训练集\n213\n—\n47.76°\nLEFT\n与 ROI_054 的范围部分重叠\n\n\nROI_018\n训练集\n117\n—\n50.40°\nRIGHT\n\n\n\nROI_020\n测试集\n112\n91\n49.39°\nRIGHT\n\n\n\nROI_021\n训练集\n108\n—\n52.40°\nLEFT\n\n\n\nROI_023\n训练集\n175\n—\n50.70°\nRIGHT\n轻度的局部错位\n\n\nROI_024\n训练集\n239\n—\n52.39°\nLEFT\n\n\n\nROI_025\n训练集\n222\n—\n49.50°\nRIGHT\n明显的局部错位\n\n\nROI_026\n训练集\n190\n—\n46.92°\nLEFT\n轻度的局部错位\n\n\nROI_027\n训练集\n234\n—\n48.90°\nRIGHT\n轻度的局部错位；编号缺 95、98、99\n\n\nROI_030\n训练集\n74\n—\n51.04°\nLEFT\n\n\n\nROI_031\n训练集\n149\n—\n52.87°\nLEFT\n\n\n\nROI_033\n训练集\n269\n—\n51.70°\nRIGHT\n\n\n\nROI_034\n训练集\n199\n—\n53.72°\nLEFT\n一幅 CE-2 分幅的经度差了 180°\n\n\nROI_035\n验证集\n214\n172\n50.97°\nLEFT\n\n\n\nROI_037\n测试集\n159\n141\n53.04°\nLEFT\n与 ROI_060 重复（ROI_060 已删除）\n\n\nROI_038\n训练集\n64\n—\n53.26°\nLEFT\n与 ROI_071 的范围部分重叠\n\n\nROI_042\n训练集\n21\n—\n48.20°\nRIGHT\n\n\n\nROI_043\n训练集\n48\n—\n52.81°\nLEFT\n\n\n\nROI_045\n训练集\n58\n—\n51.65°\nLEFT\n\n\n\nROI_046\n训练集\n165\n—\n51.48°\nLEFT\n\n\n\nROI_047\n训练集\n31\n—\n54.92°\nLEFT\n\n\n\nROI_048\n训练集\n24\n—\n45.52°\nLEFT\n轻度的局部错位\n\n\nROI_049\n验证集\n113\n88\n52.47°\nLEFT\n\n\n\nROI_050\n训练集\n160\n—\n47.62°\nLEFT\n明显的局部错位\n\n\nROI_051\n训练集\n196\n—\n52.12°\nLEFT\n\n\n\nROI_052\n训练集\n170\n—\n48.80°\nLEFT\n明显的局部错位\n\n\nROI_053\n训练集\n93\n—\n49.57°\nLEFT\n\n\n\nROI_054\n测试集\n168\n145\n47.55°\nLEFT\n轻度的局部错位；Mini-RF 目录里有两个 SAR 文件；与 ROI_017 的范围部分重叠\n\n\nROI_055\n训练集\n214\n—\n50.53°\nRIGHT\n轻度的局部错位\n\n\nROI_056\n训练集\n296\n—\n48.59°\nLEFT\n轻度的局部错位\n\n\nROI_057\n训练集\n229\n—\n53.26°\nLEFT\nCE-2 分幅的投影参数被改错，读取时纠正\n\n\nROI_058\n训练集\n248\n—\n51.37°\nRIGHT\nCE-2 分幅的投影参数被改错，读取时纠正\n\n\nROI_059\n测试集\n146\n140\n53.67°\nLEFT\n\n\n\nROI_061\n训练集\n97\n—\n52.99°\nLEFT\n\n\n\nROI_062\n训练集\n136\n—\n53.16°\nLEFT\n\n\n\nROI_063\n训练集\n103\n—\n53.16°\nLEFT\n\n\n\nROI_064\n训练集\n111\n—\n53.18°\nLEFT\n\n\n\nROI_065\n训练集\n172\n—\n53.02°\nLEFT\n轻度的局部错位；CE-2 分幅的投影参数被改错，读取时纠正\n\n\nROI_066\n训练集\n130\n—\n52.28°\nLEFT\n\n\n\nROI_067\n训练集\n120\n—\n53.71°\nLEFT\n\n\n\nROI_068\n训练集\n107\n—\n52.55°\nLEFT\n轻度的局部错位\n\n\nROI_069\n训练集\n198\n—\n50.10°\nLEFT\n轻度的局部错位\n\n\nROI_070\n验证集\n168\n113\n52.72°\nLEFT\nCE-2 分幅的投影参数被改错，读取时纠正\n\n\nROI_071\n验证集\n40\n30\n52.57°\nLEFT\n与 ROI_038 的范围部分重叠\n\n\nROI_072\n训练集\n60\n—\n52.20°\nLEFT\n\n\n\nROI_073\n训练集\n119\n—\n52.96°\nLEFT\n对齐控制点重标过，patch 重新编号；CE-2 分幅的投影参数被改错，读取时纠正\n\n\nROI_074\n训练集\n141\n—\n52.10°\nLEFT\nROI_73 的一份作废控制点实为本 ROI 的\n\n\nROI_075\n验证集\n183\n174\n51.79°\nLEFT\n\n\n\nROI_076\n训练集\n58\n—\n53.25°\nLEFT\n\n\n\nROI_077\n训练集\n165\n—\n51.93°\nLEFT\n\n\n\nROI_078\n训练集\n167\n—\n48.46°\nLEFT\n轻度的局部错位\n\n\nROI_079\n训练集\n185\n—\n50.04°\nRIGHT\n轻度的局部错位\n\n\nROI_080\n验证集\n107\n75\n53.71°\nLEFT",
     "crumbs": [
       "首页",
       "主体文档",
@@ -40,7 +28,7 @@
     "href": "docs/rois/index.html#已知问题一览",
     "title": "ROI 档案",
     "section": "已知问题一览",
-    "text": "已知问题一览\n照实记录，不做解释；原因多数待作者复核。每条的出处写在档案页上。\n\n已删除，人工标注的去向：ROI_060\n与 ROI_060 重复（ROI_060 已删除）：ROI_037\n有对齐目录，却从未被切分（待复核）：ROI_014\n明显的局部错位：ROI_008、ROI_016、ROI_025、ROI_050、ROI_052\n轻度的局部错位：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_027、ROI_048、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079\n局部错位，错开的距离随位置变化：ROI_009\n对齐控制点重标过，patch 重新编号：ROI_073\nROI_73 的一份作废控制点实为本 ROI 的：ROI_074\nCE-2 分幅的投影参数被改错，读取时纠正：ROI_057、ROI_058、ROI_065、ROI_070、ROI_073\n编号缺 95、98、99：ROI_027\n一幅 CE-2 分幅的经度差了 180°：ROI_034\nMini-RF 目录里有两个 SAR 文件：ROI_054\n目录里有别处遗留的控制点文件：ROI_011\n与 ROI_054 的范围部分重叠：ROI_017\n与 ROI_017 的范围部分重叠：ROI_054\n与 ROI_071 的范围部分重叠：ROI_038\n与 ROI_038 的范围部分重叠：ROI_071\nSAR 距离向有效分辨率异常偏粗：ROI_007、ROI_024、ROI_027、ROI_042、ROI_067、ROI_080",
+    "text": "已知问题一览\n照实记录，不做解释；多数待作者复核。每条的出处写在档案页上。\n\n与 ROI_060 重复（ROI_060 已删除）：ROI_037\n明显的局部错位：ROI_008、ROI_016、ROI_025、ROI_050、ROI_052\n轻度的局部错位：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_027、ROI_048、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079\n局部错位，错开的距离随位置变化：ROI_009\n对齐控制点重标过，patch 重新编号：ROI_073\nROI_73 的一份作废控制点实为本 ROI 的：ROI_074\nCE-2 分幅的投影参数被改错，读取时纠正：ROI_057、ROI_058、ROI_065、ROI_070、ROI_073\n编号缺 95、98、99：ROI_027\n一幅 CE-2 分幅的经度差了 180°：ROI_034\nMini-RF 目录里有两个 SAR 文件：ROI_054\n目录里有别处遗留的控制点文件：ROI_011\n与 ROI_054 的范围部分重叠：ROI_017\n与 ROI_017 的范围部分重叠：ROI_054\n与 ROI_071 的范围部分重叠：ROI_038\n与 ROI_038 的范围部分重叠：ROI_071",
     "crumbs": [
       "首页",
       "主体文档",
@@ -319,13 +307,6 @@
     "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02121_2CD_EKU_53N336_V1\n官方\n\n\n轨道号\n2121\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-12-12T15:03:46\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.71°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n267.42°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n6,878 × 50,289 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n51.2 m\n实测\n\n\n有效分辨率（方位向）\n18.3 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_067.html#已知问题",
-    "href": "docs/rois/ROI_067.html#已知问题",
-    "title": "ROI_067",
-    "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告SAR 距离向有效分辨率异常偏粗\n\n\n\n元数据表里距离向实测有效分辨率的中位数是 18.25 m；超过它的 2 倍（36.5 m）即标注于此。方位向没有这种现象。\n旧参考文档 DATA_REFERENCE.md §1.6 记的是 ROI_7、ROI_24、ROI_42、ROI_67、ROI_80 五个（43–51 m），并称「全在 Train」。按本仓库的元数据表：ROI_27 也超过判定线，ROI_7 属测试集、ROI_80 属验证集。两处出入尚未核对。旧文档的记录还有一句：这几条的入射角、视向、模式、投影、ppd 与其余条带没有区别，也不是低对比度场景造成的——原因未查明。\n本 ROI： 本 ROI 距离向 51.2 m，是中位数的 2.8 倍。\n同一条还涉及：ROI_007、ROI_024、ROI_027、ROI_042、ROI_080。\n出处：元数据表 data/metadata/minirf_metadata.csv 的「实测有效分辨率_距离向_m」列"
-  },
-  {
     "objectID": "docs/rois/ROI_067.html#缩略图",
     "href": "docs/rois/ROI_067.html#缩略图",
     "title": "ROI_067",
@@ -452,702 +433,660 @@
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_059.html",
-    "href": "docs/rois/ROI_059.html",
-    "title": "ROI_059",
+    "objectID": "docs/rois/ROI_058.html",
+    "href": "docs/rois/ROI_058.html",
+    "title": "ROI_058",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n146\n\n\n带评测真值点的 patch\n140 / 146（95.9%）\n\n\n评测真值点对数\n1,124\n\n\n产物目录\nProcessed_Data/Test/ROI_059/\n\n\n对齐控制点\ndata/tie-points/ROI_59/\n\n\n元数据表中的写法\nROI_59"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n248\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_058/\n\n\n对齐控制点\ndata/tie-points/ROI_58/\n\n\n元数据表中的写法\nROI_58"
   },
   {
-    "objectID": "docs/rois/ROI_059.html#概况",
-    "href": "docs/rois/ROI_059.html#概况",
-    "title": "ROI_059",
+    "objectID": "docs/rois/ROI_058.html#概况",
+    "href": "docs/rois/ROI_058.html#概况",
+    "title": "ROI_058",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n146\n\n\n带评测真值点的 patch\n140 / 146（95.9%）\n\n\n评测真值点对数\n1,124\n\n\n产物目录\nProcessed_Data/Test/ROI_059/\n\n\n对齐控制点\ndata/tie-points/ROI_59/\n\n\n元数据表中的写法\nROI_59"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n248\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_058/\n\n\n对齐控制点\ndata/tie-points/ROI_58/\n\n\n元数据表中的写法\nROI_58"
   },
   {
-    "objectID": "docs/rois/ROI_059.html#mini-rf-条带",
-    "href": "docs/rois/ROI_059.html#mini-rf-条带",
-    "title": "ROI_059",
+    "objectID": "docs/rois/ROI_058.html#mini-rf-条带",
+    "href": "docs/rois/ROI_058.html#mini-rf-条带",
+    "title": "ROI_058",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01740_2CD_EKU_20N011_V1\n官方\n\n\n轨道号\n1740\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-11-12T16:32:16\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.67°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n268.79°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,810 × 66,566 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.0 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04374_2CD_EKU_34N344_V1\n官方\n\n\n轨道号\n4374\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-07T14:38:37\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n51.37°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n268.46°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,996 × 66,124 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.3 m\n实测\n\n\n有效分辨率（方位向）\n19.2 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_059.html#缩略图",
-    "href": "docs/rois/ROI_059.html#缩略图",
-    "title": "ROI_059",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 33.58 ~ 51.32\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.13 ~ -6.723 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_59/cropped/ce2/opt.tif、raw/ROI_59/cropped/ce2/sar.tif（4,213 × 35,001 像素），每 59 × 59 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_059.html#本页数字从哪来",
-    "href": "docs/rois/ROI_059.html#本页数字从哪来",
-    "title": "ROI_059",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_057.html",
-    "href": "docs/rois/ROI_057.html",
-    "title": "ROI_057",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n229\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_057/\n\n\n对齐控制点\ndata/tie-points/ROI_57/\n\n\n元数据表中的写法\nROI_57"
-  },
-  {
-    "objectID": "docs/rois/ROI_057.html#概况",
-    "href": "docs/rois/ROI_057.html#概况",
-    "title": "ROI_057",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n229\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_057/\n\n\n对齐控制点\ndata/tie-points/ROI_57/\n\n\n元数据表中的写法\nROI_57"
-  },
-  {
-    "objectID": "docs/rois/ROI_057.html#mini-rf-条带",
-    "href": "docs/rois/ROI_057.html#mini-rf-条带",
-    "title": "ROI_057",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02121_2CD_EKU_28N338_V1\n官方\n\n\n轨道号\n2121\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-12-12T14:56:14\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.26°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.18°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,484 × 50,256 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n17.6 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_057.html#已知问题",
-    "href": "docs/rois/ROI_057.html#已知问题",
-    "title": "ROI_057",
+    "objectID": "docs/rois/ROI_058.html#已知问题",
+    "href": "docs/rois/ROI_058.html#已知问题",
+    "title": "ROI_058",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告CE-2 分幅的投影参数被改错，读取时纠正\n\n\n\n本 ROI 所用的一幅 CE-2 分幅，随附投影文件的 lat_ts 抄成了相邻纬度带的值（E 带应为 35 却写成 21，I 带应为 −21 却写成 −35），像素和 geotransform 没动，整幅图因此被放到几度之外。旧代码在读取时按图幅名纠正，原文件不动；直接用通用 GIS 工具读原始瓦片会得到错误位置。\n本 ROI： 出问题的分幅：E218。\n同一条还涉及：ROI_058、ROI_065、ROI_070、ROI_073。\n出处：旧迁移记录 MIGRATION.md；旧参考文档 DATA_REFERENCE.md §2"
+    "text": "已知问题\n\n\n\n\n\n\n警告CE-2 分幅的投影参数被改错，读取时纠正\n\n\n\n本 ROI 所用的一幅 CE-2 分幅，随附投影文件的 lat_ts 抄成了相邻纬度带的值（E 带应为 35 却写成 21，I 带应为 −21 却写成 −35），像素和 geotransform 没动，整幅图因此被放到几度之外。旧代码在读取时按图幅名纠正，原文件不动；直接用通用 GIS 工具读原始瓦片会得到错误位置。\n本 ROI： 出问题的分幅：E219。\n同一条还涉及：ROI_057、ROI_065、ROI_070、ROI_073。\n出处：旧迁移记录 MIGRATION.md；旧参考文档 DATA_REFERENCE.md §2"
   },
   {
-    "objectID": "docs/rois/ROI_057.html#缩略图",
-    "href": "docs/rois/ROI_057.html#缩略图",
-    "title": "ROI_057",
+    "objectID": "docs/rois/ROI_058.html#缩略图",
+    "href": "docs/rois/ROI_058.html#缩略图",
+    "title": "ROI_058",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 35.99 ~ 50.86\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -15.75 ~ -8.777 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_57/cropped/ce2/opt.tif、raw/ROI_57/cropped/ce2/sar.tif（4,127 × 59,529 像素），每 100 × 100 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 38.06 ~ 51.7\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.35 ~ -6.113 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_58/cropped/ce2/opt.tif、raw/ROI_58/cropped/ce2/sar.tif（4,733 × 43,653 像素），每 73 × 73 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_057.html#本页数字从哪来",
-    "href": "docs/rois/ROI_057.html#本页数字从哪来",
-    "title": "ROI_057",
+    "objectID": "docs/rois/ROI_058.html#本页数字从哪来",
+    "href": "docs/rois/ROI_058.html#本页数字从哪来",
+    "title": "ROI_058",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_055.html",
-    "href": "docs/rois/ROI_055.html",
-    "title": "ROI_055",
+    "objectID": "docs/rois/ROI_056.html",
+    "href": "docs/rois/ROI_056.html",
+    "title": "ROI_056",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n214\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_055/\n\n\n对齐控制点\ndata/tie-points/ROI_55/\n\n\n元数据表中的写法\nROI_55"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n296\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_056/\n\n\n对齐控制点\ndata/tie-points/ROI_56/\n\n\n元数据表中的写法\nROI_56"
   },
   {
-    "objectID": "docs/rois/ROI_055.html#概况",
-    "href": "docs/rois/ROI_055.html#概况",
-    "title": "ROI_055",
+    "objectID": "docs/rois/ROI_056.html#概况",
+    "href": "docs/rois/ROI_056.html#概况",
+    "title": "ROI_056",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n214\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_055/\n\n\n对齐控制点\ndata/tie-points/ROI_55/\n\n\n元数据表中的写法\nROI_55"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n296\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_056/\n\n\n对齐控制点\ndata/tie-points/ROI_56/\n\n\n元数据表中的写法\nROI_56"
   },
   {
-    "objectID": "docs/rois/ROI_055.html#mini-rf-条带",
-    "href": "docs/rois/ROI_055.html#mini-rf-条带",
-    "title": "ROI_055",
+    "objectID": "docs/rois/ROI_056.html#mini-rf-条带",
+    "href": "docs/rois/ROI_056.html#mini-rf-条带",
+    "title": "ROI_056",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04755_2CD_EKU_35N135_V1\n官方\n\n\n轨道号\n4755\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-07-07T12:06:05\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.53°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n91.83°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n5,130 × 65,465 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.2 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02321_2CD_EKU_04N130_V1\n官方\n\n\n轨道号\n2321\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-12-28T07:49:05\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n48.59°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n270.25°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,857 × 55,737 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.4 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_055.html#已知问题",
-    "href": "docs/rois/ROI_055.html#已知问题",
-    "title": "ROI_055",
+    "objectID": "docs/rois/ROI_056.html#已知问题",
+    "href": "docs/rois/ROI_056.html#已知问题",
+    "title": "ROI_056",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_027、ROI_048、ROI_054、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
+    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_027、ROI_048、ROI_054、ROI_055、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
   },
   {
-    "objectID": "docs/rois/ROI_055.html#缩略图",
-    "href": "docs/rois/ROI_055.html#缩略图",
-    "title": "ROI_055",
+    "objectID": "docs/rois/ROI_056.html#缩略图",
+    "href": "docs/rois/ROI_056.html#缩略图",
+    "title": "ROI_056",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 64.82 ~ 135.1\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -12.74 ~ -5.387 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_55/cropped/ce2/opt.tif、raw/ROI_55/cropped/ce2/sar.tif（4,978 × 35,734 像素），每 60 × 60 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 77.5 ~ 124\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.38 ~ -5.281 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_56/cropped/ce2/opt.tif、raw/ROI_56/cropped/ce2/sar.tif（3,359 × 48,899 像素），每 82 × 82 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_055.html#本页数字从哪来",
-    "href": "docs/rois/ROI_055.html#本页数字从哪来",
-    "title": "ROI_055",
+    "objectID": "docs/rois/ROI_056.html#本页数字从哪来",
+    "href": "docs/rois/ROI_056.html#本页数字从哪来",
+    "title": "ROI_056",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_053.html",
-    "href": "docs/rois/ROI_053.html",
-    "title": "ROI_053",
+    "objectID": "docs/rois/ROI_054.html",
+    "href": "docs/rois/ROI_054.html",
+    "title": "ROI_054",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n93\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_053/\n\n\n对齐控制点\ndata/tie-points/ROI_53/\n\n\n元数据表中的写法\nROI_53"
+    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n168\n\n\n带评测真值点的 patch\n145 / 168（86.3%）\n\n\n评测真值点对数\n1,187\n\n\n产物目录\nProcessed_Data/Test/ROI_054/\n\n\n对齐控制点\ndata/tie-points/ROI_54/\n\n\n元数据表中的写法\nROI_54"
   },
   {
-    "objectID": "docs/rois/ROI_053.html#概况",
-    "href": "docs/rois/ROI_053.html#概况",
-    "title": "ROI_053",
+    "objectID": "docs/rois/ROI_054.html#概况",
+    "href": "docs/rois/ROI_054.html#概况",
+    "title": "ROI_054",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n93\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_053/\n\n\n对齐控制点\ndata/tie-points/ROI_53/\n\n\n元数据表中的写法\nROI_53"
+    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n168\n\n\n带评测真值点的 patch\n145 / 168（86.3%）\n\n\n评测真值点对数\n1,187\n\n\n产物目录\nProcessed_Data/Test/ROI_054/\n\n\n对齐控制点\ndata/tie-points/ROI_54/\n\n\n元数据表中的写法\nROI_54"
   },
   {
-    "objectID": "docs/rois/ROI_053.html#mini-rf-条带",
-    "href": "docs/rois/ROI_053.html#mini-rf-条带",
-    "title": "ROI_053",
+    "objectID": "docs/rois/ROI_054.html#mini-rf-条带",
+    "href": "docs/rois/ROI_054.html#mini-rf-条带",
+    "title": "ROI_054",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02199_2CD_EKU_01S255_V1\n官方\n\n\n轨道号\n2199\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-12-18T19:44:17\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n49.57°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n270.92°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,010 × 49,215 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.3 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01526_2CD_EKU_06S233_V1\n官方\n\n\n轨道号\n1526\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-26T22:39:59\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n47.55°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.09°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,765 × 52,703 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.3 m\n实测\n\n\n有效分辨率（方位向）\n18.2 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_053.html#缩略图",
-    "href": "docs/rois/ROI_053.html#缩略图",
-    "title": "ROI_053",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 78.02 ~ 132\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -12.91 ~ -4.609 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_53/cropped/ce2/opt.tif、raw/ROI_53/cropped/ce2/sar.tif（2,562 × 33,915 像素），每 57 × 57 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_053.html#本页数字从哪来",
-    "href": "docs/rois/ROI_053.html#本页数字从哪来",
-    "title": "ROI_053",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_051.html",
-    "href": "docs/rois/ROI_051.html",
-    "title": "ROI_051",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n196\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_051/\n\n\n对齐控制点\ndata/tie-points/ROI_51/\n\n\n元数据表中的写法\nROI_51"
-  },
-  {
-    "objectID": "docs/rois/ROI_051.html#概况",
-    "href": "docs/rois/ROI_051.html#概况",
-    "title": "ROI_051",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n196\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_051/\n\n\n对齐控制点\ndata/tie-points/ROI_51/\n\n\n元数据表中的写法\nROI_51"
-  },
-  {
-    "objectID": "docs/rois/ROI_051.html#mini-rf-条带",
-    "href": "docs/rois/ROI_051.html#mini-rf-条带",
-    "title": "ROI_051",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01645_2CD_EKU_41N110_V1\n官方\n\n\n轨道号\n1645\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-11-05T05:24:54\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.12°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n268.21°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n5,427 × 65,731 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.7 m\n实测\n\n\n有效分辨率（方位向）\n18.9 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_051.html#缩略图",
-    "href": "docs/rois/ROI_051.html#缩略图",
-    "title": "ROI_051",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 69.83 ~ 153.9\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.43 ~ -4.964 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_51/cropped/ce2/opt.tif、raw/ROI_51/cropped/ce2/sar.tif（5,266 × 35,734 像素），每 60 × 60 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_051.html#本页数字从哪来",
-    "href": "docs/rois/ROI_051.html#本页数字从哪来",
-    "title": "ROI_051",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_049.html",
-    "href": "docs/rois/ROI_049.html",
-    "title": "ROI_049",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n验证集（Val）\n\n\npatch 对\n113\n\n\n带评测真值点的 patch\n88 / 113（77.9%）\n\n\n评测真值点对数\n706\n\n\n产物目录\nProcessed_Data/Val/ROI_049/\n\n\n对齐控制点\ndata/tie-points/ROI_49/\n\n\n元数据表中的写法\nROI_49"
-  },
-  {
-    "objectID": "docs/rois/ROI_049.html#概况",
-    "href": "docs/rois/ROI_049.html#概况",
-    "title": "ROI_049",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n验证集（Val）\n\n\npatch 对\n113\n\n\n带评测真值点的 patch\n88 / 113（77.9%）\n\n\n评测真值点对数\n706\n\n\n产物目录\nProcessed_Data/Val/ROI_049/\n\n\n对齐控制点\ndata/tie-points/ROI_49/\n\n\n元数据表中的写法\nROI_49"
-  },
-  {
-    "objectID": "docs/rois/ROI_049.html#mini-rf-条带",
-    "href": "docs/rois/ROI_049.html#mini-rf-条带",
-    "title": "ROI_049",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01777_2CD_EKU_17N334_V1\n官方\n\n\n轨道号\n1777\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-11-15T14:19:47\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.47°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.29°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,702 × 66,641 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.1 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_049.html#缩略图",
-    "href": "docs/rois/ROI_049.html#缩略图",
-    "title": "ROI_049",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 40.63 ~ 74.91\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -16.07 ~ -5.968 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_49/cropped/ce2/opt.tif、raw/ROI_49/cropped/ce2/sar.tif（4,094 × 33,394 像素），每 56 × 56 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_049.html#本页数字从哪来",
-    "href": "docs/rois/ROI_049.html#本页数字从哪来",
-    "title": "ROI_049",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_047.html",
-    "href": "docs/rois/ROI_047.html",
-    "title": "ROI_047",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n31\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_047/\n\n\n对齐控制点\ndata/tie-points/ROI_47/\n\n\n元数据表中的写法\nROI_47"
-  },
-  {
-    "objectID": "docs/rois/ROI_047.html#概况",
-    "href": "docs/rois/ROI_047.html#概况",
-    "title": "ROI_047",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n31\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_047/\n\n\n对齐控制点\ndata/tie-points/ROI_47/\n\n\n元数据表中的写法\nROI_47"
-  },
-  {
-    "objectID": "docs/rois/ROI_047.html#mini-rf-条带",
-    "href": "docs/rois/ROI_047.html#mini-rf-条带",
-    "title": "ROI_047",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02409_2CD_EKU_47S224_V1\n官方\n\n\n轨道号\n2409\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-01-04T06:55:03\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n54.92°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n86.87°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,728 × 7,329 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.7 m\n实测\n\n\n有效分辨率（方位向）\n18.9 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_047.html#缩略图",
-    "href": "docs/rois/ROI_047.html#缩略图",
-    "title": "ROI_047",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 37.94 ~ 94.93\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.41 ~ -6.274 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_47/cropped/ce2/opt.tif、raw/ROI_47/cropped/ce2/sar.tif（2,897 × 8,400 像素），每 14 × 14 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_047.html#本页数字从哪来",
-    "href": "docs/rois/ROI_047.html#本页数字从哪来",
-    "title": "ROI_047",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_045.html",
-    "href": "docs/rois/ROI_045.html",
-    "title": "ROI_045",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n58\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_045/\n\n\n对齐控制点\ndata/tie-points/ROI_45/\n\n\n元数据表中的写法\nROI_45"
-  },
-  {
-    "objectID": "docs/rois/ROI_045.html#概况",
-    "href": "docs/rois/ROI_045.html#概况",
-    "title": "ROI_045",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n58\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_045/\n\n\n对齐控制点\ndata/tie-points/ROI_45/\n\n\n元数据表中的写法\nROI_45"
-  },
-  {
-    "objectID": "docs/rois/ROI_045.html#mini-rf-条带",
-    "href": "docs/rois/ROI_045.html#mini-rf-条带",
-    "title": "ROI_045",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01395_2CD_EKU_13N009_V1\n官方\n\n\n轨道号\n1395\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-16T13:49:05\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n51.65°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n268.20°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,189 × 20,315 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.4 m\n实测\n\n\n有效分辨率（方位向）\n18.4 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_045.html#缩略图",
-    "href": "docs/rois/ROI_045.html#缩略图",
-    "title": "ROI_045",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 40.32 ~ 76.68\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -15.05 ~ -5.758 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_45/cropped/ce2/opt.tif、raw/ROI_45/cropped/ce2/sar.tif（2,574 × 19,145 像素），每 32 × 32 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_045.html#本页数字从哪来",
-    "href": "docs/rois/ROI_045.html#本页数字从哪来",
-    "title": "ROI_045",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_042.html",
-    "href": "docs/rois/ROI_042.html",
-    "title": "ROI_042",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n21\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_042/\n\n\n对齐控制点\ndata/tie-points/ROI_42/\n\n\n元数据表中的写法\nROI_42"
-  },
-  {
-    "objectID": "docs/rois/ROI_042.html#概况",
-    "href": "docs/rois/ROI_042.html#概况",
-    "title": "ROI_042",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n21\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_042/\n\n\n对齐控制点\ndata/tie-points/ROI_42/\n\n\n元数据表中的写法\nROI_42"
-  },
-  {
-    "objectID": "docs/rois/ROI_042.html#mini-rf-条带",
-    "href": "docs/rois/ROI_042.html#mini-rf-条带",
-    "title": "ROI_042",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_05032_2CD_EKU_50N208_V1\n官方\n\n\n轨道号\n5032\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-07-29T06:17:26\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n48.20°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n91.55°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n6,395 × 66,220 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n50.5 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_042.html#已知问题",
-    "href": "docs/rois/ROI_042.html#已知问题",
-    "title": "ROI_042",
+    "objectID": "docs/rois/ROI_054.html#已知问题",
+    "href": "docs/rois/ROI_054.html#已知问题",
+    "title": "ROI_054",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告SAR 距离向有效分辨率异常偏粗\n\n\n\n元数据表里距离向实测有效分辨率的中位数是 18.25 m；超过它的 2 倍（36.5 m）即标注于此。方位向没有这种现象。\n旧参考文档 DATA_REFERENCE.md §1.6 记的是 ROI_7、ROI_24、ROI_42、ROI_67、ROI_80 五个（43–51 m），并称「全在 Train」。按本仓库的元数据表：ROI_27 也超过判定线，ROI_7 属测试集、ROI_80 属验证集。两处出入尚未核对。旧文档的记录还有一句：这几条的入射角、视向、模式、投影、ppd 与其余条带没有区别，也不是低对比度场景造成的——原因未查明。\n本 ROI： 本 ROI 距离向 50.5 m，是中位数的 2.8 倍。\n同一条还涉及：ROI_007、ROI_024、ROI_027、ROI_067、ROI_080。\n出处：元数据表 data/metadata/minirf_metadata.csv 的「实测有效分辨率_距离向_m」列"
+    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n本 ROI： 测试集里唯一被归入此类的 ROI，重叠面积 86%。它的评测真值点标出的偏移是 dx 约 +17~90 px、dy 约 0，与检验结果方向一致。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_027、ROI_048、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）\n\n\n\n\n\n\n\n\n警告Mini-RF 目录里有两个 SAR 文件\n\n\n\nraw/ROI_54/minirf/ 里有两个 SAR 文件，旧代码按文件名排序取第一个。产物与旧版一致，说明当年用的也是这个，只是没有明确规定用哪个。\n出处：2026-09-11 数据核查会话\n\n\n\n\n\n\n\n\n警告与 ROI_017 的范围部分重叠\n\n\n\n与训练集的 ROI_017 范围重叠 57%，但 patch 级只有 17 个 patch 有重叠、且都不超过 16%，当时判断可接受。\n出处：旧参考文档 DATA_REFERENCE.md §4"
   },
   {
-    "objectID": "docs/rois/ROI_042.html#缩略图",
-    "href": "docs/rois/ROI_042.html#缩略图",
-    "title": "ROI_042",
+    "objectID": "docs/rois/ROI_054.html#缩略图",
+    "href": "docs/rois/ROI_054.html#缩略图",
+    "title": "ROI_054",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 46.91 ~ 149.8\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -15.77 ~ -6.333 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_42/cropped/ce2/opt.tif、raw/ROI_42/cropped/ce2/sar.tif（3,439 × 7,872 像素），每 14 × 14 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 77.99 ~ 129.2\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.79 ~ -4.499 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_54/cropped/ce2/opt.tif、raw/ROI_54/cropped/ce2/sar.tif（3,251 × 33,915 像素），每 57 × 57 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_042.html#本页数字从哪来",
-    "href": "docs/rois/ROI_042.html#本页数字从哪来",
-    "title": "ROI_042",
+    "objectID": "docs/rois/ROI_054.html#本页数字从哪来",
+    "href": "docs/rois/ROI_054.html#本页数字从哪来",
+    "title": "ROI_054",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_037.html",
-    "href": "docs/rois/ROI_037.html",
-    "title": "ROI_037",
+    "objectID": "docs/rois/ROI_052.html",
+    "href": "docs/rois/ROI_052.html",
+    "title": "ROI_052",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n159\n\n\n带评测真值点的 patch\n141 / 159（88.7%）\n\n\n评测真值点对数\n1,133\n\n\n产物目录\nProcessed_Data/Test/ROI_037/\n\n\n对齐控制点\ndata/tie-points/ROI_37/\n\n\n元数据表中的写法\nROI_37"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n170\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_052/\n\n\n对齐控制点\ndata/tie-points/ROI_52/\n\n\n元数据表中的写法\nROI_52"
   },
   {
-    "objectID": "docs/rois/ROI_037.html#概况",
-    "href": "docs/rois/ROI_037.html#概况",
-    "title": "ROI_037",
+    "objectID": "docs/rois/ROI_052.html#概况",
+    "href": "docs/rois/ROI_052.html#概况",
+    "title": "ROI_052",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n159\n\n\n带评测真值点的 patch\n141 / 159（88.7%）\n\n\n评测真值点对数\n1,133\n\n\n产物目录\nProcessed_Data/Test/ROI_037/\n\n\n对齐控制点\ndata/tie-points/ROI_37/\n\n\n元数据表中的写法\nROI_37"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n170\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_052/\n\n\n对齐控制点\ndata/tie-points/ROI_52/\n\n\n元数据表中的写法\nROI_52"
   },
   {
-    "objectID": "docs/rois/ROI_037.html#mini-rf-条带",
-    "href": "docs/rois/ROI_037.html#mini-rf-条带",
-    "title": "ROI_037",
+    "objectID": "docs/rois/ROI_052.html#mini-rf-条带",
+    "href": "docs/rois/ROI_052.html#mini-rf-条带",
+    "title": "ROI_052",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01790_2CD_EKU_15S319_V1\n官方\n\n\n轨道号\n1790\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-11-16T16:34:15\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.04°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n270.15°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,632 × 66,155 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.2 m\n实测\n\n\n有效分辨率（方位向）\n18.6 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02490_2CD_EKU_16N139_V1\n官方\n\n\n轨道号\n2490\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-01-10T15:12:15\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n48.80°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n90.92°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n4,066 × 65,753 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.0 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_037.html#已知问题",
-    "href": "docs/rois/ROI_037.html#已知问题",
-    "title": "ROI_037",
+    "objectID": "docs/rois/ROI_052.html#已知问题",
+    "href": "docs/rois/ROI_052.html#已知问题",
+    "title": "ROI_052",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告与 ROI_060 重复（ROI_060 已删除）\n\n\n\nROI_060 与本 ROI 是同一块地（同一条 Mini-RF 条带、同一幅 CE-2 分幅，152 个光学 patch 逐像素相同），2026-09-20 删除了 ROI_060、保留本 ROI。两边当年都做过评测真值点标注。\n出处：删除清单；旧参考文档 DATA_REFERENCE.md §4"
+    "text": "已知问题\n\n\n\n\n\n\n警告明显的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（在每对 patch 上找光学与 SAR 的可信匹配、量两者的相对偏移，每个 ROI 按编号等间隔抽 24 对）把这几个 ROI 归为「明显错位」：patch 对的重叠面积中位数 66%~79%。偏移几乎都在 x 方向（横跨条带），y 方向基本为 0；错位程度与该 ROI 对齐控制点的拟合残差对得上。\n这项检验只能当参考：它能证明一对 patch「是同一个地方」，证明不了「不是」。待本人复核。\n本 ROI： 对齐控制点中位拟合残差 96 px。\n同一条还涉及：ROI_008、ROI_016、ROI_025、ROI_050。\n出处：2026-09-11 数据核查会话（配对检验）"
   },
   {
-    "objectID": "docs/rois/ROI_037.html#缩略图",
-    "href": "docs/rois/ROI_037.html#缩略图",
-    "title": "ROI_037",
+    "objectID": "docs/rois/ROI_052.html#缩略图",
+    "href": "docs/rois/ROI_052.html#缩略图",
+    "title": "ROI_052",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 36.53 ~ 71.28\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.37 ~ -7.265 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_37/cropped/ce2/opt.tif、raw/ROI_37/cropped/ce2/sar.tif（3,094 × 34,429 像素），每 58 × 58 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 71.21 ~ 109.9\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.25 ~ -5.048 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_52/cropped/ce2/opt.tif、raw/ROI_52/cropped/ce2/sar.tif（4,780 × 28,874 像素），每 49 × 49 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_037.html#本页数字从哪来",
-    "href": "docs/rois/ROI_037.html#本页数字从哪来",
-    "title": "ROI_037",
+    "objectID": "docs/rois/ROI_052.html#本页数字从哪来",
+    "href": "docs/rois/ROI_052.html#本页数字从哪来",
+    "title": "ROI_052",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_034.html",
-    "href": "docs/rois/ROI_034.html",
-    "title": "ROI_034",
+    "objectID": "docs/rois/ROI_050.html",
+    "href": "docs/rois/ROI_050.html",
+    "title": "ROI_050",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n199\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_034/\n\n\n对齐控制点\ndata/tie-points/ROI_34/\n\n\n元数据表中的写法\nROI_34"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n160\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_050/\n\n\n对齐控制点\ndata/tie-points/ROI_50/\n\n\n元数据表中的写法\nROI_50"
   },
   {
-    "objectID": "docs/rois/ROI_034.html#概况",
-    "href": "docs/rois/ROI_034.html#概况",
-    "title": "ROI_034",
+    "objectID": "docs/rois/ROI_050.html#概况",
+    "href": "docs/rois/ROI_050.html#概况",
+    "title": "ROI_050",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n199\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_034/\n\n\n对齐控制点\ndata/tie-points/ROI_34/\n\n\n元数据表中的写法\nROI_34"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n160\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_050/\n\n\n对齐控制点\ndata/tie-points/ROI_50/\n\n\n元数据表中的写法\nROI_50"
   },
   {
-    "objectID": "docs/rois/ROI_034.html#mini-rf-条带",
-    "href": "docs/rois/ROI_034.html#mini-rf-条带",
-    "title": "ROI_034",
+    "objectID": "docs/rois/ROI_050.html#mini-rf-条带",
+    "href": "docs/rois/ROI_050.html#mini-rf-条带",
+    "title": "ROI_050",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02457_2CD_EKU_49S174_V1\n官方\n\n\n轨道号\n2457\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-01-08T01:22:33\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.72°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n87.52°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n6,071 × 32,998 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.8 m\n实测\n\n\n有效分辨率（方位向）\n18.3 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01552_2CD_EKU_18S206_V1\n官方\n\n\n轨道号\n1552\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-28T23:37:58\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n47.62°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.09°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,907 × 59,097 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.5 m\n实测\n\n\n有效分辨率（方位向）\n18.6 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_034.html#已知问题",
-    "href": "docs/rois/ROI_034.html#已知问题",
-    "title": "ROI_034",
+    "objectID": "docs/rois/ROI_050.html#已知问题",
+    "href": "docs/rois/ROI_050.html#已知问题",
+    "title": "ROI_050",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告一幅 CE-2 分幅的经度差了 180°\n\n\n\n该分幅的名字写的是东经 175°，按坐标算出来是西经 5°。现有产物与旧版逐像素一致；只有将来从原始数据重新对齐时才会碰到。\n出处：2026-09-11 数据核查会话"
+    "text": "已知问题\n\n\n\n\n\n\n警告明显的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（在每对 patch 上找光学与 SAR 的可信匹配、量两者的相对偏移，每个 ROI 按编号等间隔抽 24 对）把这几个 ROI 归为「明显错位」：patch 对的重叠面积中位数 66%~79%。偏移几乎都在 x 方向（横跨条带），y 方向基本为 0；错位程度与该 ROI 对齐控制点的拟合残差对得上。\n这项检验只能当参考：它能证明一对 patch「是同一个地方」，证明不了「不是」。待本人复核。\n本 ROI： SAR 相对光学整体偏移约 −136 px，约 1 km；对齐控制点中位拟合残差 130 px。\n同一条还涉及：ROI_008、ROI_016、ROI_025、ROI_052。\n出处：2026-09-11 数据核查会话（配对检验）"
   },
   {
-    "objectID": "docs/rois/ROI_034.html#缩略图",
-    "href": "docs/rois/ROI_034.html#缩略图",
-    "title": "ROI_034",
+    "objectID": "docs/rois/ROI_050.html#缩略图",
+    "href": "docs/rois/ROI_050.html#缩略图",
+    "title": "ROI_050",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 36.61 ~ 92.34\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -11.83 ~ -5.062 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_34/cropped/ce2/opt.tif、raw/ROI_34/cropped/ce2/sar.tif（7,191 × 17,599 像素），每 30 × 30 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 67.97 ~ 123.8\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.96 ~ -5.085 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_50/cropped/ce2/opt.tif、raw/ROI_50/cropped/ce2/sar.tif（3,215 × 33,394 像素），每 56 × 56 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_034.html#本页数字从哪来",
-    "href": "docs/rois/ROI_034.html#本页数字从哪来",
-    "title": "ROI_034",
+    "objectID": "docs/rois/ROI_050.html#本页数字从哪来",
+    "href": "docs/rois/ROI_050.html#本页数字从哪来",
+    "title": "ROI_050",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_031.html",
-    "href": "docs/rois/ROI_031.html",
-    "title": "ROI_031",
+    "objectID": "docs/rois/ROI_048.html",
+    "href": "docs/rois/ROI_048.html",
+    "title": "ROI_048",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n149\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_031/\n\n\n对齐控制点\ndata/tie-points/ROI_31/\n\n\n元数据表中的写法\nROI_31"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n24\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_048/\n\n\n对齐控制点\ndata/tie-points/ROI_48/\n\n\n元数据表中的写法\nROI_48"
   },
   {
-    "objectID": "docs/rois/ROI_031.html#概况",
-    "href": "docs/rois/ROI_031.html#概况",
-    "title": "ROI_031",
+    "objectID": "docs/rois/ROI_048.html#概况",
+    "href": "docs/rois/ROI_048.html#概况",
+    "title": "ROI_048",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n149\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_031/\n\n\n对齐控制点\ndata/tie-points/ROI_31/\n\n\n元数据表中的写法\nROI_31"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n24\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_048/\n\n\n对齐控制点\ndata/tie-points/ROI_48/\n\n\n元数据表中的写法\nROI_48"
   },
   {
-    "objectID": "docs/rois/ROI_031.html#mini-rf-条带",
-    "href": "docs/rois/ROI_031.html#mini-rf-条带",
-    "title": "ROI_031",
+    "objectID": "docs/rois/ROI_048.html#mini-rf-条带",
+    "href": "docs/rois/ROI_048.html#mini-rf-条带",
+    "title": "ROI_048",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02174_2CD_EKU_36N282_V1\n官方\n\n\n轨道号\n2174\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-12-16T18:53:05\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.87°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n268.88°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,935 × 50,089 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n17.7 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01541_2CD_EKU_03S218_V1\n官方\n\n\n轨道号\n1541\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-28T02:57:52\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n45.52°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.89°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,908 × 59,151 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.2 m\n实测\n\n\n有效分辨率（方位向）\n18.4 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_031.html#缩略图",
-    "href": "docs/rois/ROI_031.html#缩略图",
-    "title": "ROI_031",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 36.97 ~ 78.97\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -15.69 ~ -6.839 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_31/cropped/ce2/opt.tif、raw/ROI_31/cropped/ce2/sar.tif（2,848 × 35,734 像素），每 60 × 60 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_031.html#本页数字从哪来",
-    "href": "docs/rois/ROI_031.html#本页数字从哪来",
-    "title": "ROI_031",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_027.html",
-    "href": "docs/rois/ROI_027.html",
-    "title": "ROI_027",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n234\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_027/\n\n\n对齐控制点\ndata/tie-points/ROI_27/\n\n\n元数据表中的写法\nROI_27"
-  },
-  {
-    "objectID": "docs/rois/ROI_027.html#概况",
-    "href": "docs/rois/ROI_027.html#概况",
-    "title": "ROI_027",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n234\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_027/\n\n\n对齐控制点\ndata/tie-points/ROI_27/\n\n\n元数据表中的写法\nROI_27"
-  },
-  {
-    "objectID": "docs/rois/ROI_027.html#mini-rf-条带",
-    "href": "docs/rois/ROI_027.html#mini-rf-条带",
-    "title": "ROI_027",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04477_2CD_EKU_63S237_V1\n官方\n\n\n轨道号\n4477\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-15T17:17:29\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n48.90°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n271.87°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n12,922 × 66,151 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n54.9 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_027.html#已知问题",
-    "href": "docs/rois/ROI_027.html#已知问题",
-    "title": "ROI_027",
+    "objectID": "docs/rois/ROI_048.html#已知问题",
+    "href": "docs/rois/ROI_048.html#已知问题",
+    "title": "ROI_048",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_048、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）\n\n\n\n\n\n\n\n\n警告编号缺 95、98、99\n\n\n\n这三个 patch 是纯色废块（据作者回忆，是光照原因基本全黑），已丢弃，所以本 ROI 的编号不连续。窗口清单里与之对应的是 3 个 unresolved。读数据时请直接列目录，不要假设编号连续。\n出处：旧迁移记录 MIGRATION.md 末尾；2026-09-11 数据核查会话；作者回忆\n\n\n\n\n\n\n\n\n警告SAR 距离向有效分辨率异常偏粗\n\n\n\n元数据表里距离向实测有效分辨率的中位数是 18.25 m；超过它的 2 倍（36.5 m）即标注于此。方位向没有这种现象。\n旧参考文档 DATA_REFERENCE.md §1.6 记的是 ROI_7、ROI_24、ROI_42、ROI_67、ROI_80 五个（43–51 m），并称「全在 Train」。按本仓库的元数据表：ROI_27 也超过判定线，ROI_7 属测试集、ROI_80 属验证集。两处出入尚未核对。旧文档的记录还有一句：这几条的入射角、视向、模式、投影、ppd 与其余条带没有区别，也不是低对比度场景造成的——原因未查明。\n本 ROI： 本 ROI 距离向 54.9 m，是中位数的 3.0 倍。\n同一条还涉及：ROI_007、ROI_024、ROI_042、ROI_067、ROI_080。\n出处：元数据表 data/metadata/minirf_metadata.csv 的「实测有效分辨率_距离向_m」列"
+    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_027、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
   },
   {
-    "objectID": "docs/rois/ROI_027.html#缩略图",
-    "href": "docs/rois/ROI_027.html#缩略图",
-    "title": "ROI_027",
+    "objectID": "docs/rois/ROI_048.html#缩略图",
+    "href": "docs/rois/ROI_048.html#缩略图",
+    "title": "ROI_048",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 1 ~ 140.6\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -17.78 ~ -6.972 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_27/cropped/ce2/opt.tif、raw/ROI_27/cropped/ce2/sar.tif（6,949 × 39,190 像素），每 66 × 66 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 85.75 ~ 124\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.36 ~ -6.514 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_48/cropped/ce2/opt.tif、raw/ROI_48/cropped/ce2/sar.tif（1,287 × 18,896 像素），每 32 × 32 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_027.html#本页数字从哪来",
-    "href": "docs/rois/ROI_027.html#本页数字从哪来",
-    "title": "ROI_027",
+    "objectID": "docs/rois/ROI_048.html#本页数字从哪来",
+    "href": "docs/rois/ROI_048.html#本页数字从哪来",
+    "title": "ROI_048",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_025.html",
-    "href": "docs/rois/ROI_025.html",
-    "title": "ROI_025",
+    "objectID": "docs/rois/ROI_046.html",
+    "href": "docs/rois/ROI_046.html",
+    "title": "ROI_046",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n222\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_025/\n\n\n对齐控制点\ndata/tie-points/ROI_25/\n\n\n元数据表中的写法\nROI_25"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n165\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_046/\n\n\n对齐控制点\ndata/tie-points/ROI_46/\n\n\n元数据表中的写法\nROI_46"
   },
   {
-    "objectID": "docs/rois/ROI_025.html#概况",
-    "href": "docs/rois/ROI_025.html#概况",
-    "title": "ROI_025",
+    "objectID": "docs/rois/ROI_046.html#概况",
+    "href": "docs/rois/ROI_046.html#概况",
+    "title": "ROI_046",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n222\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_025/\n\n\n对齐控制点\ndata/tie-points/ROI_25/\n\n\n元数据表中的写法\nROI_25"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n165\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_046/\n\n\n对齐控制点\ndata/tie-points/ROI_46/\n\n\n元数据表中的写法\nROI_46"
   },
   {
-    "objectID": "docs/rois/ROI_025.html#mini-rf-条带",
-    "href": "docs/rois/ROI_025.html#mini-rf-条带",
-    "title": "ROI_025",
+    "objectID": "docs/rois/ROI_046.html#mini-rf-条带",
+    "href": "docs/rois/ROI_046.html#mini-rf-条带",
+    "title": "ROI_046",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04784_2CD_EKU_66S104_V1\n官方\n\n\n轨道号\n4784\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-07-09T20:07:06\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n49.50°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n87.83°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n13,881 × 66,004 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n17.1 m\n实测\n\n\n有效分辨率（方位向）\n17.9 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02674_2CD_EKU_42S309_V1\n官方\n\n\n轨道号\n2674\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-01-25T02:21:07\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n51.48°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n88.55°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n5,353 × 66,264 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n19.3 m\n实测\n\n\n有效分辨率（方位向）\n18.6 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_025.html#已知问题",
-    "href": "docs/rois/ROI_025.html#已知问题",
-    "title": "ROI_025",
+    "objectID": "docs/rois/ROI_046.html#缩略图",
+    "href": "docs/rois/ROI_046.html#缩略图",
+    "title": "ROI_046",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 48 ~ 122.6\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.73 ~ -5.125 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_46/cropped/ce2/opt.tif、raw/ROI_46/cropped/ce2/sar.tif（5,194 × 35,734 像素），每 60 × 60 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_046.html#本页数字从哪来",
+    "href": "docs/rois/ROI_046.html#本页数字从哪来",
+    "title": "ROI_046",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_043.html",
+    "href": "docs/rois/ROI_043.html",
+    "title": "ROI_043",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n48\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_043/\n\n\n对齐控制点\ndata/tie-points/ROI_43/\n\n\n元数据表中的写法\nROI_43"
+  },
+  {
+    "objectID": "docs/rois/ROI_043.html#概况",
+    "href": "docs/rois/ROI_043.html#概况",
+    "title": "ROI_043",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n48\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_043/\n\n\n对齐控制点\ndata/tie-points/ROI_43/\n\n\n元数据表中的写法\nROI_43"
+  },
+  {
+    "objectID": "docs/rois/ROI_043.html#mini-rf-条带",
+    "href": "docs/rois/ROI_043.html#mini-rf-条带",
+    "title": "ROI_043",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01371_2CD_EKU_23N034_V1\n官方\n\n\n轨道号\n1371\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-14T16:37:17\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.81°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.18°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,434 × 13,660 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.4 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_043.html#缩略图",
+    "href": "docs/rois/ROI_043.html#缩略图",
+    "title": "ROI_043",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 56.09 ~ 119.3\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.84 ~ -4.066 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_43/cropped/ce2/opt.tif、raw/ROI_43/cropped/ce2/sar.tif（2,692 × 15,816 像素），每 27 × 27 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_043.html#本页数字从哪来",
+    "href": "docs/rois/ROI_043.html#本页数字从哪来",
+    "title": "ROI_043",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_038.html",
+    "href": "docs/rois/ROI_038.html",
+    "title": "ROI_038",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n64\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_038/\n\n\n对齐控制点\ndata/tie-points/ROI_38/\n\n\n元数据表中的写法\nROI_38"
+  },
+  {
+    "objectID": "docs/rois/ROI_038.html#概况",
+    "href": "docs/rois/ROI_038.html#概况",
+    "title": "ROI_038",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n64\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_038/\n\n\n对齐控制点\ndata/tie-points/ROI_38/\n\n\n元数据表中的写法\nROI_38"
+  },
+  {
+    "objectID": "docs/rois/ROI_038.html#mini-rf-条带",
+    "href": "docs/rois/ROI_038.html#mini-rf-条带",
+    "title": "ROI_038",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01437_2CD_EKU_34N326_V1\n官方\n\n\n轨道号\n1437\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-19T21:07:18\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.26°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n267.46°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,294 × 30,291 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n19.1 m\n实测\n\n\n有效分辨率（方位向）\n18.5 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_038.html#已知问题",
+    "href": "docs/rois/ROI_038.html#已知问题",
+    "title": "ROI_038",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告明显的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（在每对 patch 上找光学与 SAR 的可信匹配、量两者的相对偏移，每个 ROI 按编号等间隔抽 24 对）把这几个 ROI 归为「明显错位」：patch 对的重叠面积中位数 66%~79%。偏移几乎都在 x 方向（横跨条带），y 方向基本为 0；错位程度与该 ROI 对齐控制点的拟合残差对得上。\n这项检验只能当参考：它能证明一对 patch「是同一个地方」，证明不了「不是」。待本人复核。\n本 ROI： 对齐控制点中位拟合残差 92 px。\n同一条还涉及：ROI_008、ROI_016、ROI_050、ROI_052。\n出处：2026-09-11 数据核查会话（配对检验）"
+    "text": "已知问题\n\n\n\n\n\n\n警告与 ROI_071 的范围部分重叠\n\n\n\n与验证集的 ROI_071 范围重叠 17.5%，patch 级零重叠。\n出处：旧参考文档 DATA_REFERENCE.md §4"
   },
   {
-    "objectID": "docs/rois/ROI_025.html#缩略图",
-    "href": "docs/rois/ROI_025.html#缩略图",
-    "title": "ROI_025",
+    "objectID": "docs/rois/ROI_038.html#缩略图",
+    "href": "docs/rois/ROI_038.html#缩略图",
+    "title": "ROI_038",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 24 ~ 138.8\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -16.11 ~ -6.057 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_25/cropped/ce2/opt.tif、raw/ROI_25/cropped/ce2/sar.tif（4,033 × 39,190 像素），每 66 × 66 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 38.2 ~ 51.05\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.52 ~ -7.014 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_38/cropped/ce2/opt.tif、raw/ROI_38/cropped/ce2/sar.tif（3,196 × 20,085 像素），每 34 × 34 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_025.html#本页数字从哪来",
-    "href": "docs/rois/ROI_025.html#本页数字从哪来",
-    "title": "ROI_025",
+    "objectID": "docs/rois/ROI_038.html#本页数字从哪来",
+    "href": "docs/rois/ROI_038.html#本页数字从哪来",
+    "title": "ROI_038",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_023.html",
-    "href": "docs/rois/ROI_023.html",
-    "title": "ROI_023",
+    "objectID": "docs/rois/ROI_035.html",
+    "href": "docs/rois/ROI_035.html",
+    "title": "ROI_035",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n175\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_023/\n\n\n对齐控制点\ndata/tie-points/ROI_23/\n\n\n元数据表中的写法\nROI_23"
+    "text": "项\n值\n\n\n\n\n所属划分\n验证集（Val）\n\n\npatch 对\n214\n\n\n带评测真值点的 patch\n172 / 214（80.4%）\n\n\n评测真值点对数\n1,383\n\n\n产物目录\nProcessed_Data/Val/ROI_035/\n\n\n对齐控制点\ndata/tie-points/ROI_35/\n\n\n元数据表中的写法\nROI_35"
   },
   {
-    "objectID": "docs/rois/ROI_023.html#概况",
-    "href": "docs/rois/ROI_023.html#概况",
-    "title": "ROI_023",
+    "objectID": "docs/rois/ROI_035.html#概况",
+    "href": "docs/rois/ROI_035.html#概况",
+    "title": "ROI_035",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n175\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_023/\n\n\n对齐控制点\ndata/tie-points/ROI_23/\n\n\n元数据表中的写法\nROI_23"
+    "text": "项\n值\n\n\n\n\n所属划分\n验证集（Val）\n\n\npatch 对\n214\n\n\n带评测真值点的 patch\n172 / 214（80.4%）\n\n\n评测真值点对数\n1,383\n\n\n产物目录\nProcessed_Data/Val/ROI_035/\n\n\n对齐控制点\ndata/tie-points/ROI_35/\n\n\n元数据表中的写法\nROI_35"
   },
   {
-    "objectID": "docs/rois/ROI_023.html#mini-rf-条带",
-    "href": "docs/rois/ROI_023.html#mini-rf-条带",
-    "title": "ROI_023",
+    "objectID": "docs/rois/ROI_035.html#mini-rf-条带",
+    "href": "docs/rois/ROI_035.html#mini-rf-条带",
+    "title": "ROI_035",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04730_2CD_EKU_35N160_V1\n官方\n\n\n轨道号\n4730\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-07-05T12:59:36\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.70°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n91.37°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n4,679 × 65,317 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.0 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02858_2CD_EKU_21S118_V1\n官方\n\n\n轨道号\n2858\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-02-08T13:07:14\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.97°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n88.37°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n4,273 × 65,234 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.2 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_023.html#已知问题",
-    "href": "docs/rois/ROI_023.html#已知问题",
-    "title": "ROI_023",
+    "objectID": "docs/rois/ROI_035.html#缩略图",
+    "href": "docs/rois/ROI_035.html#缩略图",
+    "title": "ROI_035",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 54.08 ~ 113.8\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -11.89 ~ -5.284 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_35/cropped/ce2/opt.tif、raw/ROI_35/cropped/ce2/sar.tif（4,725 × 35,001 像素），每 59 × 59 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_035.html#本页数字从哪来",
+    "href": "docs/rois/ROI_035.html#本页数字从哪来",
+    "title": "ROI_035",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_033.html",
+    "href": "docs/rois/ROI_033.html",
+    "title": "ROI_033",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n269\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_033/\n\n\n对齐控制点\ndata/tie-points/ROI_33/\n\n\n元数据表中的写法\nROI_33"
+  },
+  {
+    "objectID": "docs/rois/ROI_033.html#概况",
+    "href": "docs/rois/ROI_033.html#概况",
+    "title": "ROI_033",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n269\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_033/\n\n\n对齐控制点\ndata/tie-points/ROI_33/\n\n\n元数据表中的写法\nROI_33"
+  },
+  {
+    "objectID": "docs/rois/ROI_033.html#mini-rf-条带",
+    "href": "docs/rois/ROI_033.html#mini-rf-条带",
+    "title": "ROI_033",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04611_2CD_EKU_51S097_V1\n官方\n\n\n轨道号\n4611\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-26T05:43:11\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n51.70°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n271.89°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n8,030 × 65,188 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.9 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_033.html#缩略图",
+    "href": "docs/rois/ROI_033.html#缩略图",
+    "title": "ROI_033",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 43.92 ~ 102.6\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -11.77 ~ -5.604 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_33/cropped/ce2/opt.tif、raw/ROI_33/cropped/ce2/sar.tif（6,240 × 36,859 像素），每 62 × 62 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_033.html#本页数字从哪来",
+    "href": "docs/rois/ROI_033.html#本页数字从哪来",
+    "title": "ROI_033",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_030.html",
+    "href": "docs/rois/ROI_030.html",
+    "title": "ROI_030",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n74\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_030/\n\n\n对齐控制点\ndata/tie-points/ROI_30/\n\n\n元数据表中的写法\nROI_30"
+  },
+  {
+    "objectID": "docs/rois/ROI_030.html#概况",
+    "href": "docs/rois/ROI_030.html#概况",
+    "title": "ROI_030",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n74\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_030/\n\n\n对齐控制点\ndata/tie-points/ROI_30/\n\n\n元数据表中的写法\nROI_30"
+  },
+  {
+    "objectID": "docs/rois/ROI_030.html#mini-rf-条带",
+    "href": "docs/rois/ROI_030.html#mini-rf-条带",
+    "title": "ROI_030",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_06689_2CD_EKU_47N288_V1\n官方\n\n\n轨道号\n6689\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-12-06T09:14:59\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n51.04°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.13°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,846 × 26,903 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.6 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_030.html#缩略图",
+    "href": "docs/rois/ROI_030.html#缩略图",
+    "title": "ROI_030",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 39.04 ~ 66.11\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.76 ~ -6.631 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_30/cropped/ce2/opt.tif、raw/ROI_30/cropped/ce2/sar.tif（2,212 × 23,187 像素），每 39 × 39 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_030.html#本页数字从哪来",
+    "href": "docs/rois/ROI_030.html#本页数字从哪来",
+    "title": "ROI_030",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_026.html",
+    "href": "docs/rois/ROI_026.html",
+    "title": "ROI_026",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n190\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_026/\n\n\n对齐控制点\ndata/tie-points/ROI_26/\n\n\n元数据表中的写法\nROI_26"
+  },
+  {
+    "objectID": "docs/rois/ROI_026.html#概况",
+    "href": "docs/rois/ROI_026.html#概况",
+    "title": "ROI_026",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n190\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_026/\n\n\n对齐控制点\ndata/tie-points/ROI_26/\n\n\n元数据表中的写法\nROI_26"
+  },
+  {
+    "objectID": "docs/rois/ROI_026.html#mini-rf-条带",
+    "href": "docs/rois/ROI_026.html#mini-rf-条带",
+    "title": "ROI_026",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02769_2CD_EKU_02N210_V1\n官方\n\n\n轨道号\n2769\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-02-01T13:13:39\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n46.92°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n90.23°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,423 × 65,169 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.4 m\n实测\n\n\n有效分辨率（方位向）\n18.5 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_026.html#已知问题",
+    "href": "docs/rois/ROI_026.html#已知问题",
+    "title": "ROI_026",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_026、ROI_027、ROI_048、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
+    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_027、ROI_048、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
   },
   {
-    "objectID": "docs/rois/ROI_023.html#缩略图",
-    "href": "docs/rois/ROI_023.html#缩略图",
-    "title": "ROI_023",
+    "objectID": "docs/rois/ROI_026.html#缩略图",
+    "href": "docs/rois/ROI_026.html#缩略图",
+    "title": "ROI_026",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 67.56 ~ 114.2\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -12.14 ~ -5.481 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_23/cropped/ce2/opt.tif、raw/ROI_23/cropped/ce2/sar.tif（4,540 × 32,793 像素），每 55 × 55 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 76.05 ~ 124.5\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.35 ~ -4.272 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_26/cropped/ce2/opt.tif、raw/ROI_26/cropped/ce2/sar.tif（4,024 × 33,916 像素），每 57 × 57 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_023.html#本页数字从哪来",
-    "href": "docs/rois/ROI_023.html#本页数字从哪来",
-    "title": "ROI_023",
+    "objectID": "docs/rois/ROI_026.html#本页数字从哪来",
+    "href": "docs/rois/ROI_026.html#本页数字从哪来",
+    "title": "ROI_026",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_020.html",
-    "href": "docs/rois/ROI_020.html",
-    "title": "ROI_020",
+    "objectID": "docs/rois/ROI_024.html",
+    "href": "docs/rois/ROI_024.html",
+    "title": "ROI_024",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n112\n\n\n带评测真值点的 patch\n91 / 112（81.2%）\n\n\n评测真值点对数\n739\n\n\n产物目录\nProcessed_Data/Test/ROI_020/\n\n\n对齐控制点\ndata/tie-points/ROI_20/\n\n\n元数据表中的写法\nROI_20"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n239\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_024/\n\n\n对齐控制点\ndata/tie-points/ROI_24/\n\n\n元数据表中的写法\nROI_24"
   },
   {
-    "objectID": "docs/rois/ROI_020.html#概况",
-    "href": "docs/rois/ROI_020.html#概况",
-    "title": "ROI_020",
+    "objectID": "docs/rois/ROI_024.html#概况",
+    "href": "docs/rois/ROI_024.html#概况",
+    "title": "ROI_024",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n112\n\n\n带评测真值点的 patch\n91 / 112（81.2%）\n\n\n评测真值点对数\n739\n\n\n产物目录\nProcessed_Data/Test/ROI_020/\n\n\n对齐控制点\ndata/tie-points/ROI_20/\n\n\n元数据表中的写法\nROI_20"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n239\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_024/\n\n\n对齐控制点\ndata/tie-points/ROI_24/\n\n\n元数据表中的写法\nROI_24"
   },
   {
-    "objectID": "docs/rois/ROI_020.html#mini-rf-条带",
-    "href": "docs/rois/ROI_020.html#mini-rf-条带",
-    "title": "ROI_020",
+    "objectID": "docs/rois/ROI_024.html#mini-rf-条带",
+    "href": "docs/rois/ROI_024.html#mini-rf-条带",
+    "title": "ROI_024",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04399_2CD_EKU_50S318_V1\n官方\n\n\n轨道号\n4399\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-09T14:11:37\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n49.39°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n271.86°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n6,873 × 66,561 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n17.2 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_03254_2CD_EKU_55S070_V1\n官方\n\n\n轨道号\n3254\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-03-11T15:47:51\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.39°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n86.66°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n11,152 × 49,291 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n37.9 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_020.html#缩略图",
-    "href": "docs/rois/ROI_020.html#缩略图",
-    "title": "ROI_020",
+    "objectID": "docs/rois/ROI_024.html#缩略图",
+    "href": "docs/rois/ROI_024.html#缩略图",
+    "title": "ROI_024",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 59 ~ 99.98\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.51 ~ -5.649 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_20/cropped/ce2/opt.tif、raw/ROI_20/cropped/ce2/sar.tif（5,341 × 31,991 像素），每 54 × 54 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 36.99 ~ 117.5\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -12.75 ~ -3.823 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_24/cropped/ce2/opt.tif、raw/ROI_24/cropped/ce2/sar.tif（8,666 × 36,859 像素），每 62 × 62 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_020.html#本页数字从哪来",
-    "href": "docs/rois/ROI_020.html#本页数字从哪来",
-    "title": "ROI_020",
+    "objectID": "docs/rois/ROI_024.html#本页数字从哪来",
+    "href": "docs/rois/ROI_024.html#本页数字从哪来",
+    "title": "ROI_024",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_017.html",
-    "href": "docs/rois/ROI_017.html",
-    "title": "ROI_017",
+    "objectID": "docs/rois/ROI_021.html",
+    "href": "docs/rois/ROI_021.html",
+    "title": "ROI_021",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n213\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_017/\n\n\n对齐控制点\ndata/tie-points/ROI_17/\n\n\n元数据表中的写法\nROI_17"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n108\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_021/\n\n\n对齐控制点\ndata/tie-points/ROI_21/\n\n\n元数据表中的写法\nROI_21"
   },
   {
-    "objectID": "docs/rois/ROI_017.html#概况",
-    "href": "docs/rois/ROI_017.html#概况",
-    "title": "ROI_017",
+    "objectID": "docs/rois/ROI_021.html#概况",
+    "href": "docs/rois/ROI_021.html#概况",
+    "title": "ROI_021",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n213\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_017/\n\n\n对齐控制点\ndata/tie-points/ROI_17/\n\n\n元数据表中的写法\nROI_17"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n108\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_021/\n\n\n对齐控制点\ndata/tie-points/ROI_21/\n\n\n元数据表中的写法\nROI_21"
   },
   {
-    "objectID": "docs/rois/ROI_017.html#mini-rf-条带",
-    "href": "docs/rois/ROI_017.html#mini-rf-条带",
-    "title": "ROI_017",
+    "objectID": "docs/rois/ROI_021.html#mini-rf-条带",
+    "href": "docs/rois/ROI_021.html#mini-rf-条带",
+    "title": "ROI_021",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02399_2CD_EKU_07S233_V1\n官方\n\n\n轨道号\n2399\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-01-03T11:49:06\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n47.76°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n89.37°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,196 × 65,293 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.1 m\n实测\n\n\n有效分辨率（方位向）\n18.4 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_03028_2CD_EKU_00S302_V1\n官方\n\n\n轨道号\n3028\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-02-21T21:24:18\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.40°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n89.94°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,124 × 66,295 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.2 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_017.html#已知问题",
-    "href": "docs/rois/ROI_017.html#已知问题",
-    "title": "ROI_017",
+    "objectID": "docs/rois/ROI_021.html#缩略图",
+    "href": "docs/rois/ROI_021.html#缩略图",
+    "title": "ROI_021",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 34.71 ~ 47.87\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.3 ~ -5.974 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_21/cropped/ce2/opt.tif、raw/ROI_21/cropped/ce2/sar.tif（2,497 × 33,916 像素），每 57 × 57 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_021.html#本页数字从哪来",
+    "href": "docs/rois/ROI_021.html#本页数字从哪来",
+    "title": "ROI_021",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_018.html",
+    "href": "docs/rois/ROI_018.html",
+    "title": "ROI_018",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n117\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_018/\n\n\n对齐控制点\ndata/tie-points/ROI_18/\n\n\n元数据表中的写法\nROI_18"
+  },
+  {
+    "objectID": "docs/rois/ROI_018.html#概况",
+    "href": "docs/rois/ROI_018.html#概况",
+    "title": "ROI_018",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n117\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_018/\n\n\n对齐控制点\ndata/tie-points/ROI_18/\n\n\n元数据表中的写法\nROI_18"
+  },
+  {
+    "objectID": "docs/rois/ROI_018.html#mini-rf-条带",
+    "href": "docs/rois/ROI_018.html#mini-rf-条带",
+    "title": "ROI_018",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04349_2CD_EKU_50S009_V1\n官方\n\n\n轨道号\n4349\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-05T15:57:48\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.40°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n272.83°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n9,039 × 66,104 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n17.0 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_018.html#缩略图",
+    "href": "docs/rois/ROI_018.html#缩略图",
+    "title": "ROI_018",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 68.66 ~ 153.3\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.3 ~ -5.59 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_18/cropped/ce2/opt.tif、raw/ROI_18/cropped/ce2/sar.tif（7,024 × 31,343 像素），每 53 × 53 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_018.html#本页数字从哪来",
+    "href": "docs/rois/ROI_018.html#本页数字从哪来",
+    "title": "ROI_018",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_016.html",
+    "href": "docs/rois/ROI_016.html",
+    "title": "ROI_016",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n265\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_016/\n\n\n对齐控制点\ndata/tie-points/ROI_16/\n\n\n元数据表中的写法\nROI_16"
+  },
+  {
+    "objectID": "docs/rois/ROI_016.html#概况",
+    "href": "docs/rois/ROI_016.html#概况",
+    "title": "ROI_016",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n265\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_016/\n\n\n对齐控制点\ndata/tie-points/ROI_16/\n\n\n元数据表中的写法\nROI_16"
+  },
+  {
+    "objectID": "docs/rois/ROI_016.html#mini-rf-条带",
+    "href": "docs/rois/ROI_016.html#mini-rf-条带",
+    "title": "ROI_016",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04363_2CD_EKU_66S352_V1\n官方\n\n\n轨道号\n4363\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-06T18:26:02\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n49.95°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n274.65°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n21,282 × 65,900 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.0 m\n实测\n\n\n有效分辨率（方位向）\n18.5 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_016.html#已知问题",
+    "href": "docs/rois/ROI_016.html#已知问题",
+    "title": "ROI_016",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告与 ROI_054 的范围部分重叠\n\n\n\n与测试集的 ROI_054 范围重叠 57%，但 patch 级只有 17 个 patch 有重叠、且都不超过 16%，当时判断可接受。\n出处：旧参考文档 DATA_REFERENCE.md §4"
+    "text": "已知问题\n\n\n\n\n\n\n警告明显的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（在每对 patch 上找光学与 SAR 的可信匹配、量两者的相对偏移，每个 ROI 按编号等间隔抽 24 对）把这几个 ROI 归为「明显错位」：patch 对的重叠面积中位数 66%~79%。偏移几乎都在 x 方向（横跨条带），y 方向基本为 0；错位程度与该 ROI 对齐控制点的拟合残差对得上。\n这项检验只能当参考：它能证明一对 patch「是同一个地方」，证明不了「不是」。待本人复核。\n本 ROI： 对齐控制点中位拟合残差 128 px。\n同一条还涉及：ROI_008、ROI_025、ROI_050、ROI_052。\n出处：2026-09-11 数据核查会话（配对检验）"
   },
   {
-    "objectID": "docs/rois/ROI_017.html#缩略图",
-    "href": "docs/rois/ROI_017.html#缩略图",
-    "title": "ROI_017",
+    "objectID": "docs/rois/ROI_016.html#缩略图",
+    "href": "docs/rois/ROI_016.html#缩略图",
+    "title": "ROI_016",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 79.24 ~ 120.7\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -12.61 ~ -4.714 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_17/cropped/ce2/opt.tif、raw/ROI_17/cropped/ce2/sar.tif（3,757 × 36,396 像素），每 61 × 61 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 1 ~ 165.1\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -15.35 ~ -4.649 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_16/cropped/ce2/opt.tif、raw/ROI_16/cropped/ce2/sar.tif（11,444 × 39,190 像素），每 66 × 66 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_017.html#本页数字从哪来",
-    "href": "docs/rois/ROI_017.html#本页数字从哪来",
-    "title": "ROI_017",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_015.html",
-    "href": "docs/rois/ROI_015.html",
-    "title": "ROI_015",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n98\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_015/\n\n\n对齐控制点\ndata/tie-points/ROI_15/\n\n\n元数据表中的写法\nROI_15"
-  },
-  {
-    "objectID": "docs/rois/ROI_015.html#概况",
-    "href": "docs/rois/ROI_015.html#概况",
-    "title": "ROI_015",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n98\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_015/\n\n\n对齐控制点\ndata/tie-points/ROI_15/\n\n\n元数据表中的写法\nROI_15"
-  },
-  {
-    "objectID": "docs/rois/ROI_015.html#mini-rf-条带",
-    "href": "docs/rois/ROI_015.html#mini-rf-条带",
-    "title": "ROI_015",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_06680_2CD_EKU_58N297_V1\n官方\n\n\n轨道号\n6680\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-12-05T16:17:34\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.05°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n268.73°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n8,401 × 99,601 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.2 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_015.html#已知问题",
-    "href": "docs/rois/ROI_015.html#已知问题",
-    "title": "ROI_015",
-    "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_023、ROI_026、ROI_027、ROI_048、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
-  },
-  {
-    "objectID": "docs/rois/ROI_015.html#缩略图",
-    "href": "docs/rois/ROI_015.html#缩略图",
-    "title": "ROI_015",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 31.45 ~ 121.1\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -18 ~ -5.44 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_15/cropped/ce2/opt.tif、raw/ROI_15/cropped/ce2/sar.tif（4,518 × 30,679 像素），每 52 × 52 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_015.html#本页数字从哪来",
-    "href": "docs/rois/ROI_015.html#本页数字从哪来",
-    "title": "ROI_015",
+    "objectID": "docs/rois/ROI_016.html#本页数字从哪来",
+    "href": "docs/rois/ROI_016.html#本页数字从哪来",
+    "title": "ROI_016",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
@@ -1290,13 +1229,6 @@
     "title": "ROI_007",
     "section": "Mini-RF 条带",
     "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_05098_2CD_EKU_50N140_V1\n官方\n\n\n轨道号\n5098\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-08-03T10:40:37\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.66°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n92.54°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n9,101 × 65,408 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n52.6 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_007.html#已知问题",
-    "href": "docs/rois/ROI_007.html#已知问题",
-    "title": "ROI_007",
-    "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告SAR 距离向有效分辨率异常偏粗\n\n\n\n元数据表里距离向实测有效分辨率的中位数是 18.25 m；超过它的 2 倍（36.5 m）即标注于此。方位向没有这种现象。\n旧参考文档 DATA_REFERENCE.md §1.6 记的是 ROI_7、ROI_24、ROI_42、ROI_67、ROI_80 五个（43–51 m），并称「全在 Train」。按本仓库的元数据表：ROI_27 也超过判定线，ROI_7 属测试集、ROI_80 属验证集。两处出入尚未核对。旧文档的记录还有一句：这几条的入射角、视向、模式、投影、ppd 与其余条带没有区别，也不是低对比度场景造成的——原因未查明。\n本 ROI： 本 ROI 距离向 52.6 m，是中位数的 2.9 倍。\n同一条还涉及：ROI_024、ROI_027、ROI_042、ROI_067、ROI_080。\n出处：元数据表 data/metadata/minirf_metadata.csv 的「实测有效分辨率_距离向_m」列"
   },
   {
     "objectID": "docs/rois/ROI_007.html#缩略图",
@@ -1866,730 +1798,695 @@
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_014.html",
-    "href": "docs/rois/ROI_014.html",
-    "title": "ROI_014",
+    "objectID": "docs/rois/ROI_015.html",
+    "href": "docs/rois/ROI_015.html",
+    "title": "ROI_015",
     "section": "",
-    "text": "重要不在数据集里\n\n\n\n元数据表里没有这一行，也没有 patch。本页只是为了记下它的已知问题。"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n98\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_015/\n\n\n对齐控制点\ndata/tie-points/ROI_15/\n\n\n元数据表中的写法\nROI_15"
   },
   {
-    "objectID": "docs/rois/ROI_014.html#已知问题",
-    "href": "docs/rois/ROI_014.html#已知问题",
-    "title": "ROI_014",
+    "objectID": "docs/rois/ROI_015.html#概况",
+    "href": "docs/rois/ROI_015.html#概况",
+    "title": "ROI_015",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n98\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_015/\n\n\n对齐控制点\ndata/tie-points/ROI_15/\n\n\n元数据表中的写法\nROI_15"
+  },
+  {
+    "objectID": "docs/rois/ROI_015.html#mini-rf-条带",
+    "href": "docs/rois/ROI_015.html#mini-rf-条带",
+    "title": "ROI_015",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_06680_2CD_EKU_58N297_V1\n官方\n\n\n轨道号\n6680\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-12-05T16:17:34\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.05°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n268.73°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n8,401 × 99,601 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.2 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_015.html#已知问题",
+    "href": "docs/rois/ROI_015.html#已知问题",
+    "title": "ROI_015",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告有对齐目录，却从未被切分（待复核）\n\n\n\nraw/ROI_14/ 下有 cropped/ 目录，但这个 ROI 从未被切成 patch，不在数据集、元数据表与窗口清单里。2026-09-23 查看时，cropped/ce2/、cropped/lronac_0/、cropped/lronac_1/ 都是空目录。issue #6 说的是「具备对齐产物却从未被切分」，这里的对齐目录却是空的——是当年的对齐产物后来被删了，还是说的并非本 ROI，待本人复核。\n它的 Mini-RF 条带是 lsz_04858_2cd_oku_73s030_v1。旧参考文档记载：ROI_4 与 ROI_14 用 oku 极射赤面投影，GeoTIFF 没有坐标系、geotransform 带旋转，「若要加回需先补坐标系」。\n出处：旧参考文档 DATA_REFERENCE.md §4；2026-09-23 查看数据盘"
+    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_023、ROI_026、ROI_027、ROI_048、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
   },
   {
-    "objectID": "docs/rois/ROI_014.html#本页数字从哪来",
-    "href": "docs/rois/ROI_014.html#本页数字从哪来",
-    "title": "ROI_014",
+    "objectID": "docs/rois/ROI_015.html#缩略图",
+    "href": "docs/rois/ROI_015.html#缩略图",
+    "title": "ROI_015",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 31.45 ~ 121.1\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -18 ~ -5.44 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_15/cropped/ce2/opt.tif、raw/ROI_15/cropped/ce2/sar.tif（4,518 × 30,679 像素），每 52 × 52 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_015.html#本页数字从哪来",
+    "href": "docs/rois/ROI_015.html#本页数字从哪来",
+    "title": "ROI_015",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_016.html",
-    "href": "docs/rois/ROI_016.html",
-    "title": "ROI_016",
+    "objectID": "docs/rois/ROI_017.html",
+    "href": "docs/rois/ROI_017.html",
+    "title": "ROI_017",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n265\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_016/\n\n\n对齐控制点\ndata/tie-points/ROI_16/\n\n\n元数据表中的写法\nROI_16"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n213\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_017/\n\n\n对齐控制点\ndata/tie-points/ROI_17/\n\n\n元数据表中的写法\nROI_17"
   },
   {
-    "objectID": "docs/rois/ROI_016.html#概况",
-    "href": "docs/rois/ROI_016.html#概况",
-    "title": "ROI_016",
+    "objectID": "docs/rois/ROI_017.html#概况",
+    "href": "docs/rois/ROI_017.html#概况",
+    "title": "ROI_017",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n265\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_016/\n\n\n对齐控制点\ndata/tie-points/ROI_16/\n\n\n元数据表中的写法\nROI_16"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n213\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_017/\n\n\n对齐控制点\ndata/tie-points/ROI_17/\n\n\n元数据表中的写法\nROI_17"
   },
   {
-    "objectID": "docs/rois/ROI_016.html#mini-rf-条带",
-    "href": "docs/rois/ROI_016.html#mini-rf-条带",
-    "title": "ROI_016",
+    "objectID": "docs/rois/ROI_017.html#mini-rf-条带",
+    "href": "docs/rois/ROI_017.html#mini-rf-条带",
+    "title": "ROI_017",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04363_2CD_EKU_66S352_V1\n官方\n\n\n轨道号\n4363\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-06T18:26:02\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n49.95°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n274.65°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n21,282 × 65,900 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.0 m\n实测\n\n\n有效分辨率（方位向）\n18.5 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02399_2CD_EKU_07S233_V1\n官方\n\n\n轨道号\n2399\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-01-03T11:49:06\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n47.76°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n89.37°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,196 × 65,293 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.1 m\n实测\n\n\n有效分辨率（方位向）\n18.4 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_016.html#已知问题",
-    "href": "docs/rois/ROI_016.html#已知问题",
-    "title": "ROI_016",
+    "objectID": "docs/rois/ROI_017.html#已知问题",
+    "href": "docs/rois/ROI_017.html#已知问题",
+    "title": "ROI_017",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告明显的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（在每对 patch 上找光学与 SAR 的可信匹配、量两者的相对偏移，每个 ROI 按编号等间隔抽 24 对）把这几个 ROI 归为「明显错位」：patch 对的重叠面积中位数 66%~79%。偏移几乎都在 x 方向（横跨条带），y 方向基本为 0；错位程度与该 ROI 对齐控制点的拟合残差对得上。\n这项检验只能当参考：它能证明一对 patch「是同一个地方」，证明不了「不是」。待本人复核。\n本 ROI： 对齐控制点中位拟合残差 128 px。\n同一条还涉及：ROI_008、ROI_025、ROI_050、ROI_052。\n出处：2026-09-11 数据核查会话（配对检验）"
+    "text": "已知问题\n\n\n\n\n\n\n警告与 ROI_054 的范围部分重叠\n\n\n\n与测试集的 ROI_054 范围重叠 57%，但 patch 级只有 17 个 patch 有重叠、且都不超过 16%，当时判断可接受。\n出处：旧参考文档 DATA_REFERENCE.md §4"
   },
   {
-    "objectID": "docs/rois/ROI_016.html#缩略图",
-    "href": "docs/rois/ROI_016.html#缩略图",
-    "title": "ROI_016",
+    "objectID": "docs/rois/ROI_017.html#缩略图",
+    "href": "docs/rois/ROI_017.html#缩略图",
+    "title": "ROI_017",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 1 ~ 165.1\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -15.35 ~ -4.649 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_16/cropped/ce2/opt.tif、raw/ROI_16/cropped/ce2/sar.tif（11,444 × 39,190 像素），每 66 × 66 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 79.24 ~ 120.7\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -12.61 ~ -4.714 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_17/cropped/ce2/opt.tif、raw/ROI_17/cropped/ce2/sar.tif（3,757 × 36,396 像素），每 61 × 61 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_016.html#本页数字从哪来",
-    "href": "docs/rois/ROI_016.html#本页数字从哪来",
-    "title": "ROI_016",
+    "objectID": "docs/rois/ROI_017.html#本页数字从哪来",
+    "href": "docs/rois/ROI_017.html#本页数字从哪来",
+    "title": "ROI_017",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_018.html",
-    "href": "docs/rois/ROI_018.html",
-    "title": "ROI_018",
+    "objectID": "docs/rois/ROI_020.html",
+    "href": "docs/rois/ROI_020.html",
+    "title": "ROI_020",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n117\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_018/\n\n\n对齐控制点\ndata/tie-points/ROI_18/\n\n\n元数据表中的写法\nROI_18"
+    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n112\n\n\n带评测真值点的 patch\n91 / 112（81.2%）\n\n\n评测真值点对数\n739\n\n\n产物目录\nProcessed_Data/Test/ROI_020/\n\n\n对齐控制点\ndata/tie-points/ROI_20/\n\n\n元数据表中的写法\nROI_20"
   },
   {
-    "objectID": "docs/rois/ROI_018.html#概况",
-    "href": "docs/rois/ROI_018.html#概况",
-    "title": "ROI_018",
+    "objectID": "docs/rois/ROI_020.html#概况",
+    "href": "docs/rois/ROI_020.html#概况",
+    "title": "ROI_020",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n117\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_018/\n\n\n对齐控制点\ndata/tie-points/ROI_18/\n\n\n元数据表中的写法\nROI_18"
+    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n112\n\n\n带评测真值点的 patch\n91 / 112（81.2%）\n\n\n评测真值点对数\n739\n\n\n产物目录\nProcessed_Data/Test/ROI_020/\n\n\n对齐控制点\ndata/tie-points/ROI_20/\n\n\n元数据表中的写法\nROI_20"
   },
   {
-    "objectID": "docs/rois/ROI_018.html#mini-rf-条带",
-    "href": "docs/rois/ROI_018.html#mini-rf-条带",
-    "title": "ROI_018",
+    "objectID": "docs/rois/ROI_020.html#mini-rf-条带",
+    "href": "docs/rois/ROI_020.html#mini-rf-条带",
+    "title": "ROI_020",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04349_2CD_EKU_50S009_V1\n官方\n\n\n轨道号\n4349\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-05T15:57:48\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.40°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n272.83°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n9,039 × 66,104 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n17.0 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04399_2CD_EKU_50S318_V1\n官方\n\n\n轨道号\n4399\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-09T14:11:37\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n49.39°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n271.86°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n6,873 × 66,561 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n17.2 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_018.html#缩略图",
-    "href": "docs/rois/ROI_018.html#缩略图",
-    "title": "ROI_018",
+    "objectID": "docs/rois/ROI_020.html#缩略图",
+    "href": "docs/rois/ROI_020.html#缩略图",
+    "title": "ROI_020",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 68.66 ~ 153.3\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.3 ~ -5.59 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_18/cropped/ce2/opt.tif、raw/ROI_18/cropped/ce2/sar.tif（7,024 × 31,343 像素），每 53 × 53 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 59 ~ 99.98\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.51 ~ -5.649 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_20/cropped/ce2/opt.tif、raw/ROI_20/cropped/ce2/sar.tif（5,341 × 31,991 像素），每 54 × 54 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_018.html#本页数字从哪来",
-    "href": "docs/rois/ROI_018.html#本页数字从哪来",
-    "title": "ROI_018",
+    "objectID": "docs/rois/ROI_020.html#本页数字从哪来",
+    "href": "docs/rois/ROI_020.html#本页数字从哪来",
+    "title": "ROI_020",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_021.html",
-    "href": "docs/rois/ROI_021.html",
-    "title": "ROI_021",
+    "objectID": "docs/rois/ROI_023.html",
+    "href": "docs/rois/ROI_023.html",
+    "title": "ROI_023",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n108\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_021/\n\n\n对齐控制点\ndata/tie-points/ROI_21/\n\n\n元数据表中的写法\nROI_21"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n175\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_023/\n\n\n对齐控制点\ndata/tie-points/ROI_23/\n\n\n元数据表中的写法\nROI_23"
   },
   {
-    "objectID": "docs/rois/ROI_021.html#概况",
-    "href": "docs/rois/ROI_021.html#概况",
-    "title": "ROI_021",
+    "objectID": "docs/rois/ROI_023.html#概况",
+    "href": "docs/rois/ROI_023.html#概况",
+    "title": "ROI_023",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n108\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_021/\n\n\n对齐控制点\ndata/tie-points/ROI_21/\n\n\n元数据表中的写法\nROI_21"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n175\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_023/\n\n\n对齐控制点\ndata/tie-points/ROI_23/\n\n\n元数据表中的写法\nROI_23"
   },
   {
-    "objectID": "docs/rois/ROI_021.html#mini-rf-条带",
-    "href": "docs/rois/ROI_021.html#mini-rf-条带",
-    "title": "ROI_021",
+    "objectID": "docs/rois/ROI_023.html#mini-rf-条带",
+    "href": "docs/rois/ROI_023.html#mini-rf-条带",
+    "title": "ROI_023",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_03028_2CD_EKU_00S302_V1\n官方\n\n\n轨道号\n3028\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-02-21T21:24:18\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.40°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n89.94°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,124 × 66,295 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.2 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04730_2CD_EKU_35N160_V1\n官方\n\n\n轨道号\n4730\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-07-05T12:59:36\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.70°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n91.37°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n4,679 × 65,317 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.0 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_021.html#缩略图",
-    "href": "docs/rois/ROI_021.html#缩略图",
-    "title": "ROI_021",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 34.71 ~ 47.87\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.3 ~ -5.974 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_21/cropped/ce2/opt.tif、raw/ROI_21/cropped/ce2/sar.tif（2,497 × 33,916 像素），每 57 × 57 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_021.html#本页数字从哪来",
-    "href": "docs/rois/ROI_021.html#本页数字从哪来",
-    "title": "ROI_021",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_024.html",
-    "href": "docs/rois/ROI_024.html",
-    "title": "ROI_024",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n239\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_024/\n\n\n对齐控制点\ndata/tie-points/ROI_24/\n\n\n元数据表中的写法\nROI_24"
-  },
-  {
-    "objectID": "docs/rois/ROI_024.html#概况",
-    "href": "docs/rois/ROI_024.html#概况",
-    "title": "ROI_024",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n239\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_024/\n\n\n对齐控制点\ndata/tie-points/ROI_24/\n\n\n元数据表中的写法\nROI_24"
-  },
-  {
-    "objectID": "docs/rois/ROI_024.html#mini-rf-条带",
-    "href": "docs/rois/ROI_024.html#mini-rf-条带",
-    "title": "ROI_024",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_03254_2CD_EKU_55S070_V1\n官方\n\n\n轨道号\n3254\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-03-11T15:47:51\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.39°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n86.66°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n11,152 × 49,291 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n37.9 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_024.html#已知问题",
-    "href": "docs/rois/ROI_024.html#已知问题",
-    "title": "ROI_024",
+    "objectID": "docs/rois/ROI_023.html#已知问题",
+    "href": "docs/rois/ROI_023.html#已知问题",
+    "title": "ROI_023",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告SAR 距离向有效分辨率异常偏粗\n\n\n\n元数据表里距离向实测有效分辨率的中位数是 18.25 m；超过它的 2 倍（36.5 m）即标注于此。方位向没有这种现象。\n旧参考文档 DATA_REFERENCE.md §1.6 记的是 ROI_7、ROI_24、ROI_42、ROI_67、ROI_80 五个（43–51 m），并称「全在 Train」。按本仓库的元数据表：ROI_27 也超过判定线，ROI_7 属测试集、ROI_80 属验证集。两处出入尚未核对。旧文档的记录还有一句：这几条的入射角、视向、模式、投影、ppd 与其余条带没有区别，也不是低对比度场景造成的——原因未查明。\n本 ROI： 本 ROI 距离向 37.9 m，是中位数的 2.1 倍。\n同一条还涉及：ROI_007、ROI_027、ROI_042、ROI_067、ROI_080。\n出处：元数据表 data/metadata/minirf_metadata.csv 的「实测有效分辨率_距离向_m」列"
+    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_026、ROI_027、ROI_048、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
   },
   {
-    "objectID": "docs/rois/ROI_024.html#缩略图",
-    "href": "docs/rois/ROI_024.html#缩略图",
-    "title": "ROI_024",
+    "objectID": "docs/rois/ROI_023.html#缩略图",
+    "href": "docs/rois/ROI_023.html#缩略图",
+    "title": "ROI_023",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 36.99 ~ 117.5\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -12.75 ~ -3.823 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_24/cropped/ce2/opt.tif、raw/ROI_24/cropped/ce2/sar.tif（8,666 × 36,859 像素），每 62 × 62 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 67.56 ~ 114.2\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -12.14 ~ -5.481 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_23/cropped/ce2/opt.tif、raw/ROI_23/cropped/ce2/sar.tif（4,540 × 32,793 像素），每 55 × 55 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_024.html#本页数字从哪来",
-    "href": "docs/rois/ROI_024.html#本页数字从哪来",
-    "title": "ROI_024",
+    "objectID": "docs/rois/ROI_023.html#本页数字从哪来",
+    "href": "docs/rois/ROI_023.html#本页数字从哪来",
+    "title": "ROI_023",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_026.html",
-    "href": "docs/rois/ROI_026.html",
-    "title": "ROI_026",
+    "objectID": "docs/rois/ROI_025.html",
+    "href": "docs/rois/ROI_025.html",
+    "title": "ROI_025",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n190\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_026/\n\n\n对齐控制点\ndata/tie-points/ROI_26/\n\n\n元数据表中的写法\nROI_26"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n222\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_025/\n\n\n对齐控制点\ndata/tie-points/ROI_25/\n\n\n元数据表中的写法\nROI_25"
   },
   {
-    "objectID": "docs/rois/ROI_026.html#概况",
-    "href": "docs/rois/ROI_026.html#概况",
-    "title": "ROI_026",
+    "objectID": "docs/rois/ROI_025.html#概况",
+    "href": "docs/rois/ROI_025.html#概况",
+    "title": "ROI_025",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n190\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_026/\n\n\n对齐控制点\ndata/tie-points/ROI_26/\n\n\n元数据表中的写法\nROI_26"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n222\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_025/\n\n\n对齐控制点\ndata/tie-points/ROI_25/\n\n\n元数据表中的写法\nROI_25"
   },
   {
-    "objectID": "docs/rois/ROI_026.html#mini-rf-条带",
-    "href": "docs/rois/ROI_026.html#mini-rf-条带",
-    "title": "ROI_026",
+    "objectID": "docs/rois/ROI_025.html#mini-rf-条带",
+    "href": "docs/rois/ROI_025.html#mini-rf-条带",
+    "title": "ROI_025",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02769_2CD_EKU_02N210_V1\n官方\n\n\n轨道号\n2769\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-02-01T13:13:39\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n46.92°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n90.23°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,423 × 65,169 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.4 m\n实测\n\n\n有效分辨率（方位向）\n18.5 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04784_2CD_EKU_66S104_V1\n官方\n\n\n轨道号\n4784\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-07-09T20:07:06\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n49.50°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n87.83°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n13,881 × 66,004 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n17.1 m\n实测\n\n\n有效分辨率（方位向）\n17.9 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_026.html#已知问题",
-    "href": "docs/rois/ROI_026.html#已知问题",
-    "title": "ROI_026",
+    "objectID": "docs/rois/ROI_025.html#已知问题",
+    "href": "docs/rois/ROI_025.html#已知问题",
+    "title": "ROI_025",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_027、ROI_048、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
+    "text": "已知问题\n\n\n\n\n\n\n警告明显的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（在每对 patch 上找光学与 SAR 的可信匹配、量两者的相对偏移，每个 ROI 按编号等间隔抽 24 对）把这几个 ROI 归为「明显错位」：patch 对的重叠面积中位数 66%~79%。偏移几乎都在 x 方向（横跨条带），y 方向基本为 0；错位程度与该 ROI 对齐控制点的拟合残差对得上。\n这项检验只能当参考：它能证明一对 patch「是同一个地方」，证明不了「不是」。待本人复核。\n本 ROI： 对齐控制点中位拟合残差 92 px。\n同一条还涉及：ROI_008、ROI_016、ROI_050、ROI_052。\n出处：2026-09-11 数据核查会话（配对检验）"
   },
   {
-    "objectID": "docs/rois/ROI_026.html#缩略图",
-    "href": "docs/rois/ROI_026.html#缩略图",
-    "title": "ROI_026",
+    "objectID": "docs/rois/ROI_025.html#缩略图",
+    "href": "docs/rois/ROI_025.html#缩略图",
+    "title": "ROI_025",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 76.05 ~ 124.5\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.35 ~ -4.272 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_26/cropped/ce2/opt.tif、raw/ROI_26/cropped/ce2/sar.tif（4,024 × 33,916 像素），每 57 × 57 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 24 ~ 138.8\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -16.11 ~ -6.057 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_25/cropped/ce2/opt.tif、raw/ROI_25/cropped/ce2/sar.tif（4,033 × 39,190 像素），每 66 × 66 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_026.html#本页数字从哪来",
-    "href": "docs/rois/ROI_026.html#本页数字从哪来",
-    "title": "ROI_026",
+    "objectID": "docs/rois/ROI_025.html#本页数字从哪来",
+    "href": "docs/rois/ROI_025.html#本页数字从哪来",
+    "title": "ROI_025",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_030.html",
-    "href": "docs/rois/ROI_030.html",
-    "title": "ROI_030",
+    "objectID": "docs/rois/ROI_027.html",
+    "href": "docs/rois/ROI_027.html",
+    "title": "ROI_027",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n74\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_030/\n\n\n对齐控制点\ndata/tie-points/ROI_30/\n\n\n元数据表中的写法\nROI_30"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n234\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_027/\n\n\n对齐控制点\ndata/tie-points/ROI_27/\n\n\n元数据表中的写法\nROI_27"
   },
   {
-    "objectID": "docs/rois/ROI_030.html#概况",
-    "href": "docs/rois/ROI_030.html#概况",
-    "title": "ROI_030",
+    "objectID": "docs/rois/ROI_027.html#概况",
+    "href": "docs/rois/ROI_027.html#概况",
+    "title": "ROI_027",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n74\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_030/\n\n\n对齐控制点\ndata/tie-points/ROI_30/\n\n\n元数据表中的写法\nROI_30"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n234\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_027/\n\n\n对齐控制点\ndata/tie-points/ROI_27/\n\n\n元数据表中的写法\nROI_27"
   },
   {
-    "objectID": "docs/rois/ROI_030.html#mini-rf-条带",
-    "href": "docs/rois/ROI_030.html#mini-rf-条带",
-    "title": "ROI_030",
+    "objectID": "docs/rois/ROI_027.html#mini-rf-条带",
+    "href": "docs/rois/ROI_027.html#mini-rf-条带",
+    "title": "ROI_027",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_06689_2CD_EKU_47N288_V1\n官方\n\n\n轨道号\n6689\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-12-06T09:14:59\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n51.04°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.13°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,846 × 26,903 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.6 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04477_2CD_EKU_63S237_V1\n官方\n\n\n轨道号\n4477\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-15T17:17:29\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n48.90°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n271.87°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n12,922 × 66,151 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n54.9 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_030.html#缩略图",
-    "href": "docs/rois/ROI_030.html#缩略图",
-    "title": "ROI_030",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 39.04 ~ 66.11\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.76 ~ -6.631 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_30/cropped/ce2/opt.tif、raw/ROI_30/cropped/ce2/sar.tif（2,212 × 23,187 像素），每 39 × 39 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_030.html#本页数字从哪来",
-    "href": "docs/rois/ROI_030.html#本页数字从哪来",
-    "title": "ROI_030",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_033.html",
-    "href": "docs/rois/ROI_033.html",
-    "title": "ROI_033",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n269\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_033/\n\n\n对齐控制点\ndata/tie-points/ROI_33/\n\n\n元数据表中的写法\nROI_33"
-  },
-  {
-    "objectID": "docs/rois/ROI_033.html#概况",
-    "href": "docs/rois/ROI_033.html#概况",
-    "title": "ROI_033",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n269\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_033/\n\n\n对齐控制点\ndata/tie-points/ROI_33/\n\n\n元数据表中的写法\nROI_33"
-  },
-  {
-    "objectID": "docs/rois/ROI_033.html#mini-rf-条带",
-    "href": "docs/rois/ROI_033.html#mini-rf-条带",
-    "title": "ROI_033",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04611_2CD_EKU_51S097_V1\n官方\n\n\n轨道号\n4611\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-26T05:43:11\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n51.70°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n271.89°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n8,030 × 65,188 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.9 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_033.html#缩略图",
-    "href": "docs/rois/ROI_033.html#缩略图",
-    "title": "ROI_033",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 43.92 ~ 102.6\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -11.77 ~ -5.604 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_33/cropped/ce2/opt.tif、raw/ROI_33/cropped/ce2/sar.tif（6,240 × 36,859 像素），每 62 × 62 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_033.html#本页数字从哪来",
-    "href": "docs/rois/ROI_033.html#本页数字从哪来",
-    "title": "ROI_033",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_035.html",
-    "href": "docs/rois/ROI_035.html",
-    "title": "ROI_035",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n验证集（Val）\n\n\npatch 对\n214\n\n\n带评测真值点的 patch\n172 / 214（80.4%）\n\n\n评测真值点对数\n1,383\n\n\n产物目录\nProcessed_Data/Val/ROI_035/\n\n\n对齐控制点\ndata/tie-points/ROI_35/\n\n\n元数据表中的写法\nROI_35"
-  },
-  {
-    "objectID": "docs/rois/ROI_035.html#概况",
-    "href": "docs/rois/ROI_035.html#概况",
-    "title": "ROI_035",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n验证集（Val）\n\n\npatch 对\n214\n\n\n带评测真值点的 patch\n172 / 214（80.4%）\n\n\n评测真值点对数\n1,383\n\n\n产物目录\nProcessed_Data/Val/ROI_035/\n\n\n对齐控制点\ndata/tie-points/ROI_35/\n\n\n元数据表中的写法\nROI_35"
-  },
-  {
-    "objectID": "docs/rois/ROI_035.html#mini-rf-条带",
-    "href": "docs/rois/ROI_035.html#mini-rf-条带",
-    "title": "ROI_035",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02858_2CD_EKU_21S118_V1\n官方\n\n\n轨道号\n2858\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-02-08T13:07:14\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.97°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n88.37°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n4,273 × 65,234 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.2 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_035.html#缩略图",
-    "href": "docs/rois/ROI_035.html#缩略图",
-    "title": "ROI_035",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 54.08 ~ 113.8\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -11.89 ~ -5.284 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_35/cropped/ce2/opt.tif、raw/ROI_35/cropped/ce2/sar.tif（4,725 × 35,001 像素），每 59 × 59 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_035.html#本页数字从哪来",
-    "href": "docs/rois/ROI_035.html#本页数字从哪来",
-    "title": "ROI_035",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_038.html",
-    "href": "docs/rois/ROI_038.html",
-    "title": "ROI_038",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n64\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_038/\n\n\n对齐控制点\ndata/tie-points/ROI_38/\n\n\n元数据表中的写法\nROI_38"
-  },
-  {
-    "objectID": "docs/rois/ROI_038.html#概况",
-    "href": "docs/rois/ROI_038.html#概况",
-    "title": "ROI_038",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n64\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_038/\n\n\n对齐控制点\ndata/tie-points/ROI_38/\n\n\n元数据表中的写法\nROI_38"
-  },
-  {
-    "objectID": "docs/rois/ROI_038.html#mini-rf-条带",
-    "href": "docs/rois/ROI_038.html#mini-rf-条带",
-    "title": "ROI_038",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01437_2CD_EKU_34N326_V1\n官方\n\n\n轨道号\n1437\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-19T21:07:18\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.26°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n267.46°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,294 × 30,291 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n19.1 m\n实测\n\n\n有效分辨率（方位向）\n18.5 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_038.html#已知问题",
-    "href": "docs/rois/ROI_038.html#已知问题",
-    "title": "ROI_038",
+    "objectID": "docs/rois/ROI_027.html#已知问题",
+    "href": "docs/rois/ROI_027.html#已知问题",
+    "title": "ROI_027",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告与 ROI_071 的范围部分重叠\n\n\n\n与验证集的 ROI_071 范围重叠 17.5%，patch 级零重叠。\n出处：旧参考文档 DATA_REFERENCE.md §4"
+    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_048、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）\n\n\n\n\n\n\n\n\n警告编号缺 95、98、99\n\n\n\n这三个 patch 是纯色废块（据作者回忆，是光照原因基本全黑），已丢弃，所以本 ROI 的编号不连续。窗口清单里与之对应的是 3 个 unresolved。读数据时请直接列目录，不要假设编号连续。\n出处：旧迁移记录 MIGRATION.md 末尾；2026-09-11 数据核查会话；作者回忆"
   },
   {
-    "objectID": "docs/rois/ROI_038.html#缩略图",
-    "href": "docs/rois/ROI_038.html#缩略图",
-    "title": "ROI_038",
+    "objectID": "docs/rois/ROI_027.html#缩略图",
+    "href": "docs/rois/ROI_027.html#缩略图",
+    "title": "ROI_027",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 38.2 ~ 51.05\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.52 ~ -7.014 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_38/cropped/ce2/opt.tif、raw/ROI_38/cropped/ce2/sar.tif（3,196 × 20,085 像素），每 34 × 34 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 1 ~ 140.6\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -17.78 ~ -6.972 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_27/cropped/ce2/opt.tif、raw/ROI_27/cropped/ce2/sar.tif（6,949 × 39,190 像素），每 66 × 66 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_038.html#本页数字从哪来",
-    "href": "docs/rois/ROI_038.html#本页数字从哪来",
-    "title": "ROI_038",
+    "objectID": "docs/rois/ROI_027.html#本页数字从哪来",
+    "href": "docs/rois/ROI_027.html#本页数字从哪来",
+    "title": "ROI_027",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_043.html",
-    "href": "docs/rois/ROI_043.html",
-    "title": "ROI_043",
+    "objectID": "docs/rois/ROI_031.html",
+    "href": "docs/rois/ROI_031.html",
+    "title": "ROI_031",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n48\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_043/\n\n\n对齐控制点\ndata/tie-points/ROI_43/\n\n\n元数据表中的写法\nROI_43"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n149\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_031/\n\n\n对齐控制点\ndata/tie-points/ROI_31/\n\n\n元数据表中的写法\nROI_31"
   },
   {
-    "objectID": "docs/rois/ROI_043.html#概况",
-    "href": "docs/rois/ROI_043.html#概况",
-    "title": "ROI_043",
+    "objectID": "docs/rois/ROI_031.html#概况",
+    "href": "docs/rois/ROI_031.html#概况",
+    "title": "ROI_031",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n48\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_043/\n\n\n对齐控制点\ndata/tie-points/ROI_43/\n\n\n元数据表中的写法\nROI_43"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n149\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_031/\n\n\n对齐控制点\ndata/tie-points/ROI_31/\n\n\n元数据表中的写法\nROI_31"
   },
   {
-    "objectID": "docs/rois/ROI_043.html#mini-rf-条带",
-    "href": "docs/rois/ROI_043.html#mini-rf-条带",
-    "title": "ROI_043",
+    "objectID": "docs/rois/ROI_031.html#mini-rf-条带",
+    "href": "docs/rois/ROI_031.html#mini-rf-条带",
+    "title": "ROI_031",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01371_2CD_EKU_23N034_V1\n官方\n\n\n轨道号\n1371\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-14T16:37:17\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.81°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.18°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,434 × 13,660 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.4 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02174_2CD_EKU_36N282_V1\n官方\n\n\n轨道号\n2174\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-12-16T18:53:05\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.87°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n268.88°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,935 × 50,089 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n17.7 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_043.html#缩略图",
-    "href": "docs/rois/ROI_043.html#缩略图",
-    "title": "ROI_043",
+    "objectID": "docs/rois/ROI_031.html#缩略图",
+    "href": "docs/rois/ROI_031.html#缩略图",
+    "title": "ROI_031",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 56.09 ~ 119.3\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.84 ~ -4.066 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_43/cropped/ce2/opt.tif、raw/ROI_43/cropped/ce2/sar.tif（2,692 × 15,816 像素），每 27 × 27 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 36.97 ~ 78.97\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -15.69 ~ -6.839 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_31/cropped/ce2/opt.tif、raw/ROI_31/cropped/ce2/sar.tif（2,848 × 35,734 像素），每 60 × 60 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_043.html#本页数字从哪来",
-    "href": "docs/rois/ROI_043.html#本页数字从哪来",
-    "title": "ROI_043",
+    "objectID": "docs/rois/ROI_031.html#本页数字从哪来",
+    "href": "docs/rois/ROI_031.html#本页数字从哪来",
+    "title": "ROI_031",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_046.html",
-    "href": "docs/rois/ROI_046.html",
-    "title": "ROI_046",
+    "objectID": "docs/rois/ROI_034.html",
+    "href": "docs/rois/ROI_034.html",
+    "title": "ROI_034",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n165\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_046/\n\n\n对齐控制点\ndata/tie-points/ROI_46/\n\n\n元数据表中的写法\nROI_46"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n199\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_034/\n\n\n对齐控制点\ndata/tie-points/ROI_34/\n\n\n元数据表中的写法\nROI_34"
   },
   {
-    "objectID": "docs/rois/ROI_046.html#概况",
-    "href": "docs/rois/ROI_046.html#概况",
-    "title": "ROI_046",
+    "objectID": "docs/rois/ROI_034.html#概况",
+    "href": "docs/rois/ROI_034.html#概况",
+    "title": "ROI_034",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n165\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_046/\n\n\n对齐控制点\ndata/tie-points/ROI_46/\n\n\n元数据表中的写法\nROI_46"
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n199\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_034/\n\n\n对齐控制点\ndata/tie-points/ROI_34/\n\n\n元数据表中的写法\nROI_34"
   },
   {
-    "objectID": "docs/rois/ROI_046.html#mini-rf-条带",
-    "href": "docs/rois/ROI_046.html#mini-rf-条带",
-    "title": "ROI_046",
+    "objectID": "docs/rois/ROI_034.html#mini-rf-条带",
+    "href": "docs/rois/ROI_034.html#mini-rf-条带",
+    "title": "ROI_034",
     "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02674_2CD_EKU_42S309_V1\n官方\n\n\n轨道号\n2674\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-01-25T02:21:07\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n51.48°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n88.55°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n5,353 × 66,264 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n19.3 m\n实测\n\n\n有效分辨率（方位向）\n18.6 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02457_2CD_EKU_49S174_V1\n官方\n\n\n轨道号\n2457\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-01-08T01:22:33\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.72°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n87.52°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n6,071 × 32,998 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.8 m\n实测\n\n\n有效分辨率（方位向）\n18.3 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_046.html#缩略图",
-    "href": "docs/rois/ROI_046.html#缩略图",
-    "title": "ROI_046",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 48 ~ 122.6\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.73 ~ -5.125 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_46/cropped/ce2/opt.tif、raw/ROI_46/cropped/ce2/sar.tif（5,194 × 35,734 像素），每 60 × 60 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_046.html#本页数字从哪来",
-    "href": "docs/rois/ROI_046.html#本页数字从哪来",
-    "title": "ROI_046",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_048.html",
-    "href": "docs/rois/ROI_048.html",
-    "title": "ROI_048",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n24\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_048/\n\n\n对齐控制点\ndata/tie-points/ROI_48/\n\n\n元数据表中的写法\nROI_48"
-  },
-  {
-    "objectID": "docs/rois/ROI_048.html#概况",
-    "href": "docs/rois/ROI_048.html#概况",
-    "title": "ROI_048",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n24\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_048/\n\n\n对齐控制点\ndata/tie-points/ROI_48/\n\n\n元数据表中的写法\nROI_48"
-  },
-  {
-    "objectID": "docs/rois/ROI_048.html#mini-rf-条带",
-    "href": "docs/rois/ROI_048.html#mini-rf-条带",
-    "title": "ROI_048",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01541_2CD_EKU_03S218_V1\n官方\n\n\n轨道号\n1541\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-28T02:57:52\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n45.52°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.89°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,908 × 59,151 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.2 m\n实测\n\n\n有效分辨率（方位向）\n18.4 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_048.html#已知问题",
-    "href": "docs/rois/ROI_048.html#已知问题",
-    "title": "ROI_048",
+    "objectID": "docs/rois/ROI_034.html#已知问题",
+    "href": "docs/rois/ROI_034.html#已知问题",
+    "title": "ROI_034",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_027、ROI_054、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
+    "text": "已知问题\n\n\n\n\n\n\n警告一幅 CE-2 分幅的经度差了 180°\n\n\n\n该分幅的名字写的是东经 175°，按坐标算出来是西经 5°。现有产物与旧版逐像素一致；只有将来从原始数据重新对齐时才会碰到。\n出处：2026-09-11 数据核查会话"
   },
   {
-    "objectID": "docs/rois/ROI_048.html#缩略图",
-    "href": "docs/rois/ROI_048.html#缩略图",
-    "title": "ROI_048",
+    "objectID": "docs/rois/ROI_034.html#缩略图",
+    "href": "docs/rois/ROI_034.html#缩略图",
+    "title": "ROI_034",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 85.75 ~ 124\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.36 ~ -6.514 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_48/cropped/ce2/opt.tif、raw/ROI_48/cropped/ce2/sar.tif（1,287 × 18,896 像素），每 32 × 32 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 36.61 ~ 92.34\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -11.83 ~ -5.062 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_34/cropped/ce2/opt.tif、raw/ROI_34/cropped/ce2/sar.tif（7,191 × 17,599 像素），每 30 × 30 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_048.html#本页数字从哪来",
-    "href": "docs/rois/ROI_048.html#本页数字从哪来",
-    "title": "ROI_048",
+    "objectID": "docs/rois/ROI_034.html#本页数字从哪来",
+    "href": "docs/rois/ROI_034.html#本页数字从哪来",
+    "title": "ROI_034",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
   {
-    "objectID": "docs/rois/ROI_050.html",
-    "href": "docs/rois/ROI_050.html",
-    "title": "ROI_050",
+    "objectID": "docs/rois/ROI_037.html",
+    "href": "docs/rois/ROI_037.html",
+    "title": "ROI_037",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n160\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_050/\n\n\n对齐控制点\ndata/tie-points/ROI_50/\n\n\n元数据表中的写法\nROI_50"
+    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n159\n\n\n带评测真值点的 patch\n141 / 159（88.7%）\n\n\n评测真值点对数\n1,133\n\n\n产物目录\nProcessed_Data/Test/ROI_037/\n\n\n对齐控制点\ndata/tie-points/ROI_37/\n\n\n元数据表中的写法\nROI_37"
   },
   {
-    "objectID": "docs/rois/ROI_050.html#概况",
-    "href": "docs/rois/ROI_050.html#概况",
-    "title": "ROI_050",
+    "objectID": "docs/rois/ROI_037.html#概况",
+    "href": "docs/rois/ROI_037.html#概况",
+    "title": "ROI_037",
     "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n160\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_050/\n\n\n对齐控制点\ndata/tie-points/ROI_50/\n\n\n元数据表中的写法\nROI_50"
+    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n159\n\n\n带评测真值点的 patch\n141 / 159（88.7%）\n\n\n评测真值点对数\n1,133\n\n\n产物目录\nProcessed_Data/Test/ROI_037/\n\n\n对齐控制点\ndata/tie-points/ROI_37/\n\n\n元数据表中的写法\nROI_37"
   },
   {
-    "objectID": "docs/rois/ROI_050.html#mini-rf-条带",
-    "href": "docs/rois/ROI_050.html#mini-rf-条带",
-    "title": "ROI_050",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01552_2CD_EKU_18S206_V1\n官方\n\n\n轨道号\n1552\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-28T23:37:58\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n47.62°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.09°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,907 × 59,097 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.5 m\n实测\n\n\n有效分辨率（方位向）\n18.6 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_050.html#已知问题",
-    "href": "docs/rois/ROI_050.html#已知问题",
-    "title": "ROI_050",
-    "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告明显的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（在每对 patch 上找光学与 SAR 的可信匹配、量两者的相对偏移，每个 ROI 按编号等间隔抽 24 对）把这几个 ROI 归为「明显错位」：patch 对的重叠面积中位数 66%~79%。偏移几乎都在 x 方向（横跨条带），y 方向基本为 0；错位程度与该 ROI 对齐控制点的拟合残差对得上。\n这项检验只能当参考：它能证明一对 patch「是同一个地方」，证明不了「不是」。待本人复核。\n本 ROI： SAR 相对光学整体偏移约 −136 px，约 1 km；对齐控制点中位拟合残差 130 px。\n同一条还涉及：ROI_008、ROI_016、ROI_025、ROI_052。\n出处：2026-09-11 数据核查会话（配对检验）"
-  },
-  {
-    "objectID": "docs/rois/ROI_050.html#缩略图",
-    "href": "docs/rois/ROI_050.html#缩略图",
-    "title": "ROI_050",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 67.97 ~ 123.8\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.96 ~ -5.085 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_50/cropped/ce2/opt.tif、raw/ROI_50/cropped/ce2/sar.tif（3,215 × 33,394 像素），每 56 × 56 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_050.html#本页数字从哪来",
-    "href": "docs/rois/ROI_050.html#本页数字从哪来",
-    "title": "ROI_050",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_052.html",
-    "href": "docs/rois/ROI_052.html",
-    "title": "ROI_052",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n170\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_052/\n\n\n对齐控制点\ndata/tie-points/ROI_52/\n\n\n元数据表中的写法\nROI_52"
-  },
-  {
-    "objectID": "docs/rois/ROI_052.html#概况",
-    "href": "docs/rois/ROI_052.html#概况",
-    "title": "ROI_052",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n170\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_052/\n\n\n对齐控制点\ndata/tie-points/ROI_52/\n\n\n元数据表中的写法\nROI_52"
-  },
-  {
-    "objectID": "docs/rois/ROI_052.html#mini-rf-条带",
-    "href": "docs/rois/ROI_052.html#mini-rf-条带",
-    "title": "ROI_052",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02490_2CD_EKU_16N139_V1\n官方\n\n\n轨道号\n2490\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-01-10T15:12:15\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n48.80°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n90.92°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n4,066 × 65,753 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.0 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_052.html#已知问题",
-    "href": "docs/rois/ROI_052.html#已知问题",
-    "title": "ROI_052",
-    "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告明显的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（在每对 patch 上找光学与 SAR 的可信匹配、量两者的相对偏移，每个 ROI 按编号等间隔抽 24 对）把这几个 ROI 归为「明显错位」：patch 对的重叠面积中位数 66%~79%。偏移几乎都在 x 方向（横跨条带），y 方向基本为 0；错位程度与该 ROI 对齐控制点的拟合残差对得上。\n这项检验只能当参考：它能证明一对 patch「是同一个地方」，证明不了「不是」。待本人复核。\n本 ROI： 对齐控制点中位拟合残差 96 px。\n同一条还涉及：ROI_008、ROI_016、ROI_025、ROI_050。\n出处：2026-09-11 数据核查会话（配对检验）"
-  },
-  {
-    "objectID": "docs/rois/ROI_052.html#缩略图",
-    "href": "docs/rois/ROI_052.html#缩略图",
-    "title": "ROI_052",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 71.21 ~ 109.9\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.25 ~ -5.048 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_52/cropped/ce2/opt.tif、raw/ROI_52/cropped/ce2/sar.tif（4,780 × 28,874 像素），每 49 × 49 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_052.html#本页数字从哪来",
-    "href": "docs/rois/ROI_052.html#本页数字从哪来",
-    "title": "ROI_052",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_054.html",
-    "href": "docs/rois/ROI_054.html",
-    "title": "ROI_054",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n168\n\n\n带评测真值点的 patch\n145 / 168（86.3%）\n\n\n评测真值点对数\n1,187\n\n\n产物目录\nProcessed_Data/Test/ROI_054/\n\n\n对齐控制点\ndata/tie-points/ROI_54/\n\n\n元数据表中的写法\nROI_54"
-  },
-  {
-    "objectID": "docs/rois/ROI_054.html#概况",
-    "href": "docs/rois/ROI_054.html#概况",
-    "title": "ROI_054",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n168\n\n\n带评测真值点的 patch\n145 / 168（86.3%）\n\n\n评测真值点对数\n1,187\n\n\n产物目录\nProcessed_Data/Test/ROI_054/\n\n\n对齐控制点\ndata/tie-points/ROI_54/\n\n\n元数据表中的写法\nROI_54"
-  },
-  {
-    "objectID": "docs/rois/ROI_054.html#mini-rf-条带",
-    "href": "docs/rois/ROI_054.html#mini-rf-条带",
-    "title": "ROI_054",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01526_2CD_EKU_06S233_V1\n官方\n\n\n轨道号\n1526\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-26T22:39:59\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n47.55°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.09°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,765 × 52,703 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.3 m\n实测\n\n\n有效分辨率（方位向）\n18.2 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_054.html#已知问题",
-    "href": "docs/rois/ROI_054.html#已知问题",
-    "title": "ROI_054",
-    "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n本 ROI： 测试集里唯一被归入此类的 ROI，重叠面积 86%。它的评测真值点标出的偏移是 dx 约 +17~90 px、dy 约 0，与检验结果方向一致。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_027、ROI_048、ROI_055、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）\n\n\n\n\n\n\n\n\n警告Mini-RF 目录里有两个 SAR 文件\n\n\n\nraw/ROI_54/minirf/ 里有两个 SAR 文件，旧代码按文件名排序取第一个。产物与旧版一致，说明当年用的也是这个，只是没有明确规定用哪个。\n出处：2026-09-11 数据核查会话\n\n\n\n\n\n\n\n\n警告与 ROI_017 的范围部分重叠\n\n\n\n与训练集的 ROI_017 范围重叠 57%，但 patch 级只有 17 个 patch 有重叠、且都不超过 16%，当时判断可接受。\n出处：旧参考文档 DATA_REFERENCE.md §4"
-  },
-  {
-    "objectID": "docs/rois/ROI_054.html#缩略图",
-    "href": "docs/rois/ROI_054.html#缩略图",
-    "title": "ROI_054",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 77.99 ~ 129.2\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.79 ~ -4.499 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_54/cropped/ce2/opt.tif、raw/ROI_54/cropped/ce2/sar.tif（3,251 × 33,915 像素），每 57 × 57 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_054.html#本页数字从哪来",
-    "href": "docs/rois/ROI_054.html#本页数字从哪来",
-    "title": "ROI_054",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_056.html",
-    "href": "docs/rois/ROI_056.html",
-    "title": "ROI_056",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n296\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_056/\n\n\n对齐控制点\ndata/tie-points/ROI_56/\n\n\n元数据表中的写法\nROI_56"
-  },
-  {
-    "objectID": "docs/rois/ROI_056.html#概况",
-    "href": "docs/rois/ROI_056.html#概况",
-    "title": "ROI_056",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n296\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_056/\n\n\n对齐控制点\ndata/tie-points/ROI_56/\n\n\n元数据表中的写法\nROI_56"
-  },
-  {
-    "objectID": "docs/rois/ROI_056.html#mini-rf-条带",
-    "href": "docs/rois/ROI_056.html#mini-rf-条带",
-    "title": "ROI_056",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02321_2CD_EKU_04N130_V1\n官方\n\n\n轨道号\n2321\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-12-28T07:49:05\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n48.59°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n270.25°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,857 × 55,737 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.4 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_056.html#已知问题",
-    "href": "docs/rois/ROI_056.html#已知问题",
-    "title": "ROI_056",
-    "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_027、ROI_048、ROI_054、ROI_055、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
-  },
-  {
-    "objectID": "docs/rois/ROI_056.html#缩略图",
-    "href": "docs/rois/ROI_056.html#缩略图",
-    "title": "ROI_056",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 77.5 ~ 124\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.38 ~ -5.281 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_56/cropped/ce2/opt.tif、raw/ROI_56/cropped/ce2/sar.tif（3,359 × 48,899 像素），每 82 × 82 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_056.html#本页数字从哪来",
-    "href": "docs/rois/ROI_056.html#本页数字从哪来",
-    "title": "ROI_056",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_058.html",
-    "href": "docs/rois/ROI_058.html",
-    "title": "ROI_058",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n248\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_058/\n\n\n对齐控制点\ndata/tie-points/ROI_58/\n\n\n元数据表中的写法\nROI_58"
-  },
-  {
-    "objectID": "docs/rois/ROI_058.html#概况",
-    "href": "docs/rois/ROI_058.html#概况",
-    "title": "ROI_058",
-    "section": "",
-    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n248\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_058/\n\n\n对齐控制点\ndata/tie-points/ROI_58/\n\n\n元数据表中的写法\nROI_58"
-  },
-  {
-    "objectID": "docs/rois/ROI_058.html#mini-rf-条带",
-    "href": "docs/rois/ROI_058.html#mini-rf-条带",
-    "title": "ROI_058",
-    "section": "Mini-RF 条带",
-    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04374_2CD_EKU_34N344_V1\n官方\n\n\n轨道号\n4374\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-06-07T14:38:37\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n51.37°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n268.46°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,996 × 66,124 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.3 m\n实测\n\n\n有效分辨率（方位向）\n19.2 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_058.html#已知问题",
-    "href": "docs/rois/ROI_058.html#已知问题",
-    "title": "ROI_058",
-    "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告CE-2 分幅的投影参数被改错，读取时纠正\n\n\n\n本 ROI 所用的一幅 CE-2 分幅，随附投影文件的 lat_ts 抄成了相邻纬度带的值（E 带应为 35 却写成 21，I 带应为 −21 却写成 −35），像素和 geotransform 没动，整幅图因此被放到几度之外。旧代码在读取时按图幅名纠正，原文件不动；直接用通用 GIS 工具读原始瓦片会得到错误位置。\n本 ROI： 出问题的分幅：E219。\n同一条还涉及：ROI_057、ROI_065、ROI_070、ROI_073。\n出处：旧迁移记录 MIGRATION.md；旧参考文档 DATA_REFERENCE.md §2"
-  },
-  {
-    "objectID": "docs/rois/ROI_058.html#缩略图",
-    "href": "docs/rois/ROI_058.html#缩略图",
-    "title": "ROI_058",
-    "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 38.06 ~ 51.7\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.35 ~ -6.113 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_58/cropped/ce2/opt.tif、raw/ROI_58/cropped/ce2/sar.tif（4,733 × 43,653 像素），每 73 × 73 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
-  },
-  {
-    "objectID": "docs/rois/ROI_058.html#本页数字从哪来",
-    "href": "docs/rois/ROI_058.html#本页数字从哪来",
-    "title": "ROI_058",
-    "section": "本页数字从哪来",
-    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
-  },
-  {
-    "objectID": "docs/rois/ROI_060.html",
-    "href": "docs/rois/ROI_060.html",
-    "title": "ROI_060",
-    "section": "",
-    "text": "重要已从数据盘删除\n\n\n\n原属验证集。与 Test/ROI_037 为同一地点(PRODUCT_ID LSZ_01790_2CD_EKU_15S319_V1, CE2 tile H219_10S041W), 152 个光学 patch 中 152 个与 ROI_037 逐像素相同, 造成 Test/Val 不独立。删除于 2026-09-20。\n下面的 patch 数取自删除时留下的文件清单 data/metadata/removed_ROI_060_manifest.txt——清单只有文件名，所以评测真值点的点数未知。标注现在在哪，见下方「已知问题」。"
-  },
-  {
-    "objectID": "docs/rois/ROI_060.html#概况",
-    "href": "docs/rois/ROI_060.html#概况",
-    "title": "ROI_060",
-    "section": "概况",
-    "text": "概况\n\n\n\n项\n值\n\n\n\n\n所属划分\n验证集（Val）\n\n\npatch 对\n152\n\n\n带评测真值点的 patch\n145 / 152（95.4%）\n\n\n评测真值点对数\n未知\n\n\n产物目录\nProcessed_Data/Val/ROI_060/（已删除）\n\n\n对齐控制点\ndata/tie-points/ROI_60/\n\n\n元数据表中的写法\nROI_60"
-  },
-  {
-    "objectID": "docs/rois/ROI_060.html#mini-rf-条带",
-    "href": "docs/rois/ROI_060.html#mini-rf-条带",
-    "title": "ROI_060",
+    "objectID": "docs/rois/ROI_037.html#mini-rf-条带",
+    "href": "docs/rois/ROI_037.html#mini-rf-条带",
+    "title": "ROI_037",
     "section": "Mini-RF 条带",
     "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01790_2CD_EKU_15S319_V1\n官方\n\n\n轨道号\n1790\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-11-16T16:34:15\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.04°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n270.15°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,632 × 66,155 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.2 m\n实测\n\n\n有效分辨率（方位向）\n18.6 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
   },
   {
-    "objectID": "docs/rois/ROI_060.html#已知问题",
-    "href": "docs/rois/ROI_060.html#已知问题",
-    "title": "ROI_060",
+    "objectID": "docs/rois/ROI_037.html#已知问题",
+    "href": "docs/rois/ROI_037.html#已知问题",
+    "title": "ROI_037",
     "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告已删除，人工标注的去向\n\n\n\n它与 ROI_037 是同一块地（同一条 Mini-RF 条带、同一幅 CE-2 分幅 H219_10S041W），删除时保留了 ROI_037。它的人工标注都还在，只是不在数据盘上：\n\n对齐控制点：随仓库入库，在 data/tie-points/ROI_60/cropped/。\n评测真值点：随 patch 从数据盘删除。另有一份在作者本机 D:\\Data\\Moon\\_work\\Processed_Data_v2\\Val\\ROI_060\\Label\\——2026-09-23 核对，290 个文件， 文件名与删除清单 data/metadata/removed_ROI_060_manifest.txt 逐一相同；内容未逐字节核对， 尚未入库。\n对齐影像 raw/ROI_60/cropped/ce2/ 保留未动（本页缩略图即取自它）。\n\n出处：删除清单；旧参考文档 DATA_REFERENCE.md §4；2026-09-23 查看本机目录"
+    "text": "已知问题\n\n\n\n\n\n\n警告与 ROI_060 重复（ROI_060 已删除）\n\n\n\nROI_060 与本 ROI 是同一块地（同一条 Mini-RF 条带、同一幅 CE-2 分幅，152 个光学 patch 逐像素相同），2026-09-20 删除了 ROI_060、保留本 ROI。两边当年都做过评测真值点标注。\n出处：删除清单；旧参考文档 DATA_REFERENCE.md §4"
   },
   {
-    "objectID": "docs/rois/ROI_060.html#缩略图",
-    "href": "docs/rois/ROI_060.html#缩略图",
-    "title": "ROI_060",
+    "objectID": "docs/rois/ROI_037.html#缩略图",
+    "href": "docs/rois/ROI_037.html#缩略图",
+    "title": "ROI_037",
     "section": "缩略图",
-    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 36.53 ~ 71.28\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.37 ~ -7.265 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_60/cropped/ce2/opt.tif、raw/ROI_60/cropped/ce2/sar.tif（3,094 × 34,429 像素），每 58 × 58 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 36.53 ~ 71.28\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.37 ~ -7.265 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_37/cropped/ce2/opt.tif、raw/ROI_37/cropped/ce2/sar.tif（3,094 × 34,429 像素），每 58 × 58 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
   },
   {
-    "objectID": "docs/rois/ROI_060.html#本页数字从哪来",
-    "href": "docs/rois/ROI_060.html#本页数字从哪来",
-    "title": "ROI_060",
+    "objectID": "docs/rois/ROI_037.html#本页数字从哪来",
+    "href": "docs/rois/ROI_037.html#本页数字从哪来",
+    "title": "ROI_037",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_042.html",
+    "href": "docs/rois/ROI_042.html",
+    "title": "ROI_042",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n21\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_042/\n\n\n对齐控制点\ndata/tie-points/ROI_42/\n\n\n元数据表中的写法\nROI_42"
+  },
+  {
+    "objectID": "docs/rois/ROI_042.html#概况",
+    "href": "docs/rois/ROI_042.html#概况",
+    "title": "ROI_042",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n21\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_042/\n\n\n对齐控制点\ndata/tie-points/ROI_42/\n\n\n元数据表中的写法\nROI_42"
+  },
+  {
+    "objectID": "docs/rois/ROI_042.html#mini-rf-条带",
+    "href": "docs/rois/ROI_042.html#mini-rf-条带",
+    "title": "ROI_042",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_05032_2CD_EKU_50N208_V1\n官方\n\n\n轨道号\n5032\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-07-29T06:17:26\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n48.20°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n91.55°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n6,395 × 66,220 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n50.5 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_042.html#缩略图",
+    "href": "docs/rois/ROI_042.html#缩略图",
+    "title": "ROI_042",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 46.91 ~ 149.8\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -15.77 ~ -6.333 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_42/cropped/ce2/opt.tif、raw/ROI_42/cropped/ce2/sar.tif（3,439 × 7,872 像素），每 14 × 14 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_042.html#本页数字从哪来",
+    "href": "docs/rois/ROI_042.html#本页数字从哪来",
+    "title": "ROI_042",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_045.html",
+    "href": "docs/rois/ROI_045.html",
+    "title": "ROI_045",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n58\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_045/\n\n\n对齐控制点\ndata/tie-points/ROI_45/\n\n\n元数据表中的写法\nROI_45"
+  },
+  {
+    "objectID": "docs/rois/ROI_045.html#概况",
+    "href": "docs/rois/ROI_045.html#概况",
+    "title": "ROI_045",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n58\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_045/\n\n\n对齐控制点\ndata/tie-points/ROI_45/\n\n\n元数据表中的写法\nROI_45"
+  },
+  {
+    "objectID": "docs/rois/ROI_045.html#mini-rf-条带",
+    "href": "docs/rois/ROI_045.html#mini-rf-条带",
+    "title": "ROI_045",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01395_2CD_EKU_13N009_V1\n官方\n\n\n轨道号\n1395\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-10-16T13:49:05\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n51.65°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n268.20°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n2,189 × 20,315 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.4 m\n实测\n\n\n有效分辨率（方位向）\n18.4 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_045.html#缩略图",
+    "href": "docs/rois/ROI_045.html#缩略图",
+    "title": "ROI_045",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 40.32 ~ 76.68\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -15.05 ~ -5.758 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_45/cropped/ce2/opt.tif、raw/ROI_45/cropped/ce2/sar.tif（2,574 × 19,145 像素），每 32 × 32 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_045.html#本页数字从哪来",
+    "href": "docs/rois/ROI_045.html#本页数字从哪来",
+    "title": "ROI_045",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_047.html",
+    "href": "docs/rois/ROI_047.html",
+    "title": "ROI_047",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n31\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_047/\n\n\n对齐控制点\ndata/tie-points/ROI_47/\n\n\n元数据表中的写法\nROI_47"
+  },
+  {
+    "objectID": "docs/rois/ROI_047.html#概况",
+    "href": "docs/rois/ROI_047.html#概况",
+    "title": "ROI_047",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n31\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_047/\n\n\n对齐控制点\ndata/tie-points/ROI_47/\n\n\n元数据表中的写法\nROI_47"
+  },
+  {
+    "objectID": "docs/rois/ROI_047.html#mini-rf-条带",
+    "href": "docs/rois/ROI_047.html#mini-rf-条带",
+    "title": "ROI_047",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02409_2CD_EKU_47S224_V1\n官方\n\n\n轨道号\n2409\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-01-04T06:55:03\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n54.92°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n86.87°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,728 × 7,329 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.7 m\n实测\n\n\n有效分辨率（方位向）\n18.9 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_047.html#缩略图",
+    "href": "docs/rois/ROI_047.html#缩略图",
+    "title": "ROI_047",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 37.94 ~ 94.93\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.41 ~ -6.274 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_47/cropped/ce2/opt.tif、raw/ROI_47/cropped/ce2/sar.tif（2,897 × 8,400 像素），每 14 × 14 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_047.html#本页数字从哪来",
+    "href": "docs/rois/ROI_047.html#本页数字从哪来",
+    "title": "ROI_047",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_049.html",
+    "href": "docs/rois/ROI_049.html",
+    "title": "ROI_049",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n验证集（Val）\n\n\npatch 对\n113\n\n\n带评测真值点的 patch\n88 / 113（77.9%）\n\n\n评测真值点对数\n706\n\n\n产物目录\nProcessed_Data/Val/ROI_049/\n\n\n对齐控制点\ndata/tie-points/ROI_49/\n\n\n元数据表中的写法\nROI_49"
+  },
+  {
+    "objectID": "docs/rois/ROI_049.html#概况",
+    "href": "docs/rois/ROI_049.html#概况",
+    "title": "ROI_049",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n验证集（Val）\n\n\npatch 对\n113\n\n\n带评测真值点的 patch\n88 / 113（77.9%）\n\n\n评测真值点对数\n706\n\n\n产物目录\nProcessed_Data/Val/ROI_049/\n\n\n对齐控制点\ndata/tie-points/ROI_49/\n\n\n元数据表中的写法\nROI_49"
+  },
+  {
+    "objectID": "docs/rois/ROI_049.html#mini-rf-条带",
+    "href": "docs/rois/ROI_049.html#mini-rf-条带",
+    "title": "ROI_049",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01777_2CD_EKU_17N334_V1\n官方\n\n\n轨道号\n1777\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-11-15T14:19:47\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.47°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.29°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,702 × 66,641 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.1 m\n实测\n\n\n有效分辨率（方位向）\n18.7 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_049.html#缩略图",
+    "href": "docs/rois/ROI_049.html#缩略图",
+    "title": "ROI_049",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 40.63 ~ 74.91\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -16.07 ~ -5.968 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_49/cropped/ce2/opt.tif、raw/ROI_49/cropped/ce2/sar.tif（4,094 × 33,394 像素），每 56 × 56 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_049.html#本页数字从哪来",
+    "href": "docs/rois/ROI_049.html#本页数字从哪来",
+    "title": "ROI_049",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_051.html",
+    "href": "docs/rois/ROI_051.html",
+    "title": "ROI_051",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n196\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_051/\n\n\n对齐控制点\ndata/tie-points/ROI_51/\n\n\n元数据表中的写法\nROI_51"
+  },
+  {
+    "objectID": "docs/rois/ROI_051.html#概况",
+    "href": "docs/rois/ROI_051.html#概况",
+    "title": "ROI_051",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n196\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_051/\n\n\n对齐控制点\ndata/tie-points/ROI_51/\n\n\n元数据表中的写法\nROI_51"
+  },
+  {
+    "objectID": "docs/rois/ROI_051.html#mini-rf-条带",
+    "href": "docs/rois/ROI_051.html#mini-rf-条带",
+    "title": "ROI_051",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01645_2CD_EKU_41N110_V1\n官方\n\n\n轨道号\n1645\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-11-05T05:24:54\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n52.12°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n268.21°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n5,427 × 65,731 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n16.7 m\n实测\n\n\n有效分辨率（方位向）\n18.9 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_051.html#缩略图",
+    "href": "docs/rois/ROI_051.html#缩略图",
+    "title": "ROI_051",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 69.83 ~ 153.9\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -13.43 ~ -4.964 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_51/cropped/ce2/opt.tif、raw/ROI_51/cropped/ce2/sar.tif（5,266 × 35,734 像素），每 60 × 60 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_051.html#本页数字从哪来",
+    "href": "docs/rois/ROI_051.html#本页数字从哪来",
+    "title": "ROI_051",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_053.html",
+    "href": "docs/rois/ROI_053.html",
+    "title": "ROI_053",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n93\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_053/\n\n\n对齐控制点\ndata/tie-points/ROI_53/\n\n\n元数据表中的写法\nROI_53"
+  },
+  {
+    "objectID": "docs/rois/ROI_053.html#概况",
+    "href": "docs/rois/ROI_053.html#概况",
+    "title": "ROI_053",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n93\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_053/\n\n\n对齐控制点\ndata/tie-points/ROI_53/\n\n\n元数据表中的写法\nROI_53"
+  },
+  {
+    "objectID": "docs/rois/ROI_053.html#mini-rf-条带",
+    "href": "docs/rois/ROI_053.html#mini-rf-条带",
+    "title": "ROI_053",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02199_2CD_EKU_01S255_V1\n官方\n\n\n轨道号\n2199\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-12-18T19:44:17\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n49.57°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n270.92°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,010 × 49,215 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.3 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_053.html#缩略图",
+    "href": "docs/rois/ROI_053.html#缩略图",
+    "title": "ROI_053",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 78.02 ~ 132\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -12.91 ~ -4.609 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_53/cropped/ce2/opt.tif、raw/ROI_53/cropped/ce2/sar.tif（2,562 × 33,915 像素），每 57 × 57 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_053.html#本页数字从哪来",
+    "href": "docs/rois/ROI_053.html#本页数字从哪来",
+    "title": "ROI_053",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_055.html",
+    "href": "docs/rois/ROI_055.html",
+    "title": "ROI_055",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n214\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_055/\n\n\n对齐控制点\ndata/tie-points/ROI_55/\n\n\n元数据表中的写法\nROI_55"
+  },
+  {
+    "objectID": "docs/rois/ROI_055.html#概况",
+    "href": "docs/rois/ROI_055.html#概况",
+    "title": "ROI_055",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n214\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_055/\n\n\n对齐控制点\ndata/tie-points/ROI_55/\n\n\n元数据表中的写法\nROI_55"
+  },
+  {
+    "objectID": "docs/rois/ROI_055.html#mini-rf-条带",
+    "href": "docs/rois/ROI_055.html#mini-rf-条带",
+    "title": "ROI_055",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_04755_2CD_EKU_35N135_V1\n官方\n\n\n轨道号\n4755\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2010-07-07T12:06:05\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n50.53°\n官方\n\n\n视向\nRIGHT\n官方\n\n\n视方位角\n91.83°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n5,130 × 65,465 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.2 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_055.html#已知问题",
+    "href": "docs/rois/ROI_055.html#已知问题",
+    "title": "ROI_055",
+    "section": "已知问题",
+    "text": "已知问题\n\n\n\n\n\n\n警告轻度的局部错位\n\n\n\n2026-09-11 的 patch 级配对检验（每个 ROI 抽 24 对）把这几个 ROI 归为「轻度错位」：patch 对的重叠面积中位数 77%~95%，偏移几十像素，错开超过半个 patch 的样本在 10% 以下。同一检验的对照组（ROI_5、ROI_12、ROI_21）重叠面积为 97%~99%。\n这项检验只能当参考（理由见「明显的局部错位」一条），待本人复核。\n同一条还涉及：ROI_002、ROI_003、ROI_010、ROI_015、ROI_023、ROI_026、ROI_027、ROI_048、ROI_054、ROI_056、ROI_065、ROI_068、ROI_069、ROI_078、ROI_079。\n出处：2026-09-11 数据核查会话（配对检验）"
+  },
+  {
+    "objectID": "docs/rois/ROI_055.html#缩略图",
+    "href": "docs/rois/ROI_055.html#缩略图",
+    "title": "ROI_055",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 64.82 ~ 135.1\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -12.74 ~ -5.387 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_55/cropped/ce2/opt.tif、raw/ROI_55/cropped/ce2/sar.tif（4,978 × 35,734 像素），每 60 × 60 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_055.html#本页数字从哪来",
+    "href": "docs/rois/ROI_055.html#本页数字从哪来",
+    "title": "ROI_055",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_057.html",
+    "href": "docs/rois/ROI_057.html",
+    "title": "ROI_057",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n229\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_057/\n\n\n对齐控制点\ndata/tie-points/ROI_57/\n\n\n元数据表中的写法\nROI_57"
+  },
+  {
+    "objectID": "docs/rois/ROI_057.html#概况",
+    "href": "docs/rois/ROI_057.html#概况",
+    "title": "ROI_057",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n训练集（Train）\n\n\npatch 对\n229\n\n\n带评测真值点的 patch\n无（训练集没有评测真值点）\n\n\n评测真值点对数\n—\n\n\n产物目录\nProcessed_Data/Train/ROI_057/\n\n\n对齐控制点\ndata/tie-points/ROI_57/\n\n\n元数据表中的写法\nROI_57"
+  },
+  {
+    "objectID": "docs/rois/ROI_057.html#mini-rf-条带",
+    "href": "docs/rois/ROI_057.html#mini-rf-条带",
+    "title": "ROI_057",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02121_2CD_EKU_28N338_V1\n官方\n\n\n轨道号\n2121\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-12-12T14:56:14\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.26°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n269.18°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,484 × 50,256 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n17.6 m\n实测\n\n\n有效分辨率（方位向）\n18.8 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_057.html#已知问题",
+    "href": "docs/rois/ROI_057.html#已知问题",
+    "title": "ROI_057",
+    "section": "已知问题",
+    "text": "已知问题\n\n\n\n\n\n\n警告CE-2 分幅的投影参数被改错，读取时纠正\n\n\n\n本 ROI 所用的一幅 CE-2 分幅，随附投影文件的 lat_ts 抄成了相邻纬度带的值（E 带应为 35 却写成 21，I 带应为 −21 却写成 −35），像素和 geotransform 没动，整幅图因此被放到几度之外。旧代码在读取时按图幅名纠正，原文件不动；直接用通用 GIS 工具读原始瓦片会得到错误位置。\n本 ROI： 出问题的分幅：E218。\n同一条还涉及：ROI_058、ROI_065、ROI_070、ROI_073。\n出处：旧迁移记录 MIGRATION.md；旧参考文档 DATA_REFERENCE.md §2"
+  },
+  {
+    "objectID": "docs/rois/ROI_057.html#缩略图",
+    "href": "docs/rois/ROI_057.html#缩略图",
+    "title": "ROI_057",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 35.99 ~ 50.86\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -15.75 ~ -8.777 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_57/cropped/ce2/opt.tif、raw/ROI_57/cropped/ce2/sar.tif（4,127 × 59,529 像素），每 100 × 100 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_057.html#本页数字从哪来",
+    "href": "docs/rois/ROI_057.html#本页数字从哪来",
+    "title": "ROI_057",
+    "section": "本页数字从哪来",
+    "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
+  },
+  {
+    "objectID": "docs/rois/ROI_059.html",
+    "href": "docs/rois/ROI_059.html",
+    "title": "ROI_059",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n146\n\n\n带评测真值点的 patch\n140 / 146（95.9%）\n\n\n评测真值点对数\n1,124\n\n\n产物目录\nProcessed_Data/Test/ROI_059/\n\n\n对齐控制点\ndata/tie-points/ROI_59/\n\n\n元数据表中的写法\nROI_59"
+  },
+  {
+    "objectID": "docs/rois/ROI_059.html#概况",
+    "href": "docs/rois/ROI_059.html#概况",
+    "title": "ROI_059",
+    "section": "",
+    "text": "项\n值\n\n\n\n\n所属划分\n测试集（Test）\n\n\npatch 对\n146\n\n\n带评测真值点的 patch\n140 / 146（95.9%）\n\n\n评测真值点对数\n1,124\n\n\n产物目录\nProcessed_Data/Test/ROI_059/\n\n\n对齐控制点\ndata/tie-points/ROI_59/\n\n\n元数据表中的写法\nROI_59"
+  },
+  {
+    "objectID": "docs/rois/ROI_059.html#mini-rf-条带",
+    "href": "docs/rois/ROI_059.html#mini-rf-条带",
+    "title": "ROI_059",
+    "section": "Mini-RF 条带",
+    "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_01740_2CD_EKU_20N011_V1\n官方\n\n\n轨道号\n1740\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-11-12T16:32:16\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.67°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n268.79°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n3,810 × 66,566 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n18.0 m\n实测\n\n\n有效分辨率（方位向）\n19.0 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
+  },
+  {
+    "objectID": "docs/rois/ROI_059.html#缩略图",
+    "href": "docs/rois/ROI_059.html#缩略图",
+    "title": "ROI_059",
+    "section": "缩略图",
+    "text": "缩略图\n\n\n\n\n\n\n光学：灰度值，拉伸区间 33.58 ~ 51.32\n\n\n\n\n\n\n\nSAR：H + V 总功率（dB），拉伸区间 -14.13 ~ -6.723 dB\n\n\n\n\n\n取自对齐影像 raw/ROI_59/cropped/ce2/opt.tif、raw/ROI_59/cropped/ce2/sar.tif（4,213 × 35,001 像素），每 59 × 59 个像素取有效像素的均值并成一个，按行列原样画出；拉伸区间是有效像素的 2% 与 98% 分位。黑色是没有数据的区域，对齐影像按两者的外包框取景，所以 SAR 条带两侧常有大片黑边。"
+  },
+  {
+    "objectID": "docs/rois/ROI_059.html#本页数字从哪来",
+    "href": "docs/rois/ROI_059.html#本页数字从哪来",
+    "title": "ROI_059",
     "section": "本页数字从哪来",
     "text": "本页数字从哪来\n\npatch 数与评测真值点：统计快照 stats/snapshot.json，生成于 2026-09-23T07:25:37+08:00，数据指纹 sha256:521b8fec4c1e1984cf4094fd7f709c51642a15b45b03bca34f569a39f5a038fb。\n条带参数：元数据表 data/metadata/minirf_metadata.csv。\n缩略图：moondata thumbnails 生成于 2026-09-23T08:03:16+08:00。\n已知问题：docs/rois/known-issues.toml（手写，每条注明出处）。"
   },
@@ -2956,13 +2853,6 @@
     "title": "ROI_080",
     "section": "Mini-RF 条带",
     "text": "Mini-RF 条带\n\n\n\n项\n值\n来源\n\n\n\n\n产品 ID\nLSZ_02094_2CD_EKU_50N003_V1\n官方\n\n\n轨道号\n2094\n官方\n\n\n任务阶段\nNOMINAL MISSION\n官方\n\n\n成像时刻（UTC）\n2009-12-10T12:08:35\n官方\n\n\n模式\nZOOM_S\n官方\n\n\n中心频率\n2.3800 GHz\n官方\n\n\n入射角\n53.71°\n官方\n\n\n视向\nLEFT\n官方\n\n\n视方位角\n267.31°\n官方\n\n\n投影\nEQUIRECTANGULAR\n官方\n\n\n地图分辨率\n4096.0 像素/度\n官方\n\n\n原生采样间隔\n7.4032 m\n官方\n\n\n条带尺寸（宽 × 长）\n8,836 × 66,501 像素\n官方\n\n\n波段数\n4\n官方\n\n\n有效分辨率（距离向）\n49.2 m\n实测\n\n\n有效分辨率（方位向）\n18.6 m\n实测\n\n\n\n「官方」取自该条带的 PDS 标签，「实测」是在本数据集影像上量出来的，口径见 data/README.md。"
-  },
-  {
-    "objectID": "docs/rois/ROI_080.html#已知问题",
-    "href": "docs/rois/ROI_080.html#已知问题",
-    "title": "ROI_080",
-    "section": "已知问题",
-    "text": "已知问题\n\n\n\n\n\n\n警告SAR 距离向有效分辨率异常偏粗\n\n\n\n元数据表里距离向实测有效分辨率的中位数是 18.25 m；超过它的 2 倍（36.5 m）即标注于此。方位向没有这种现象。\n旧参考文档 DATA_REFERENCE.md §1.6 记的是 ROI_7、ROI_24、ROI_42、ROI_67、ROI_80 五个（43–51 m），并称「全在 Train」。按本仓库的元数据表：ROI_27 也超过判定线，ROI_7 属测试集、ROI_80 属验证集。两处出入尚未核对。旧文档的记录还有一句：这几条的入射角、视向、模式、投影、ppd 与其余条带没有区别，也不是低对比度场景造成的——原因未查明。\n本 ROI： 本 ROI 距离向 49.2 m，是中位数的 2.7 倍。\n同一条还涉及：ROI_007、ROI_024、ROI_027、ROI_042、ROI_067。\n出处：元数据表 data/metadata/minirf_metadata.csv 的「实测有效分辨率_距离向_m」列"
   },
   {
     "objectID": "docs/rois/ROI_080.html#缩略图",

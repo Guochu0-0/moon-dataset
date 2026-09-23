@@ -24,7 +24,7 @@ def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     return root
 
 
-def test_draws_every_roi_in_the_metadata_table(repo: Path, tmp_path: Path) -> None:
+def test_draws_every_dataset_roi_in_the_metadata_table(repo: Path, tmp_path: Path) -> None:
     drive = tmp_path / "drive"
     aligned = drive / "raw" / "ROI_6" / "cropped" / "ce2"
     write_tiff(aligned / "opt.tif", np.arange(16, dtype=np.uint8).reshape(4, 4) + 1)
@@ -36,7 +36,7 @@ def test_draws_every_roi_in_the_metadata_table(repo: Path, tmp_path: Path) -> No
     assert (out / "ROI_006_optical.png").is_file()
     manifest = json.loads((out / "thumbnails.json").read_text(encoding="utf-8"))
     assert list(manifest["rois"]) == ["ROI_006"]
-    assert list(manifest["missing"]) == ["ROI_060"]
+    assert manifest["missing"] == {}  # 已删除的 ROI_60 不画，不算缺
 
 
 def test_refuses_cleanly_when_the_drive_is_detached(

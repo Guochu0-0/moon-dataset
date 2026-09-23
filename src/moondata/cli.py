@@ -36,7 +36,7 @@ from moondata.errors import (
     RepoRootNotFound,
     StatsUnavailable,
 )
-from moondata.metadata import load_metadata
+from moondata.metadata import dataset_rows, load_metadata
 from moondata.roipages import generate as generate_roi_pages
 from moondata.snapshot import Snapshot, compute_fingerprint, write_snapshot
 from moondata.stats import PRODUCT_DIRNAME, parse_removed_manifest, scan_products
@@ -167,7 +167,7 @@ def _pages(config: Config) -> int:
 def _thumbnails(config: Config) -> int:
     data_root = require_data_root(config)
     repo_root = require_repo_root(config, "要画哪些 ROI 取自仓库里的元数据表")
-    rows = load_metadata(repo_root / METADATA_RELPATH)
+    rows = dataset_rows(load_metadata(repo_root / METADATA_RELPATH))
     out_dir = repo_root / THUMBNAILS_RELDIR
     manifest = generate_thumbnails(
         data_root,
