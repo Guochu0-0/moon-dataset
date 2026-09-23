@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>数据来源 – 月球光学–SAR 配准数据集</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">月球光学–SAR 配准数据集</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">首页</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./sources.html" aria-current="page"> 
+<span class="menu-text">数据来源</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./rois/index.html"> 
+<span class="menu-text">ROI 总表</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#官方文档" id="toc-官方文档" class="nav-link active" data-scroll-target="#官方文档">官方文档</a></li>
+  <li><a href="#mini-rf-sar" id="toc-mini-rf-sar" class="nav-link" data-scroll-target="#mini-rf-sar">Mini-RF SAR</a>
+  <ul class="collapse">
+  <li><a href="#产品-id" id="toc-产品-id" class="nav-link" data-scroll-target="#产品-id">产品 ID</a></li>
+  <li><a href="#波段" id="toc-波段" class="nav-link" data-scroll-target="#波段">波段</a></li>
+  <li><a href="#stokes-参数" id="toc-stokes-参数" class="nav-link" data-scroll-target="#stokes-参数">Stokes 参数</a></li>
+  <li><a href="#仪器参数" id="toc-仪器参数" class="nav-link" data-scroll-target="#仪器参数">仪器参数</a></li>
+  <li><a href="#格式与投影" id="toc-格式与投影" class="nav-link" data-scroll-target="#格式与投影">格式与投影</a></li>
+  </ul></li>
+  <li><a href="#ce-2-光学" id="toc-ce-2-光学" class="nav-link" data-scroll-target="#ce-2-光学">CE-2 光学</a>
+  <ul class="collapse">
+  <li><a href="#投影参数有误的分幅" id="toc-投影参数有误的分幅" class="nav-link" data-scroll-target="#投影参数有误的分幅">投影参数有误的分幅</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">数据来源</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="官方文档" class="level2">
+<h2 class="anchored" data-anchor-id="官方文档">官方文档</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>文档</th>
+<th>版本</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://pds-geosciences.wustl.edu/lro/lro-l-mrflro-4-cdr-v1/lromrf_0001/document/dp_sis/mrflro_dp_sis.pdf">Mini-RF 数据产品 SIS</a></td>
+<td>MRF-4009，2010-02-25</td>
+<td>仪器参数（表 1）、Stokes 参数（§4.3.2.2）、文件命名（§4.7.1.1、表 16）</td>
+</tr>
+<tr class="even">
+<td>Mini-RF 产品标签（<code>.LBL</code>）</td>
+<td><code>DATA_SET_ID = LRO-L-MRFLRO-5-CDR-MAP-V1.0</code></td>
+<td>波段、入射角、视向、投影、特殊值</td>
+</tr>
+<tr class="odd">
+<td><a href="https://pds-geosciences.wustl.edu/lro/lro-l-mrflro-4-cdr-v1/lromrf_0001/catalog/mrflro_4_cdr_v1_0_ds.cat">Mini-RF CDR 数据集说明</a></td>
+<td><code>LRO-L-MRFLRO-4-CDR-V1.0</code>，2011-06-15</td>
+<td>数据集层面的说明</td>
+</tr>
+<tr class="even">
+<td><a href="https://moon.bao.ac.cn/">嫦娥数据发布与信息服务系统</a></td>
+<td>—</td>
+<td>CE-2 7 m DOM 下载入口（证书已过期）</td>
+</tr>
+</tbody>
+</table>
+<p>本数据集的产品标签属于 <code>-5-CDR-MAP</code>（地图投影后的 CDR），数据集说明属于 <code>-4-CDR</code>，两者的数据集 ID 不同。</p>
+</section>
+<section id="mini-rf-sar" class="level2">
+<h2 class="anchored" data-anchor-id="mini-rf-sar">Mini-RF SAR</h2>
+<section id="产品-id" class="level3">
+<h3 class="anchored" data-anchor-id="产品-id">产品 ID</h3>
+<p>产品 ID 同时是文件名。按 SIS §4.7.1.1 与表 16 解码，以 <code>LSZ_02319_2CD_EKU_23S131_V1</code> 为例：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>段</th>
+<th>含义</th>
+<th>本例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>L</code></td>
+<td>平台</td>
+<td>LRO</td>
+</tr>
+<tr class="even">
+<td><code>S</code></td>
+<td>频段</td>
+<td>S 波段</td>
+</tr>
+<tr class="odd">
+<td><code>Z</code></td>
+<td>雷达模式</td>
+<td>Zoom</td>
+</tr>
+<tr class="even">
+<td><code>02319</code></td>
+<td>轨道号</td>
+<td>2319</td>
+</tr>
+<tr class="odd">
+<td><code>2</code></td>
+<td>处理级别</td>
+<td>Level 2</td>
+</tr>
+<tr class="even">
+<td><code>CD</code></td>
+<td>文件类型</td>
+<td>Calibrated Data Record</td>
+</tr>
+<tr class="odd">
+<td><code>E</code></td>
+<td>投影</td>
+<td>Equirectangular</td>
+</tr>
+<tr class="even">
+<td><code>K</code></td>
+<td>分辨率档位</td>
+<td>1024 ppd</td>
+</tr>
+<tr class="odd">
+<td><code>U</code></td>
+<td>数值类型</td>
+<td>Unnormalized float</td>
+</tr>
+<tr class="even">
+<td><code>23</code> <code>S</code></td>
+<td>中心纬度</td>
+<td>23°S</td>
+</tr>
+<tr class="odd">
+<td><code>131</code></td>
+<td>中心经度（东经 0–359°）</td>
+<td>131°E</td>
+</tr>
+<tr class="even">
+<td><code>V1</code></td>
+<td>产品版本</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>全部 67 个条带的档位字母为 <code>K</code>（1024 ppd），产品标签的 <code>MAP_RESOLUTION</code> 为 4096 ppd。以标签为准。</li>
+<li>产品 ID 不含成像时间。成像时间见 GeoTIFF 元数据的 <code>START_TIME</code> 或元数据表的「成像时刻UTC」列。</li>
+</ul>
+</section>
+<section id="波段" class="level3">
+<h3 class="anchored" data-anchor-id="波段">波段</h3>
+<p>混合极化：发射圆极化，相干接收 H、V 两路线极化。4 个 float32 波段，按波段顺序存放（SIS §4.3.2.2.1）。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>波段</th>
+<th><code>BAND_NAME</code></th>
+<th>物理量</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>H RECEIVE INTENSITY</td>
+<td>⟨|E<sub>H</sub>|²⟩，功率</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>V RECEIVE INTENSITY</td>
+<td>⟨|E<sub>V</sub>|²⟩，功率</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>CROSS POWER INTENSITY (REAL)</td>
+<td>Re⟨E<sub>H</sub> E<sub>V</sub>*⟩</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>CROSS POWER INTENSITY (IMAGINARY)</td>
+<td>Im⟨E<sub>H</sub> E<sub>V</sub>*⟩</td>
+</tr>
+</tbody>
+</table>
+<p>波段 3、4 可为负值。</p>
+</section>
+<section id="stokes-参数" class="level3">
+<h3 class="anchored" data-anchor-id="stokes-参数">Stokes 参数</h3>
+<p>SIS §4.3.2.2.1–2：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>S1 <span class="op">=</span> b1 <span class="op">+</span> b2</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>S2 <span class="op">=</span> b1 <span class="op">-</span> b2</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>S3 <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> b3</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>S4 <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">*</span> b4</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>SC  <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (S1 <span class="op">-</span> S4)                        <span class="co"># 同向圆极化</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>OC  <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (S1 <span class="op">+</span> S4)                        <span class="co"># 反向圆极化</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>CPR <span class="op">=</span> SC <span class="op">/</span> OC                                <span class="co"># 圆极化比</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>m   <span class="op">=</span> np.sqrt(S2<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> S3<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> S4<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> S1    <span class="co"># 极化度</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<p>全月平均 CPR 约 0.3，m 约 0.6（SIS §4.3.2.2.2.3）。</p>
+</section>
+<section id="仪器参数" class="level3">
+<h3 class="anchored" data-anchor-id="仪器参数">仪器参数</h3>
+<p>SIS 表 1，S 波段：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>参数</th>
+<th>Zoom</th>
+<th>Baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>频率</td>
+<td>2.38 GHz（12.6 cm）</td>
+<td>同左</td>
+</tr>
+<tr class="even">
+<td>斜距分辨率</td>
+<td>23 m</td>
+<td>115 m</td>
+</tr>
+<tr class="odd">
+<td>地距 / 方位分辨率</td>
+<td>15 × 30（原表无单位）</td>
+<td>150 m</td>
+</tr>
+<tr class="even">
+<td>视数</td>
+<td>8</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>线性调频带宽</td>
+<td>8 MHz</td>
+<td>1.6 MHz</td>
+</tr>
+<tr class="even">
+<td>NESZ</td>
+<td>−25 dB</td>
+<td>−30 dB</td>
+</tr>
+<tr class="odd">
+<td>条带长度</td>
+<td>&lt; 400 km</td>
+<td>同左</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="格式与投影" class="level3">
+<h3 class="anchored" data-anchor-id="格式与投影">格式与投影</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>项</th>
+<th>值</th>
+<th>出处</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>官方格式</td>
+<td>PDS3 <code>IMG</code> + <code>LBL</code>，<code>PC_REAL</code></td>
+<td>产品标签</td>
+</tr>
+<tr class="even">
+<td>空值</td>
+<td><code>CORE_NULL</code> ≈ −3.4028 × 10³⁸</td>
+<td>产品标签</td>
+</tr>
+<tr class="odd">
+<td>投影</td>
+<td>等距圆柱，<code>CENTER_LONGITUDE = 180.0</code></td>
+<td>产品标签</td>
+</tr>
+<tr class="even">
+<td>月球半径</td>
+<td>1737.4 km（球体）</td>
+<td>产品标签</td>
+</tr>
+<tr class="odd">
+<td>采样间隔</td>
+<td>4096 ppd，<code>MAP_SCALE</code> = 7.4032 m</td>
+<td>产品标签</td>
+</tr>
+<tr class="even">
+<td>数据盘格式</td>
+<td>GeoTIFF，标签字段写入 GeoTIFF 元数据</td>
+<td>数据盘 <code>raw/ROI_&lt;n&gt;/minirf/</code></td>
+</tr>
+</tbody>
+</table>
+<p><a href="./rois/ROI_054.html">ROI_054</a> 的 <code>minirf/</code> 目录下有两个 SAR 文件。</p>
+</section>
+</section>
+<section id="ce-2-光学" class="level2">
+<h2 class="anchored" data-anchor-id="ce-2-光学">CE-2 光学</h2>
+<section id="投影参数有误的分幅" class="level3">
+<h3 class="anchored" data-anchor-id="投影参数有误的分幅">投影参数有误的分幅</h3>
+<p>以下 5 幅的 <code>lat_ts</code> 写成了相邻纬度带的值。读取时按幅名纠正，源文件未改。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>分幅</th>
+<th>写成</th>
+<th>应为</th>
+<th>受影响的 ROI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>E215、E218、E219</td>
+<td>21°</td>
+<td>35°</td>
+<td><a href="./rois/ROI_073.html">ROI_073</a>、<a href="./rois/ROI_057.html">ROI_057</a>、<a href="./rois/ROI_058.html">ROI_058</a></td>
+</tr>
+<tr class="even">
+<td>I219、I236</td>
+<td>−35°</td>
+<td>−21°</td>
+<td><a href="./rois/ROI_070.html">ROI_070</a>、<a href="./rois/ROI_065.html">ROI_065</a></td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+
+<div id="proto-bar" style="position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:99999;background:#111;color:#fff;border-radius:20px;padding:6px 10px;font:13px system-ui,'Microsoft YaHei';box-shadow:0 4px 14px #0006;display:flex;gap:8px;align-items:center">
+<span style="opacity:.6">PROTOTYPE</span><a href="../a-quarto/sources.html" style="color:#fff;padding:2px 8px;border-radius:12px;text-decoration:none;background:#0b63c5">A · Quarto</a><a href="../b-mkdocs/sources.html" style="color:#fff;padding:2px 8px;border-radius:12px;text-decoration:none;">B · MkDocs Material</a><a href="../c-handwritten/sources.html" style="color:#fff;padding:2px 8px;border-radius:12px;text-decoration:none;">C · 手写生成器</a></div>
+<script>
+document.addEventListener('keydown',function(e){
+  var t=document.activeElement;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;
+  if(e.key==='ArrowLeft')location.href='../c-handwritten/sources.html';if(e.key==='ArrowRight')location.href='../b-mkdocs/sources.html';
+});
+</script>
+</body></html>

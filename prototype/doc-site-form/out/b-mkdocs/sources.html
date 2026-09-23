@@ -1,0 +1,937 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="rois/index.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>数据来源 - 月球光学–SAR 配准数据集</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="assets/external/unpkg.com/iframe-worker/shim.js"></script>
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="index.html" title="月球光学–SAR 配准数据集" class="md-header__button md-logo" aria-label="月球光学–SAR 配准数据集" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            月球光学–SAR 配准数据集
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              数据来源
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="月球光学–SAR 配准数据集" class="md-nav__button md-logo" aria-label="月球光学–SAR 配准数据集" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    月球光学–SAR 配准数据集
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据来源
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="sources.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据来源
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        官方文档
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mini-rf-sar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mini-RF SAR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mini-RF SAR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        产品 ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        波段
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stokes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stokes 参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        仪器参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        格式与投影
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CE-2 光学
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CE-2 光学">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        投影参数有误的分幅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rois/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROI 总表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        官方文档
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mini-rf-sar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mini-RF SAR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mini-RF SAR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        产品 ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        波段
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stokes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stokes 参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        仪器参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        格式与投影
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CE-2 光学
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CE-2 光学">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        投影参数有误的分幅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">数据来源</h1>
+<h2 id="_2">官方文档</h2>
+<table>
+<thead>
+<tr>
+<th>文档</th>
+<th>版本</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://pds-geosciences.wustl.edu/lro/lro-l-mrflro-4-cdr-v1/lromrf_0001/document/dp_sis/mrflro_dp_sis.pdf">Mini-RF 数据产品 SIS</a></td>
+<td>MRF-4009，2010-02-25</td>
+<td>仪器参数（表 1）、Stokes 参数（§4.3.2.2）、文件命名（§4.7.1.1、表 16）</td>
+</tr>
+<tr>
+<td>Mini-RF 产品标签（<code>.LBL</code>）</td>
+<td><code>DATA_SET_ID = LRO-L-MRFLRO-5-CDR-MAP-V1.0</code></td>
+<td>波段、入射角、视向、投影、特殊值</td>
+</tr>
+<tr>
+<td><a href="https://pds-geosciences.wustl.edu/lro/lro-l-mrflro-4-cdr-v1/lromrf_0001/catalog/mrflro_4_cdr_v1_0_ds.cat">Mini-RF CDR 数据集说明</a></td>
+<td><code>LRO-L-MRFLRO-4-CDR-V1.0</code>，2011-06-15</td>
+<td>数据集层面的说明</td>
+</tr>
+<tr>
+<td><a href="https://moon.bao.ac.cn/">嫦娥数据发布与信息服务系统</a></td>
+<td>—</td>
+<td>CE-2 7 m DOM 下载入口（证书已过期）</td>
+</tr>
+</tbody>
+</table>
+<p>本数据集的产品标签属于 <code>-5-CDR-MAP</code>（地图投影后的 CDR），数据集说明属于 <code>-4-CDR</code>，两者的数据集 ID 不同。</p>
+<h2 id="mini-rf-sar">Mini-RF SAR</h2>
+<h3 id="id">产品 ID</h3>
+<p>产品 ID 同时是文件名。按 SIS §4.7.1.1 与表 16 解码，以 <code>LSZ_02319_2CD_EKU_23S131_V1</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>含义</th>
+<th>本例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>L</code></td>
+<td>平台</td>
+<td>LRO</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td>频段</td>
+<td>S 波段</td>
+</tr>
+<tr>
+<td><code>Z</code></td>
+<td>雷达模式</td>
+<td>Zoom</td>
+</tr>
+<tr>
+<td><code>02319</code></td>
+<td>轨道号</td>
+<td>2319</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>处理级别</td>
+<td>Level 2</td>
+</tr>
+<tr>
+<td><code>CD</code></td>
+<td>文件类型</td>
+<td>Calibrated Data Record</td>
+</tr>
+<tr>
+<td><code>E</code></td>
+<td>投影</td>
+<td>Equirectangular</td>
+</tr>
+<tr>
+<td><code>K</code></td>
+<td>分辨率档位</td>
+<td>1024 ppd</td>
+</tr>
+<tr>
+<td><code>U</code></td>
+<td>数值类型</td>
+<td>Unnormalized float</td>
+</tr>
+<tr>
+<td><code>23</code> <code>S</code></td>
+<td>中心纬度</td>
+<td>23°S</td>
+</tr>
+<tr>
+<td><code>131</code></td>
+<td>中心经度（东经 0–359°）</td>
+<td>131°E</td>
+</tr>
+<tr>
+<td><code>V1</code></td>
+<td>产品版本</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>全部 67 个条带的档位字母为 <code>K</code>（1024 ppd），产品标签的 <code>MAP_RESOLUTION</code> 为 4096 ppd。以标签为准。</li>
+<li>产品 ID 不含成像时间。成像时间见 GeoTIFF 元数据的 <code>START_TIME</code> 或元数据表的「成像时刻UTC」列。</li>
+</ul>
+<h3 id="_3">波段</h3>
+<p>混合极化：发射圆极化，相干接收 H、V 两路线极化。4 个 float32 波段，按波段顺序存放（SIS §4.3.2.2.1）。</p>
+<table>
+<thead>
+<tr>
+<th>波段</th>
+<th><code>BAND_NAME</code></th>
+<th>物理量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>H RECEIVE INTENSITY</td>
+<td>⟨|E<sub>H</sub>|²⟩，功率</td>
+</tr>
+<tr>
+<td>2</td>
+<td>V RECEIVE INTENSITY</td>
+<td>⟨|E<sub>V</sub>|²⟩，功率</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CROSS POWER INTENSITY (REAL)</td>
+<td>Re⟨E<sub>H</sub> E<sub>V</sub>*⟩</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CROSS POWER INTENSITY (IMAGINARY)</td>
+<td>Im⟨E<sub>H</sub> E<sub>V</sub>*⟩</td>
+</tr>
+</tbody>
+</table>
+<p>波段 3、4 可为负值。</p>
+<h3 id="stokes">Stokes 参数</h3>
+<p>SIS §4.3.2.2.1–2：</p>
+<div class="highlight"><pre><span></span><code><span class="n">S1</span> <span class="o">=</span> <span class="n">b1</span> <span class="o">+</span> <span class="n">b2</span>
+<span class="n">S2</span> <span class="o">=</span> <span class="n">b1</span> <span class="o">-</span> <span class="n">b2</span>
+<span class="n">S3</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">b3</span>
+<span class="n">S4</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">b4</span>
+
+<span class="n">SC</span>  <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">S1</span> <span class="o">-</span> <span class="n">S4</span><span class="p">)</span>                        <span class="c1"># 同向圆极化</span>
+<span class="n">OC</span>  <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">S1</span> <span class="o">+</span> <span class="n">S4</span><span class="p">)</span>                        <span class="c1"># 反向圆极化</span>
+<span class="n">CPR</span> <span class="o">=</span> <span class="n">SC</span> <span class="o">/</span> <span class="n">OC</span>                                <span class="c1"># 圆极化比</span>
+<span class="n">m</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">S2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">S3</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">S4</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">S1</span>    <span class="c1"># 极化度</span>
+</code></pre></div>
+<p>全月平均 CPR 约 0.3，m 约 0.6（SIS §4.3.2.2.2.3）。</p>
+<h3 id="_4">仪器参数</h3>
+<p>SIS 表 1，S 波段：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>Zoom</th>
+<th>Baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>频率</td>
+<td>2.38 GHz（12.6 cm）</td>
+<td>同左</td>
+</tr>
+<tr>
+<td>斜距分辨率</td>
+<td>23 m</td>
+<td>115 m</td>
+</tr>
+<tr>
+<td>地距 / 方位分辨率</td>
+<td>15 × 30（原表无单位）</td>
+<td>150 m</td>
+</tr>
+<tr>
+<td>视数</td>
+<td>8</td>
+<td>16</td>
+</tr>
+<tr>
+<td>线性调频带宽</td>
+<td>8 MHz</td>
+<td>1.6 MHz</td>
+</tr>
+<tr>
+<td>NESZ</td>
+<td>−25 dB</td>
+<td>−30 dB</td>
+</tr>
+<tr>
+<td>条带长度</td>
+<td>&lt; 400 km</td>
+<td>同左</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">格式与投影</h3>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>值</th>
+<th>出处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>官方格式</td>
+<td>PDS3 <code>IMG</code> + <code>LBL</code>，<code>PC_REAL</code></td>
+<td>产品标签</td>
+</tr>
+<tr>
+<td>空值</td>
+<td><code>CORE_NULL</code> ≈ −3.4028 × 10³⁸</td>
+<td>产品标签</td>
+</tr>
+<tr>
+<td>投影</td>
+<td>等距圆柱，<code>CENTER_LONGITUDE = 180.0</code></td>
+<td>产品标签</td>
+</tr>
+<tr>
+<td>月球半径</td>
+<td>1737.4 km（球体）</td>
+<td>产品标签</td>
+</tr>
+<tr>
+<td>采样间隔</td>
+<td>4096 ppd，<code>MAP_SCALE</code> = 7.4032 m</td>
+<td>产品标签</td>
+</tr>
+<tr>
+<td>数据盘格式</td>
+<td>GeoTIFF，标签字段写入 GeoTIFF 元数据</td>
+<td>数据盘 <code>raw/ROI_&lt;n&gt;/minirf/</code></td>
+</tr>
+</tbody>
+</table>
+<p><a href="rois/ROI_054.html">ROI_054</a> 的 <code>minirf/</code> 目录下有两个 SAR 文件。</p>
+<h2 id="ce-2">CE-2 光学</h2>
+<h3 id="_6">投影参数有误的分幅</h3>
+<p>以下 5 幅的 <code>lat_ts</code> 写成了相邻纬度带的值。读取时按幅名纠正，源文件未改。</p>
+<table>
+<thead>
+<tr>
+<th>分幅</th>
+<th>写成</th>
+<th>应为</th>
+<th>受影响的 ROI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E215、E218、E219</td>
+<td>21°</td>
+<td>35°</td>
+<td><a href="rois/ROI_073.html">ROI_073</a>、<a href="rois/ROI_057.html">ROI_057</a>、<a href="rois/ROI_058.html">ROI_058</a></td>
+</tr>
+<tr>
+<td>I219、I236</td>
+<td>−35°</td>
+<td>−21°</td>
+<td><a href="rois/ROI_070.html">ROI_070</a>、<a href="rois/ROI_065.html">ROI_065</a></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.top", "toc.follow", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="assets/external/unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+    
+  
+<div id="proto-bar" style="position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:99999;background:#111;color:#fff;border-radius:20px;padding:6px 10px;font:13px system-ui,'Microsoft YaHei';box-shadow:0 4px 14px #0006;display:flex;gap:8px;align-items:center">
+<span style="opacity:.6">PROTOTYPE</span><a href="../a-quarto/sources.html" style="color:#fff;padding:2px 8px;border-radius:12px;text-decoration:none;">A · Quarto</a><a href="../b-mkdocs/sources.html" style="color:#fff;padding:2px 8px;border-radius:12px;text-decoration:none;background:#0b63c5">B · MkDocs Material</a><a href="../c-handwritten/sources.html" style="color:#fff;padding:2px 8px;border-radius:12px;text-decoration:none;">C · 手写生成器</a></div>
+<script>
+document.addEventListener('keydown',function(e){
+  var t=document.activeElement;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;
+  if(e.key==='ArrowLeft')location.href='../a-quarto/sources.html';if(e.key==='ArrowRight')location.href='../c-handwritten/sources.html';
+});
+</script>
+</body>
+</html>

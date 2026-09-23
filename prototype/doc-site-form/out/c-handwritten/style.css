@@ -1,0 +1,19 @@
+
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.7 system-ui,"Microsoft YaHei",sans-serif;color:#222}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid #ddd;padding:8px 20px;display:flex;gap:20px;align-items:center;z-index:5}
+header .site{font-weight:600;color:#222;text-decoration:none}
+header nav a{margin-right:14px;color:#555;text-decoration:none}
+header nav a.here{color:#0b63c5;font-weight:600}
+#q{margin-left:auto;padding:4px 8px;width:220px;border:1px solid #bbb;border-radius:4px}
+#hits{position:absolute;right:20px;top:44px;width:420px;max-height:70vh;overflow:auto;background:#fff;border:1px solid #ccc;box-shadow:0 4px 16px #0002;display:none}
+#hits a{display:block;padding:8px 12px;border-bottom:1px solid #eee;color:#222;text-decoration:none}
+#hits a:hover{background:#f3f7fc}#hits b{color:#0b63c5}#hits small{color:#666}
+.wrap{display:flex;max-width:1200px;margin:0 auto}
+main{flex:1;min-width:0;padding:10px 32px 80px}
+aside{width:220px;padding:20px 10px;font-size:13px;position:sticky;top:50px;align-self:flex-start;max-height:calc(100vh - 60px);overflow:auto}
+aside a{display:block;color:#555;text-decoration:none;padding:2px 0}aside a.l3{padding-left:12px}
+h1{font-size:1.7em;margin:.8em 0 .4em}h2{border-bottom:1px solid #eee;padding-bottom:4px;margin-top:1.8em}
+table{border-collapse:collapse;margin:1em 0;font-size:14px}th,td{border:1px solid #ddd;padding:4px 10px}th{background:#f5f5f5}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px;font-size:.92em}pre{background:#f6f8fa;padding:12px;overflow:auto}pre code{background:none}
+img{max-width:48%;margin-right:1%;vertical-align:top;border:1px solid #ddd}
