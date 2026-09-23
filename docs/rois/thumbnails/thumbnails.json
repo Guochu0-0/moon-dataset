@@ -1,0 +1,2187 @@
+{
+  "generated_at": "2026-09-23T08:03:16+08:00",
+  "max_side": 600,
+  "percentiles": [
+    2.0,
+    98.0
+  ],
+  "rois": {
+    "ROI_001": {
+      "optical": {
+        "file": "ROI_001_optical.png",
+        "source": "raw/ROI_1/cropped/ce2/opt.tif",
+        "source_size": [
+          3189,
+          9928
+        ],
+        "step": 17,
+        "shown": "灰度值",
+        "stretch": [
+          58.6275,
+          118.4464
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_001_sar.png",
+        "source": "raw/ROI_1/cropped/ce2/sar.tif",
+        "source_size": [
+          3189,
+          9928
+        ],
+        "step": 17,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.6554,
+          -6.3803
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_002": {
+      "optical": {
+        "file": "ROI_002_optical.png",
+        "source": "raw/ROI_2/cropped/ce2/opt.tif",
+        "source_size": [
+          2713,
+          24903
+        ],
+        "step": 42,
+        "shown": "灰度值",
+        "stretch": [
+          69.6872,
+          116.9556
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_002_sar.png",
+        "source": "raw/ROI_2/cropped/ce2/sar.tif",
+        "source_size": [
+          2713,
+          24903
+        ],
+        "step": 42,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.3581,
+          -6.7231
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_003": {
+      "optical": {
+        "file": "ROI_003_optical.png",
+        "source": "raw/ROI_3/cropped/ce2/opt.tif",
+        "source_size": [
+          9788,
+          34128
+        ],
+        "step": 57,
+        "shown": "灰度值",
+        "stretch": [
+          3.2702,
+          136.5906
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_003_sar.png",
+        "source": "raw/ROI_3/cropped/ce2/sar.tif",
+        "source_size": [
+          9788,
+          34128
+        ],
+        "step": 57,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.8081,
+          -6.9326
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_005": {
+      "optical": {
+        "file": "ROI_005_optical.png",
+        "source": "raw/ROI_5/cropped/ce2/opt.tif",
+        "source_size": [
+          4568,
+          34245
+        ],
+        "step": 58,
+        "shown": "灰度值",
+        "stretch": [
+          36.0419,
+          66.847
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_005_sar.png",
+        "source": "raw/ROI_5/cropped/ce2/sar.tif",
+        "source_size": [
+          4568,
+          34245
+        ],
+        "step": 58,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -16.2159,
+          -6.695
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_006": {
+      "optical": {
+        "file": "ROI_006_optical.png",
+        "source": "raw/ROI_6/cropped/ce2/opt.tif",
+        "source_size": [
+          3622,
+          12748
+        ],
+        "step": 22,
+        "shown": "灰度值",
+        "stretch": [
+          65.3014,
+          111.7618
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_006_sar.png",
+        "source": "raw/ROI_6/cropped/ce2/sar.tif",
+        "source_size": [
+          3622,
+          12748
+        ],
+        "step": 22,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.5788,
+          -5.2184
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_007": {
+      "optical": {
+        "file": "ROI_007_optical.png",
+        "source": "raw/ROI_7/cropped/ce2/opt.tif",
+        "source_size": [
+          5570,
+          66654
+        ],
+        "step": 112,
+        "shown": "灰度值",
+        "stretch": [
+          48.6142,
+          125.0683
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_007_sar.png",
+        "source": "raw/ROI_7/cropped/ce2/sar.tif",
+        "source_size": [
+          5570,
+          66654
+        ],
+        "step": 112,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.3236,
+          -5.2845
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_008": {
+      "optical": {
+        "file": "ROI_008_optical.png",
+        "source": "raw/ROI_8/cropped/ce2/opt.tif",
+        "source_size": [
+          3895,
+          68290
+        ],
+        "step": 114,
+        "shown": "灰度值",
+        "stretch": [
+          74.4943,
+          139.2282
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_008_sar.png",
+        "source": "raw/ROI_8/cropped/ce2/sar.tif",
+        "source_size": [
+          3895,
+          68290
+        ],
+        "step": 114,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.3639,
+          -4.4916
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_009": {
+      "optical": {
+        "file": "ROI_009_optical.png",
+        "source": "raw/ROI_9/cropped/ce2/opt.tif",
+        "source_size": [
+          2211,
+          33916
+        ],
+        "step": 57,
+        "shown": "灰度值",
+        "stretch": [
+          47.0339,
+          93.2362
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_009_sar.png",
+        "source": "raw/ROI_9/cropped/ce2/sar.tif",
+        "source_size": [
+          2211,
+          33916
+        ],
+        "step": 57,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.7475,
+          -6.3115
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_010": {
+      "optical": {
+        "file": "ROI_010_optical.png",
+        "source": "raw/ROI_10/cropped/ce2/opt.tif",
+        "source_size": [
+          4021,
+          33036
+        ],
+        "step": 56,
+        "shown": "灰度值",
+        "stretch": [
+          58.727,
+          107.1904
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_010_sar.png",
+        "source": "raw/ROI_10/cropped/ce2/sar.tif",
+        "source_size": [
+          4021,
+          33036
+        ],
+        "step": 56,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.62,
+          -5.6422
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_011": {
+      "optical": {
+        "file": "ROI_011_optical.png",
+        "source": "raw/ROI_11/cropped/ce2/opt.tif",
+        "source_size": [
+          3761,
+          29483
+        ],
+        "step": 50,
+        "shown": "灰度值",
+        "stretch": [
+          63.0332,
+          101.4335
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_011_sar.png",
+        "source": "raw/ROI_11/cropped/ce2/sar.tif",
+        "source_size": [
+          3761,
+          29483
+        ],
+        "step": 50,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.995,
+          -4.6206
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_012": {
+      "optical": {
+        "file": "ROI_012_optical.png",
+        "source": "raw/ROI_12/cropped/ce2/opt.tif",
+        "source_size": [
+          3389,
+          16373
+        ],
+        "step": 28,
+        "shown": "灰度值",
+        "stretch": [
+          30.3151,
+          72.4908
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_012_sar.png",
+        "source": "raw/ROI_12/cropped/ce2/sar.tif",
+        "source_size": [
+          3389,
+          16373
+        ],
+        "step": 28,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.435,
+          -4.6331
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_013": {
+      "optical": {
+        "file": "ROI_013_optical.png",
+        "source": "raw/ROI_13/cropped/ce2/opt.tif",
+        "source_size": [
+          4189,
+          11987
+        ],
+        "step": 20,
+        "shown": "灰度值",
+        "stretch": [
+          41.2044,
+          102.1115
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_013_sar.png",
+        "source": "raw/ROI_13/cropped/ce2/sar.tif",
+        "source_size": [
+          4189,
+          11987
+        ],
+        "step": 20,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.3497,
+          -5.1928
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_015": {
+      "optical": {
+        "file": "ROI_015_optical.png",
+        "source": "raw/ROI_15/cropped/ce2/opt.tif",
+        "source_size": [
+          4518,
+          30679
+        ],
+        "step": 52,
+        "shown": "灰度值",
+        "stretch": [
+          31.4512,
+          121.097
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_015_sar.png",
+        "source": "raw/ROI_15/cropped/ce2/sar.tif",
+        "source_size": [
+          4518,
+          30679
+        ],
+        "step": 52,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -17.9987,
+          -5.44
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_016": {
+      "optical": {
+        "file": "ROI_016_optical.png",
+        "source": "raw/ROI_16/cropped/ce2/opt.tif",
+        "source_size": [
+          11444,
+          39190
+        ],
+        "step": 66,
+        "shown": "灰度值",
+        "stretch": [
+          1.0,
+          165.1099
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_016_sar.png",
+        "source": "raw/ROI_16/cropped/ce2/sar.tif",
+        "source_size": [
+          11444,
+          39190
+        ],
+        "step": 66,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.3546,
+          -4.649
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_017": {
+      "optical": {
+        "file": "ROI_017_optical.png",
+        "source": "raw/ROI_17/cropped/ce2/opt.tif",
+        "source_size": [
+          3757,
+          36396
+        ],
+        "step": 61,
+        "shown": "灰度值",
+        "stretch": [
+          79.2379,
+          120.7147
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_017_sar.png",
+        "source": "raw/ROI_17/cropped/ce2/sar.tif",
+        "source_size": [
+          3757,
+          36396
+        ],
+        "step": 61,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.6067,
+          -4.7143
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_018": {
+      "optical": {
+        "file": "ROI_018_optical.png",
+        "source": "raw/ROI_18/cropped/ce2/opt.tif",
+        "source_size": [
+          7024,
+          31343
+        ],
+        "step": 53,
+        "shown": "灰度值",
+        "stretch": [
+          68.6562,
+          153.2507
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_018_sar.png",
+        "source": "raw/ROI_18/cropped/ce2/sar.tif",
+        "source_size": [
+          7024,
+          31343
+        ],
+        "step": 53,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.2994,
+          -5.5905
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_020": {
+      "optical": {
+        "file": "ROI_020_optical.png",
+        "source": "raw/ROI_20/cropped/ce2/opt.tif",
+        "source_size": [
+          5341,
+          31991
+        ],
+        "step": 54,
+        "shown": "灰度值",
+        "stretch": [
+          59.0011,
+          99.9846
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_020_sar.png",
+        "source": "raw/ROI_20/cropped/ce2/sar.tif",
+        "source_size": [
+          5341,
+          31991
+        ],
+        "step": 54,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.5099,
+          -5.6492
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_021": {
+      "optical": {
+        "file": "ROI_021_optical.png",
+        "source": "raw/ROI_21/cropped/ce2/opt.tif",
+        "source_size": [
+          2497,
+          33916
+        ],
+        "step": 57,
+        "shown": "灰度值",
+        "stretch": [
+          34.7105,
+          47.866
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_021_sar.png",
+        "source": "raw/ROI_21/cropped/ce2/sar.tif",
+        "source_size": [
+          2497,
+          33916
+        ],
+        "step": 57,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.3018,
+          -5.974
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_023": {
+      "optical": {
+        "file": "ROI_023_optical.png",
+        "source": "raw/ROI_23/cropped/ce2/opt.tif",
+        "source_size": [
+          4540,
+          32793
+        ],
+        "step": 55,
+        "shown": "灰度值",
+        "stretch": [
+          67.5561,
+          114.2493
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_023_sar.png",
+        "source": "raw/ROI_23/cropped/ce2/sar.tif",
+        "source_size": [
+          4540,
+          32793
+        ],
+        "step": 55,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.1398,
+          -5.4813
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_024": {
+      "optical": {
+        "file": "ROI_024_optical.png",
+        "source": "raw/ROI_24/cropped/ce2/opt.tif",
+        "source_size": [
+          8666,
+          36859
+        ],
+        "step": 62,
+        "shown": "灰度值",
+        "stretch": [
+          36.9915,
+          117.525
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_024_sar.png",
+        "source": "raw/ROI_24/cropped/ce2/sar.tif",
+        "source_size": [
+          8666,
+          36859
+        ],
+        "step": 62,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.7521,
+          -3.8231
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_025": {
+      "optical": {
+        "file": "ROI_025_optical.png",
+        "source": "raw/ROI_25/cropped/ce2/opt.tif",
+        "source_size": [
+          4033,
+          39190
+        ],
+        "step": 66,
+        "shown": "灰度值",
+        "stretch": [
+          23.9988,
+          138.7581
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_025_sar.png",
+        "source": "raw/ROI_25/cropped/ce2/sar.tif",
+        "source_size": [
+          4033,
+          39190
+        ],
+        "step": 66,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -16.1103,
+          -6.0571
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_026": {
+      "optical": {
+        "file": "ROI_026_optical.png",
+        "source": "raw/ROI_26/cropped/ce2/opt.tif",
+        "source_size": [
+          4024,
+          33916
+        ],
+        "step": 57,
+        "shown": "灰度值",
+        "stretch": [
+          76.0504,
+          124.5491
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_026_sar.png",
+        "source": "raw/ROI_26/cropped/ce2/sar.tif",
+        "source_size": [
+          4024,
+          33916
+        ],
+        "step": 57,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.3467,
+          -4.272
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_027": {
+      "optical": {
+        "file": "ROI_027_optical.png",
+        "source": "raw/ROI_27/cropped/ce2/opt.tif",
+        "source_size": [
+          6949,
+          39190
+        ],
+        "step": 66,
+        "shown": "灰度值",
+        "stretch": [
+          1.0,
+          140.5931
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_027_sar.png",
+        "source": "raw/ROI_27/cropped/ce2/sar.tif",
+        "source_size": [
+          6949,
+          39190
+        ],
+        "step": 66,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -17.7826,
+          -6.9719
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_030": {
+      "optical": {
+        "file": "ROI_030_optical.png",
+        "source": "raw/ROI_30/cropped/ce2/opt.tif",
+        "source_size": [
+          2212,
+          23187
+        ],
+        "step": 39,
+        "shown": "灰度值",
+        "stretch": [
+          39.044,
+          66.1091
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_030_sar.png",
+        "source": "raw/ROI_30/cropped/ce2/sar.tif",
+        "source_size": [
+          2212,
+          23187
+        ],
+        "step": 39,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.7613,
+          -6.6311
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_031": {
+      "optical": {
+        "file": "ROI_031_optical.png",
+        "source": "raw/ROI_31/cropped/ce2/opt.tif",
+        "source_size": [
+          2848,
+          35734
+        ],
+        "step": 60,
+        "shown": "灰度值",
+        "stretch": [
+          36.972,
+          78.9748
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_031_sar.png",
+        "source": "raw/ROI_31/cropped/ce2/sar.tif",
+        "source_size": [
+          2848,
+          35734
+        ],
+        "step": 60,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.6936,
+          -6.839
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_033": {
+      "optical": {
+        "file": "ROI_033_optical.png",
+        "source": "raw/ROI_33/cropped/ce2/opt.tif",
+        "source_size": [
+          6240,
+          36859
+        ],
+        "step": 62,
+        "shown": "灰度值",
+        "stretch": [
+          43.9188,
+          102.5841
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_033_sar.png",
+        "source": "raw/ROI_33/cropped/ce2/sar.tif",
+        "source_size": [
+          6240,
+          36859
+        ],
+        "step": 62,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -11.7724,
+          -5.6042
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_034": {
+      "optical": {
+        "file": "ROI_034_optical.png",
+        "source": "raw/ROI_34/cropped/ce2/opt.tif",
+        "source_size": [
+          7191,
+          17599
+        ],
+        "step": 30,
+        "shown": "灰度值",
+        "stretch": [
+          36.6113,
+          92.3383
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_034_sar.png",
+        "source": "raw/ROI_34/cropped/ce2/sar.tif",
+        "source_size": [
+          7191,
+          17599
+        ],
+        "step": 30,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -11.8259,
+          -5.0622
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_035": {
+      "optical": {
+        "file": "ROI_035_optical.png",
+        "source": "raw/ROI_35/cropped/ce2/opt.tif",
+        "source_size": [
+          4725,
+          35001
+        ],
+        "step": 59,
+        "shown": "灰度值",
+        "stretch": [
+          54.0767,
+          113.7874
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_035_sar.png",
+        "source": "raw/ROI_35/cropped/ce2/sar.tif",
+        "source_size": [
+          4725,
+          35001
+        ],
+        "step": 59,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -11.89,
+          -5.2836
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_037": {
+      "optical": {
+        "file": "ROI_037_optical.png",
+        "source": "raw/ROI_37/cropped/ce2/opt.tif",
+        "source_size": [
+          3094,
+          34429
+        ],
+        "step": 58,
+        "shown": "灰度值",
+        "stretch": [
+          36.5347,
+          71.2772
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_037_sar.png",
+        "source": "raw/ROI_37/cropped/ce2/sar.tif",
+        "source_size": [
+          3094,
+          34429
+        ],
+        "step": 58,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.3662,
+          -7.2653
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_038": {
+      "optical": {
+        "file": "ROI_038_optical.png",
+        "source": "raw/ROI_38/cropped/ce2/opt.tif",
+        "source_size": [
+          3196,
+          20085
+        ],
+        "step": 34,
+        "shown": "灰度值",
+        "stretch": [
+          38.1981,
+          51.0518
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_038_sar.png",
+        "source": "raw/ROI_38/cropped/ce2/sar.tif",
+        "source_size": [
+          3196,
+          20085
+        ],
+        "step": 34,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.5217,
+          -7.0142
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_042": {
+      "optical": {
+        "file": "ROI_042_optical.png",
+        "source": "raw/ROI_42/cropped/ce2/opt.tif",
+        "source_size": [
+          3439,
+          7872
+        ],
+        "step": 14,
+        "shown": "灰度值",
+        "stretch": [
+          46.9113,
+          149.7806
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_042_sar.png",
+        "source": "raw/ROI_42/cropped/ce2/sar.tif",
+        "source_size": [
+          3439,
+          7872
+        ],
+        "step": 14,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.7721,
+          -6.3334
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_043": {
+      "optical": {
+        "file": "ROI_043_optical.png",
+        "source": "raw/ROI_43/cropped/ce2/opt.tif",
+        "source_size": [
+          2692,
+          15816
+        ],
+        "step": 27,
+        "shown": "灰度值",
+        "stretch": [
+          56.0864,
+          119.3147
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_043_sar.png",
+        "source": "raw/ROI_43/cropped/ce2/sar.tif",
+        "source_size": [
+          2692,
+          15816
+        ],
+        "step": 27,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.8354,
+          -4.0656
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_045": {
+      "optical": {
+        "file": "ROI_045_optical.png",
+        "source": "raw/ROI_45/cropped/ce2/opt.tif",
+        "source_size": [
+          2574,
+          19145
+        ],
+        "step": 32,
+        "shown": "灰度值",
+        "stretch": [
+          40.3165,
+          76.6803
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_045_sar.png",
+        "source": "raw/ROI_45/cropped/ce2/sar.tif",
+        "source_size": [
+          2574,
+          19145
+        ],
+        "step": 32,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.0515,
+          -5.7584
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_046": {
+      "optical": {
+        "file": "ROI_046_optical.png",
+        "source": "raw/ROI_46/cropped/ce2/opt.tif",
+        "source_size": [
+          5194,
+          35734
+        ],
+        "step": 60,
+        "shown": "灰度值",
+        "stretch": [
+          47.9979,
+          122.582
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_046_sar.png",
+        "source": "raw/ROI_46/cropped/ce2/sar.tif",
+        "source_size": [
+          5194,
+          35734
+        ],
+        "step": 60,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.7298,
+          -5.1251
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_047": {
+      "optical": {
+        "file": "ROI_047_optical.png",
+        "source": "raw/ROI_47/cropped/ce2/opt.tif",
+        "source_size": [
+          2897,
+          8400
+        ],
+        "step": 14,
+        "shown": "灰度值",
+        "stretch": [
+          37.9386,
+          94.9337
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_047_sar.png",
+        "source": "raw/ROI_47/cropped/ce2/sar.tif",
+        "source_size": [
+          2897,
+          8400
+        ],
+        "step": 14,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.4051,
+          -6.2744
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_048": {
+      "optical": {
+        "file": "ROI_048_optical.png",
+        "source": "raw/ROI_48/cropped/ce2/opt.tif",
+        "source_size": [
+          1287,
+          18896
+        ],
+        "step": 32,
+        "shown": "灰度值",
+        "stretch": [
+          85.7501,
+          123.9843
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_048_sar.png",
+        "source": "raw/ROI_48/cropped/ce2/sar.tif",
+        "source_size": [
+          1287,
+          18896
+        ],
+        "step": 32,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.3558,
+          -6.5144
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_049": {
+      "optical": {
+        "file": "ROI_049_optical.png",
+        "source": "raw/ROI_49/cropped/ce2/opt.tif",
+        "source_size": [
+          4094,
+          33394
+        ],
+        "step": 56,
+        "shown": "灰度值",
+        "stretch": [
+          40.6305,
+          74.9127
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_049_sar.png",
+        "source": "raw/ROI_49/cropped/ce2/sar.tif",
+        "source_size": [
+          4094,
+          33394
+        ],
+        "step": 56,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -16.065,
+          -5.9679
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_050": {
+      "optical": {
+        "file": "ROI_050_optical.png",
+        "source": "raw/ROI_50/cropped/ce2/opt.tif",
+        "source_size": [
+          3215,
+          33394
+        ],
+        "step": 56,
+        "shown": "灰度值",
+        "stretch": [
+          67.9737,
+          123.7868
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_050_sar.png",
+        "source": "raw/ROI_50/cropped/ce2/sar.tif",
+        "source_size": [
+          3215,
+          33394
+        ],
+        "step": 56,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.9599,
+          -5.0852
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_051": {
+      "optical": {
+        "file": "ROI_051_optical.png",
+        "source": "raw/ROI_51/cropped/ce2/opt.tif",
+        "source_size": [
+          5266,
+          35734
+        ],
+        "step": 60,
+        "shown": "灰度值",
+        "stretch": [
+          69.8321,
+          153.8744
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_051_sar.png",
+        "source": "raw/ROI_51/cropped/ce2/sar.tif",
+        "source_size": [
+          5266,
+          35734
+        ],
+        "step": 60,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.4254,
+          -4.9636
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_052": {
+      "optical": {
+        "file": "ROI_052_optical.png",
+        "source": "raw/ROI_52/cropped/ce2/opt.tif",
+        "source_size": [
+          4780,
+          28874
+        ],
+        "step": 49,
+        "shown": "灰度值",
+        "stretch": [
+          71.2099,
+          109.8701
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_052_sar.png",
+        "source": "raw/ROI_52/cropped/ce2/sar.tif",
+        "source_size": [
+          4780,
+          28874
+        ],
+        "step": 49,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.2511,
+          -5.0475
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_053": {
+      "optical": {
+        "file": "ROI_053_optical.png",
+        "source": "raw/ROI_53/cropped/ce2/opt.tif",
+        "source_size": [
+          2562,
+          33915
+        ],
+        "step": 57,
+        "shown": "灰度值",
+        "stretch": [
+          78.0233,
+          132.0482
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_053_sar.png",
+        "source": "raw/ROI_53/cropped/ce2/sar.tif",
+        "source_size": [
+          2562,
+          33915
+        ],
+        "step": 57,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.9053,
+          -4.6086
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_054": {
+      "optical": {
+        "file": "ROI_054_optical.png",
+        "source": "raw/ROI_54/cropped/ce2/opt.tif",
+        "source_size": [
+          3251,
+          33915
+        ],
+        "step": 57,
+        "shown": "灰度值",
+        "stretch": [
+          77.9937,
+          129.1842
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_054_sar.png",
+        "source": "raw/ROI_54/cropped/ce2/sar.tif",
+        "source_size": [
+          3251,
+          33915
+        ],
+        "step": 57,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.7923,
+          -4.499
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_055": {
+      "optical": {
+        "file": "ROI_055_optical.png",
+        "source": "raw/ROI_55/cropped/ce2/opt.tif",
+        "source_size": [
+          4978,
+          35734
+        ],
+        "step": 60,
+        "shown": "灰度值",
+        "stretch": [
+          64.8231,
+          135.1061
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_055_sar.png",
+        "source": "raw/ROI_55/cropped/ce2/sar.tif",
+        "source_size": [
+          4978,
+          35734
+        ],
+        "step": 60,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.7449,
+          -5.3873
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_056": {
+      "optical": {
+        "file": "ROI_056_optical.png",
+        "source": "raw/ROI_56/cropped/ce2/opt.tif",
+        "source_size": [
+          3359,
+          48899
+        ],
+        "step": 82,
+        "shown": "灰度值",
+        "stretch": [
+          77.4956,
+          124.018
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_056_sar.png",
+        "source": "raw/ROI_56/cropped/ce2/sar.tif",
+        "source_size": [
+          3359,
+          48899
+        ],
+        "step": 82,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.3846,
+          -5.2814
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_057": {
+      "optical": {
+        "file": "ROI_057_optical.png",
+        "source": "raw/ROI_57/cropped/ce2/opt.tif",
+        "source_size": [
+          4127,
+          59529
+        ],
+        "step": 100,
+        "shown": "灰度值",
+        "stretch": [
+          35.9875,
+          50.8581
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_057_sar.png",
+        "source": "raw/ROI_57/cropped/ce2/sar.tif",
+        "source_size": [
+          4127,
+          59529
+        ],
+        "step": 100,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.7525,
+          -8.7769
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_058": {
+      "optical": {
+        "file": "ROI_058_optical.png",
+        "source": "raw/ROI_58/cropped/ce2/opt.tif",
+        "source_size": [
+          4733,
+          43653
+        ],
+        "step": 73,
+        "shown": "灰度值",
+        "stretch": [
+          38.0566,
+          51.6968
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_058_sar.png",
+        "source": "raw/ROI_58/cropped/ce2/sar.tif",
+        "source_size": [
+          4733,
+          43653
+        ],
+        "step": 73,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.3502,
+          -6.1132
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_059": {
+      "optical": {
+        "file": "ROI_059_optical.png",
+        "source": "raw/ROI_59/cropped/ce2/opt.tif",
+        "source_size": [
+          4213,
+          35001
+        ],
+        "step": 59,
+        "shown": "灰度值",
+        "stretch": [
+          33.5844,
+          51.3199
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_059_sar.png",
+        "source": "raw/ROI_59/cropped/ce2/sar.tif",
+        "source_size": [
+          4213,
+          35001
+        ],
+        "step": 59,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.1323,
+          -6.7234
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_060": {
+      "optical": {
+        "file": "ROI_060_optical.png",
+        "source": "raw/ROI_60/cropped/ce2/opt.tif",
+        "source_size": [
+          3094,
+          34429
+        ],
+        "step": 58,
+        "shown": "灰度值",
+        "stretch": [
+          36.5347,
+          71.2772
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_060_sar.png",
+        "source": "raw/ROI_60/cropped/ce2/sar.tif",
+        "source_size": [
+          3094,
+          34429
+        ],
+        "step": 58,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.3662,
+          -7.2653
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_061": {
+      "optical": {
+        "file": "ROI_061_optical.png",
+        "source": "raw/ROI_61/cropped/ce2/opt.tif",
+        "source_size": [
+          4424,
+          32793
+        ],
+        "step": 55,
+        "shown": "灰度值",
+        "stretch": [
+          36.9126,
+          48.7862
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_061_sar.png",
+        "source": "raw/ROI_61/cropped/ce2/sar.tif",
+        "source_size": [
+          4424,
+          32793
+        ],
+        "step": 55,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.6585,
+          -7.5239
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_062": {
+      "optical": {
+        "file": "ROI_062_optical.png",
+        "source": "raw/ROI_62/cropped/ce2/opt.tif",
+        "source_size": [
+          3545,
+          32793
+        ],
+        "step": 55,
+        "shown": "灰度值",
+        "stretch": [
+          35.5977,
+          46.895
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_062_sar.png",
+        "source": "raw/ROI_62/cropped/ce2/sar.tif",
+        "source_size": [
+          3545,
+          32793
+        ],
+        "step": 55,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.3108,
+          -7.1029
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_063": {
+      "optical": {
+        "file": "ROI_063_optical.png",
+        "source": "raw/ROI_63/cropped/ce2/opt.tif",
+        "source_size": [
+          4786,
+          27967
+        ],
+        "step": 47,
+        "shown": "灰度值",
+        "stretch": [
+          45.0566,
+          77.9525
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_063_sar.png",
+        "source": "raw/ROI_63/cropped/ce2/sar.tif",
+        "source_size": [
+          4786,
+          27967
+        ],
+        "step": 47,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.6679,
+          -7.1138
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_064": {
+      "optical": {
+        "file": "ROI_064_optical.png",
+        "source": "raw/ROI_64/cropped/ce2/opt.tif",
+        "source_size": [
+          4304,
+          25681
+        ],
+        "step": 43,
+        "shown": "灰度值",
+        "stretch": [
+          36.8053,
+          86.1604
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_064_sar.png",
+        "source": "raw/ROI_64/cropped/ce2/sar.tif",
+        "source_size": [
+          4304,
+          25681
+        ],
+        "step": 43,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.0413,
+          -6.1085
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_065": {
+      "optical": {
+        "file": "ROI_065_optical.png",
+        "source": "raw/ROI_65/cropped/ce2/opt.tif",
+        "source_size": [
+          5270,
+          50254
+        ],
+        "step": 84,
+        "shown": "灰度值",
+        "stretch": [
+          44.8424,
+          98.4398
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_065_sar.png",
+        "source": "raw/ROI_65/cropped/ce2/sar.tif",
+        "source_size": [
+          5270,
+          50254
+        ],
+        "step": 84,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.8043,
+          -6.2889
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_066": {
+      "optical": {
+        "file": "ROI_066_optical.png",
+        "source": "raw/ROI_66/cropped/ce2/opt.tif",
+        "source_size": [
+          2230,
+          41006
+        ],
+        "step": 69,
+        "shown": "灰度值",
+        "stretch": [
+          62.5005,
+          95.7998
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_066_sar.png",
+        "source": "raw/ROI_66/cropped/ce2/sar.tif",
+        "source_size": [
+          2230,
+          41006
+        ],
+        "step": 69,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.2332,
+          -5.7941
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_067": {
+      "optical": {
+        "file": "ROI_067_optical.png",
+        "source": "raw/ROI_67/cropped/ce2/opt.tif",
+        "source_size": [
+          5345,
+          36859
+        ],
+        "step": 62,
+        "shown": "灰度值",
+        "stretch": [
+          48.5542,
+          100.368
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_067_sar.png",
+        "source": "raw/ROI_67/cropped/ce2/sar.tif",
+        "source_size": [
+          5345,
+          36859
+        ],
+        "step": 62,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -16.9532,
+          -5.7733
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_068": {
+      "optical": {
+        "file": "ROI_068_optical.png",
+        "source": "raw/ROI_68/cropped/ce2/opt.tif",
+        "source_size": [
+          2538,
+          31776
+        ],
+        "step": 53,
+        "shown": "灰度值",
+        "stretch": [
+          55.7022,
+          103.4846
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_068_sar.png",
+        "source": "raw/ROI_68/cropped/ce2/sar.tif",
+        "source_size": [
+          2538,
+          31776
+        ],
+        "step": 53,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.2892,
+          -4.563
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_069": {
+      "optical": {
+        "file": "ROI_069_optical.png",
+        "source": "raw/ROI_69/cropped/ce2/opt.tif",
+        "source_size": [
+          2939,
+          49078
+        ],
+        "step": 82,
+        "shown": "灰度值",
+        "stretch": [
+          68.8169,
+          125.3261
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_069_sar.png",
+        "source": "raw/ROI_69/cropped/ce2/sar.tif",
+        "source_size": [
+          2939,
+          49078
+        ],
+        "step": 82,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.763,
+          -6.5493
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_070": {
+      "optical": {
+        "file": "ROI_070_optical.png",
+        "source": "raw/ROI_70/cropped/ce2/opt.tif",
+        "source_size": [
+          3158,
+          35588
+        ],
+        "step": 60,
+        "shown": "灰度值",
+        "stretch": [
+          41.3858,
+          125.3757
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_070_sar.png",
+        "source": "raw/ROI_70/cropped/ce2/sar.tif",
+        "source_size": [
+          3158,
+          35588
+        ],
+        "step": 60,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -13.2948,
+          -2.8235
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_071": {
+      "optical": {
+        "file": "ROI_071_optical.png",
+        "source": "raw/ROI_71/cropped/ce2/opt.tif",
+        "source_size": [
+          2818,
+          13242
+        ],
+        "step": 23,
+        "shown": "灰度值",
+        "stretch": [
+          39.3478,
+          68.1986
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_071_sar.png",
+        "source": "raw/ROI_71/cropped/ce2/sar.tif",
+        "source_size": [
+          2818,
+          13242
+        ],
+        "step": 23,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.7265,
+          -5.5601
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_072": {
+      "optical": {
+        "file": "ROI_072_optical.png",
+        "source": "raw/ROI_72/cropped/ce2/opt.tif",
+        "source_size": [
+          1983,
+          18820
+        ],
+        "step": 32,
+        "shown": "灰度值",
+        "stretch": [
+          64.071,
+          103.0331
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_072_sar.png",
+        "source": "raw/ROI_72/cropped/ce2/sar.tif",
+        "source_size": [
+          1983,
+          18820
+        ],
+        "step": 32,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.2565,
+          -6.5634
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_073": {
+      "optical": {
+        "file": "ROI_073_optical.png",
+        "source": "raw/ROI_73/cropped/ce2/opt.tif",
+        "source_size": [
+          3261,
+          27249
+        ],
+        "step": 46,
+        "shown": "灰度值",
+        "stretch": [
+          42.8393,
+          67.3875
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_073_sar.png",
+        "source": "raw/ROI_73/cropped/ce2/sar.tif",
+        "source_size": [
+          3261,
+          27249
+        ],
+        "step": 46,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.7285,
+          -7.5924
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_074": {
+      "optical": {
+        "file": "ROI_074_optical.png",
+        "source": "raw/ROI_74/cropped/ce2/opt.tif",
+        "source_size": [
+          3277,
+          34429
+        ],
+        "step": 58,
+        "shown": "灰度值",
+        "stretch": [
+          32.8979,
+          43.0597
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_074_sar.png",
+        "source": "raw/ROI_74/cropped/ce2/sar.tif",
+        "source_size": [
+          3277,
+          34429
+        ],
+        "step": 58,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.673,
+          -6.8726
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_075": {
+      "optical": {
+        "file": "ROI_075_optical.png",
+        "source": "raw/ROI_75/cropped/ce2/opt.tif",
+        "source_size": [
+          4146,
+          32837
+        ],
+        "step": 55,
+        "shown": "灰度值",
+        "stretch": [
+          71.3834,
+          128.3296
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_075_sar.png",
+        "source": "raw/ROI_75/cropped/ce2/sar.tif",
+        "source_size": [
+          4146,
+          32837
+        ],
+        "step": 55,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.4341,
+          -6.1899
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_076": {
+      "optical": {
+        "file": "ROI_076_optical.png",
+        "source": "raw/ROI_76/cropped/ce2/opt.tif",
+        "source_size": [
+          2055,
+          16395
+        ],
+        "step": 28,
+        "shown": "灰度值",
+        "stretch": [
+          49.9375,
+          82.7151
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_076_sar.png",
+        "source": "raw/ROI_76/cropped/ce2/sar.tif",
+        "source_size": [
+          2055,
+          16395
+        ],
+        "step": 28,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.7871,
+          -6.5688
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_077": {
+      "optical": {
+        "file": "ROI_077_optical.png",
+        "source": "raw/ROI_77/cropped/ce2/opt.tif",
+        "source_size": [
+          2906,
+          34429
+        ],
+        "step": 58,
+        "shown": "灰度值",
+        "stretch": [
+          69.8039,
+          110.018
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_077_sar.png",
+        "source": "raw/ROI_77/cropped/ce2/sar.tif",
+        "source_size": [
+          2906,
+          34429
+        ],
+        "step": 58,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -14.4494,
+          -5.8159
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_078": {
+      "optical": {
+        "file": "ROI_078_optical.png",
+        "source": "raw/ROI_78/cropped/ce2/opt.tif",
+        "source_size": [
+          5159,
+          35734
+        ],
+        "step": 60,
+        "shown": "灰度值",
+        "stretch": [
+          69.2365,
+          116.5485
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_078_sar.png",
+        "source": "raw/ROI_78/cropped/ce2/sar.tif",
+        "source_size": [
+          5159,
+          35734
+        ],
+        "step": 60,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.4773,
+          -6.0137
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_079": {
+      "optical": {
+        "file": "ROI_079_optical.png",
+        "source": "raw/ROI_79/cropped/ce2/opt.tif",
+        "source_size": [
+          4654,
+          32793
+        ],
+        "step": 55,
+        "shown": "灰度值",
+        "stretch": [
+          85.6384,
+          145.1413
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_079_sar.png",
+        "source": "raw/ROI_79/cropped/ce2/sar.tif",
+        "source_size": [
+          4654,
+          32793
+        ],
+        "step": 55,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -12.5553,
+          -5.654
+        ],
+        "unit": " dB"
+      }
+    },
+    "ROI_080": {
+      "optical": {
+        "file": "ROI_080_optical.png",
+        "source": "raw/ROI_80/cropped/ce2/opt.tif",
+        "source_size": [
+          6867,
+          31890
+        ],
+        "step": 54,
+        "shown": "灰度值",
+        "stretch": [
+          55.2072,
+          112.441
+        ],
+        "unit": ""
+      },
+      "sar": {
+        "file": "ROI_080_sar.png",
+        "source": "raw/ROI_80/cropped/ce2/sar.tif",
+        "source_size": [
+          6867,
+          31890
+        ],
+        "step": 54,
+        "shown": "H + V 总功率（dB）",
+        "stretch": [
+          -15.1565,
+          -5.6225
+        ],
+        "unit": " dB"
+      }
+    }
+  },
+  "missing": {}
+}

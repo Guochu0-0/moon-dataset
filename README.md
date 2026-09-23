@@ -134,6 +134,30 @@ quarto render
 逐字节哈希不现实，而「少了一个 ROI」「patch 数量变了」这类真正会让快照失效的
 变化都体现在形态上。
 
+## ROI 档案页
+
+每个 ROI 一页（`docs/rois/ROI_<nnn>.md`），外加总览页，**全部由脚本生成，不手写**：
+
+```bash
+moondata pages        # 只读仓库，不需要数据盘；quarto render 前也会自动跑
+```
+
+输入全在仓库里：元数据表、统计快照、缩略图清单，以及唯一手写的
+`docs/rois/known-issues.toml`（ROI 的已知问题，每条注明出处）。要补一条已知问题，
+改这个文件再 `quarto render` 即可。生成的页面随仓库提交；有测试守着「提交的页面
+就是生成器此刻的输出」，改了输入忘了重新生成会被测出来。
+
+缩略图要读对齐影像（`raw/ROI_*/cropped/ce2/`，六十多 GB），所以**只能接上数据盘生成**，
+生成后作为产物提交（`docs/rois/thumbnails/`，每张图的来源、降采样步长、拉伸区间
+记在同目录的 `thumbnails.json` 里）：
+
+```bash
+moondata thumbnails   # 需时约五分钟
+quarto render
+```
+
+对齐影像是 256 × 256 分块存储的，同样由 `moondata.tiff` 读取，不需要 GDAL。
+
 ## 代码结构即流程图
 
 ```
@@ -149,6 +173,9 @@ src/moondata/
 ├── stats.py     扫描 patch 产物，产出快照里的统计量
 ├── tiff.py      不依赖影像库的 TIFF 读取器
 ├── docvalues.py 文档页从快照取值、排版数字
+├── metadata.py  Mini-RF 逐 ROI 元数据表的读取
+├── thumbnails.py 从对齐影像画 ROI 缩略图
+├── roipages.py  生成 ROI 档案页
 ├── doctor.py    自检
 ├── docsite.py   文档站构建后处理（让 file:// 下搜索可用）
 └── cli.py       命令行

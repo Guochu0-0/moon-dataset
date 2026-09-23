@@ -29,6 +29,18 @@ class StatsUnavailable(MoonDataError):
     """扫描产出统计量时遇到读不动或认不出的输入（产物目录、窗口清单、删除清单、标签文件）。"""
 
 
+class MetadataUnreadable(MoonDataError):
+    """Mini-RF 逐 ROI 元数据表或 ROI 已知问题清单读不动、认不出。"""
+
+
+class ThumbnailUnavailable(MoonDataError):
+    """对齐影像读得动、但画不出缩略图（例如整幅没有一个有效像素）。"""
+
+
+class RepoRootNotFound(MoonDataError):
+    """命令的输入或输出在仓库里（元数据表、档案页），却不是在仓库内运行的。"""
+
+
 class NotImplementedYet(MoonDataError):
     """子命令的骨架已就位、实现留待后续 issue。带上 issue 号，别让人猜。"""
 

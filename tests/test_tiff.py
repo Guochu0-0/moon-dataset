@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 
 from moondata.errors import TiffUnreadable
-from moondata.tiff import read_info, read_tiff
+from moondata.tiff import iter_blocks, read_info, read_tiff
 from tiff_fixtures import write_tiff
 
 
@@ -52,6 +52,41 @@ class TestReadsTheDatasetsTwoKindsOfPatch:
         np.testing.assert_array_equal(array[:, :, 0], expected)
 
 
+class TestReadsTheTiledAlignedImages:
+    """对齐影像（`raw/ROI_*/cropped/ce2/*.tif`）是 256 × 256 分块存储的，宽高不整除。"""
+
+    def test_edge_tiles_are_cropped_to_the_image(self, tmp_path: Path) -> None:
+        expected = optical(height=21, width=13)
+        _, array = read_tiff(write_tiff(tmp_path / "opt.tif", expected, tile=(8, 16)))
+        assert array.shape == (21, 13, 1)
+        np.testing.assert_array_equal(array[:, :, 0], expected)
+
+    def test_four_band_float(self, tmp_path: Path) -> None:
+        expected = sar(height=10, width=7)
+        _, array = read_tiff(write_tiff(tmp_path / "sar.tif", expected, tile=(4, 4)))
+        np.testing.assert_array_equal(array, expected)
+
+
+class TestIterBlocks:
+    """缩略图要扫几十 GB 的对齐影像，不能整幅读进内存，所以要能一块一块地走。"""
+
+    def test_blocks_tile_the_image_exactly_once(self, tmp_path: Path) -> None:
+        expected = sar(height=10, width=7)
+        path = write_tiff(tmp_path / "sar.tif", expected, tile=(4, 4))
+        rebuilt = np.full(expected.shape, np.nan, dtype=np.float32)
+        for top, left, block in iter_blocks(path):
+            assert np.isnan(rebuilt[top : top + block.shape[0], left : left + block.shape[1]]).all()
+            rebuilt[top : top + block.shape[0], left : left + block.shape[1]] = block
+        np.testing.assert_array_equal(rebuilt, expected)
+
+    def test_strips_are_blocks_too(self, tmp_path: Path) -> None:
+        expected = optical(height=21)
+        path = write_tiff(tmp_path / "opt.tif", expected, rows_per_strip=4)
+        blocks = list(iter_blocks(path))
+        assert [(top, left) for top, left, _ in blocks] == [(t, 0) for t in range(0, 21, 4)]
+        assert blocks[-1][2].shape == (1, 12, 1)
+
+
 class TestHeader:
     def test_reports_georeferencing_and_nodata_without_decoding(
         self, tmp_path: Path
@@ -89,11 +124,6 @@ class TestRefusesWhatItCannotReadCorrectly:
     def test_predictor(self, tmp_path: Path) -> None:
         path = write_tiff(tmp_path / "opt.tif", optical(), predictor=2)
         with pytest.raises(TiffUnreadable, match="Predictor"):
-            read_tiff(path)
-
-    def test_tiled_layout(self, tmp_path: Path) -> None:
-        path = write_tiff(tmp_path / "opt.tif", optical(), tiled=True)
-        with pytest.raises(TiffUnreadable, match="分块"):
             read_tiff(path)
 
     def test_unknown_compression(self, tmp_path: Path) -> None:

@@ -1,6 +1,6 @@
 """测试用的极简 TIFF 写入器。
 
-只写 `moondata.tiff` 需要读的那几个标签，外加若干开关用来造出「读取器应当拒绝」
+只写 `moondata.tiff` 需要读的那几个标签，条带式与分块式各一种布局，外加若干开关用来造出「读取器应当拒绝」
 的文件。测试不能依赖真实数据盘，所以 fixture 影像只能自己造。
 """
 
@@ -26,12 +26,16 @@ def write_tiff(
     compression: int = 8,
     byteorder: str = "<",
     predictor: int = 1,
-    tiled: bool = False,
+    tile: tuple[int, int] | None = None,
     nodata: str | None = "0",
     pixel_scale: tuple[float, float, float] | None = (7.5, 7.5, 0.0),
     tiepoint: tuple[float, ...] | None = (0.0, 0.0, 0.0, 100.0, -200.0, 0.0),
 ) -> Path:
-    """把 `(H, W)` 或 `(H, W, C)` 数组写成条带式 TIFF。"""
+    """把 `(H, W)` 或 `(H, W, C)` 数组写成 TIFF。
+
+    给了 `tile=(宽, 高)` 就按分块写：边缘块照规范补零到整块大小，读取器必须把补的
+    部分裁掉——对齐影像的宽高几乎都不是 256 的整数倍，这正是要测的地方。
+    """
     if array.ndim == 2:
         array = array[:, :, np.newaxis]
     height, width, bands = array.shape
@@ -39,10 +43,22 @@ def write_tiff(
         rows_per_strip = height
     data = np.ascontiguousarray(array.astype(array.dtype.newbyteorder(byteorder)))
 
-    strips: list[bytes] = []
-    for top in range(0, height, rows_per_strip):
-        raw = data[top : top + rows_per_strip].tobytes()
-        strips.append(zlib.compress(raw) if compression in (8, 32946) else raw)
+    chunks: list[np.ndarray] = []
+    if tile is None:
+        for top in range(0, height, rows_per_strip):
+            chunks.append(data[top : top + rows_per_strip])
+    else:
+        tile_width, tile_height = tile
+        for top in range(0, height, tile_height):
+            for left in range(0, width, tile_width):
+                block = np.zeros((tile_height, tile_width, bands), dtype=data.dtype)
+                piece = data[top : top + tile_height, left : left + tile_width]
+                block[: piece.shape[0], : piece.shape[1]] = piece
+                chunks.append(block)
+    strips = [
+        zlib.compress(c.tobytes()) if compression in (8, 32946) else c.tobytes()
+        for c in chunks
+    ]
 
     header_size = 8
     offsets: list[int] = []
@@ -59,16 +75,24 @@ def write_tiff(
         (258, SHORT, [itemsize * 8] * bands),
         (259, SHORT, [compression]),
         (262, SHORT, [1]),
-        (273, LONG, offsets),
         (277, SHORT, [bands]),
-        (278, LONG, [rows_per_strip]),
-        (279, LONG, [len(s) for s in strips]),
         (284, SHORT, [1]),
         (317, SHORT, [predictor]),
         (339, SHORT, [SAMPLE_FORMAT[array.dtype.kind]] * bands),
     ]
-    if tiled:
-        tags.append((322, LONG, [16]))
+    if tile is None:
+        tags += [
+            (273, LONG, offsets),
+            (278, LONG, [rows_per_strip]),
+            (279, LONG, [len(s) for s in strips]),
+        ]
+    else:
+        tags += [
+            (322, LONG, [tile[0]]),
+            (323, LONG, [tile[1]]),
+            (324, LONG, offsets),
+            (325, LONG, [len(s) for s in strips]),
+        ]
     if pixel_scale is not None:
         tags.append((33550, DOUBLE, list(pixel_scale)))
     if tiepoint is not None:

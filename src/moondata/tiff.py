@@ -1,4 +1,4 @@
-"""不依赖任何影像库的 TIFF 读取器——只为读 patch 产物而写。
+"""不依赖任何影像库的 TIFF 读取器——读 patch 产物与对齐影像。
 
 patch 用 Deflate 压缩、按条带存储。**tifffile 读它们会报
 `libdeflate_zlib_decompress returned LIBDEFLATE_BAD_DATA`**，而把同一段条带字节交给
@@ -8,15 +8,19 @@ zlib 挑剔。所以这里自己解析 TIFF 目录、逐条带用 `zlib` 解压�
 它不放进 `moondata.raster`：那一层是 GDAL 的地盘，而读 patch 恰恰是没装 GDAL 的人
 （训练服务器、只装了文档档的人）最需要的能力。本模块只用标准库和 numpy。
 
-支持面刻意收窄到本数据集实际用到的编码：经典 TIFF（非 BigTIFF）、条带式、像素交错、
-无 Predictor、不压缩或 Deflate。**超出这个范围一律报错而不是尽力而为**——读错的
+支持面刻意收窄到本数据集实际用到的编码：经典 TIFF（非 BigTIFF）、像素交错、
+无 Predictor、不压缩或 Deflate；布局上 patch 是条带式，对齐影像（`raw/ROI_*/cropped/ce2/`）
+是 256 × 256 分块式，两种都支持。**超出这个范围一律报错而不是尽力而为**——读错的
 代价是一组看起来完全正常的错数字。
+
+对齐影像动辄几 GB，读缩略图时不能整幅进内存，所以另有 `iter_blocks` 一块一块地给。
 """
 
 from __future__ import annotations
 
 import struct
 import zlib
+from collections.abc import Iterator
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -36,6 +40,9 @@ STRIP_BYTE_COUNTS = 279
 PLANAR_CONFIGURATION = 284
 PREDICTOR = 317
 TILE_WIDTH = 322
+TILE_LENGTH = 323
+TILE_OFFSETS = 324
+TILE_BYTE_COUNTS = 325
 SAMPLE_FORMAT = 339
 MODEL_PIXEL_SCALE = 33550
 MODEL_TIEPOINT = 33922
@@ -78,10 +85,17 @@ class TiffInfo:
     """每像素的地面尺寸（x, y），单位随投影，本数据集为米。"""
     origin: tuple[float, float] | None
     """左上角像素的地图坐标。"""
-    rows_per_strip: int
-    strip_offsets: tuple[int, ...]
-    strip_byte_counts: tuple[int, ...]
+    block_size: tuple[int, int]
+    """每块的（宽, 高）。条带式的「块」就是一整行宽的条带，最后一条可以更短；
+    分块式的边缘块按规范补齐到整块大小，多出来的部分要裁掉。"""
+    block_offsets: tuple[int, ...]
+    block_byte_counts: tuple[int, ...]
+    tiled: bool
     byteorder: str
+
+    @property
+    def blocks_across(self) -> int:
+        return -(-self.width // self.block_size[0])
 
 
 def read_info(path: str | Path) -> TiffInfo:
@@ -96,42 +110,60 @@ def read_info(path: str | Path) -> TiffInfo:
 def read_tiff(path: str | Path) -> tuple[TiffInfo, np.ndarray]:
     """读出头信息与像素。像素一律是 `(H, W, C)`，单波段也保留 C 这一维——
     调用方不必再为「光学是二维、SAR 是三维」分支。"""
+    info = read_info(path)
+    array = np.empty((info.height, info.width, info.bands), dtype=info.dtype)
+    for top, left, block in iter_blocks(path):
+        array[top : top + block.shape[0], left : left + block.shape[1]] = block
+    return info, array
+
+
+def iter_blocks(path: str | Path) -> Iterator[tuple[int, int, np.ndarray]]:
+    """逐块给出 `(top, left, 像素)`，像素是 `(h, w, C)`，已裁到影像范围之内。
+
+    各块互不重叠、合起来恰好铺满整幅。块内像素已转成本机字节序。
+    """
     path = Path(path)
     try:
         with path.open("rb") as stream:
             info = _parse(path, stream)
-            raw = b"".join(_strips(info, stream))
+            for index in range(len(info.block_offsets)):
+                yield _block(info, stream, index)
     except (OSError, struct.error) as error:
         raise TiffUnreadable(f"TIFF 读不动：{path}（{error}）") from error
 
-    expected = info.width * info.height * info.bands * info.dtype.itemsize
-    if len(raw) != expected:
-        raise TiffUnreadable(
-            f"TIFF 像素数据长度不对：{path}（应为 {expected} 字节，实得 {len(raw)}）"
-        )
-    array = np.frombuffer(raw, dtype=info.dtype.newbyteorder(info.byteorder))
-    return info, array.astype(info.dtype).reshape(info.height, info.width, info.bands)
 
+def _block(info: TiffInfo, stream, index: int) -> tuple[int, int, np.ndarray]:
+    block_width, block_height = info.block_size
+    row, column = divmod(index, info.blocks_across)
+    top, left = row * block_height, column * block_width
+    rows = min(block_height, info.height - top)
+    columns = min(block_width, info.width - left)
+    # 条带的最后一条只存有效的行；分块的边缘块存的是补齐后的整块
+    stored_rows = block_height if info.tiled else rows
 
-def _strips(info: TiffInfo, stream) -> list[bytes]:
-    strips = []
-    for index, (offset, count) in enumerate(
-        zip(info.strip_offsets, info.strip_byte_counts)
-    ):
-        stream.seek(offset)
-        data = stream.read(count)
-        if len(data) != count:
-            raise TiffUnreadable(f"TIFF 第 {index} 条带被截断：{info.path}")
-        if info.compression == NO_COMPRESSION:
-            strips.append(data)
-            continue
+    what = "块" if info.tiled else "条带"
+    count = info.block_byte_counts[index]
+    stream.seek(info.block_offsets[index])
+    data = stream.read(count)
+    if len(data) != count:
+        raise TiffUnreadable(f"TIFF 第 {index} {what}被截断：{info.path}")
+    if info.compression != NO_COMPRESSION:
         try:
-            strips.append(zlib.decompress(data))
+            data = zlib.decompress(data)
         except zlib.error as error:
             raise TiffUnreadable(
-                f"TIFF 第 {index} 条带解压失败：{info.path}（{error}）"
+                f"TIFF 第 {index} {what}解压失败：{info.path}（{error}）"
             ) from error
-    return strips
+
+    expected = stored_rows * block_width * info.bands * info.dtype.itemsize
+    if len(data) != expected:
+        raise TiffUnreadable(
+            f"TIFF 第 {index} {what}的像素数据长度不对：{info.path}"
+            f"（应为 {expected} 字节，实得 {len(data)}）"
+        )
+    pixels = np.frombuffer(data, dtype=info.dtype.newbyteorder(info.byteorder))
+    pixels = pixels.reshape(stored_rows, block_width, info.bands)[:rows, :columns]
+    return top, left, pixels.astype(info.dtype)
 
 
 def _parse(path: Path, stream) -> TiffInfo:
@@ -155,8 +187,6 @@ def _parse(path: Path, stream) -> TiffInfo:
             raise TiffUnreadable(f"TIFF 缺少必需的标签 {name}：{path}")
         return tags[code]
 
-    if TILE_WIDTH in tags:
-        raise TiffUnreadable(f"不支持分块（tiled）存储的 TIFF，只支持条带式：{path}")
     compression = tags.get(COMPRESSION, (NO_COMPRESSION,))[0]
     if compression != NO_COMPRESSION and compression not in DEFLATE:
         raise TiffUnreadable(f"不支持的压缩方式 Compression={compression}：{path}")
@@ -179,18 +209,34 @@ def _parse(path: Path, stream) -> TiffInfo:
         raise TiffUnreadable(f"不支持非整字节的位深 {bit_depth}：{path}")
     dtype = np.dtype(f"{_SAMPLE_KIND[next(iter(formats))]}{bit_depth // 8}")
 
+    width = require(IMAGE_WIDTH, "ImageWidth")[0]
     height = require(IMAGE_LENGTH, "ImageLength")[0]
-    offsets = require(STRIP_OFFSETS, "StripOffsets")
-    counts = require(STRIP_BYTE_COUNTS, "StripByteCounts")
-    if len(offsets) != len(counts):
-        raise TiffUnreadable(f"StripOffsets 与 StripByteCounts 条数不一致：{path}")
+    tiled = TILE_WIDTH in tags
+    if tiled:
+        block_size = (
+            require(TILE_WIDTH, "TileWidth")[0],
+            require(TILE_LENGTH, "TileLength")[0],
+        )
+        offsets = require(TILE_OFFSETS, "TileOffsets")
+        counts = require(TILE_BYTE_COUNTS, "TileByteCounts")
+    else:
+        block_size = (width, tags.get(ROWS_PER_STRIP, (height,))[0])
+        offsets = require(STRIP_OFFSETS, "StripOffsets")
+        counts = require(STRIP_BYTE_COUNTS, "StripByteCounts")
+    across = -(-width // block_size[0])
+    down = -(-height // block_size[1])
+    if not (len(offsets) == len(counts) == across * down):
+        raise TiffUnreadable(
+            f"TIFF 的块数对不上：{path}（按尺寸应有 {across * down} 块，"
+            f"偏移表 {len(offsets)} 项，长度表 {len(counts)} 项）"
+        )
 
     scale = tags.get(MODEL_PIXEL_SCALE)
     tiepoint = tags.get(MODEL_TIEPOINT)
     nodata = tags.get(GDAL_NODATA)
     return TiffInfo(
         path=path,
-        width=require(IMAGE_WIDTH, "ImageWidth")[0],
+        width=width,
         height=height,
         bands=bands,
         dtype=dtype,
@@ -199,15 +245,16 @@ def _parse(path: Path, stream) -> TiffInfo:
         pixel_scale=(scale[0], scale[1]) if scale else None,
         # tiepoint 是 (I, J, K, X, Y, Z)：像素 (I, J) 对应地图 (X, Y)。本数据集 I=J=0。
         origin=(tiepoint[3], tiepoint[4]) if tiepoint else None,
-        rows_per_strip=tags.get(ROWS_PER_STRIP, (height,))[0],
-        strip_offsets=tuple(offsets),
-        strip_byte_counts=tuple(counts),
+        block_size=block_size,
+        block_offsets=tuple(offsets),
+        block_byte_counts=tuple(counts),
+        tiled=tiled,
         byteorder=byteorder,
     )
 
 
 def _read_ifd(path: Path, stream, offset: int, byteorder: str) -> dict[int, tuple | str]:
-    """只读第一个 IFD。patch 都是单幅影像，没有金字塔或多页。"""
+    """只读第一个 IFD。patch 与对齐影像都是单幅，没有内置金字塔或多页。"""
     stream.seek(offset)
     (count,) = struct.unpack(f"{byteorder}H", stream.read(2))
     entries = stream.read(12 * count)

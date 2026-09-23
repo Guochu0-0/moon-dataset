@@ -136,6 +136,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../docs/products.html"> 
 <span class="menu-text">产物文档</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/rois/index.html"> 
+<span class="menu-text">ROI 档案</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -190,6 +194,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../docs/products.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">产物文档</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../docs/rois/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ROI 档案</span></a>
   </div>
 </li>
       </ul>
@@ -619,12 +629,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>这两处差异的来历（据数据集作者说明）：</p>
 <ul>
 <li><strong><code>ROI_073</code>：清单里的窗口本身是错的。</strong> 该 ROI 最初的对齐控制点有误（见 <code>data/README.md</code> 中 <code>cropped_2</code> 的重标记录），清单里的窗口是按那批错误的点算出来的，与现有产物对不上是 预期之内的。它在训练集，<strong>正向复现不要求与这里的旧窗口一致</strong>。</li>
-<li><strong><code>ROI_027</code>：<code>unresolved</code> 可能是被删掉的全黑 patch。</strong> 作者印象中，当年有几个 patch 因光照原因基本全黑而被删掉，这与该 ROI 的编号断档（见<a href="#文件命名">文件命名</a>）吻合。 这一条<strong>只是回忆，尚未核实</strong>。</li>
+<li><strong><code>ROI_027</code>：<code>unresolved</code> 是被丢弃的纯色废块。</strong> 作者印象中，当年有几个 patch 因光照原因基本全黑而被删掉，这与该 ROI 的编号断档（见<a href="#文件命名">文件命名</a>）吻合。 旧迁移记录（<code>MIGRATION.md</code>，未入库）也写明该 ROI 缺的几个编号是「纯色废块」，与回忆一致。 详见该 ROI 的<a href="../docs/rois/ROI_027.html">档案页</a>。</li>
 </ul>
 <p>正向复现的验收只在验证集与测试集上设门：这两个划分的清单与产物完全对得上。 训练集上的差异不影响验收，也<strong>不得</strong>为凑数修改窗口清单或产物。</p>
 </section>
 <section id="逐-roi-数量" class="level2">
 <h2 class="anchored" data-anchor-id="逐-roi-数量">逐 ROI 数量</h2>
+<p>点 ROI 编号进入它的档案页（条带参数、缩略图、已知问题），全部 ROI 的总览见 <a href="../docs/rois/index.html">ROI 档案</a>。</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -637,469 +648,469 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">ROI_001</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_001.html">ROI_001</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">40</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_002</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_002.html">ROI_002</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">152</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_003</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_003.html">ROI_003</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">171</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_005</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_005.html">ROI_005</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">135</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_006</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_006.html">ROI_006</a></td>
 <td style="text-align: left;">Test</td>
 <td style="text-align: right;">81</td>
 <td style="text-align: right;">67</td>
 <td style="text-align: right;">538</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_007</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_007.html">ROI_007</a></td>
 <td style="text-align: left;">Test</td>
 <td style="text-align: right;">372</td>
 <td style="text-align: right;">286</td>
 <td style="text-align: right;">2,315</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_008</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_008.html">ROI_008</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">291</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_009</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_009.html">ROI_009</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">162</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_010</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_010.html">ROI_010</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">159</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_011</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_011.html">ROI_011</a></td>
 <td style="text-align: left;">Test</td>
 <td style="text-align: right;">92</td>
 <td style="text-align: right;">83</td>
 <td style="text-align: right;">706</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_012</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_012.html">ROI_012</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">105</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_013</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_013.html">ROI_013</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">54</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_015</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_015.html">ROI_015</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">98</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_016</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_016.html">ROI_016</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">265</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_017</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_017.html">ROI_017</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">213</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_018</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_018.html">ROI_018</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">117</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_020</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_020.html">ROI_020</a></td>
 <td style="text-align: left;">Test</td>
 <td style="text-align: right;">112</td>
 <td style="text-align: right;">91</td>
 <td style="text-align: right;">739</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_021</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_021.html">ROI_021</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">108</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_023</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_023.html">ROI_023</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">175</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_024</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_024.html">ROI_024</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">239</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_025</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_025.html">ROI_025</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">222</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_026</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_026.html">ROI_026</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">190</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_027</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_027.html">ROI_027</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">234</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_030</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_030.html">ROI_030</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">74</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_031</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_031.html">ROI_031</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">149</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_033</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_033.html">ROI_033</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">269</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_034</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_034.html">ROI_034</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">199</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_035</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_035.html">ROI_035</a></td>
 <td style="text-align: left;">Val</td>
 <td style="text-align: right;">214</td>
 <td style="text-align: right;">172</td>
 <td style="text-align: right;">1,383</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_037</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_037.html">ROI_037</a></td>
 <td style="text-align: left;">Test</td>
 <td style="text-align: right;">159</td>
 <td style="text-align: right;">141</td>
 <td style="text-align: right;">1,133</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_038</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_038.html">ROI_038</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">64</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_042</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_042.html">ROI_042</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">21</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_043</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_043.html">ROI_043</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">48</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_045</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_045.html">ROI_045</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">58</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_046</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_046.html">ROI_046</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">165</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_047</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_047.html">ROI_047</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">31</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_048</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_048.html">ROI_048</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">24</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_049</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_049.html">ROI_049</a></td>
 <td style="text-align: left;">Val</td>
 <td style="text-align: right;">113</td>
 <td style="text-align: right;">88</td>
 <td style="text-align: right;">706</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_050</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_050.html">ROI_050</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">160</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_051</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_051.html">ROI_051</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">196</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_052</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_052.html">ROI_052</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">170</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_053</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_053.html">ROI_053</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">93</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_054</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_054.html">ROI_054</a></td>
 <td style="text-align: left;">Test</td>
 <td style="text-align: right;">168</td>
 <td style="text-align: right;">145</td>
 <td style="text-align: right;">1,187</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_055</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_055.html">ROI_055</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">214</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_056</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_056.html">ROI_056</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">296</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_057</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_057.html">ROI_057</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">229</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_058</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_058.html">ROI_058</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">248</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_059</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_059.html">ROI_059</a></td>
 <td style="text-align: left;">Test</td>
 <td style="text-align: right;">146</td>
 <td style="text-align: right;">140</td>
 <td style="text-align: right;">1,124</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_061</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_061.html">ROI_061</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">97</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_062</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_062.html">ROI_062</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">136</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_063</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_063.html">ROI_063</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">103</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_064</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_064.html">ROI_064</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">111</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_065</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_065.html">ROI_065</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">172</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_066</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_066.html">ROI_066</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">130</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_067</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_067.html">ROI_067</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">120</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_068</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_068.html">ROI_068</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">107</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_069</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_069.html">ROI_069</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">198</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_070</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_070.html">ROI_070</a></td>
 <td style="text-align: left;">Val</td>
 <td style="text-align: right;">168</td>
 <td style="text-align: right;">113</td>
 <td style="text-align: right;">910</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_071</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_071.html">ROI_071</a></td>
 <td style="text-align: left;">Val</td>
 <td style="text-align: right;">40</td>
 <td style="text-align: right;">30</td>
 <td style="text-align: right;">241</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_072</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_072.html">ROI_072</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">60</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_073</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_073.html">ROI_073</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">119</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_074</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_074.html">ROI_074</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">141</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_075</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_075.html">ROI_075</a></td>
 <td style="text-align: left;">Val</td>
 <td style="text-align: right;">183</td>
 <td style="text-align: right;">174</td>
 <td style="text-align: right;">1,442</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_076</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_076.html">ROI_076</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">58</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_077</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_077.html">ROI_077</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">165</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_078</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_078.html">ROI_078</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">167</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ROI_079</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_079.html">ROI_079</a></td>
 <td style="text-align: left;">Train</td>
 <td style="text-align: right;">185</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ROI_080</td>
+<td style="text-align: left;"><a href="../docs/rois/ROI_080.html">ROI_080</a></td>
 <td style="text-align: left;">Val</td>
 <td style="text-align: right;">107</td>
 <td style="text-align: right;">75</td>

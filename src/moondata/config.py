@@ -33,6 +33,10 @@ WINDOWS_RELDIR = Path("data") / "windows"
 REMOVED_MANIFEST_RELDIR = Path("data") / "metadata"
 REMOVED_MANIFEST_GLOB = "removed_*_manifest.txt"
 """删除清单：删除某个 ROI 时留下的文件清单，见 CONTEXT.md。"""
+METADATA_RELPATH = Path("data") / "metadata" / "minirf_metadata.csv"
+ROI_PAGES_RELDIR = Path("docs") / "rois"
+"""ROI 档案页（生成物）、已知问题清单（手写）与缩略图都在这里。"""
+THUMBNAILS_RELDIR = ROI_PAGES_RELDIR / "thumbnails"
 
 
 class DataRootSource(Enum):

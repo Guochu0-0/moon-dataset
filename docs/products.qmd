@@ -303,22 +303,25 @@ print(table(
 - **`ROI_073`：清单里的窗口本身是错的。** 该 ROI 最初的对齐控制点有误（见 `data/README.md`
   中 `cropped_2` 的重标记录），清单里的窗口是按那批错误的点算出来的，与现有产物对不上是
   预期之内的。它在训练集，**正向复现不要求与这里的旧窗口一致**。
-- **`ROI_027`：`unresolved` 可能是被删掉的全黑 patch。** 作者印象中，当年有几个 patch
+- **`ROI_027`：`unresolved` 是被丢弃的纯色废块。** 作者印象中，当年有几个 patch
   因光照原因基本全黑而被删掉，这与该 ROI 的编号断档（见[文件命名](#文件命名)）吻合。
-  这一条**只是回忆，尚未核实**。
+  旧迁移记录（`MIGRATION.md`，未入库）也写明该 ROI 缺的几个编号是「纯色废块」，与回忆一致。
+  详见该 ROI 的[档案页](rois/ROI_027.md)。
 
 正向复现的验收只在验证集与测试集上设门：这两个划分的清单与产物完全对得上。
 训练集上的差异不影响验收，也**不得**为凑数修改窗口清单或产物。
 
 ## 逐 ROI 数量
 
+点 ROI 编号进入它的档案页（条带参数、缩略图、已知问题），全部 ROI 的总览见 [ROI 档案](rois/index.md)。
+
 ```{python}
 #| output: asis
 print(table(
     ["ROI", "划分", "patch 对", "有真值点的", "真值点对数"],
     [
-        [roi, r["split"], num(r["patch_count"]), num(r["labeled_patch_count"]),
-         num(r["label_point_count"])]
+        [f"[{roi}](rois/{roi}.md)", r["split"], num(r["patch_count"]),
+         num(r["labeled_patch_count"]), num(r["label_point_count"])]
         for roi, r in sorted(stats["rois"].items())
     ],
     align="llrrr",

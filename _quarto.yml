@@ -11,6 +11,12 @@ project:
     - index.qmd
     - CONTEXT.md
     - docs/*.qmd
+    - docs/rois/*.md
+
+  # ROI 档案页是生成物：渲染前按仓库里的输入重新生成一遍，免得渲染出过期的页面。
+  # 只读仓库，不碰数据盘。理由详见 moondata/roipages.py。
+  pre-render:
+    - python -m moondata pages
 
   # Quarto 的搜索在运行时 fetch("search.json")，双击打开时走 file:// 会被同源策略
   # 拦下。这一步把索引嵌进 JS，让搜索不必起服务器。理由详见 moondata/docsite.py。
@@ -35,6 +41,8 @@ website:
         text: 术语表
       - href: docs/products.qmd
         text: 产物文档
+      - href: docs/rois/index.md
+        text: ROI 档案
   sidebar:
     style: floating
     collapse-level: 2
@@ -51,6 +59,9 @@ website:
           - text: "流程文档（尚未产出，见 issue #11）"
           - href: docs/products.qmd
             text: 产物文档
+          # 六十几页不逐一列进导航树，从总览页的表格点进去
+          - href: docs/rois/index.md
+            text: ROI 档案
       - href: docs/dataset-study.qmd
         text: 数据集特性研究（本轮未产出）
   page-footer:
