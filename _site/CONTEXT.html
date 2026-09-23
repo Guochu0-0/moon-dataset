@@ -211,6 +211,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#复现与验收" id="toc-复现与验收" class="nav-link" data-scroll-target="#复现与验收">复现与验收</a>
   <ul class="collapse">
   <li><a href="#窗口window" id="toc-窗口window" class="nav-link" data-scroll-target="#窗口window">窗口（window）</a></li>
+  <li><a href="#筛选影像selection-images" id="toc-筛选影像selection-images" class="nav-link" data-scroll-target="#筛选影像selection-images">筛选影像（selection images）</a></li>
   <li><a href="#窗口清单window-manifest" id="toc-窗口清单window-manifest" class="nav-link" data-scroll-target="#窗口清单window-manifest">窗口清单（window manifest）</a></li>
   <li><a href="#正向复现forward-reproduction" id="toc-正向复现forward-reproduction" class="nav-link" data-scroll-target="#正向复现forward-reproduction">正向复现（forward reproduction）</a></li>
   <li><a href="#一级验收-二级验收level-1-level-2-acceptance" id="toc-一级验收-二级验收level-1-level-2-acceptance" class="nav-link" data-scroll-target="#一级验收-二级验收level-1-level-2-acceptance">一级验收 / 二级验收（level-1 / level-2 acceptance）</a></li>
@@ -357,7 +358,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="复现与验收">复现与验收</h2>
 <section id="窗口window" class="level3">
 <h3 class="anchored" data-anchor-id="窗口window">窗口（window）</h3>
-<p>一个 patch 在对齐影像上的位置，记作左上角像素坐标加固定的 patch 尺寸。 「算窗口」与「切 patch」是两件事：前者不读影像，后者要。</p>
+<p>一个 patch 在对齐影像上的位置，记作左上角像素坐标加固定的 patch 尺寸。 「算窗口」与「切 patch」是两件事。窗口<strong>落在哪</strong>是纯几何，不读影像；窗口<strong>留不留</strong> 要看两块 patch 里有没有 nodata 像素，那要读<strong>筛选影像</strong>。切 patch 读的则是另一版对齐影像。</p>
+</section>
+<section id="筛选影像selection-images" class="level3">
+<h3 class="anchored" data-anchor-id="筛选影像selection-images">筛选影像（selection images）</h3>
+<p>按当年切片时的做法（光学一次、SAR 两次最近邻重采样）从原始输入重做的一对对齐影像， <strong>只用来判窗口留不留</strong>，不从它上面切 patch。数据盘上现在的对齐影像已用 cubic 重做过， nodata 边缘与当年差一两个像素，拿它判会多留下几个贴边的窗口，其后的编号随之整体错位。</p>
 </section>
 <section id="窗口清单window-manifest" class="level3">
 <h3 class="anchored" data-anchor-id="窗口清单window-manifest">窗口清单（window manifest）</h3>
@@ -371,7 +376,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="一级验收-二级验收level-1-level-2-acceptance" class="level3">
 <h3 class="anchored" data-anchor-id="一级验收-二级验收level-1-level-2-acceptance">一级验收 / 二级验收（level-1 / level-2 acceptance）</h3>
 <ul>
-<li><strong>一级</strong>：正向算出的窗口与<strong>窗口清单</strong>逐条相等。不读影像，快。</li>
+<li><strong>一级</strong>：正向算出的窗口与<strong>窗口清单</strong>逐条相等（位置与编号都相等）。比对本身不读影像，快。</li>
 <li><strong>二级</strong>：切出的 patch 与现有产物<strong>逐字节一致</strong>。要读影像，慢。</li>
 </ul>
 </section>
