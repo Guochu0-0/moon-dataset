@@ -176,6 +176,7 @@ src/moondata/
 ├── metadata.py  Mini-RF 逐 ROI 元数据表的读取
 ├── thumbnails.py 从对齐影像画 ROI 缩略图
 ├── roipages.py  生成 ROI 档案页
+├── sources.py   产品 ID 解码、CE-2 分幅与分带、条带元数据汇总（来源文档用）
 ├── doctor.py    自检
 ├── docsite.py   文档站构建后处理（让 file:// 下搜索可用）
 └── cli.py       命令行

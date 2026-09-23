@@ -133,6 +133,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">术语表</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../docs/sources.html"> 
+<span class="menu-text">来源文档</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../docs/products.html"> 
 <span class="menu-text">产物文档</span></a>
   </li>  
@@ -151,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">主体文档</li><li class="breadcrumb-item"><a href="../docs/products.html">产物文档</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/sources.html">主体文档</a></li><li class="breadcrumb-item"><a href="../docs/products.html">产物文档</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -185,8 +189,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
- <span class="menu-text">来源文档（尚未产出，见 issue #7）</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../docs/sources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">来源文档</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
  <span class="menu-text">流程文档（尚未产出，见 issue #11）</span>
   </li>
@@ -239,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">主体文档</li><li class="breadcrumb-item"><a href="../docs/products.html">产物文档</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/sources.html">主体文档</a></li><li class="breadcrumb-item"><a href="../docs/products.html">产物文档</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">产物文档</h1>
 <p class="subtitle lead">你拿到的是什么</p>
@@ -407,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><strong>SAR 含负值是正常的</strong>，不是坏数据。9,862 个 SAR patch 里有负值。归一化、取对数之前要先想清楚怎么处理它们。</li>
 <li><strong>光学与 SAR 的像素间距相同</strong>，因为两者已被重采样到同一个网格上（见术语表「对齐影像」）。 注意它<strong>不是</strong> CE-2 DOM 的原生分辨率——原始光学瓦片与这里的间距不同。</li>
-<li>SAR 各波段的物理含义属于数据来源，见来源文档（尚未产出，issue #7）。</li>
+<li>SAR 各波段的物理含义属于数据来源，见<a href="../docs/sources.html#bands">来源文档</a>。</li>
 </ul>
 <section id="怎么读" class="level3">
 <h3 class="anchored" data-anchor-id="怎么读">怎么读</h3>

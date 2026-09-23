@@ -39,6 +39,8 @@ website:
         text: 首页
       - href: CONTEXT.md
         text: 术语表
+      - href: docs/sources.qmd
+        text: 来源文档
       - href: docs/products.qmd
         text: 产物文档
       - href: docs/rois/index.md
@@ -55,7 +57,8 @@ website:
       # 一眼看出整份材料由哪几块组成，但点进去是首页会更让人困惑。
       - section: "主体文档"
         contents:
-          - text: "来源文档（尚未产出，见 issue #7）"
+          - href: docs/sources.qmd
+            text: 来源文档
           - text: "流程文档（尚未产出，见 issue #11）"
           - href: docs/products.qmd
             text: 产物文档

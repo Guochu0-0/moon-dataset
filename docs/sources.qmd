@@ -1,0 +1,317 @@
+---
+title: 来源文档
+subtitle: 这些数据打哪来
+execute:
+  echo: false
+---
+
+```{python}
+#| include: false
+from pathlib import Path
+
+from moondata.config import METADATA_RELPATH, find_repo_root
+from moondata.docvalues import num, table
+from moondata.metadata import dataset_rows, load_metadata
+from moondata.sources import BIN_PPD, CE2_BANDS, decode_product_id, summarize_strips
+
+repo = find_repo_root(Path.cwd()) or Path.cwd()
+rows = dataset_rows(load_metadata(repo / METADATA_RELPATH))
+strips = summarize_strips(rows)
+example = decode_product_id(rows[0].fields["PRODUCT_ID"])
+
+def only(column):
+    """全表只有一种取值时返回它；不止一种就照实列出，免得正文写「全部为 X」却不成立。"""
+    values = strips.distinct[column]
+    return values[0] if len(values) == 1 else "、".join(values) + "（不止一种）"
+
+def spread(s, unit, digits=1):
+    return f"中位 {s.median:.{digits}f}{unit}，范围 {s.low:.{digits}f}–{s.high:.{digits}f}{unit}"
+
+label_ppd = float(only("MAP_RESOLUTION_ppd"))
+letter_ppd = {decode_product_id(r.fields["PRODUCT_ID"]).bin_ppd for r in rows}
+letters = sorted({decode_product_id(r.fields["PRODUCT_ID"]).bin_letter for r in rows})
+right_letter = next(k for k, v in BIN_PPD.items() if v == label_ppd)
+mismatched = sum(
+    decode_product_id(r.fields["PRODUCT_ID"]).bin_ppd != float(r.fields["MAP_RESOLUTION_ppd"])
+    for r in rows
+)
+looks = "，".join(f"{k} {v} 条" for k, v in strips.look_directions.items())
+```
+
+读者带着具体问题进来，找到答案就走：**某个字段从哪来、某个参数是多少、去哪核对原文。**
+数据怎么被做成数据集，看流程文档；最终交付物长什么样，看[产物文档](products.qmd)。
+
+**每条事实都标了来源**，三者的可信度完全不同：
+
+- **[官方]**：在官方文档或产品标签里能查到原文，并注明出处位置。可以自己去核对。
+- **[实测]**：在本数据集的文件上直接读出或量出来的。
+- **[推断]**：由命名、现象归纳出来，或转述自旧文档而没有找到官方原文。可信度最低，引用前请自己核实。
+
+::: {.callout-warning}
+## 原始 CE-2 瓦片里有 5 幅的投影参数是错的——只在读取时被纠正，源文件从未修复
+
+数据盘 `raw/` 下有 5 幅 CE-2 分幅 **E215、E218、E219、I219、I236**，GeoTIFF 头里墨卡托投影的
+标准纬线 `lat_ts` 写成了相邻纬度带的值（E 带应为 35°、写成了 21°；I 带应为 −21°、写成了 −35°）。
+像素与 geotransform 都没动，但整幅图因此被放到几度之外。**[实测]**
+
+**这个错误从未在源文件里修复。** 旧代码在**读取时**按幅名纠正（生成一份改了 `lat_ts` 的临时 VRT，
+原文件只读），新代码也必须这样做。用 QGIS、`gdalinfo`、rasterio 等通用 GIS 工具直接打开这几幅，
+得到的位置是错的，而且不会有任何报错。受影响的 ROI 见[下文](#ce2-lat-ts)。
+:::
+
+## 官方文档与版本
+
+### 去哪核对原始定义
+
+| 文档 | 版本 | 在这里查什么 |
+|---|---|---|
+| [Mini-RF 数据产品 SIS](https://pds-geosciences.wustl.edu/lro/lro-l-mrflro-4-cdr-v1/lromrf_0001/document/dp_sis/mrflro_dp_sis.pdf)（Software Interface Specification） | 编号 MRF-4009，2010-02-25 版，变更记录到第 9 次修订（2010-02-20） | 仪器参数（表 1）、Stokes 参数与极化产品定义（§4.3.2.2）、文件命名规则（§4.7.1.1、表 16） |
+| Mini-RF 产品标签（`.LBL`，每个条带一份） | `LABEL_REVISION_NOTE = "2010-JHU/APL Mini-RF LRO Ver. 1"`；`DATA_SET_ID = "LRO-L-MRFLRO-5-CDR-MAP-V1.0"` | 四个波段的名字、入射角、视向、投影与采样间隔、特殊值 |
+| [Mini-RF CDR 数据集说明](https://pds-geosciences.wustl.edu/lro/lro-l-mrflro-4-cdr-v1/lromrf_0001/catalog/mrflro_4_cdr_v1_0_ds.cat) | `LRO-L-MRFLRO-4-CDR-V1.0`，发布于 2011-06-15 | 数据集层面的说明 |
+| [Mini-RF 累积索引](https://pds-geosciences.wustl.edu/lro/lro-l-mrflro-4-cdr-v1/lromrf_0005/index/cumindex.tab) | — | 从产品 ID 查到它所在的归档卷 |
+| [Mini-RF PDS 总览](https://pds-geosciences.wustl.edu/missions/lro/mrf.htm)、[ODE MAPCDR 产品说明](https://ode.rsl.wustl.edu/moon/pagehelp/Content/Missions_Instruments/LRO/Mini-RF/MAPCDR.htm) | — | 入口页 |
+| [嫦娥数据发布与信息服务系统](https://moon.bao.ac.cn/) | — | CE-2 7 m DOM 的下载入口（**证书已过期，浏览器会报警**） |
+
+版本号、数据集 ID 与所引章节号取自文档与标签原文。**[官方]**
+链接转录自旧参考文档，本轮没有逐一联网核对。**[推断]**
+这些文档的下载副本连同本数据集 67 个条带的官方 `.LBL` 标签，存放在旧工作区的 `docs/` 目录，
+没有迁移进本仓库。**[实测]**
+
+注意两个数据集 ID 不一样：产品标签写的是 `…-5-CDR-MAP-V1.0`（地图投影后的 CDR），
+而上表的数据集说明与累积索引属于 `…-4-CDR-V1.0`。本数据集用的是前者。**[官方]**，以标签为准。
+
+CE-2 这边，本仓库**没有找到**产品规范类的官方文档；下文凡涉及 CE-2 产品本身的描述，
+除了能从文件上读出来的，都标为推断。
+
+## Mini-RF SAR
+
+### 产品 ID 怎么读 {#product-id}
+
+每个条带有一个产品 ID，同时也是它的文件名（数据盘上是小写的，如
+`lsz_02833_2cd_eku_16s144_v1.tif`）。按 SIS §4.7.1.1 与表 16 逐段解码，以
+`{python} example.text` 为例：**[官方]**
+
+```{python}
+#| output: asis
+print(table(
+    ["段", "含义", "本例"],
+    [[f"`{s.code}`", s.field, s.meaning] for s in example.segments()],
+))
+```
+
+几点补充：
+
+- **分辨率档位字母不可信。** 本数据集全部条带的档位字母是 `{python} "、".join(letters)`，
+  按表 16 对应 `{python} "、".join(str(v) for v in sorted(letter_ppd))` ppd；
+  而产品标签里的 `MAP_RESOLUTION` 是 `{python} num(int(label_ppd))` ppd，对应的字母应为 `{python} right_letter`。
+  两者对不上的条带有 `{python} num(mismatched)` 个，即全部。**以标签（和 GeoTIFF 的像素大小）为准。** **[实测]**，对照元数据表
+- **ID 里没有成像时间。** 要从 ID 查时间，看 GeoTIFF 元数据里的 `START_TIME`、仓库元数据表的「成像时刻UTC」列，
+  或在累积索引里按 ID 查。**[官方]**（SIS §4.7.1.1 的字段表里没有时间段）
+- 同一个 ID 在仓库的 Mini-RF 元数据表（`data/metadata/minirf_metadata.csv`）里对得上轨道号、模式、投影三列，
+  这一点由单元测试逐行核对。**[实测]**
+
+### 四个波段是什么 {#bands}
+
+Mini-RF 是**混合极化**（hybrid-pol）体制：发射圆极化，**相干**接收 H、V 两路线极化。
+每像素 16 字节，4 个 32 位浮点波段，按波段顺序存放（`BAND_SEQUENTIAL`）。**[官方]**，产品标签 `BAND_NAME`、`DESCRIPTION` 与 SIS §4.3.2.2.1
+
+| 波段 | 官方 `BAND_NAME` | 物理量 |
+|---|---|---|
+| 1 | H RECEIVE INTENSITY | ⟨\|E~H~\|²⟩，H 路接收**功率** |
+| 2 | V RECEIVE INTENSITY | ⟨\|E~V~\|²⟩，V 路接收**功率** |
+| 3 | CROSS POWER INTENSITY (REAL) | Re⟨E~H~ E~V~\*⟩ |
+| 4 | CROSS POWER INTENSITY (IMAGINARY) | Im⟨E~H~ E~V~\*⟩ |
+
+**波段 1、2 是强度（功率），不是幅度；波段 3、4 是交叉功率的实部与虚部，可以为负。**
+把它们当成四个普通灰度通道去做归一化，会得到没有物理意义的结果。**[官方]**
+
+### 由四个波段推导的物理量 {#stokes}
+
+SIS §4.3.2.2.1–2 的定义，写成代码：**[官方]**
+
+```python
+S1 = b1 + b2          # 总功率
+S2 = b1 - b2
+S3 = 2 * b3
+S4 = -2 * b4          # 注意负号，官方定义如此
+
+SC  = 0.5 * (S1 - S4)                        # 同向圆极化（same sense）
+OC  = 0.5 * (S1 + S4)                        # 反向圆极化（opposite sense）
+CPR = SC / OC                                # 圆极化比
+m   = np.sqrt(S2**2 + S3**2 + S4**2) / S1    # 极化度
+```
+
+SIS 给出的参考值：全月平均 CPR 约为 0.3，全月平均 m 约为 0.6；CPR 接近 0 对应极光滑的地表，
+大于 1 对应大尺度块状粗糙面，或厚层冻结挥发物（如水冰）的体散射。**[官方]**，SIS §4.3.2.2.2.3
+
+[ROI 档案页](rois/index.md)里的 SAR 缩略图画的就是 S1（总功率），取 dB。**[实测]**
+
+### 仪器参数 {#instrument}
+
+S 波段、Zoom 模式（本数据集全部条带都是这个模式，见[下文](#strips)）的参数，摘自 SIS 表 1：**[官方]**
+
+| 参数 | Zoom | Baseline（对照） |
+|---|---|---|
+| 频率 | 2.38 GHz（波长 12.6 cm） | 同左 |
+| 极化 | 发射 RCP 或 LCP，相干接收 H 与 V | 同左 |
+| 斜距分辨率 | 23 m | 115 m |
+| 地距分辨率 | 15 × 30（原表未写单位） | 150 m |
+| 方位分辨率 | 15 × 30（原表未写单位） | 150 m |
+| 视数 | 8 | 16 |
+| 线性调频带宽 | 8 MHz | 1.6 MHz |
+| 噪声等效后向散射系数（NESZ） | −25 dB | −30 dB |
+| 条带长度 | < 400 km | 同左 |
+| 极化纯度 | 串扰 19 dB，轴比 1.7 dB | 同左 |
+
+测绘带宽一项，SIS 表 1 的 S 波段一栏写的是「6 km (baseline)」，X 波段一栏写的是「4 km」，
+没有单列 S 波段 Zoom 模式的值。旧参考文档把 4 km 记成了 Zoom 的测绘带宽，这一读法在原表里找不到依据。**[官方]**
+
+### 格式、特殊值与投影 {#format}
+
+- 官方产品是 PDS3 的 `IMG` + `LBL`，32 位 IEEE 浮点（`PC_REAL`）。空值 `CORE_NULL = 16#FF7FFFFB#`，
+  约为 −3.4028 × 10³⁸，**不是 0**。**[官方]**，产品标签
+- 投影为等距圆柱（`EQUIRECTANGULAR`），`CENTER_LONGITUDE = 180.0`，`CENTER_LATITUDE = 0.0`（标准纬线一栏写的是 `N/A`）；月球取球体，半径 1737.4 km；
+  行星中心坐标（planetocentric），东经为正。**[官方]**，产品标签 `IMAGE_MAP_PROJECTION`
+- 采样间隔：`MAP_RESOLUTION = 4096 <pix/deg>`，`MAP_SCALE = 0.0074031617 <KM/PIXEL>`，即约 7.4032 m。**[官方]**，产品标签
+- 数据盘 `raw/ROI_<n>/minirf/` 里只保留了转换后的 GeoTIFF，原始 `IMG`/`LBL` 没有保留。GeoTIFF 的像素大小
+  就是上面的 `MAP_SCALE`；nodata 设成了 `CORE_NULL` 对应的浮点值；`PRODUCT_ID`、`DATA_SET_ID`、`START_TIME`
+  等标签字段被写进了 GeoTIFF 元数据，所以每个条带都能唯一追回官方归档。**[实测]**
+- [ROI_054](rois/ROI_054.md) 的 `minirf/` 目录里有两个 SAR 文件，旧代码按文件名排序取第一个。**[实测]**
+
+### 本数据集条带的几何与覆盖 {#strips}
+
+以下数字由仓库里的 Mini-RF 元数据表（从 `{python} num(strips.count)` 个条带的官方标签逐项抄出）在渲染时汇总，
+不手写。逐条带的值见各 [ROI 档案页](rois/index.md)。**[官方]**，产品标签 → 元数据表
+
+| 项 | 取值 |
+|---|---|
+| 条带数 | `{python} num(strips.count)`（每个 ROI 一条） |
+| 任务阶段 | `{python} only("任务阶段")` |
+| 模式 | `{python} only("模式")` |
+| 中心频率 | `{python} only("中心频率_GHz")` GHz |
+| 投影 | `{python} only("投影")` |
+| `MAP_RESOLUTION` | `{python} only("MAP_RESOLUTION_ppd")` ppd |
+| 采样间隔 | `{python} only("原生采样_m")` m |
+| 波段数 | `{python} only("波段数")` |
+| 入射角 | `{python} spread(strips.incidence, "°", 2)` |
+| 视向 | `{python} looks` |
+| 条带宽（像素） | `{python} spread(strips.width_px, "", 0)` |
+| 条带长（像素） | `{python} spread(strips.length_px, "", 0)` |
+| 成像时间（UTC） | `{python} strips.first_acquisition` 至 `{python} strips.last_acquisition` |
+
+## 分辨率：标称值与实测值 {#resolution}
+
+这一节**只列数值**。标称值与实测有效分辨率之间的关系尚未研究清楚，本轮不作解释。
+
+### SAR {#resolution-sar}
+
+| 量 | 数值 | 来源 |
+|---|---|---|
+| 采样间隔 | `{python} only("原生采样_m")` m | **[官方]**，产品标签 `MAP_SCALE` |
+| 斜距分辨率（标称） | 23 m | **[官方]**，SIS 表 1 |
+| 地距 / 方位分辨率（标称） | 15 × 30（原表未写单位），8 视 | **[官方]**，SIS 表 1 |
+| 实测有效分辨率，距离向 | `{python} spread(strips.range_resolution, " m")` | **[实测]** |
+| 实测有效分辨率，方位向 | `{python} spread(strips.azimuth_resolution, " m")` | **[实测]** |
+
+实测方法（旧参考文档记载）：在每个条带中部取若干 512 × 512 的全有效块，对取对数后的后向散射
+沿行、列方向求功率谱，以「功率谱降到高频噪声底 3 倍以下」处的波长作为有效分辨率。
+逐条带数值在元数据表的「实测有效分辨率」两列里。**[实测]**
+
+### CE-2 光学 {#resolution-optical}
+
+| 量 | 数值 | 来源 |
+|---|---|---|
+| 像素大小 | 7 m | **[实测]**，全部分幅的 geotransform |
+| 实测有效分辨率 | 约 23 m | **[推断]**，转述自旧参考文档（方法同上），逐幅数值没有保存，无法复核 |
+
+## CE-2 光学
+
+### 产品 {#ce2-product}
+
+- 嫦娥二号 CCD 立体相机的 7 m 分辨率全月数字正射影像（DOM）。拿到手的是**正射成品**，
+  属 CE2TMap2015 系列，由 100 km 轨道的影像制作；地面段已完成辐射定标、光度校正、几何校正、
+  影像匹配与分幅镶嵌；全月分为 844 幅。
+  **[推断]**，转述自旧参考文档，本仓库没有找到官方原文
+- 下载入口是嫦娥数据发布与信息服务系统的「月图浏览」，选 7 米分辨率 DOM 产品，按经纬度检索，
+  得到 `tif` + `tfw` + `prj` 文件包。**[推断]**，出自旧的《数据下载教程》
+- 单波段，8 位无符号整型；像素 7 m × 7 m。**[实测]**
+- 投影信息的存放方式不统一：有的 ROI 目录里带旁挂的 `.prj`/`.tfw`，有的只把坐标系嵌在 GeoTIFF 里；
+  还有个别分幅（如 ROI_28 的 G123）GeoTIFF 里没有坐标系，只能靠旁挂的 `.prj`。**[实测]**
+
+### 分幅命名 {#ce2-naming}
+
+分幅文件名形如 `CE2_GRAS_DOM_07m_G203_03N161W_A`，中间两段是分幅编号与名义位置：**[推断]**，由本数据集用到的全部分幅的名字与 geotransform 归纳
+
+| 段 | 本例 | 含义 |
+|---|---|---|
+| 纬度带字母 | `G` | 见下表 |
+| 行号 | `2` | 每条带分南北两行，各占 7°，`1` 在北、`2` 在南 |
+| 列号 | `03` | 从西经 180° 起向东编号，每列的经度宽度随纬度带不同 |
+| 名义纬度 | `03N` | 本幅中心附近的纬度，取整到度 |
+| 名义经度 | `161W` | 本幅中心附近的经度，取整到度，东西经分开写 |
+
+按这套规则从名字算出的经纬范围，与本数据集用到的全部分幅用 geotransform 反算的实测范围一致
+（相差不超过 0.03°）。**[实测]**
+
+### 分带墨卡托投影参数 {#ce2-projection}
+
+南北纬 70° 以内按纬度带分幅，每带一套墨卡托投影，参数只有**标准纬线** `lat_ts` 随带变化，其余全部相同：**[实测]**，全部分幅的 `.prj` 或 GeoTIFF 内嵌坐标系
+
+- 投影：墨卡托（GDAL 读作 `Mercator_2SP`）
+- 月球球体，半径 1737400 m（`Moon_2000_IAU_IAG`）
+- 中央经线 0°，东偏移与北偏移均为 0
+- 像素 7 m × 7 m
+
+```{python}
+#| output: asis
+def lat(v):
+    return f"{abs(v)}°{'N' if v > 0 else 'S' if v < 0 else ''}"
+
+def width(w):
+    return f"{w:g}°"
+
+print(table(
+    ["纬度带", "纬度范围", "`lat_ts`", "每幅经度宽", "每行幅数"],
+    [
+        [b.letter, f"{lat(b.south)} – {lat(b.north)}", f"{b.lat_ts:+d}°", width(b.column_width),
+         num(int(360 / b.column_width))]
+        for b in CE2_BANDS
+    ],
+    align="lllrr",
+))
+```
+
+这张表由 `moondata.sources.CE2_BANDS` 生成；`lat_ts` 取自各带没有出过问题的分幅，纬度范围与经度宽
+由分幅名与 geotransform 归纳，并用单元测试对照过实测范围。**[实测]**
+
+补充几条：
+
+- `lat_ts` 的数值恰好等于本带的中间纬度。**[推断]**
+- 有的北半球分幅 `lat_ts` 写成了负值（如 G208、G242 写的是 −7°）。墨卡托投影只取标准纬线的余弦，
+  正负号不改变结果，所以这不算错误。**[实测]**
+- 70° 以外的极区用极射赤面投影（标准纬线 ±80°），分幅字母为 `N`、`S`。本数据集没有用到，
+  只在不属于数据集的 ROI_4、ROI_14、ROI_19 的原始目录里出现过。**[实测]**
+
+### `lat_ts` 被改错的 5 幅 {#ce2-lat-ts}
+
+即页首警告里的那 5 幅。**[实测]**，逐幅读 GeoTIFF 内嵌坐标系
+
+| 分幅 | 所在带应有的 `lat_ts` | 文件里写的 | 用到它的 ROI |
+|---|---|---|---|
+| E215_31N049W | 35° | 21° | [ROI_073](rois/ROI_073.md) |
+| E218_31N022W | 35° | 21° | [ROI_057](rois/ROI_057.md) |
+| E219_31N013W | 35° | 21° | [ROI_058](rois/ROI_058.md) |
+| I219_24S032W | −21° | −35° | [ROI_070](rois/ROI_070.md) |
+| I236_24S104E | −21° | −35° | [ROI_065](rois/ROI_065.md) |
+
+据旧代码的注释：这几幅在 2025-10-30 被重新写过，坐标系换成了相邻纬度带的，原因多半是当时为了让两幅
+能镶嵌而「统一」了坐标系；现有 patch 产物在那之前就做好了，所以没受影响。**[推断]**
+
+同样据旧代码注释：用错误的 `lat_ts` 读，这几幅与 Mini-RF 的重叠区会少掉 30%～60%；
+把 `lat_ts` 改回本带的值后，用 SIFT 与旧产物逐点比对，中位误差 7～44 m。**[实测]**，旧代码作者当时所测
+
+## 已被推翻的旧结论 {#overturned}
+
+旧参考文档第 4 节曾把部分 ROI 的局部错位归因于地形与缺少高程数据（现存版本里已找不到这句），这条归因已被推翻，本文档不采用。
+作者的结论是：错位来自对齐时的全局拟合残差，再叠加条带极端的长宽比（见各 ROI 档案页里的「局部错位」条目）。
+这一结论还没有写成附证据的研究笔记，留给[数据集特性研究](dataset-study.qmd)。**[推断]**
