@@ -12,8 +12,10 @@
   `scan`，以及从对齐影像画 ROI 缩略图的 `thumbnails`。
   它们进门第一件事是检查数据根，不可达就干净地退出。
 
-四步流程的子命令与包的顶层模块一一对应。带 `--verify` 时拿正向结果对照仓库里的窗口清单
-（验收，不影响产出）；对不上以退出码 1 结束，好让脚本据此判断。
+四步流程的子命令与包的顶层模块一一对应；第四步拆成两条：`windows` 正向算窗口、
+`patches` 在窗口上切 patch，都落在 `moondata.patches`。前三步带 `--verify` 时拿正向结果
+对照仓库里的窗口清单（验收，不影响产出）；第四步的验收要反复快跑、不该连带重算，
+所以单独成一条 `verify-windows`。对不上一律以退出码 1 结束，好让脚本据此判断。
 
 预期内的错误一律渲染成一行中文并以退出码 1 结束，不打印 traceback。
 """
@@ -74,6 +76,10 @@ PENDING_STEPS: dict[str, tuple[str, int]] = {
 }
 ALIGNED_RELDIR = Path("work") / "aligned"
 """`overlap` 的默认输出目录（相对仓库根，不入库）。数据盘只读，产物一律写在这边。"""
+GATE_SPLITS = ("Val", "Test")
+"""第一级验收设门的划分：它们的 patch 上有人工评测真值点，窗口一变就全部作废。"""
+MAX_LISTED = 5
+"""`verify-windows` 每类差异最多列几条。一个多出来的窗口能让其后几百条全错位，全列出来没人看。"""
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -417,11 +423,6 @@ def _windows(config: Config, args: argparse.Namespace) -> int:
         )
         print(f"  已写出 {out}")
     return 0
-
-
-GATE_SPLITS = ("Val", "Test")
-"""第一级验收设门的划分：它们的 patch 上有人工评测真值点，窗口一变就全部作废。"""
-MAX_LISTED = 5
 
 
 def _verify_windows(config: Config, rois: Sequence[str]) -> int:
