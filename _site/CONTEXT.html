@@ -206,6 +206,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#对齐控制点alignment-tie-points" id="toc-对齐控制点alignment-tie-points" class="nav-link" data-scroll-target="#对齐控制点alignment-tie-points">对齐控制点（alignment tie points）</a></li>
   <li><a href="#评测真值点evaluation-ground-truth" id="toc-评测真值点evaluation-ground-truth" class="nav-link" data-scroll-target="#评测真值点evaluation-ground-truth">评测真值点（evaluation ground truth）</a></li>
   <li><a href="#为什么按用途命名" id="toc-为什么按用途命名" class="nav-link" data-scroll-target="#为什么按用途命名">为什么按用途命名</a></li>
+  <li><a href="#生成标签generated-labels" id="toc-生成标签generated-labels" class="nav-link" data-scroll-target="#生成标签generated-labels">生成标签（generated labels）</a></li>
   </ul></li>
   <li><a href="#坐标符号约定coordinate-sign-convention" id="toc-坐标符号约定coordinate-sign-convention" class="nav-link" data-scroll-target="#坐标符号约定coordinate-sign-convention">坐标符号约定（coordinate sign convention）</a></li>
   <li><a href="#复现与验收" id="toc-复现与验收" class="nav-link" data-scroll-target="#复现与验收">复现与验收</a>
@@ -306,6 +307,14 @@ ul.task-list li input[type="checkbox"] {
 <p>这两批点在既有代码与文件名里被叫作 <code>tie</code> 和 <code>label</code>，口头上则常被称作「大图上的点」 与「小图上的点」。文档一律使用上面两个专名，因为按位置命名解释不了 「训练集为什么没有后者」，而按用途命名，答案自明：<strong>训练集不需要被评测</strong>。</p>
 <p>文件名与文件格式<strong>保持现状不改</strong>——它们是格式契约，既有数据和既有代码都按它读写。 改的只是我们讲话时用的词。</p>
 </section>
+<section id="生成标签generated-labels" class="level3">
+<h3 class="anchored" data-anchor-id="生成标签generated-labels">生成标签（generated labels）</h3>
+<ul>
+<li><strong>怎么来</strong> —— 不是人标的：patch 内取一组规则网格点，用<strong>全局变换</strong>算出它们在 SAR patch 上的位置。精度因此完全取决于对齐控制点拟合出的那个变换。</li>
+<li><strong>格式</strong> —— 与评测真值点<strong>同一种文件格式</strong>（<code>Label/patch_&lt;n&gt;.txt</code>，y 取负）。</li>
+<li><strong>不是什么</strong> —— 不是评测真值点，不能拿来评测；也不能拿去替换验证集与测试集上 人工标的那一份。代码把它写在工作目录里，不写回数据盘。</li>
+</ul>
+</section>
 </section>
 <section id="坐标符号约定coordinate-sign-convention" class="level2">
 <h2 class="anchored" data-anchor-id="坐标符号约定coordinate-sign-convention">坐标符号约定（coordinate sign convention）</h2>
@@ -323,6 +332,12 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>文件</th>
@@ -334,7 +349,7 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td><code>Label/patch_&lt;n&gt;.txt</code></td>
-<td>评测真值点</td>
+<td>评测真值点（或生成标签）</td>
 <td>patch 内像素</td>
 <td><strong>取负</strong></td>
 </tr>
@@ -377,7 +392,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="一级验收-二级验收level-1-level-2-acceptance">一级验收 / 二级验收（level-1 / level-2 acceptance）</h3>
 <ul>
 <li><strong>一级</strong>：正向算出的窗口与<strong>窗口清单</strong>逐条相等（位置与编号都相等）。比对本身不读影像，快。</li>
-<li><strong>二级</strong>：切出的 patch 与现有产物<strong>逐字节一致</strong>。要读影像，慢。</li>
+<li><strong>二级</strong>：切出的 patch 与现有产物<strong>逐字节一致</strong>。要读影像，慢。在逐字节之前先依次回答 三个问题，次序固定：<strong>位置</strong>变没变 → <strong>数据</strong>丢没丢 → <strong>网纹</strong>消没消。前两项是正确性， 第三项是改进目标，只记录。</li>
 </ul>
 </section>
 <section id="冻结frozen" class="level3">
