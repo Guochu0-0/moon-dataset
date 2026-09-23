@@ -30,6 +30,7 @@ import json
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
+from typing import Any
 
 from moondata import raster
 from moondata.errors import MetadataUnreadable, RawInputsUnavailable
@@ -67,8 +68,15 @@ class AlignmentPlan:
     grid_crs: GridCrs
     reference: Path
     """网格坐标系取自哪幅影像。"""
-    corrected_tiles: list[Path]
-    """头里 `lat_ts` 写错、读取时纠正了的分幅。"""
+    optical_footprints: list[Any]
+    sar_footprint: Any
+    """栅格层的 `Footprint`：规划时读到的坐标系（已纠正）与范围，对齐时原样沿用，
+    不再读一遍文件头。类型不写死，免得本模块在 import 时就牵出地理库。"""
+
+    @property
+    def corrected_tiles(self) -> list[Path]:
+        """头里 `lat_ts` 写错、读取时纠正了的分幅。"""
+        return [f.path for f in self.optical_footprints if f.corrected]
 
 
 def locate_sources(data_root: Path, roi: str) -> RoiSources:
@@ -106,17 +114,13 @@ def plan_alignment(sources: RoiSources, grid_crs: GridCrs = GridCrs.OPTICAL) -> 
     grid = PixelGrid.covering(
         reference.crs_wkt, backend.project_box(region, reference.crs_wkt), TARGET_RESOLUTION
     )
-    return AlignmentPlan(
-        sources, grid, grid_crs, reference.path, [t.path for t in tiles if t.corrected]
-    )
+    return AlignmentPlan(sources, grid, grid_crs, reference.path, tiles, sar)
 
 
 def align(plan: AlignmentPlan, out_dir: Path, *, resample: str = DEFAULT_RESAMPLE) -> None:
     """写出 `out_dir/opt.tif`、`out_dir/sar.tif`，并留一份 `grid.json` 记下怎么来的。"""
     backend = raster.backend()
-    tiles = [backend.read_footprint(p, ce2_tile=True) for p in plan.sources.optical_tiles]
-    sar = backend.read_footprint(plan.sources.sar, ce2_tile=False)
-    for name, inputs in ((OPTICAL_NAME, tiles), (SAR_NAME, [sar])):
+    for name, inputs in ((OPTICAL_NAME, plan.optical_footprints), (SAR_NAME, [plan.sar_footprint])):
         backend.warp_onto(inputs, plan.grid, out_dir / name, resample=resample, nodata=NODATA)
         backend.assert_on_grid(out_dir / name, plan.grid)
     record = {

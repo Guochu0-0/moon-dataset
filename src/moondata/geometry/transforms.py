@@ -30,7 +30,15 @@ class TransformModel(Enum):
     @property
     def min_points(self) -> int:
         """刚体 3 个自由度、相似 4 个、仿射 6 个、单应 8 个；每对点给两个方程。"""
-        return {"rigid": 2, "similarity": 2, "affine": 3, "homography": 4}[self.value]
+        return _MIN_POINTS[self]
+
+
+_MIN_POINTS = {
+    TransformModel.RIGID: 2,
+    TransformModel.SIMILARITY: 2,
+    TransformModel.AFFINE: 3,
+    TransformModel.HOMOGRAPHY: 4,
+}
 
 
 def estimate_transform(src, dst, model: TransformModel) -> np.ndarray:

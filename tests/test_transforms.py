@@ -60,6 +60,21 @@ class TestRigidNeverReflects:
         np.testing.assert_allclose(rotation @ rotation.T, np.eye(2), atol=1e-12)
         assert np.linalg.det(rotation) == pytest.approx(1.0)
 
+    def test_it_is_the_best_proper_rotation(self) -> None:
+        """独立的对照：逐 0.01° 暴力搜索旋转角，取残差最小者——解出的角度应与它一致。"""
+        mirrored = SRC * [-1.0, 1.0] + [40.0, -15.0]
+        got = estimate_transform(SRC, mirrored, TransformModel.RIGID)
+        src_c, dst_c = SRC - SRC.mean(axis=0), mirrored - mirrored.mean(axis=0)
+
+        def cost(theta: float) -> float:
+            c, s = np.cos(theta), np.sin(theta)
+            return float(((src_c @ np.array([[c, s], [-s, c]]) - dst_c) ** 2).sum())
+
+        angles = np.radians(np.arange(-180.0, 180.0, 0.01))
+        best = angles[np.argmin([cost(a) for a in angles])]
+        solved = np.arctan2(got[1, 0], got[0, 0])
+        assert np.degrees(np.angle(np.exp(1j * (solved - best)))) == pytest.approx(0.0, abs=0.01)
+
 
 class TestFailsLoudlyInsteadOfDegrading:
     @pytest.mark.parametrize(
