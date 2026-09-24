@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROI_054 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="roi-a" data-root="../">
+<header class="top"><a class="site" href="../../a-atlas/index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="../../a-atlas/index.html">首页</a><a href="../../a-atlas/sources.html">数据来源</a><a href="../rois/index.html" aria-current=page>ROI 总表</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索文档" aria-label="搜索文档" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main>
+<div class="wrap roi rp">
+  <header class="roi-head">
+    <p class="crumbs"><a href="index.html">ROI 总表</a></p>
+    <h1>ROI_054</h1>
+    <nav class="stepper" aria-label="相邻 ROI"><a href="ROI_027.html">ROI_027</a></nav>
+  </header>
+  <div class="rp-grid">
+    <div class="rp-strips Test"><div id="strips"></div><p class="note">对齐影像的缩略图，黑色是没有数据的区域。网格是各 patch 的范围；<span class="sw-t Test"></span>着色的格子带评测真值点。</p></div>
+    <div class="rp-info"><dl class="facts"><dt>划分</dt><dd><span class="sw Test"></span>测试集</dd><dt>patch 对</dt><dd>168</dd><dt>带评测真值点的 patch</dt><dd>145（1187 对点）</dd><dt>中心</dt><dd>3.5°S，127.3°W</dd><dt>范围</dt><dd>7.7°S–0.7°N，127.7°W–126.9°W</dd></dl><h2>备注</h2><ul class="issues"><li>与训练集 <a href="../../a-atlas/rois/ROI_017.html">ROI_017</a> 的范围重叠 57%；patch 级只有 17 个 patch 有重叠，重叠面积都不超过 16%。</li></ul><div id="loc" class="locator"></div></div>
+  </div>
+</div></main>
+<script src="../../assets/data.js"></script>
+<script src="../search-index.js"></script>
+<script src="../../assets/site.js"></script>
+<script>Site.stripFigure(document.getElementById('strips'), 'ROI_054', ['optical','sar']);
+Site.moonMap(document.getElementById('loc'), {mode:'dots', focus:'ROI_054'});
+</script>
+<div id="proto-bar"><span>原型</span><a href="../../roi-a/rois/ROI_054.html" aria-current=page>A 精简</a><a href="../../roi-b/rois/ROI_054.html">B 带来源</a><a href="../../roi-c/rois/ROI_054.html">C 按 patch 浏览</a></div>
+<style>#proto-bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:999;display:flex;gap:6px;align-items:center;
+background:#000;color:#fff;border-radius:999px;padding:5px 8px 5px 14px;font:13px/1.2 system-ui,"Microsoft YaHei";box-shadow:0 6px 20px rgba(0,0,0,.35)}
+#proto-bar span{opacity:.6;margin-right:4px}#proto-bar a{color:#fff;text-decoration:none;padding:4px 10px;border-radius:999px}
+#proto-bar a[aria-current]{background:#fff;color:#000}</style>
+<script>document.addEventListener('keydown',function(e){var t=document.activeElement;if(t&&(t.tagName==='INPUT'||t.isContentEditable))return;
+if(e.key==='ArrowLeft')location.href='../../roi-c/rois/ROI_054.html';if(e.key==='ArrowRight')location.href='../../roi-b/rois/ROI_054.html';});</script></body></html>

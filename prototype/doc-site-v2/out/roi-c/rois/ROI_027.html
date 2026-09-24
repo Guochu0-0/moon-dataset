@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROI_027 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="roi-c" data-root="../">
+<header class="top"><a class="site" href="../../a-atlas/index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="../../a-atlas/index.html">首页</a><a href="../../a-atlas/sources.html">数据来源</a><a href="../rois/index.html" aria-current=page>ROI 总表</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索文档" aria-label="搜索文档" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main>
+<div class="wrap roi rp">
+  <header class="roi-head">
+    <p class="crumbs"><a href="index.html">ROI 总表</a></p>
+    <h1>ROI_027</h1>
+    <nav class="stepper" aria-label="相邻 ROI"><a href="ROI_054.html">ROI_054</a></nav>
+  </header>
+  <div class="rp-grid">
+    <div class="rp-strips Train"><div id="strips"></div><p class="note">对齐影像的缩略图，黑色是没有数据的区域。网格是各 patch 的范围。</p></div>
+    <div class="rp-info"><dl class="facts"><dt>划分</dt><dd><span class="sw Train"></span>训练集</dd><dt>patch 对</dt><dd>234</dd><dt>中心</dt><dd>66.5°S，123.9°W</dd><dt>范围</dt><dd>70.7°S–62.3°S，125.8°W–122.0°W</dd></dl><h2>备注</h2><ul class="issues"><li>patch 编号缺 95、98、99：这三块基本全黑，已丢弃。</li></ul><h2 id="ph">patch</h2><div id="pv" class="pv"></div><p class="note">点击左侧网格里的格子换一对 patch。左为光学，右为 SAR 总功率（dB）。</p></div>
+  </div>
+</div></main>
+<script src="../../assets/data.js"></script>
+<script src="../search-index.js"></script>
+<script src="../../assets/site.js"></script>
+<script>Site.stripFigure(document.getElementById('strips'), 'ROI_027', ['optical','sar']);
+
+var ROI = 'ROI_027', PTS = {}, TRUTH = false;
+var pv = document.getElementById('pv'), ph = document.getElementById('ph');
+function showPatch(k) {
+  var pts = PTS[k] || [];
+  ph.textContent = 'patch_' + k + (TRUTH ? (pts.length ? '，' + pts.length + ' 对评测真值点' : '，无评测真值点') : '');
+  var base = document.body.dataset.root + '../assets/patches/' + ROI + '/p' + k;
+  var svg = '<svg viewBox="0 0 1034 512" class="pair-svg"><image href="' + base + '_opt.jpg" width="512" height="512"/>' +
+    '<image href="' + base + '_sar.jpg" x="522" width="512" height="512"/>';
+  pts.forEach(function (p) { svg += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="9"/><circle cx="' + (p[2] + 522) + '" cy="' + p[3] + '" r="9"/>'; });
+  pv.innerHTML = svg + '</svg>';
+  document.querySelectorAll('.grid rect').forEach(function (c) { c.classList.toggle('sel', c.dataset.i === String(k)); });
+}
+document.querySelectorAll('.grid rect').forEach(function (c, j) {
+  c.dataset.i = c.querySelector('title').textContent.match(/\d+/)[0];
+  c.addEventListener('click', function () { showPatch(c.dataset.i); });
+});
+showPatch('0');</script>
+<div id="proto-bar"><span>原型</span><a href="../../roi-a/rois/ROI_027.html">A 精简</a><a href="../../roi-b/rois/ROI_027.html">B 带来源</a><a href="../../roi-c/rois/ROI_027.html" aria-current=page>C 按 patch 浏览</a></div>
+<style>#proto-bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:999;display:flex;gap:6px;align-items:center;
+background:#000;color:#fff;border-radius:999px;padding:5px 8px 5px 14px;font:13px/1.2 system-ui,"Microsoft YaHei";box-shadow:0 6px 20px rgba(0,0,0,.35)}
+#proto-bar span{opacity:.6;margin-right:4px}#proto-bar a{color:#fff;text-decoration:none;padding:4px 10px;border-radius:999px}
+#proto-bar a[aria-current]{background:#fff;color:#000}</style>
+<script>document.addEventListener('keydown',function(e){var t=document.activeElement;if(t&&(t.tagName==='INPUT'||t.isContentEditable))return;
+if(e.key==='ArrowLeft')location.href='../../roi-b/rois/ROI_027.html';if(e.key==='ArrowRight')location.href='../../roi-a/rois/ROI_027.html';});</script></body></html>
