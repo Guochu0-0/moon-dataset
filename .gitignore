@@ -5,9 +5,6 @@ __pycache__/
 /.quarto/
 **/*.quarto_ipynb
 
-# 本机数据根配置（写的是本机挂载点，换台机器就不对了）。模板见 moondata.toml.example
-/moondata.toml
-
 # Python 打包与测试
 *.egg-info/
 /.pytest_cache/
@@ -15,5 +12,5 @@ __pycache__/
 # Node 依赖（sandcastle 是 devDependency，装在仓库根）
 /node_modules/
 
-# 流程步骤的产物（对齐影像等），见 moondata overlap
+# 两个编号脚本的产物（重叠区影像、patch 对），见 config.toml 的 work_root
 /work/

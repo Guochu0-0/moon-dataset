@@ -1,1 +1,0 @@
-PROJCS["Equirectangular",GEOGCS["GCS_unknown",DATUM["D_unknown",SPHEROID["unknown",1737400.0,0.0]],PRIMEM["Reference meridian",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Plate_Carree"],PARAMETER["false_easting",0.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",180.0],UNIT["Meter",1.0]]

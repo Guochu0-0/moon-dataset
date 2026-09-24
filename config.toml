@@ -1,0 +1,18 @@
+# 全部参数的唯一来源，见 src/moondata/config.py。
+
+# 原始输入与既有成品所在的盘，换机器要改这一行。代码只读它，从不写。
+data_root = "/mnt/data"
+# 两个编号脚本的产物根，相对路径按本文件所在目录解析。
+work_root = "work"
+
+patch_size = 512
+# 重叠区影像的重采样方式。
+resample = "cubic"
+
+# 网格坐标系取自 SAR 的 ROI。默认取与 SAR 重叠最多的那幅 CE-2 分幅的投影；
+# 这四个 ROI 的重叠区影像当年是在 SAR 的等距圆柱投影下做的，控制点也标在那个网格上。
+[grid_crs]
+ROI_034 = "sar"
+ROI_057 = "sar"
+ROI_058 = "sar"
+ROI_070 = "sar"
