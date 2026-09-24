@@ -1,319 +1,91 @@
-# 月球光学–SAR 配准数据集研究工作区
+# 月球光学–SAR 配准数据集
 
-CE-2 7 m DOM × Mini-RF SAR 配准数据集的文档、处理代码与关键元数据。
-数据集已冻结；955 GB 影像不在本仓库内，通过可配置的数据根路径引用。
+CE-2 7 m DOM 与 Mini-RF SAR 配准数据集的处理代码、文档站与不可再生的小文件。
 
-## 先看文档站
+文档站：双击 `_site/index.html`，不需要安装任何东西，也不需要联网。
 
-全部说明材料在 `_site/` 里，**构建产物随仓库提交**：克隆下来双击 `_site/index.html`
-就能读，不装任何工具链、不联网、也不用接移动硬盘。
+## 环境
 
-正文在 `docs/pages/`，样式脚本字体在 `docs/theme/`，配图与逐 ROI 事实在 `docs/assets/`。
-改完之后重新构建（只读仓库，不需要数据盘），连同 `_site/` 一起提交：
+一个 conda 环境，包从 conda-forge 装，含 GDAL、pyproj 与测试所需的库，并以可编辑方式装入本仓库的 `moondata` 包：
+
+```bash
+conda env create -f environment.yml --solver=libmamba
+conda activate moon-dataset
+```
+
+conda 23.10 起默认求解器就是 libmamba，`--solver=libmamba` 可省；更早的版本要带上它，经典求解器在含 GDAL 的环境上解不出来。也可以一次性设置：`conda config --set solver libmamba`。
+
+## 配置
+
+全部参数在仓库根的 `config.toml`，没有环境变量或命令行开关。换机器时改：
+
+| 键 | 含义 |
+|---|---|
+| `data_root` | 数据根：原始影像与既有成品所在的目录。代码只读它。 |
+| `work_root` | 输出根：两个编号脚本的产物目录，默认 `work/`（不入库）。 |
+
+相对路径按 `config.toml` 所在目录解析。
+
+## 运行
+
+### 两个编号脚本
+
+```bash
+python scripts/01_overlap.py [ROI_054 ...]   # 重叠区提取
+python scripts/02_patches.py [ROI_054 ...]   # 协同切片
+```
+
+唯一的参数是 ROI 列表，不带参数跑全部 ROI，已有产物直接覆盖。两步之间的人工步骤「标控制点」已完成，控制点在 `data/tie-points/`。
+
+| 脚本 | 输入 | 输出 |
+|---|---|---|
+| `01_overlap.py` | 数据根下的原始影像 | `work/01_overlap/ROI_<nnn>/{opt,sar}.tif` |
+| `02_patches.py` | 重叠区影像、`data/tie-points/ROI_<nnn>.pts` | `work/02_patches/<划分>/ROI_<nnn>/{Optical,SAR}/`、`windows.json` |
+
+### 素材
+
+`docs/assets/` 下的配图与 `roi-facts.json` 由素材脚本从数据盘生成，按组单独重跑：
+
+```bash
+python scripts/make_assets.py basemap <lroc_color_poles_4k.tif>   # 全月底图
+python scripts/make_assets.py samples                             # 首页样例
+python scripts/make_assets.py facts [ROI_054 ...]                 # 逐 ROI 事实
+python scripts/make_assets.py overlays [ROI_054 ...]              # 原始产品叠合图
+python scripts/make_assets.py process                             # 流程配图，先跑 01_overlap.py ROI_054
+```
+
+`basemap` 的输入是 [NASA SVS 4720](https://svs.gsfc.nasa.gov/4720) 的 `lroc_color_poles_4k.tif`，不入库。
+
+### 文档站
 
 ```bash
 python scripts/build_site.py
 ```
 
-`docs/assets/` 由素材脚本从数据盘生成，按组可单独重跑：
+只读仓库里的文件，不需要数据盘。改了 `docs/pages/`、`docs/assets/` 或 `data/metadata/` 后重跑，连同 `_site/` 一起提交。
 
-```bash
-python scripts/make_assets.py basemap <lroc_color_poles_4k.tif>
-python scripts/make_assets.py samples
-python scripts/make_assets.py facts [ROI ...]
-python scripts/make_assets.py overlays [ROI ...]
-python scripts/make_assets.py process          # 先跑 scripts/01_overlap.py ROI_054
-```
-
-## 装哪一档
-
-依赖分两档。**先想清楚你要干什么，再决定装哪一个**——分档的唯一理由是
-GDAL 在 Windows 上用 pip 装经常失败，那是接手这个项目的人第一个会卡住的地方，
-而只想读文档或做分析的人不该被它拦住。
-
-| | 文档档 `environment.yml` | 数据处理档 `environment-data.yml` |
-|---|---|---|
-| 环境名 | `moon-dataset` | `moon-dataset-data` |
-| 含 GDAL/pyproj | 否 | 是 |
-| 适合谁 | 读文档、渲染文档站、跑几何层单测、做基于统计快照的分析 | 要真正读取 955 GB 影像、重跑四步流程、复现数据集的人 |
-| 需要移动硬盘 | 不需要 | 需要 |
-
-```bash
-conda env create -f environment.yml        # 文档档
-conda activate moon-dataset
-```
-
-```bash
-conda env create -f environment-data.yml   # 数据处理档
-conda activate moon-dataset-data
-```
-
-> **先把求解器换成 libmamba，否则数据处理档基本装不上。** conda 23.10 以前默认用
-> 经典 SAT 求解器，它在 `gdal + qt6 + jupyter` 这一锅上会卡到没有尽头——实测跑满
-> 40 分钟、吃掉 3.8 GB 内存仍未出解。libmamba 几十秒解完。
->
-> ```bash
-> conda config --set solver libmamba        # 一次性设置
-> conda --version                           # 23.10 及以后已经是默认
-> ```
->
-> 不想改全局配置的话，在建环境时加 `--solver=libmamba` 也行。
-
-两档都会把本仓库以可编辑方式装进环境，装完即有 `moondata` 命令。
-
-> 只是想读文档的话，其实**什么都不用装**：文档站的构建产物已提交，克隆后直接
-> 双击 HTML 即可离线阅读。
-
-## 数据根怎么配
-
-955 GB 影像在一块移动硬盘上，不同机器、不同时刻挂载在不同盘符，所以数据根可配置。
-三层来源，**优先级由高到低**，取第一个给出非空值的：
-
-1. 命令行 `--data-root PATH`
-2. 环境变量 `MOONDATA_DATA_ROOT`
-3. 仓库根 `moondata.toml` 的 `[data] root`
-
-都没给则为「未设置」：文档渲染与快照分析本来就不需要数据根，所以这不影响它们；
-但 `moondata doctor` 会以退出码 1 结束，因为它回答不了「数据在不在」这个问题。
-
-相对路径各按自己那层的基准解析——命令行与环境变量按当前工作目录，`moondata.toml`
-里写的按该文件所在目录。
-
-```bash
-cp moondata.toml.example moondata.toml     # 然后改成本机路径
-```
-
-`moondata.toml` 写的是本机挂载点，不入库；入库的是 `moondata.toml.example`。
-
-## 盘没插的时候
-
-**降级运行，不是崩溃。** 凡是能靠统计快照完成的照常跑，只有真正需要读影像的
-命令才报错，而且报的是一行中文，不是 traceback。
-
-```bash
-moondata doctor
-```
-
-一次报全三件事：数据根解析到哪个路径（以及是哪一层给出的）、该路径是否可达、
-与统计快照的指纹是否一致。盘插着且一切正常时退出码为 0，否则为 1。
-
-> 快照若尚未生成，「指纹」一栏显示「统计快照尚未生成」——这不算失败，退出码仍是 0。
-
-```
-数据根    G:\Lunar_Optical_SAR_Registration_Dataset
-来源      环境变量 MOONDATA_DATA_ROOT
-可达性    可达
-统计快照  D:\Code\moon-dataset\stats\snapshot.json
-指纹      一致
-```
-
-统计快照在仓库根的 `stats/snapshot.json`，**入库**——文档只读它、不读影像，
-所以盘没插时文档照样渲染。它不放在 `data/` 下：`data/` 装的是不可再生的关键资产，
-而快照是随时可以重新扫出来的计算产物（见 `data/README.md`）。
-
-## 重新生成统计快照
-
-```bash
-moondata scan
-quarto render
-```
-
-`scan` 读遍 `Processed_Data/` 下全部 patch（光学、SAR、评测真值点），把数量、数据类型、
-数值范围、真值点覆盖、与窗口清单的数量差连同生成时间和数据指纹写进
-`stats/snapshot.json`。它要读几十 GB，需时十来分钟。之后 `quarto render` 让文档取新值，
-**快照与 `_site/` 一起提交**。
-
-什么时候要重跑：`moondata doctor` 报指纹「不一致」时。数据集已冻结，正常情况下不该发生——
-真发生了，先查清是数据变了还是快照过期了。
-
-读 patch 不需要 GDAL：`moondata.tiff` 只用标准库与 numpy。这批 TIFF 用 tifffile 读会报
-`LIBDEFLATE_BAD_DATA`，理由见该模块 docstring。
-
-指纹刻画的是数据根的**目录形态**（相对路径 + 文件大小），不是像素内容——955 GB
-逐字节哈希不现实，而「少了一个 ROI」「patch 数量变了」这类真正会让快照失效的
-变化都体现在形态上。
-
-## ROI 档案页
-
-每个 ROI 一页（`docs/rois/ROI_<nnn>.md`），外加总览页，**全部由脚本生成，不手写**：
-
-```bash
-moondata pages        # 只读仓库，不需要数据盘；quarto render 前也会自动跑
-```
-
-输入全在仓库里：元数据表、统计快照、缩略图清单，以及唯一手写的
-`docs/rois/known-issues.toml`（ROI 的已知问题，每条注明出处）。要补一条已知问题，
-改这个文件再 `quarto render` 即可。生成的页面随仓库提交；有测试守着「提交的页面
-就是生成器此刻的输出」，改了输入忘了重新生成会被测出来。
-
-缩略图要读对齐影像（`raw/ROI_*/cropped/ce2/`，六十多 GB），所以**只能接上数据盘生成**，
-生成后作为产物提交（`docs/rois/thumbnails/`，每张图的来源、降采样步长、拉伸区间
-记在同目录的 `thumbnails.json` 里）：
-
-```bash
-moondata thumbnails   # 需时约五分钟
-quarto render
-```
-
-对齐影像是 256 × 256 分块存储的，同样由 `moondata.tiff` 读取，不需要 GDAL。
-
-## 对齐与变换求解（流程前三步）
-
-```bash
-moondata transform 35 6 --verify      # 第三步：由对齐控制点求全局变换，并对照窗口清单
-moondata tiepoints 73                 # 第二步：看某个 ROI 用的是哪一代对齐控制点
-moondata overlap 35 --verify          # 第一步：对齐到同一网格，写出 work/aligned/ROI_035/
-```
-
-- `tiepoints` / `transform` 只读仓库里的 `data/tie-points/`，**不要数据盘、不要 GDAL**。
-  默认模型是最小二乘仿射——产出现有数据集的那个；`--model rigid|similarity|homography`
-  供研究对比。`--verify` 用求出的变换重算窗口清单里每个窗口的 SAR 位置，偏差在取整
-  误差（[0, 2) 像素）以内算一致；超出的窗口逐个报出编号与偏差，并以退出码 1 结束。
-  除 ROI_73（清单是按当年错误的标注算的，见 `data/README.md`）外全部一致。
-- `overlap` 要数据处理档环境（GDAL/pyproj）和数据盘。镶嵌、重投影、裁切、重采样在
-  **一次** `gdal.Warp` 里完成；5 幅 CE-2 分幅头里写错的 `lat_ts` 在读取时纠正（临时 VRT，
-  源文件只读）；写完读回核对两幅确实落在同一网格上。产物写到仓库的 `work/`（不入库），
-  `--out` 可改。`--plan-only` 只算网格、秒级完成。
-- `overlap --verify` 拿正向算出的网格对照窗口清单里的历史网格。66/68 个 ROI 一致；
-  其中 ROI_34、57、58、70 当年是在 SAR 的投影下对齐的，要加 `--grid-crs sar`。
-  ROI_65（原点差 0.27 m、多一行）与 ROI_73 的历史网格来自被旧脚本改坏的中间文件，
-  **来源不可复现**，原因见 `moondata.overlap` 的模块 docstring。
-
-## 正向窗口与第一级验收（流程第四步的前半）
-
-```bash
-moondata windows 6 11 20              # 正向算出窗口，写进 work/windows/ROI_006.json 等
-moondata windows 70 --grid-crs sar    # 当年在 SAR 投影下对齐的 ROI，同 overlap
-moondata verify-windows               # 第一级验收：验证集 + 测试集，逐条比对窗口清单
-moondata verify-windows 35            # 也可以只比某几个 ROI（含训练集）
-```
-
-- `windows` 要数据处理档环境和数据盘，**全程不读窗口清单、不读任何历史 patch**：
-  对齐控制点 → 仿射变换 → 从原始输入规划网格 → 从原点铺 512 窗口、边缘余量丢弃 →
-  四角经变换、各自向零截断、取平均、再截断，得 SAR 窗口 → 丢掉出界与重叠不足 70% 的 →
-  丢掉任一边含 0 像素的 → 余下的按顺序编号。规则逐条写在 `moondata.geometry.windows`
-  与 `moondata.patches` 的 docstring 里。
-- 「含不含 0 像素」看的是**筛选影像**：按当年做法（光学一次、SAR 两次最近邻）从原始输入
-  重做的一对对齐影像，默认放在 `work/selection/<ROI>/`，首次每个 ROI 约一两分钟、约 1 GB，
-  之后复用。不能用数据盘上现在的对齐影像来判——它们已用 cubic 重做过，nodata 边缘
-  差一两个像素，验证/测试集上会多留下 11 个贴边窗口，其后的编号整体错位。
-- `verify-windows` 只读 `work/windows/` 与 `data/windows/`，**不读影像、不要数据盘、不要 GDAL**，
-  秒级完成。对不上时按 ROI 报出：网格差异、多出和缺少的窗口（带编号与坐标）、
-  因此改了编号的窗口、同编号位置不同的窗口及其像素偏差。全部一致退出码 0，否则 1。
-- 验收门的完整跑法（首次约半小时、筛选影像共约 15 GB）：
-  `moondata windows 6 7 11 20 35 37 49 54 59 60 71 75 80`，再 `moondata windows 70 --grid-crs sar`，
-  最后 `moondata verify-windows`。2026-09-23 实跑（GDAL 3.6.2）：**14/14 个 ROI、2107 个窗口
-  逐条一致**，没有需要记为「来源不可复现」的 ROI。
-- 几何这一半另有一道不读影像的单测（`tests/test_windows.py`）：全部 67 个 ROI 的清单窗口
-  都落在正向候选上、SAR 坐标逐像素相等、先后顺序不变。
-
-## 切 patch 与第二级验收（流程第四步的全程）
-
-```bash
-moondata patches 6 11 20              # 正向窗口 → 对齐影像 → 切 patch、写生成标签，写进 work/patches/
-moondata patches 70 --grid-crs sar    # 同 windows
-moondata verify-patches               # 第二级验收：验证集 + 测试集，对照数据盘上的现有产物
-```
-
-- `patches` 一条命令走完第四步：算正向窗口（同 `windows`，结果也写进 `work/windows/`）、
-  做 cubic 对齐影像（同 `overlap`，`work/aligned/<ROI>/` 已有且网格对得上就复用）、在窗口上
-  切出光学与 SAR、为每个 patch 写一份**生成标签**。产物按数据盘的结构写到
-  `work/patches/<划分>/<ROI>/{Optical,SAR,Label}/`，每次重跑先清掉该 ROI 的旧产物。
-  **不写回数据盘**——验证集与测试集的 `Label/` 是人工标的评测真值点，生成标签不能替换它。
-- 生成标签的格式与现有 `Label/patch_<n>.txt` 一字不差：每行四列（光学 x、y，SAR x、y）、
-  **两个 y 都取负**、制表符分隔、8 位小数、CRLF。内容是 patch 内 5 × 5 的规则网格点及其经
-  全局变换在 SAR patch 上的位置。
-- 逐字节一致靠两件事：patch 从正向做出的 cubic 对齐影像上切（网格与历史一致时，它与数据盘上的
-  对齐影像逐像素相同）；TIFF 由 GDAL 写文件头与目录，**条带再用标准库 zlib（level 6）重压一遍**。
-  现有 patch 的每条带恰是 zlib level 6 的输出（rasterio 1.3.9 能原样写出同样的字节）；本机
-  conda 装的 GDAL 3.6.2 用同样的写法、同样的像素，压出来的条带却不同，文件头与目录则一字不差。
-  理由写在 `moondata.tiff.recompress_deflate`。
-- `verify-patches` 只读，**不要 GDAL**（patch 与对齐影像都经 `moondata.tiff` 读），但要数据盘。
-  判据继承自旧代码的新旧产物比对工具，逐 ROI 按固定次序报告：
-  1. **位置**——新 patch 自带的地理坐标换算到窗口清单的网格上，光学与 SAR 都要恰好落在
-     清单的窗口上（容差 1e-6 像素）；
-  2. **数据完整性**——历史对齐影像（`raw/<ROI>/cropped/ce2/opt.tif`）有效、新对齐影像却为 0
-     的像素占比，全幅逐像素算，超过 0.1% 算失败；
-  3. **网纹**——每 8 个 patch 抽 1 个，看光学逐行梯度自相关的最强周期是否为 14 px，
-     **只记录、不判失败**（数据集已冻结，本轮不因它改数据）；
-  4. **逐字节**——光学与 SAR 两个文件都与现有产物相同。字节不同的再看像素相关系数，
-     低于 0.90 记为「内容不符」。
-
-  窗口清单里有、但产物已按删除清单删掉的 ROI（ROI_060）点名跳过，不计入。
-  全部通过退出码 0，否则 1。
-- 验收门的完整跑法（首次约半小时；对齐影像与筛选影像共约 25 GB、patch 约 7 GB，之后复用、几分钟跑完）：
-  `moondata patches 6 7 11 20 35 37 49 54 59 71 75 80`，再 `moondata patches 70 --grid-crs sar`，
-  最后 `moondata verify-patches`。
-
-### 2026-09-23 实跑结果（GDAL 3.6.2，验证集 + 测试集 13 个现存 ROI、1955 对 patch）
-
-| 检查 | 结果 |
-|---|---|
-| 1 位置 | **13/13 个 ROI 全部落在窗口清单的窗口上**，光学与 SAR 都是，一个不差 |
-| 2 数据完整性 | **13/13 个 ROI 丢失 0 像素**（新旧对齐影像全幅逐像素比） |
-| 3 网纹 | 14 px 周期占比新旧**都是 0%**（抽 249 个）——现有产物已是 cubic 版，没有旧网纹 |
-| 逐字节 | **10/13 个 ROI 逐字节一致**；ROI_037、ROI_054、ROI_070 不一致，见下 |
-
-三个不一致的 ROI，位置与数据都没问题，差在浮点末位与坐标系的名字上，评测真值点照样成立：
-
-- **ROI_037、ROI_054**：正向算出的网格原点 y 与历史网格差**一个浮点末位**（约 1e-11 m，
-  如 `-189574.40512988946` 对 `-189574.4051298895`）。第一级验收有 1e-6 m 容差，判为一致；
-  但这一位会写进 patch 的地理标签，SAR（float32）经 cubic 插值后也有 27 / 57 个 patch 出现
-  ≤ 3e-8 的像素差。光学像素完全相同。pyproj、GDAL/osr、rasterio 三种算法都给出同一个值，
-  与历史值不同——全部 66 个网格可复现的 ROI 里有 7 个是这种情况（另外 5 个是训练集的 018、053、057、058 与已删除的 060），
-  最可能是当年 rasterio/GDAL/PROJ 版本的浮点差异。
-- **ROI_070**：像素完全相同，差在坐标系 WKT 的名字：历史写的是 `PROJCS["unknown",…]`，
-  正向从 SAR 文件读到的是 `EQUIRECTANGULAR MOON`，proj 参数逐项相同。
-  同样是当年环境留下的痕迹。
-
-按「不为凑一致写特例代码」的约定，这三处**不做修补**，记为「逐字节不可复现、内容等价」。
-
-## 代码结构即流程图
-
-```
-src/moondata/
-├── overlap/     第一步  算重叠区
-├── tiepoints/   第二步  对齐控制点
-├── transform/   第三步  估计全局变换
-├── patches/     第四步  正向算窗口、切 patch、生成标签、两级验收
-├── raster/      支撑层  唯一依赖 GDAL/pyproj 的地方
-├── geometry/    支撑层  纯 numpy，无地理库，可被完整单测
-├── manifest.py  窗口清单的读写（读只用于验收对照；正向结果按同一格式写）
-├── config.py    数据根解析
-├── snapshot.py  数据指纹与统计快照的存取
-├── stats.py     扫描 patch 产物，产出快照里的统计量
-├── tiff.py      不依赖影像库的 TIFF 读取器
-├── docvalues.py 文档页从快照取值、排版数字
-├── metadata.py  Mini-RF 逐 ROI 元数据表的读取
-├── thumbnails.py 从对齐影像画 ROI 缩略图
-├── roipages.py  生成 ROI 档案页
-├── sources.py   产品 ID 解码、CE-2 分幅与分带、条带元数据汇总（来源文档用）
-├── doctor.py    自检
-├── docsite.py   文档站构建后处理（让 file:// 下搜索可用）
-└── cli.py       命令行
-
-stats/snapshot.json   统计快照（入库；文档只读它，不读影像）
-
-_quarto.yml           文档站配置（一条 `quarto render` 走完全程）
-CONTEXT.md            术语表；同时是站点的一页
-index.qmd             站点首页
-docs/                 站点其余页面（docs/agents/ 是给 agent 的约定，不进站点）
-_site/                构建产物（入库，供离线双击阅读）
-```
-
-`raster/` 与 `geometry/` 之间那条线是有意画的：地理库调用全部收在 `raster/`，
-所以几何计算能在没有 GDAL 的机器上跑、并被单元测试完整覆盖。
-
-## 跑测试
+### 测试
 
 ```bash
 pytest
 ```
 
-不需要移动硬盘，也不需要 GDAL。
+不需要数据盘。
 
-## 更多
+## 目录
 
-- `CONTEXT.md` —— 术语表
-- `AGENTS.md` —— agent 约定
-- `data/README.md` —— 纳入版本控制的不可再生关键资产
+| 路径 | 内容 |
+|---|---|
+| `scripts/` | 两个编号脚本、素材脚本 `make_assets.py`、站点生成 `build_site.py` |
+| `src/moondata/` | 脚本背后的包：`geometry`（纯 numpy 的网格、窗口与仿射）、`raster`（全部 GDAL/pyproj 调用）、`sources`（定位原始输入）、`config`、`assets`、`site`、`errors` |
+| `tests/` | `geometry` 与站点生成器的测试 |
+| `config.toml` | 全部参数 |
+| `environment.yml` | conda 环境 |
+| `data/` | 控制点、评测真值点、Mini-RF 元数据表，见 [`data/README.md`](data/README.md) |
+| `docs/pages/` | 文档站正文 |
+| `docs/theme/` | 文档站样式、脚本与字体 |
+| `docs/assets/` | 文档站素材（素材脚本生成） |
+| `_site/` | 构建好的文档站 |
+| `CONTEXT.md` | 术语表 |
+| `AGENTS.md`、`docs/agents/`、`.sandcastle/` | agent 约定与编码规范 |
+| `work/` | 编号脚本的产物（不入库） |

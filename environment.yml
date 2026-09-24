@@ -1,20 +1,19 @@
-# 文档档（轻）——阅读、渲染文档，跑几何层与自检命令。
+# 本仓库唯一的环境：两个编号脚本、素材脚本、站点生成器与测试都用它。
 #
-#   conda env create -f environment.yml
+#   conda env create -f environment.yml --solver=libmamba
 #   conda activate moon-dataset
 #
-# 刻意**不含 GDAL/pyproj**：它们在 Windows 上是接手者第一个会卡住的地方，
-# 而只想读文档或做分析的人根本用不到。要重跑数据请改用 environment-data.yml。
+# GDAL 与 pyproj 只从 conda-forge 装，不用 pip 装。
 name: moon-dataset
 channels:
   - conda-forge
 dependencies:
   - python=3.11
   - numpy>=1.24
-  - pandas
-  - matplotlib
-  - jupyter
-  - markdown        # 构建文档站；构建产物已提交，只读文档的人其实也不需要它
+  - gdal>=3.6
+  - pyproj>=3.5
+  - markdown>=3.4   # 站点生成器
+  - pillow          # 素材脚本
   - pytest
   - pip
   - pip:

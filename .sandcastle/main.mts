@@ -88,7 +88,7 @@ type Plan = z.infer<typeof planSchema>;
 
 const MAX_ITERATIONS = 10;
 
-// 镜像里已有装好 GDAL/pyproj/quarto/pytest 的 conda 环境，这里只把仓库装成可编辑模式
+// 镜像里已有装好 GDAL/pyproj/pytest 的 conda 环境，这里只把仓库装成可编辑模式
 // 让 pytest 能 import moondata。--no-deps：依赖已在镜像里。--no-build-isolation：否则
 // pip 会为 requires=["setuptools>=68"] 联网重下一份，实测 40s，打满 hook 的 60s 预算。
 const hooks = {
@@ -100,8 +100,7 @@ const hooks = {
 };
 
 // 只读是硬要求：那 919 GB 原始影像不可再生。
-// MOONDATA_DATA_ROOT 走 provider env，命中 moondata.config 的第二层优先级，所以本机
-// 那个 gitignore 掉的 moondata.toml 不用进容器。
+// 挂载点与入库的 config.toml 里的 data_root 相同，容器里不必另配数据根。
 const DATA_ROOT_HOST = "G:/Lunar_Optical_SAR_Registration_Dataset";
 const DATA_ROOT_SANDBOX = "/mnt/data";
 
@@ -110,7 +109,6 @@ const sandboxProvider = () =>
     mounts: [
       { hostPath: DATA_ROOT_HOST, sandboxPath: DATA_ROOT_SANDBOX, readonly: true },
     ],
-    env: { MOONDATA_DATA_ROOT: DATA_ROOT_SANDBOX },
   });
 
 for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
