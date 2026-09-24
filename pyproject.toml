@@ -7,7 +7,7 @@ name = "moondata"
 version = "0.2.0"
 description = "从 CE-2 7 m DOM 与 Mini-RF SAR 的原始输入做出配准数据集"
 requires-python = ">=3.11"
-dependencies = ["numpy>=1.24"]
+dependencies = ["numpy>=1.24", "markdown>=3.4"]
 
 # GDAL/pyproj **不在这里**。它们用 pip 装在 Windows 上经常失败，只能由 conda 提供，
 # 见 environment-data.yml。

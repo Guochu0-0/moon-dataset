@@ -14,7 +14,7 @@ dependencies:
   - pandas
   - matplotlib
   - jupyter
-  - quarto          # 构建文档站；构建产物已提交，只读文档的人其实也不需要它
+  - markdown        # 构建文档站；构建产物已提交，只读文档的人其实也不需要它
   - pytest
   - pip
   - pip:

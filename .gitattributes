@@ -5,14 +5,12 @@ data/** -text
 # 方式失败。core.autocrlf=true 会在 checkout 时把文本文件转成 CRLF，这里显式钉回 LF。
 .sandcastle/Dockerfile text eol=lf
 
-# _site/ 是要提交的 Quarto 成品（见 .gitignore），但 Quarto 会把 mermaid.min.js、
-# bootstrap、图标字体一并打包进去。压缩过的 JS 是几万字符的单行，token 密度极高：
-# issue #4 只改了 3 个 .qmd，`git diff main...分支` 却展开成 3.8 MB、约 95 万 token，
-# 直接把 reviewer 顶爆（Prompt is too long）。标成 -diff 后 git 只输出一行
-# 「Binary files differ」，成品照常提交与发布，源文件的逐行改动不受影响。
+# _site/ 是入库的文档站构建产物（scripts/build_site.py），里面有 search-index.js 这类
+# 单行几百 KB 的文件和大量图片，diff 只输出「Binary files differ」，改动看 docs/ 下的源。
 _site/** -diff
 
-# ROI 档案页是生成物，测试按字节比对「提交的页面 == 生成器输出」，生成器写的是 LF。
-# core.autocrlf=true 会在 checkout 时转成 CRLF，那样测试会误报过期、`moondata pages`
-# 也会把六十几页全部重写一遍。钉回 LF。
-docs/rois/*.md text eol=lf
+# tests/test_site.py 按字节核对「入库的 _site/ == 生成器输出」，生成器写的是 LF。
+# core.autocrlf=true 会在 checkout 时把文本转成 CRLF，测试就会误报过期，这里钉回 LF。
+_site/**/*.html text eol=lf
+_site/**/*.js text eol=lf
+_site/**/*.css text eol=lf

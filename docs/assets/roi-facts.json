@@ -1,0 +1,3400 @@
+{
+ "ROI_001": {
+  "patches": 40,
+  "last_patch": 39,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 150,
+  "center": [
+   131.39,
+   -29.079
+  ],
+  "bbox": [
+   130.9088,
+   -30.3886,
+   131.8716,
+   -27.7692
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_J135_31S130E_A",
+    "tile": "J135",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32038,
+     29265
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3189,
+    9928
+   ]
+  }
+ },
+ "ROI_002": {
+  "patches": 152,
+  "last_patch": 151,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 36,
+  "center": [
+   111.077,
+   4.435
+  ],
+  "bbox": [
+   110.7386,
+   1.343,
+   111.4146,
+   7.527
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G239_03N108E_A",
+    "tile": "G239",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32349,
+     30274
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2713,
+    24903
+   ]
+  }
+ },
+ "ROI_003": {
+  "patches": 171,
+  "last_patch": 170,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 36,
+  "center": [
+   -126.829,
+   66.102
+  ],
+  "bbox": [
+   -129.4957,
+   62.3659,
+   -124.1631,
+   69.838
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_C104_66N127W_A",
+    "tile": "C104",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 63.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     29601,
+     34877
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 63.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    9788,
+    34128
+   ]
+  }
+ },
+ "ROI_005": {
+  "patches": 135,
+  "last_patch": 134,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 33,
+  "center": [
+   -73.902,
+   38.36
+  ],
+  "bbox": [
+   -74.5915,
+   34.314,
+   -73.2122,
+   42.4066
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E112_38N076W_A",
+    "tile": "E112",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     31885
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4568,
+    34245
+   ]
+  }
+ },
+ "ROI_006": {
+  "patches": 81,
+  "last_patch": 80,
+  "missing": [],
+  "truth_patches": 67,
+  "truth_points": 538,
+  "tie_points": 33,
+  "center": [
+   144.012,
+   -22.29
+  ],
+  "bbox": [
+   143.5319,
+   -23.8524,
+   144.4914,
+   -20.7279
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_I241_24S144E_A",
+    "tile": "I241",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32455,
+     31239
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -21.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3622,
+    12748
+   ]
+  }
+ },
+ "ROI_007": {
+  "patches": 372,
+  "last_patch": 371,
+  "missing": [],
+  "truth_patches": 286,
+  "truth_points": 2315,
+  "tie_points": 39,
+  "center": [
+   140.857,
+   49.262
+  ],
+  "bbox": [
+   139.8073,
+   41.1647,
+   141.9072,
+   57.3595
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_D133_52N145E_A",
+    "tile": "D133",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28521,
+     32870
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_D233_45N145E_A",
+    "tile": "D233",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28521,
+     28539
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 49.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    5570,
+    66654
+   ]
+  }
+ },
+ "ROI_008": {
+  "patches": 291,
+  "last_patch": 290,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 32,
+  "center": [
+   -157.893,
+   7.0
+  ],
+  "bbox": [
+   -158.378,
+   -1.4141,
+   -157.4074,
+   15.4136
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G103_10N161W_A",
+    "tile": "G103",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30731
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_G203_03N161W_A",
+    "tile": "G203",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30274
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3895,
+    68290
+   ]
+  }
+ },
+ "ROI_009": {
+  "patches": 162,
+  "last_patch": 161,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   60.758,
+   3.5
+  ],
+  "bbox": [
+   60.4822,
+   -0.7142,
+   61.0331,
+   7.714
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G233_03N063E_A",
+    "tile": "G233",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30274
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2211,
+    33916
+   ]
+  }
+ },
+ "ROI_010": {
+  "patches": 159,
+  "last_patch": 158,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   92.787,
+   17.463
+  ],
+  "bbox": [
+   92.254,
+   13.293,
+   93.3193,
+   21.633
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_F235_17N096E_A",
+    "tile": "F235",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32455,
+     29806
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 21.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4021,
+    33036
+   ]
+  }
+ },
+ "ROI_011": {
+  "patches": 92,
+  "last_patch": 91,
+  "missing": [],
+  "truth_patches": 83,
+  "truth_points": 706,
+  "tie_points": 30,
+  "center": [
+   -66.862,
+   -11.009
+  ],
+  "bbox": [
+   -67.331,
+   -14.6119,
+   -66.3938,
+   -7.4053
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_H216_10S063W_A",
+    "tile": "H216",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30731
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3761,
+    29483
+   ]
+  }
+ },
+ "ROI_012": {
+  "patches": 105,
+  "last_patch": 104,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -167.208,
+   -35.56
+  ],
+  "bbox": [
+   -167.7198,
+   -37.57,
+   -166.6965,
+   -33.55
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_J102_31S166W_A",
+    "tile": "J102",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_J202_38S166W_A",
+    "tile": "J202",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     31885
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3389,
+    16373
+   ]
+  }
+ },
+ "ROI_013": {
+  "patches": 54,
+  "last_patch": 53,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   167.085,
+   -43.355
+  ],
+  "bbox": [
+   166.2954,
+   -44.9976,
+   167.8747,
+   -41.713
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_K135_45S165E_A",
+    "tile": "K135",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28521,
+     28539
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -49.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4189,
+    11987
+   ]
+  }
+ },
+ "ROI_015": {
+  "patches": 98,
+  "last_patch": 97,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 32,
+  "center": [
+   -63.532,
+   59.499
+  ],
+  "bbox": [
+   -64.7627,
+   55.2831,
+   -62.3013,
+   63.7143
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_C208_59N067W_A",
+    "tile": "C208",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 63.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     29601,
+     27340
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 63.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4518,
+    30679
+   ]
+  }
+ },
+ "ROI_016": {
+  "patches": 265,
+  "last_patch": 264,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -8.423,
+   -66.499
+  ],
+  "bbox": [
+   -11.5408,
+   -70.7109,
+   -5.3061,
+   -62.2864
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_L212_66S007W_A",
+    "tile": "L212",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -63.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     29600,
+     34877
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -63.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    11444,
+    39190
+   ]
+  }
+ },
+ "ROI_017": {
+  "patches": 213,
+  "last_patch": 212,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -126.854,
+   -3.243
+  ],
+  "bbox": [
+   -127.3217,
+   -7.7654,
+   -126.3855,
+   1.2802
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G208_03N123W_A",
+    "tile": "G208",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30274
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_H108_03S123W_A",
+    "tile": "H108",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30273
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3757,
+    36396
+   ]
+  }
+ },
+ "ROI_018": {
+  "patches": 117,
+  "last_patch": 116,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   8.582,
+   -45.575
+  ],
+  "bbox": [
+   7.2581,
+   -49.6991,
+   9.9061,
+   -41.45
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_K119_45S005E_A",
+    "tile": "K119",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28520,
+     28539
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -49.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    7024,
+    31343
+   ]
+  }
+ },
+ "ROI_020": {
+  "patches": 112,
+  "last_patch": 111,
+  "missing": [],
+  "truth_patches": 91,
+  "truth_points": 739,
+  "tie_points": 30,
+  "center": [
+   -42.619,
+   -45.499
+  ],
+  "bbox": [
+   -43.626,
+   -49.7143,
+   -41.6125,
+   -41.2842
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_K114_45S045W_A",
+    "tile": "K114",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28521,
+     28539
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -49.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    5341,
+    31991
+   ]
+  }
+ },
+ "ROI_021": {
+  "patches": 108,
+  "last_patch": 107,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 36,
+  "center": [
+   -58.081,
+   3.5
+  ],
+  "bbox": [
+   -58.3922,
+   -0.7142,
+   -57.77,
+   7.714
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G217_03N056W_A",
+    "tile": "G217",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32349,
+     30274
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2497,
+    33916
+   ]
+  }
+ },
+ "ROI_023": {
+  "patches": 175,
+  "last_patch": 174,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 32,
+  "center": [
+   160.311,
+   31.5
+  ],
+  "bbox": [
+   159.6258,
+   27.2849,
+   160.9966,
+   35.7141
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E238_31N157E_A",
+    "tile": "E238",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4540,
+    32793
+   ]
+  }
+ },
+ "ROI_024": {
+  "patches": 239,
+  "last_patch": 238,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 31,
+  "center": [
+   70.412,
+   -52.499
+  ],
+  "bbox": [
+   68.7785,
+   -56.712,
+   72.0456,
+   -48.2863
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_K225_52S065E_A",
+    "tile": "K225",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28521,
+     32870
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_K226_52S075E_A",
+    "tile": "K226",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28520,
+     32870
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -49.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    8666,
+    36859
+   ]
+  }
+ },
+ "ROI_025": {
+  "patches": 222,
+  "last_patch": 221,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   104.11,
+   -66.499
+  ],
+  "bbox": [
+   103.0115,
+   -70.7109,
+   105.2087,
+   -62.2864
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_L219_66S097E_A",
+    "tile": "L219",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -63.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     29600,
+     34877
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -63.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4033,
+    39190
+   ]
+  }
+ },
+ "ROI_026": {
+  "patches": 190,
+  "last_patch": 189,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -150.282,
+   3.5
+  ],
+  "bbox": [
+   -150.7833,
+   -0.7142,
+   -149.7805,
+   7.714
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G204_03N153W_A",
+    "tile": "G204",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30274
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_G205_03N146W_A",
+    "tile": "G205",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30274
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4024,
+    33916
+   ]
+  }
+ },
+ "ROI_027": {
+  "patches": 234,
+  "last_patch": 236,
+  "missing": [
+   95,
+   98,
+   99
+  ],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 31,
+  "center": [
+   -123.889,
+   -66.499
+  ],
+  "bbox": [
+   -125.7823,
+   -70.7109,
+   -121.9965,
+   -62.2864
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_L204_66S127W_A",
+    "tile": "L204",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -63.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     29601,
+     34877
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -63.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    6949,
+    39190
+   ]
+  }
+ },
+ "ROI_030": {
+  "patches": 74,
+  "last_patch": 73,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -72.234,
+   46.509
+  ],
+  "bbox": [
+   -72.6505,
+   43.5049,
+   -71.8166,
+   49.5123
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_D211_45N075W_A",
+    "tile": "D211",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28520,
+     28539
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 49.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2212,
+    23187
+   ]
+  }
+ },
+ "ROI_031": {
+  "patches": 149,
+  "last_patch": 148,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 34,
+  "center": [
+   -77.55,
+   38.5
+  ],
+  "bbox": [
+   -77.9803,
+   34.2861,
+   -77.1204,
+   42.7129
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E112_38N076W_A",
+    "tile": "E112",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     31885
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2848,
+    35734
+   ]
+  }
+ },
+ "ROI_033": {
+  "patches": 269,
+  "last_patch": 268,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 32,
+  "center": [
+   97.126,
+   -52.499
+  ],
+  "bbox": [
+   95.9495,
+   -56.712,
+   98.3019,
+   -48.2863
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_K228_52S095E_A",
+    "tile": "K228",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28521,
+     32870
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -49.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    6240,
+    36859
+   ]
+  }
+ },
+ "ROI_034": {
+  "patches": 199,
+  "last_patch": 198,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   174.554,
+   -50.802
+  ],
+  "bbox": [
+   173.6648,
+   -52.9785,
+   175.4434,
+   -48.6257
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_K236_52S175E_A",
+    "tile": "K236",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28521,
+     32870
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "eqc",
+    "lat_ts": 0.0,
+    "lat_0": 0.0,
+    "lon_0": 180.0
+   },
+   "pixel": 7.5,
+   "size": [
+    7191,
+    17599
+   ]
+  }
+ },
+ "ROI_035": {
+  "patches": 214,
+  "last_patch": 213,
+  "missing": [],
+  "truth_patches": 172,
+  "truth_points": 1383,
+  "tie_points": 30,
+  "center": [
+   118.343,
+   -24.5
+  ],
+  "bbox": [
+   117.7167,
+   -28.7132,
+   118.9685,
+   -20.286
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_I238_24S120E_A",
+    "tile": "I238",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32454,
+     31239
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -21.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4725,
+    35001
+   ]
+  }
+ },
+ "ROI_037": {
+  "patches": 159,
+  "last_patch": 158,
+  "missing": [],
+  "truth_patches": 141,
+  "truth_points": 1133,
+  "tie_points": 30,
+  "center": [
+   -40.723,
+   -10.5
+  ],
+  "bbox": [
+   -41.1089,
+   -14.7137,
+   -40.3379,
+   -6.2861
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_H219_10S041W_A",
+    "tile": "H219",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30731
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3094,
+    34429
+   ]
+  }
+ },
+ "ROI_038": {
+  "patches": 64,
+  "last_patch": 63,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 19,
+  "center": [
+   -34.486,
+   32.891
+  ],
+  "bbox": [
+   -34.9684,
+   30.3465,
+   -34.0034,
+   35.4357
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E217_31N031W_A",
+    "tile": "E217",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3196,
+    20085
+   ]
+  }
+ },
+ "ROI_042": {
+  "patches": 21,
+  "last_patch": 20,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -152.086,
+   56.96
+  ],
+  "bbox": [
+   -153.0231,
+   55.791,
+   -151.1495,
+   58.1284
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_C202_59N157W_A",
+    "tile": "C202",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 63.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     29601,
+     27340
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 63.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3439,
+    7872
+   ]
+  }
+ },
+ "ROI_043": {
+  "patches": 48,
+  "last_patch": 47,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   33.646,
+   22.6
+  ],
+  "bbox": [
+   33.2892,
+   20.6661,
+   34.0024,
+   24.5335
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_F127_24N032E_A",
+    "tile": "F127",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32454,
+     31239
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 21.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2692,
+    15816
+   ]
+  }
+ },
+ "ROI_045": {
+  "patches": 58,
+  "last_patch": 57,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 29,
+  "center": [
+   9.072,
+   12.068
+  ],
+  "bbox": [
+   8.7517,
+   9.7361,
+   9.3932,
+   14.4
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G126_10N011E_A",
+    "tile": "G126",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30731
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2574,
+    19145
+   ]
+  }
+ },
+ "ROI_046": {
+  "patches": 165,
+  "last_patch": 164,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 29,
+  "center": [
+   -50.961,
+   -38.5
+  ],
+  "bbox": [
+   -51.7449,
+   -42.7129,
+   -50.1767,
+   -34.2861
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_J215_38S049W_A",
+    "tile": "J215",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     31885
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    5194,
+    35734
+   ]
+  }
+ },
+ "ROI_047": {
+  "patches": 31,
+  "last_patch": 30,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -136.211,
+   -47.3
+  ],
+  "bbox": [
+   -136.757,
+   -48.3735,
+   -135.6649,
+   -46.2263
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_K105_45S135W_A",
+    "tile": "K105",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28521,
+     28539
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -49.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2897,
+    8400
+   ]
+  }
+ },
+ "ROI_048": {
+  "patches": 24,
+  "last_patch": 23,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -142.622,
+   1.948
+  ],
+  "bbox": [
+   -142.7824,
+   -0.4039,
+   -142.4616,
+   4.3007
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G205_03N146W_A",
+    "tile": "G205",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30274
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    1287,
+    18896
+   ]
+  }
+ },
+ "ROI_049": {
+  "patches": 113,
+  "last_patch": 112,
+  "missing": [],
+  "truth_patches": 88,
+  "truth_points": 706,
+  "tie_points": 30,
+  "center": [
+   -26.079,
+   17.5
+  ],
+  "bbox": [
+   -26.6209,
+   13.2854,
+   -25.5363,
+   21.7139
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_F220_17N024W_A",
+    "tile": "F220",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32455,
+     29806
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 21.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4094,
+    33394
+   ]
+  }
+ },
+ "ROI_050": {
+  "patches": 160,
+  "last_patch": 159,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -153.721,
+   -17.5
+  ],
+  "bbox": [
+   -154.1469,
+   -21.714,
+   -153.2951,
+   -13.2855
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_I104_17S152W_A",
+    "tile": "I104",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32454,
+     29806
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -21.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3215,
+    33394
+   ]
+  }
+ },
+ "ROI_051": {
+  "patches": 196,
+  "last_patch": 195,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   109.947,
+   38.499
+  ],
+  "bbox": [
+   109.1522,
+   34.286,
+   110.7422,
+   42.7127
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E133_38N112E_A",
+    "tile": "E133",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32038,
+     31885
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    5266,
+    35734
+   ]
+  }
+ },
+ "ROI_052": {
+  "patches": 170,
+  "last_patch": 169,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   139.064,
+   11.071
+  ],
+  "bbox": [
+   138.4681,
+   7.5429,
+   139.6593,
+   14.5994
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G143_10N138E_A",
+    "tile": "G143",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30731
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.499999999999902,
+   "size": [
+    4780,
+    28874
+   ]
+  }
+ },
+ "ROI_053": {
+  "patches": 93,
+  "last_patch": 92,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -104.746,
+   -3.5
+  ],
+  "bbox": [
+   -105.0649,
+   -7.714,
+   -104.4264,
+   0.7139
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_H111_03S101W_A",
+    "tile": "H111",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30273
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2562,
+    33915
+   ]
+  }
+ },
+ "ROI_054": {
+  "patches": 168,
+  "last_patch": 167,
+  "missing": [],
+  "truth_patches": 145,
+  "truth_points": 1187,
+  "tie_points": 30,
+  "center": [
+   -127.264,
+   -3.5
+  ],
+  "bbox": [
+   -127.6691,
+   -7.714,
+   -126.8589,
+   0.7139
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_H107_03S131W_A",
+    "tile": "H107",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30273
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_H108_03S123W_A",
+    "tile": "H108",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30273
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3251,
+    33915
+   ]
+  }
+ },
+ "ROI_055": {
+  "patches": 214,
+  "last_patch": 213,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 33,
+  "center": [
+   134.947,
+   38.499
+  ],
+  "bbox": [
+   134.1956,
+   34.286,
+   135.6986,
+   42.7127
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E135_38N130E_A",
+    "tile": "E135",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32038,
+     31885
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_E136_38N139E_A",
+    "tile": "E136",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     31885
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4978,
+    35734
+   ]
+  }
+ },
+ "ROI_056": {
+  "patches": 296,
+  "last_patch": 295,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 31,
+  "center": [
+   130.41,
+   1.947
+  ],
+  "bbox": [
+   129.991,
+   -4.1307,
+   130.8281,
+   8.0246
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G242_03N131E_A",
+    "tile": "G242",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30274
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_H142_03S131E_A",
+    "tile": "H142",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30273
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3359,
+    48899
+   ]
+  }
+ },
+ "ROI_057": {
+  "patches": 229,
+  "last_patch": 228,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -22.458,
+   28.186
+  ],
+  "bbox": [
+   -22.9686,
+   20.8242,
+   -21.9479,
+   35.5478
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E218_31N022W_A",
+    "tile": "E218",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32038,
+     29265
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_F120_24N024W_A",
+    "tile": "F120",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32455,
+     31239
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "eqc",
+    "lat_ts": 0.0,
+    "lat_0": 0.0,
+    "lon_0": 180.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4127,
+    59529
+   ]
+  }
+ },
+ "ROI_058": {
+  "patches": 248,
+  "last_patch": 247,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -16.246,
+   30.513
+  ],
+  "bbox": [
+   -16.8314,
+   25.1145,
+   -15.6608,
+   35.9114
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E219_31N013W_A",
+    "tile": "E219",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_F121_24N016W_A",
+    "tile": "F121",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32454,
+     31239
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "eqc",
+    "lat_ts": 0.0,
+    "lat_0": 0.0,
+    "lon_0": 180.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4733,
+    43653
+   ]
+  }
+ },
+ "ROI_059": {
+  "patches": 146,
+  "last_patch": 145,
+  "missing": [],
+  "truth_patches": 140,
+  "truth_points": 1124,
+  "tie_points": 25,
+  "center": [
+   11.354,
+   24.5
+  ],
+  "bbox": [
+   10.7959,
+   20.2861,
+   11.9121,
+   28.7132
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_F124_24N008E_A",
+    "tile": "F124",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32455,
+     31239
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_F125_24N016E_A",
+    "tile": "F125",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32454,
+     31239
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 21.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4213,
+    35001
+   ]
+  }
+ },
+ "ROI_061": {
+  "patches": 97,
+  "last_patch": 96,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -28.534,
+   31.5
+  ],
+  "bbox": [
+   -29.2016,
+   27.2849,
+   -27.8659,
+   35.7141
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E217_31N031W_A",
+    "tile": "E217",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4424,
+    32793
+   ]
+  }
+ },
+ "ROI_062": {
+  "patches": 136,
+  "last_patch": 135,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -58.781,
+   31.5
+  ],
+  "bbox": [
+   -59.3165,
+   27.2849,
+   -58.2461,
+   35.7141
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E214_31N058W_A",
+    "tile": "E214",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3545,
+    32793
+   ]
+  }
+ },
+ "ROI_063": {
+  "patches": 103,
+  "last_patch": 102,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -1.111,
+   25.22
+  ],
+  "bbox": [
+   -1.7448,
+   21.8716,
+   -0.4769,
+   28.5691
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_F123_24N000W_A",
+    "tile": "F123",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32454,
+     31239
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 21.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4786,
+    27967
+   ]
+  }
+ },
+ "ROI_064": {
+  "patches": 111,
+  "last_patch": 110,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   14.025,
+   37.547
+  ],
+  "bbox": [
+   13.3749,
+   34.4766,
+   14.6744,
+   40.618
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E122_38N013E_A",
+    "tile": "E122",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     31885
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4304,
+    25681
+   ]
+  }
+ },
+ "ROI_065": {
+  "patches": 172,
+  "last_patch": 171,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   102.723,
+   -29.53
+  ],
+  "bbox": [
+   101.927,
+   -36.1076,
+   103.5182,
+   -22.9528
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_I236_24S104E_A",
+    "tile": "I236",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32454,
+     31239
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_J132_31S103E_A",
+    "tile": "J132",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    5270,
+    50254
+   ]
+  }
+ },
+ "ROI_066": {
+  "patches": 130,
+  "last_patch": 129,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -67.706,
+   2.765
+  ],
+  "bbox": [
+   -67.9838,
+   -2.3319,
+   -67.4281,
+   7.8611
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G215_03N071W_A",
+    "tile": "G215",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30274
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_G216_03N063W_A",
+    "tile": "G216",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30274
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_H115_03S071W_A",
+    "tile": "H115",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30273
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_H116_03S063W_A",
+    "tile": "H116",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30273
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2230,
+    41006
+   ]
+  }
+ },
+ "ROI_067": {
+  "patches": 120,
+  "last_patch": 119,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -23.796,
+   52.499
+  ],
+  "bbox": [
+   -24.8034,
+   48.2863,
+   -22.7884,
+   56.7121
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_D116_52N025W_A",
+    "tile": "D116",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28521,
+     32870
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_D117_52N015W_A",
+    "tile": "D117",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28521,
+     32870
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 49.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    5345,
+    36859
+   ]
+  }
+ },
+ "ROI_068": {
+  "patches": 107,
+  "last_patch": 106,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -21.229,
+   10.232
+  ],
+  "bbox": [
+   -21.5454,
+   6.3394,
+   -20.9129,
+   14.1254
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G122_10N018W_A",
+    "tile": "G122",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30731
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2538,
+    31776
+   ]
+  }
+ },
+ "ROI_069": {
+  "patches": 198,
+  "last_patch": 197,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   22.59,
+   -19.095
+  ],
+  "bbox": [
+   22.201,
+   -25.2242,
+   22.9796,
+   -12.9664
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_I126_17S024E_A",
+    "tile": "I126",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32455,
+     29806
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_I226_24S024E_A",
+    "tile": "I226",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32455,
+     31239
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -21.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2939,
+    49078
+   ]
+  }
+ },
+ "ROI_070": {
+  "patches": 168,
+  "last_patch": 167,
+  "missing": [],
+  "truth_patches": 113,
+  "truth_points": 910,
+  "tie_points": 30,
+  "center": [
+   -31.77,
+   -27.535
+  ],
+  "bbox": [
+   -32.1605,
+   -31.9358,
+   -31.3795,
+   -23.1337
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_I219_24S032W_A",
+    "tile": "I219",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32454,
+     31239
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_J117_31S031W_A",
+    "tile": "J117",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "eqc",
+    "lat_ts": 0.0,
+    "lat_0": 0.0,
+    "lon_0": 180.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3158,
+    35588
+   ]
+  }
+ },
+ "ROI_071": {
+  "patches": 40,
+  "last_patch": 39,
+  "missing": [],
+  "truth_patches": 30,
+  "truth_points": 241,
+  "tie_points": 30,
+  "center": [
+   -34.201,
+   29.438
+  ],
+  "bbox": [
+   -34.6268,
+   27.6973,
+   -33.7759,
+   31.1785
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E217_31N031W_A",
+    "tile": "E217",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2818,
+    13242
+   ]
+  }
+ },
+ "ROI_072": {
+  "patches": 60,
+  "last_patch": 59,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -22.283,
+   -30.036
+  ],
+  "bbox": [
+   -22.5819,
+   -32.4946,
+   -21.9831,
+   -27.5777
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_J118_31S022W_A",
+    "tile": "J118",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32038,
+     29265
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    1983,
+    18820
+   ]
+  }
+ },
+ "ROI_073": {
+  "patches": 119,
+  "last_patch": 118,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -46.832,
+   28.53
+  ],
+  "bbox": [
+   -47.2641,
+   25.3612,
+   -46.4002,
+   31.6985
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_E215_31N049W_A",
+    "tile": "E215",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_F117_24N048W_A",
+    "tile": "F117",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 21.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32454,
+     31239
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 21.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3261,
+    27249
+   ]
+  }
+ },
+ "ROI_074": {
+  "patches": 141,
+  "last_patch": 140,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   37.716,
+   10.5
+  ],
+  "bbox": [
+   37.3074,
+   6.286,
+   38.124,
+   14.7136
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G129_10N033E_A",
+    "tile": "G129",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30731
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_G130_10N041E_A",
+    "tile": "G130",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30731
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    3277,
+    34429
+   ]
+  }
+ },
+ "ROI_075": {
+  "patches": 183,
+  "last_patch": 182,
+  "missing": [],
+  "truth_patches": 174,
+  "truth_points": 1442,
+  "tie_points": 30,
+  "center": [
+   51.865,
+   -38.796
+  ],
+  "bbox": [
+   51.2392,
+   -42.6534,
+   52.491,
+   -34.9394
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_J226_38S049E_A",
+    "tile": "J226",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     31885
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4146,
+    32837
+   ]
+  }
+ },
+ "ROI_076": {
+  "patches": 58,
+  "last_patch": 57,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   32.16,
+   -9.563
+  ],
+  "bbox": [
+   31.9039,
+   -11.5772,
+   32.4159,
+   -7.5494
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_H129_03S033E_A",
+    "tile": "H129",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30273
+    ]
+   },
+   {
+    "id": "CE2_GRAS_DOM_07m_H229_10S033E_A",
+    "tile": "H229",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30731
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2055,
+    16395
+   ]
+  }
+ },
+ "ROI_077": {
+  "patches": 165,
+  "last_patch": 164,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -85.23,
+   10.5
+  ],
+  "bbox": [
+   -85.5916,
+   6.286,
+   -84.8675,
+   14.7136
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_G113_10N086W_A",
+    "tile": "G113",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 7.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32348,
+     30731
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 7.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    2906,
+    34429
+   ]
+  }
+ },
+ "ROI_078": {
+  "patches": 167,
+  "last_patch": 166,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   -84.227,
+   -38.5
+  ],
+  "bbox": [
+   -85.006,
+   -42.7129,
+   -83.4483,
+   -34.2861
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_J211_38S085W_A",
+    "tile": "J211",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32038,
+     31885
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    5159,
+    35734
+   ]
+  }
+ },
+ "ROI_079": {
+  "patches": 185,
+  "last_patch": 184,
+  "missing": [],
+  "truth_patches": null,
+  "truth_points": null,
+  "tie_points": 30,
+  "center": [
+   55.734,
+   -31.5
+  ],
+  "bbox": [
+   55.0318,
+   -35.7142,
+   56.437,
+   -27.2851
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_J127_31S058E_A",
+    "tile": "J127",
+    "projection": {
+     "name": "merc",
+     "lat_ts": -35.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     32037,
+     29265
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": -35.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    4654,
+    32793
+   ]
+  }
+ },
+ "ROI_080": {
+  "patches": 107,
+  "last_patch": 106,
+  "missing": [],
+  "truth_patches": 75,
+  "truth_points": 607,
+  "tie_points": 30,
+  "center": [
+   3.283,
+   45.511
+  ],
+  "bbox": [
+   1.9884,
+   41.31,
+   4.5772,
+   49.7118
+  ],
+  "frames": [
+   {
+    "id": "CE2_GRAS_DOM_07m_D219_45N005E_A",
+    "tile": "D219",
+    "projection": {
+     "name": "merc",
+     "lat_ts": 49.0,
+     "lon_0": 0.0
+    },
+    "pixel": 7.0,
+    "size": [
+     28520,
+     28539
+    ]
+   }
+  ],
+  "overlap": {
+   "projection": {
+    "name": "merc",
+    "lat_ts": 49.0,
+    "lon_0": 0.0
+   },
+   "pixel": 7.5,
+   "size": [
+    6867,
+    31890
+   ]
+  }
+ }
+}

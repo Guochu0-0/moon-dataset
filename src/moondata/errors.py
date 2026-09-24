@@ -51,5 +51,9 @@ class RasterUnreadable(MoonDataError):
     """影像打不开、没有坐标系、或不是北向上的正方形像元。消息里带文件路径。"""
 
 
+class SiteInputUnreadable(MoonDataError):
+    """文档站的输入（正文、素材、`roi-facts.json`）缺失或认不出。消息里带文件路径。"""
+
+
 class GridMismatch(MoonDataError):
     """写出的重叠区影像没有落在规划的像素网格上。"""

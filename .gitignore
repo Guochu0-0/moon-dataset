@@ -1,10 +1,6 @@
 __pycache__/
 *.pyc
 
-# Quarto 构建中间产物（_site/ 是要提交的成品，不在此列）
-/.quarto/
-**/*.quarto_ipynb
-
 # Python 打包与测试
 *.egg-info/
 /.pytest_cache/

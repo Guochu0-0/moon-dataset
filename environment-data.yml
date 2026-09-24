@@ -17,7 +17,8 @@ dependencies:
   - pandas
   - matplotlib
   - jupyter
-  - quarto
+  - markdown
+  - pillow          # 素材脚本写文档配图
   - pytest
   - gdal>=3.6
   - pyproj>=3.5

@@ -76,18 +76,25 @@ def load_roi_table(repo_root: Path) -> list[RoiRow]:
     """元数据表里的 67 个 ROI，按编号升序。表里只有数据集的 ROI。"""
     path = repo_root / METADATA_RELPATH
     try:
+        rows = [RoiRow(roi, record["划分"].strip()) for roi, record in load_metadata(repo_root).items()]
+    except KeyError as error:
+        raise MetadataUnreadable(f"元数据表缺少列 {error}：{path}") from error
+    return sorted(rows, key=lambda row: row.roi)
+
+
+def load_metadata(repo_root: Path) -> dict[str, dict[str, str]]:
+    """元数据表的全部列，键是补零写法的 ROI 名，按编号升序。"""
+    path = repo_root / METADATA_RELPATH
+    try:
         # utf-8-sig：文件带 BOM，否则第一个列名会变成 '﻿ROI'
         with path.open(encoding="utf-8-sig", newline="") as stream:
             records = list(csv.DictReader(stream))
     except (OSError, UnicodeDecodeError, csv.Error) as error:
         raise MetadataUnreadable(f"元数据表读不动：{path}（{error}）") from error
-    rows = []
-    for record in records:
-        try:
-            rows.append(RoiRow(padded_roi(record["ROI"]), record["划分"].strip()))
-        except KeyError as error:
-            raise MetadataUnreadable(f"元数据表缺少列 {error}：{path}") from error
-    return sorted(rows, key=lambda row: row.roi)
+    try:
+        return dict(sorted(((padded_roi(r["ROI"]), r) for r in records), key=lambda item: item[0]))
+    except KeyError as error:
+        raise MetadataUnreadable(f"元数据表缺少列 {error}：{path}") from error
 
 
 @dataclass(frozen=True)
@@ -112,6 +119,37 @@ def locate_inputs(data_root: Path, roi: str) -> RoiInputs:
             f"{roi_dir / 'minirf'} 下应恰有一条 Mini-RF 条带，实际认出 {len(strips)} 条"
         )
     return RoiInputs(padded_roi(roi), tiles, strips[0])
+
+
+DATASET_DIRNAME = "Processed_Data"
+GROUND_TRUTH_RELDIR = Path("data") / "ground-truth"
+ASSETS_RELDIR = Path("docs") / "assets"
+"""文档站素材：`scripts/make_assets.py` 写、`scripts/build_site.py` 读。"""
+FACTS_NAME = "roi-facts.json"
+SAMPLES_NAME = "samples.json"
+OVERLAY_NAME = "overlay.json"
+
+
+def ground_truth_files(repo_root: Path, split: str, roi: str) -> list[Path]:
+    """仓库里一个 ROI 的评测真值点文件，按 patch 编号升序。训练集没有。"""
+    directory = repo_root / GROUND_TRUTH_RELDIR / split / padded_roi(roi)
+    return sorted(directory.glob("patch_*.txt"), key=lambda p: int(p.stem.split("_")[1]))
+
+
+def ground_truth_file(repo_root: Path, split: str, roi: str, patch: int) -> Path:
+    return repo_root / GROUND_TRUTH_RELDIR / split / padded_roi(roi) / f"patch_{patch}.txt"
+
+
+def dataset_patch_dir(data_root: Path, split: str, roi: str) -> Path:
+    """数据盘上现有数据集里一个 ROI 的 patch 对：其下 `Optical/`、`SAR/`。"""
+    return data_root / DATASET_DIRNAME / split / padded_roi(roi)
+
+
+def dataset_overlap_images(data_root: Path, roi: str) -> tuple[Path, Path]:
+    """数据盘上现有数据集的一对重叠区影像 (光学, SAR)，patch 就是从它们上切的。
+    当年的脚本把它们写在原始输入旁边的 `cropped/ce2/` 下。"""
+    base = data_root / RAW_DIRNAME / raw_roi_name(roi) / "cropped" / "ce2"
+    return base / "opt.tif", base / "sar.tif"
 
 
 def corrected_lat_ts(tile_path: Path) -> float | None:

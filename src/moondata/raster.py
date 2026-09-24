@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import tempfile
+import warnings
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Sequence
@@ -243,3 +244,66 @@ def _bounds(dataset: gdal.Dataset) -> tuple[float, float, float, float]:
     x0, dx, _, y0, _, dy = dataset.GetGeoTransform()
     x1, y1 = x0 + dx * dataset.RasterXSize, y0 + dy * dataset.RasterYSize
     return min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1)
+
+
+# ---------------------------------------------------------------------------
+# 文档素材（`moondata.assets`）用到的读取与重投影。只求看得清，不进数据集。
+
+
+def projection_params(crs_wkt: str) -> dict[str, float | str]:
+    """坐标系的投影名与决定它的几个参数，供文档写成一句话。"""
+    with warnings.catch_warnings():
+        # to_dict 经由 PROJ 字符串，会丢掉 WKT 里的名字等信息——这里只要投影参数
+        warnings.simplefilter("ignore", UserWarning)
+        params = CRS.from_wkt(crs_wkt).to_dict()
+    found: dict[str, float | str] = {"name": params.get("proj", "?")}
+    for key in ("lat_ts", "lat_0", "lon_0"):
+        if key in params:
+            found[key] = float(params[key])
+    return found
+
+
+def bounds_in(path: Path, source_wkt: str, target_wkt: str) -> tuple[float, float, float, float]:
+    """一幅影像的范围换到另一个坐标系里的外包矩形。`source_wkt` 显式给出，`lat_ts`
+    纠正过的分幅要用纠正后的坐标系。"""
+    return Transformer.from_crs(
+        CRS.from_wkt(source_wkt), CRS.from_wkt(target_wkt), always_xy=True
+    ).transform_bounds(*_bounds(_open(path)), densify_pts=DENSIFY_POINTS)
+
+
+def preview(path: Path, width: int, height: int, bands: Sequence[int] = (1,)) -> tuple[np.ndarray, tuple]:
+    """降采样读整幅，返回 `(波段, 行, 列)` 的 float32 与对应的地理变换。
+
+    按最近邻隔行隔列取：GDAL 只读用到的行，文件有金字塔时直接读金字塔。Mini-RF 条带
+    是逐行存储的几 GB 到几十 GB，按均值降采样要把整幅读一遍。
+    """
+    dataset = _open(path)
+    width, height = min(width, dataset.RasterXSize), min(height, dataset.RasterYSize)
+    array = dataset.ReadAsArray(
+        0, 0, dataset.RasterXSize, dataset.RasterYSize,
+        buf_xsize=width, buf_ysize=height, band_list=list(bands),
+    ).astype(np.float32)
+    array = array if array.ndim == 3 else array[np.newaxis]
+    x0, dx, rx, y0, ry, dy = dataset.GetGeoTransform()
+    sx, sy = dataset.RasterXSize / width, dataset.RasterYSize / height
+    return array, (x0, dx * sx, rx, y0, ry, dy * sy)
+
+
+def warp_array(
+    array: np.ndarray, geotransform: tuple, source_wkt: str, grid: PixelGrid, *, resample: str = "average"
+) -> np.ndarray:
+    """把内存里的单波段影像（NaN 为无数据）重投影到 `grid` 上，返回 `(行, 列)`，无数据为 NaN。"""
+    driver = gdal.GetDriverByName("MEM")
+    source = driver.Create("", array.shape[1], array.shape[0], 1, gdal.GDT_Float32)
+    source.SetGeoTransform(geotransform)
+    source.SetProjection(source_wkt)
+    band = source.GetRasterBand(1)
+    band.SetNoDataValue(float("nan"))
+    band.WriteArray(array)
+    target = driver.Create("", grid.width, grid.height, 1, gdal.GDT_Float32)
+    target.SetGeoTransform(grid.geotransform)
+    target.SetProjection(grid.crs_wkt)
+    target.GetRasterBand(1).SetNoDataValue(float("nan"))
+    target.GetRasterBand(1).Fill(float("nan"))
+    gdal.Warp(target, source, options=gdal.WarpOptions(resampleAlg=resample, srcNodata="nan", dstNodata="nan"))
+    return target.GetRasterBand(1).ReadAsArray()

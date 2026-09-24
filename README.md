@@ -6,25 +6,23 @@ CE-2 7 m DOM × Mini-RF SAR 配准数据集的文档、处理代码与关键元�
 ## 先看文档站
 
 全部说明材料在 `_site/` 里，**构建产物随仓库提交**：克隆下来双击 `_site/index.html`
-就能读，不装任何工具链、不联网、也不用接移动硬盘。左边导航树，右边页内目录，
-右上角搜索框搜全站正文，中文可用。
+就能读，不装任何工具链、不联网、也不用接移动硬盘。
 
-第一站是[术语表](CONTEXT.md)（仓库根的 `CONTEXT.md`，站点里那一页就是它渲染出来的）。
-里面钉死了两件容易出错的事：**对齐控制点**与**评测真值点**不是一回事；
-三种同名点文件对 y 的符号处理不一致。两者弄错都不会报错。
-
-改完 `.qmd` 或 `CONTEXT.md` 之后重新构建，一条命令：
+正文在 `docs/pages/`，样式脚本字体在 `docs/theme/`，配图与逐 ROI 事实在 `docs/assets/`。
+改完之后重新构建（只读仓库，不需要数据盘），连同 `_site/` 一起提交：
 
 ```bash
-quarto render
+python scripts/build_site.py
 ```
 
-`_site/` 会整个重生成，**记得连同产物一起提交**——否则读者双击看到的还是旧的。
+`docs/assets/` 由素材脚本从数据盘生成，按组可单独重跑：
 
-> 渲染完成后 `_quarto.yml` 会自动跑一步 `python -m moondata.docsite`。Quarto 的搜索
-> 在运行时 `fetch("search.json")`、页内目录脚本按 ES 模块加载，这两件事在 `file://`
-> 下都会被浏览器拦掉，那一步把它们改成离线也能用的形式。理由写在
-> `src/moondata/docsite.py` 的模块 docstring 里。
+```bash
+python scripts/make_assets.py basemap <lroc_color_poles_4k.tif>
+python scripts/make_assets.py samples
+python scripts/make_assets.py facts [ROI ...]
+python scripts/make_assets.py overlays [ROI ...]
+```
 
 ## 装哪一档
 

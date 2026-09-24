@@ -1,0 +1,67 @@
+[
+ {
+  "roi": "ROI_006",
+  "split": "Test",
+  "patch": 60
+ },
+ {
+  "roi": "ROI_007",
+  "split": "Test",
+  "patch": 138
+ },
+ {
+  "roi": "ROI_011",
+  "split": "Test",
+  "patch": 2
+ },
+ {
+  "roi": "ROI_020",
+  "split": "Test",
+  "patch": 39
+ },
+ {
+  "roi": "ROI_035",
+  "split": "Val",
+  "patch": 16
+ },
+ {
+  "roi": "ROI_037",
+  "split": "Test",
+  "patch": 87
+ },
+ {
+  "roi": "ROI_049",
+  "split": "Val",
+  "patch": 91
+ },
+ {
+  "roi": "ROI_054",
+  "split": "Test",
+  "patch": 140
+ },
+ {
+  "roi": "ROI_059",
+  "split": "Test",
+  "patch": 62
+ },
+ {
+  "roi": "ROI_070",
+  "split": "Val",
+  "patch": 151
+ },
+ {
+  "roi": "ROI_071",
+  "split": "Val",
+  "patch": 8
+ },
+ {
+  "roi": "ROI_075",
+  "split": "Val",
+  "patch": 118
+ },
+ {
+  "roi": "ROI_080",
+  "split": "Val",
+  "patch": 50
+ }
+]
