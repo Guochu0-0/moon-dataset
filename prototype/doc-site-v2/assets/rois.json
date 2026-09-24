@@ -1,0 +1,1748 @@
+[
+{
+"roi": "ROI_001",
+"split_zh": "训练集",
+"patches": 40,
+"truth_patches": null,
+"incidence": 49.75,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_1",
+"product_id": "LSZ_02319_2CD_EKU_23S131_V1",
+"time": "2009-12-28T05:47:26",
+"width_px": 3287,
+"length_px": 55819,
+"bbox": [
+130.9088,
+-30.3886,
+131.8716,
+-27.7692
+],
+"center": [
+131.39,
+-29.079
+]
+},
+{
+"roi": "ROI_002",
+"split_zh": "训练集",
+"patches": 152,
+"truth_patches": null,
+"incidence": 51.77,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_2",
+"product_id": "LSZ_01992_2CD_EKU_06N111_V1",
+"time": "2009-12-02T11:39:27",
+"width_px": 2308,
+"length_px": 33158,
+"bbox": [
+110.7386,
+1.343,
+111.4146,
+7.527
+],
+"center": [
+111.077,
+4.435
+]
+},
+{
+"roi": "ROI_003",
+"split_zh": "训练集",
+"patches": 171,
+"truth_patches": null,
+"incidence": 49.28,
+"look": "RIGHT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_3",
+"product_id": "LSZ_05705_2CD_EKU_57N232_V1",
+"time": "2010-09-20T02:41:48",
+"width_px": 18202,
+"length_px": 99134,
+"bbox": [
+-129.4957,
+62.3659,
+-124.1631,
+69.838
+],
+"center": [
+-126.829,
+66.102
+]
+},
+{
+"roi": "ROI_005",
+"split_zh": "训练集",
+"patches": 135,
+"truth_patches": null,
+"incidence": 50.97,
+"look": "RIGHT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_5",
+"product_id": "LSZ_04956_2CD_EKU_34N286_V1",
+"time": "2010-07-23T06:54:56",
+"width_px": 4708,
+"length_px": 66629,
+"bbox": [
+-74.5915,
+34.314,
+-73.2122,
+42.4066
+],
+"center": [
+-73.902,
+38.36
+]
+},
+{
+"roi": "ROI_006",
+"split_zh": "测试集",
+"patches": 81,
+"truth_patches": 67,
+"incidence": 49.47,
+"look": "LEFT",
+"issues": [],
+"split": "Test",
+"raw": "ROI_6",
+"product_id": "LSZ_02833_2CD_EKU_16S144_V1",
+"time": "2010-02-06T13:57:30",
+"width_px": 3275,
+"length_px": 65239,
+"bbox": [
+143.5319,
+-23.8524,
+144.4914,
+-20.7279
+],
+"center": [
+144.012,
+-22.29
+]
+},
+{
+"roi": "ROI_007",
+"split_zh": "测试集",
+"patches": 372,
+"truth_patches": 286,
+"incidence": 50.66,
+"look": "RIGHT",
+"issues": [],
+"split": "Test",
+"raw": "ROI_7",
+"product_id": "LSZ_05098_2CD_EKU_50N140_V1",
+"time": "2010-08-03T10:40:37",
+"width_px": 9101,
+"length_px": 65408,
+"bbox": [
+139.8073,
+41.1647,
+141.9072,
+57.3595
+],
+"center": [
+140.857,
+49.262
+]
+},
+{
+"roi": "ROI_008",
+"split_zh": "训练集",
+"patches": 291,
+"truth_patches": null,
+"incidence": 46.44,
+"look": "LEFT",
+"issues": [
+"明显的局部错位"
+],
+"split": "Train",
+"raw": "ROI_8",
+"product_id": "LSZ_03124_2CD_EKU_07N202_V1",
+"time": "2010-03-01T10:21:14",
+"width_px": 3635,
+"length_px": 65327,
+"bbox": [
+-158.378,
+-1.4141,
+-157.4074,
+15.4136
+],
+"center": [
+-157.893,
+7.0
+]
+},
+{
+"roi": "ROI_009",
+"split_zh": "训练集",
+"patches": 162,
+"truth_patches": null,
+"incidence": 52.47,
+"look": "LEFT",
+"issues": [
+"局部错位，错开的距离随位置变化"
+],
+"split": "Train",
+"raw": "ROI_9",
+"product_id": "LSZ_02041_2CD_EKU_04N061_V1",
+"time": "2009-12-06T08:00:54",
+"width_px": 1881,
+"length_px": 33525,
+"bbox": [
+60.4822,
+-0.7142,
+61.0331,
+7.714
+],
+"center": [
+60.758,
+3.5
+]
+},
+{
+"roi": "ROI_010",
+"split_zh": "训练集",
+"patches": 159,
+"truth_patches": null,
+"incidence": 51.38,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_10",
+"product_id": "LSZ_06182_2CD_EKU_09N093_V1",
+"time": "2010-10-27T13:27:18",
+"width_px": 3636,
+"length_px": 98461,
+"bbox": [
+92.254,
+13.293,
+93.3193,
+21.633
+],
+"center": [
+92.787,
+17.463
+]
+},
+{
+"roi": "ROI_011",
+"split_zh": "测试集",
+"patches": 92,
+"truth_patches": 83,
+"incidence": 51.41,
+"look": "LEFT",
+"issues": [
+"目录里有别处遗留的控制点文件"
+],
+"split": "Test",
+"raw": "ROI_11",
+"product_id": "LSZ_02689_2CD_EKU_16S293_V1",
+"time": "2010-01-26T06:29:37",
+"width_px": 3199,
+"length_px": 66241,
+"bbox": [
+-67.331,
+-14.6119,
+-66.3938,
+-7.4053
+],
+"center": [
+-66.862,
+-11.009
+]
+},
+{
+"roi": "ROI_012",
+"split_zh": "训练集",
+"patches": 105,
+"truth_patches": null,
+"incidence": 54.71,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_12",
+"product_id": "LSZ_02786_2CD_EKU_36S193_V1",
+"time": "2010-02-02T21:29:54",
+"width_px": 3493,
+"length_px": 13722,
+"bbox": [
+-167.7198,
+-37.57,
+-166.6965,
+-33.55
+],
+"center": [
+-167.208,
+-35.56
+]
+},
+{
+"roi": "ROI_013",
+"split_zh": "训练集",
+"patches": 54,
+"truth_patches": null,
+"incidence": 53.68,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_13",
+"product_id": "LSZ_02464_2CD_EKU_37S167_V1",
+"time": "2010-01-08T14:29:05",
+"width_px": 5390,
+"length_px": 65083,
+"bbox": [
+166.2954,
+-44.9976,
+167.8747,
+-41.713
+],
+"center": [
+167.085,
+-43.355
+]
+},
+{
+"roi": "ROI_015",
+"split_zh": "训练集",
+"patches": 98,
+"truth_patches": null,
+"incidence": 50.05,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_15",
+"product_id": "LSZ_06680_2CD_EKU_58N297_V1",
+"time": "2010-12-05T16:17:34",
+"width_px": 8401,
+"length_px": 99601,
+"bbox": [
+-64.7627,
+55.2831,
+-62.3013,
+63.7143
+],
+"center": [
+-63.532,
+59.499
+]
+},
+{
+"roi": "ROI_016",
+"split_zh": "训练集",
+"patches": 265,
+"truth_patches": null,
+"incidence": 49.95,
+"look": "RIGHT",
+"issues": [
+"明显的局部错位"
+],
+"split": "Train",
+"raw": "ROI_16",
+"product_id": "LSZ_04363_2CD_EKU_66S352_V1",
+"time": "2010-06-06T18:26:02",
+"width_px": 21282,
+"length_px": 65900,
+"bbox": [
+-11.5408,
+-70.7109,
+-5.3061,
+-62.2864
+],
+"center": [
+-8.423,
+-66.499
+]
+},
+{
+"roi": "ROI_017",
+"split_zh": "训练集",
+"patches": 213,
+"truth_patches": null,
+"incidence": 47.76,
+"look": "LEFT",
+"issues": [
+"与 ROI_054 的范围部分重叠"
+],
+"split": "Train",
+"raw": "ROI_17",
+"product_id": "LSZ_02399_2CD_EKU_07S233_V1",
+"time": "2010-01-03T11:49:06",
+"width_px": 3196,
+"length_px": 65293,
+"bbox": [
+-127.3217,
+-7.7654,
+-126.3855,
+1.2802
+],
+"center": [
+-126.854,
+-3.243
+]
+},
+{
+"roi": "ROI_018",
+"split_zh": "训练集",
+"patches": 117,
+"truth_patches": null,
+"incidence": 50.4,
+"look": "RIGHT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_18",
+"product_id": "LSZ_04349_2CD_EKU_50S009_V1",
+"time": "2010-06-05T15:57:48",
+"width_px": 9039,
+"length_px": 66104,
+"bbox": [
+7.2581,
+-49.6991,
+9.9061,
+-41.45
+],
+"center": [
+8.582,
+-45.575
+]
+},
+{
+"roi": "ROI_020",
+"split_zh": "测试集",
+"patches": 112,
+"truth_patches": 91,
+"incidence": 49.39,
+"look": "RIGHT",
+"issues": [],
+"split": "Test",
+"raw": "ROI_20",
+"product_id": "LSZ_04399_2CD_EKU_50S318_V1",
+"time": "2010-06-09T14:11:37",
+"width_px": 6873,
+"length_px": 66561,
+"bbox": [
+-43.626,
+-49.7143,
+-41.6125,
+-41.2842
+],
+"center": [
+-42.619,
+-45.499
+]
+},
+{
+"roi": "ROI_021",
+"split_zh": "训练集",
+"patches": 108,
+"truth_patches": null,
+"incidence": 52.4,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_21",
+"product_id": "LSZ_03028_2CD_EKU_00S302_V1",
+"time": "2010-02-21T21:24:18",
+"width_px": 2124,
+"length_px": 66295,
+"bbox": [
+-58.3922,
+-0.7142,
+-57.77,
+7.714
+],
+"center": [
+-58.081,
+3.5
+]
+},
+{
+"roi": "ROI_023",
+"split_zh": "训练集",
+"patches": 175,
+"truth_patches": null,
+"incidence": 50.7,
+"look": "RIGHT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_23",
+"product_id": "LSZ_04730_2CD_EKU_35N160_V1",
+"time": "2010-07-05T12:59:36",
+"width_px": 4679,
+"length_px": 65317,
+"bbox": [
+159.6258,
+27.2849,
+160.9966,
+35.7141
+],
+"center": [
+160.311,
+31.5
+]
+},
+{
+"roi": "ROI_024",
+"split_zh": "训练集",
+"patches": 239,
+"truth_patches": null,
+"incidence": 52.39,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_24",
+"product_id": "LSZ_03254_2CD_EKU_55S070_V1",
+"time": "2010-03-11T15:47:51",
+"width_px": 11152,
+"length_px": 49291,
+"bbox": [
+68.7785,
+-56.712,
+72.0456,
+-48.2863
+],
+"center": [
+70.412,
+-52.499
+]
+},
+{
+"roi": "ROI_025",
+"split_zh": "训练集",
+"patches": 222,
+"truth_patches": null,
+"incidence": 49.5,
+"look": "RIGHT",
+"issues": [
+"明显的局部错位"
+],
+"split": "Train",
+"raw": "ROI_25",
+"product_id": "LSZ_04784_2CD_EKU_66S104_V1",
+"time": "2010-07-09T20:07:06",
+"width_px": 13881,
+"length_px": 66004,
+"bbox": [
+103.0115,
+-70.7109,
+105.2087,
+-62.2864
+],
+"center": [
+104.11,
+-66.499
+]
+},
+{
+"roi": "ROI_026",
+"split_zh": "训练集",
+"patches": 190,
+"truth_patches": null,
+"incidence": 46.92,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_26",
+"product_id": "LSZ_02769_2CD_EKU_02N210_V1",
+"time": "2010-02-01T13:13:39",
+"width_px": 3423,
+"length_px": 65169,
+"bbox": [
+-150.7833,
+-0.7142,
+-149.7805,
+7.714
+],
+"center": [
+-150.282,
+3.5
+]
+},
+{
+"roi": "ROI_027",
+"split_zh": "训练集",
+"patches": 234,
+"truth_patches": null,
+"incidence": 48.9,
+"look": "RIGHT",
+"issues": [
+"轻度的局部错位",
+"编号缺 95、98、99"
+],
+"split": "Train",
+"raw": "ROI_27",
+"product_id": "LSZ_04477_2CD_EKU_63S237_V1",
+"time": "2010-06-15T17:17:29",
+"width_px": 12922,
+"length_px": 66151,
+"bbox": [
+-125.7823,
+-70.7109,
+-121.9965,
+-62.2864
+],
+"center": [
+-123.889,
+-66.499
+]
+},
+{
+"roi": "ROI_030",
+"split_zh": "训练集",
+"patches": 74,
+"truth_patches": null,
+"incidence": 51.04,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_30",
+"product_id": "LSZ_06689_2CD_EKU_47N288_V1",
+"time": "2010-12-06T09:14:59",
+"width_px": 2846,
+"length_px": 26903,
+"bbox": [
+-72.6505,
+43.5049,
+-71.8166,
+49.5123
+],
+"center": [
+-72.234,
+46.509
+]
+},
+{
+"roi": "ROI_031",
+"split_zh": "训练集",
+"patches": 149,
+"truth_patches": null,
+"incidence": 52.87,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_31",
+"product_id": "LSZ_02174_2CD_EKU_36N282_V1",
+"time": "2009-12-16T18:53:05",
+"width_px": 2935,
+"length_px": 50089,
+"bbox": [
+-77.9803,
+34.2861,
+-77.1204,
+42.7129
+],
+"center": [
+-77.55,
+38.5
+]
+},
+{
+"roi": "ROI_033",
+"split_zh": "训练集",
+"patches": 269,
+"truth_patches": null,
+"incidence": 51.7,
+"look": "RIGHT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_33",
+"product_id": "LSZ_04611_2CD_EKU_51S097_V1",
+"time": "2010-06-26T05:43:11",
+"width_px": 8030,
+"length_px": 65188,
+"bbox": [
+95.9495,
+-56.712,
+98.3019,
+-48.2863
+],
+"center": [
+97.126,
+-52.499
+]
+},
+{
+"roi": "ROI_034",
+"split_zh": "训练集",
+"patches": 199,
+"truth_patches": null,
+"incidence": 53.72,
+"look": "LEFT",
+"issues": [
+"一幅 CE-2 分幅的经度差了 180°"
+],
+"split": "Train",
+"raw": "ROI_34",
+"product_id": "LSZ_02457_2CD_EKU_49S174_V1",
+"time": "2010-01-08T01:22:33",
+"width_px": 6071,
+"length_px": 32998,
+"bbox": [
+173.6648,
+-52.9785,
+175.4434,
+-48.6257
+],
+"center": [
+174.554,
+-50.802
+]
+},
+{
+"roi": "ROI_035",
+"split_zh": "验证集",
+"patches": 214,
+"truth_patches": 172,
+"incidence": 50.97,
+"look": "LEFT",
+"issues": [],
+"split": "Val",
+"raw": "ROI_35",
+"product_id": "LSZ_02858_2CD_EKU_21S118_V1",
+"time": "2010-02-08T13:07:14",
+"width_px": 4273,
+"length_px": 65234,
+"bbox": [
+117.7167,
+-28.7132,
+118.9685,
+-20.286
+],
+"center": [
+118.343,
+-24.5
+]
+},
+{
+"roi": "ROI_037",
+"split_zh": "测试集",
+"patches": 159,
+"truth_patches": 141,
+"incidence": 53.04,
+"look": "LEFT",
+"issues": [
+"与 ROI_060 重复（ROI_060 已删除）"
+],
+"split": "Test",
+"raw": "ROI_37",
+"product_id": "LSZ_01790_2CD_EKU_15S319_V1",
+"time": "2009-11-16T16:34:15",
+"width_px": 2632,
+"length_px": 66155,
+"bbox": [
+-41.1089,
+-14.7137,
+-40.3379,
+-6.2861
+],
+"center": [
+-40.723,
+-10.5
+]
+},
+{
+"roi": "ROI_038",
+"split_zh": "训练集",
+"patches": 64,
+"truth_patches": null,
+"incidence": 53.26,
+"look": "LEFT",
+"issues": [
+"与 ROI_071 的范围部分重叠"
+],
+"split": "Train",
+"raw": "ROI_38",
+"product_id": "LSZ_01437_2CD_EKU_34N326_V1",
+"time": "2009-10-19T21:07:18",
+"width_px": 3294,
+"length_px": 30291,
+"bbox": [
+-34.9684,
+30.3465,
+-34.0034,
+35.4357
+],
+"center": [
+-34.486,
+32.891
+]
+},
+{
+"roi": "ROI_042",
+"split_zh": "训练集",
+"patches": 21,
+"truth_patches": null,
+"incidence": 48.2,
+"look": "RIGHT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_42",
+"product_id": "LSZ_05032_2CD_EKU_50N208_V1",
+"time": "2010-07-29T06:17:26",
+"width_px": 6395,
+"length_px": 66220,
+"bbox": [
+-153.0231,
+55.791,
+-151.1495,
+58.1284
+],
+"center": [
+-152.086,
+56.96
+]
+},
+{
+"roi": "ROI_043",
+"split_zh": "训练集",
+"patches": 48,
+"truth_patches": null,
+"incidence": 52.81,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_43",
+"product_id": "LSZ_01371_2CD_EKU_23N034_V1",
+"time": "2009-10-14T16:37:17",
+"width_px": 2434,
+"length_px": 13660,
+"bbox": [
+33.2892,
+20.6661,
+34.0024,
+24.5335
+],
+"center": [
+33.646,
+22.6
+]
+},
+{
+"roi": "ROI_045",
+"split_zh": "训练集",
+"patches": 58,
+"truth_patches": null,
+"incidence": 51.65,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_45",
+"product_id": "LSZ_01395_2CD_EKU_13N009_V1",
+"time": "2009-10-16T13:49:05",
+"width_px": 2189,
+"length_px": 20315,
+"bbox": [
+8.7517,
+9.7361,
+9.3932,
+14.4
+],
+"center": [
+9.072,
+12.068
+]
+},
+{
+"roi": "ROI_046",
+"split_zh": "训练集",
+"patches": 165,
+"truth_patches": null,
+"incidence": 51.48,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_46",
+"product_id": "LSZ_02674_2CD_EKU_42S309_V1",
+"time": "2010-01-25T02:21:07",
+"width_px": 5353,
+"length_px": 66264,
+"bbox": [
+-51.7449,
+-42.7129,
+-50.1767,
+-34.2861
+],
+"center": [
+-50.961,
+-38.5
+]
+},
+{
+"roi": "ROI_047",
+"split_zh": "训练集",
+"patches": 31,
+"truth_patches": null,
+"incidence": 54.92,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_47",
+"product_id": "LSZ_02409_2CD_EKU_47S224_V1",
+"time": "2010-01-04T06:55:03",
+"width_px": 3728,
+"length_px": 7329,
+"bbox": [
+-136.757,
+-48.3735,
+-135.6649,
+-46.2263
+],
+"center": [
+-136.211,
+-47.3
+]
+},
+{
+"roi": "ROI_048",
+"split_zh": "训练集",
+"patches": 24,
+"truth_patches": null,
+"incidence": 45.52,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_48",
+"product_id": "LSZ_01541_2CD_EKU_03S218_V1",
+"time": "2009-10-28T02:57:52",
+"width_px": 2908,
+"length_px": 59151,
+"bbox": [
+-142.7824,
+-0.4039,
+-142.4616,
+4.3007
+],
+"center": [
+-142.622,
+1.948
+]
+},
+{
+"roi": "ROI_049",
+"split_zh": "验证集",
+"patches": 113,
+"truth_patches": 88,
+"incidence": 52.47,
+"look": "LEFT",
+"issues": [],
+"split": "Val",
+"raw": "ROI_49",
+"product_id": "LSZ_01777_2CD_EKU_17N334_V1",
+"time": "2009-11-15T14:19:47",
+"width_px": 3702,
+"length_px": 66641,
+"bbox": [
+-26.6209,
+13.2854,
+-25.5363,
+21.7139
+],
+"center": [
+-26.079,
+17.5
+]
+},
+{
+"roi": "ROI_050",
+"split_zh": "训练集",
+"patches": 160,
+"truth_patches": null,
+"incidence": 47.62,
+"look": "LEFT",
+"issues": [
+"明显的局部错位"
+],
+"split": "Train",
+"raw": "ROI_50",
+"product_id": "LSZ_01552_2CD_EKU_18S206_V1",
+"time": "2009-10-28T23:37:58",
+"width_px": 2907,
+"length_px": 59097,
+"bbox": [
+-154.1469,
+-21.714,
+-153.2951,
+-13.2855
+],
+"center": [
+-153.721,
+-17.5
+]
+},
+{
+"roi": "ROI_051",
+"split_zh": "训练集",
+"patches": 196,
+"truth_patches": null,
+"incidence": 52.12,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_51",
+"product_id": "LSZ_01645_2CD_EKU_41N110_V1",
+"time": "2009-11-05T05:24:54",
+"width_px": 5427,
+"length_px": 65731,
+"bbox": [
+109.1522,
+34.286,
+110.7422,
+42.7127
+],
+"center": [
+109.947,
+38.499
+]
+},
+{
+"roi": "ROI_052",
+"split_zh": "训练集",
+"patches": 170,
+"truth_patches": null,
+"incidence": 48.8,
+"look": "LEFT",
+"issues": [
+"明显的局部错位"
+],
+"split": "Train",
+"raw": "ROI_52",
+"product_id": "LSZ_02490_2CD_EKU_16N139_V1",
+"time": "2010-01-10T15:12:15",
+"width_px": 4066,
+"length_px": 65753,
+"bbox": [
+138.4681,
+7.5429,
+139.6593,
+14.5994
+],
+"center": [
+139.064,
+11.071
+]
+},
+{
+"roi": "ROI_053",
+"split_zh": "训练集",
+"patches": 93,
+"truth_patches": null,
+"incidence": 49.57,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_53",
+"product_id": "LSZ_02199_2CD_EKU_01S255_V1",
+"time": "2009-12-18T19:44:17",
+"width_px": 3010,
+"length_px": 49215,
+"bbox": [
+-105.0649,
+-7.714,
+-104.4264,
+0.7139
+],
+"center": [
+-104.746,
+-3.5
+]
+},
+{
+"roi": "ROI_054",
+"split_zh": "测试集",
+"patches": 168,
+"truth_patches": 145,
+"incidence": 47.55,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位",
+"Mini-RF 目录里有两个 SAR 文件",
+"与 ROI_017 的范围部分重叠"
+],
+"split": "Test",
+"raw": "ROI_54",
+"product_id": "LSZ_01526_2CD_EKU_06S233_V1",
+"time": "2009-10-26T22:39:59",
+"width_px": 2765,
+"length_px": 52703,
+"bbox": [
+-127.6691,
+-7.714,
+-126.8589,
+0.7139
+],
+"center": [
+-127.264,
+-3.5
+]
+},
+{
+"roi": "ROI_055",
+"split_zh": "训练集",
+"patches": 214,
+"truth_patches": null,
+"incidence": 50.53,
+"look": "RIGHT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_55",
+"product_id": "LSZ_04755_2CD_EKU_35N135_V1",
+"time": "2010-07-07T12:06:05",
+"width_px": 5130,
+"length_px": 65465,
+"bbox": [
+134.1956,
+34.286,
+135.6986,
+42.7127
+],
+"center": [
+134.947,
+38.499
+]
+},
+{
+"roi": "ROI_056",
+"split_zh": "训练集",
+"patches": 296,
+"truth_patches": null,
+"incidence": 48.59,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_56",
+"product_id": "LSZ_02321_2CD_EKU_04N130_V1",
+"time": "2009-12-28T07:49:05",
+"width_px": 2857,
+"length_px": 55737,
+"bbox": [
+129.991,
+-4.1307,
+130.8281,
+8.0246
+],
+"center": [
+130.41,
+1.947
+]
+},
+{
+"roi": "ROI_057",
+"split_zh": "训练集",
+"patches": 229,
+"truth_patches": null,
+"incidence": 53.26,
+"look": "LEFT",
+"issues": [
+"CE-2 分幅的投影参数被改错，读取时纠正"
+],
+"split": "Train",
+"raw": "ROI_57",
+"product_id": "LSZ_02121_2CD_EKU_28N338_V1",
+"time": "2009-12-12T14:56:14",
+"width_px": 3484,
+"length_px": 50256,
+"bbox": [
+-22.9686,
+20.8242,
+-21.9479,
+35.5478
+],
+"center": [
+-22.458,
+28.186
+]
+},
+{
+"roi": "ROI_058",
+"split_zh": "训练集",
+"patches": 248,
+"truth_patches": null,
+"incidence": 51.37,
+"look": "RIGHT",
+"issues": [
+"CE-2 分幅的投影参数被改错，读取时纠正"
+],
+"split": "Train",
+"raw": "ROI_58",
+"product_id": "LSZ_04374_2CD_EKU_34N344_V1",
+"time": "2010-06-07T14:38:37",
+"width_px": 3996,
+"length_px": 66124,
+"bbox": [
+-16.8314,
+25.1145,
+-15.6608,
+35.9114
+],
+"center": [
+-16.246,
+30.513
+]
+},
+{
+"roi": "ROI_059",
+"split_zh": "测试集",
+"patches": 146,
+"truth_patches": 140,
+"incidence": 53.67,
+"look": "LEFT",
+"issues": [],
+"split": "Test",
+"raw": "ROI_59",
+"product_id": "LSZ_01740_2CD_EKU_20N011_V1",
+"time": "2009-11-12T16:32:16",
+"width_px": 3810,
+"length_px": 66566,
+"bbox": [
+10.7959,
+20.2861,
+11.9121,
+28.7132
+],
+"center": [
+11.354,
+24.5
+]
+},
+{
+"roi": "ROI_061",
+"split_zh": "训练集",
+"patches": 97,
+"truth_patches": null,
+"incidence": 52.99,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_61",
+"product_id": "LSZ_01779_2CD_EKU_30N332_V1",
+"time": "2009-11-15T18:10:12",
+"width_px": 4559,
+"length_px": 66787,
+"bbox": [
+-29.2016,
+27.2849,
+-27.8659,
+35.7141
+],
+"center": [
+-28.534,
+31.5
+]
+},
+{
+"roi": "ROI_062",
+"split_zh": "训练集",
+"patches": 136,
+"truth_patches": null,
+"incidence": 53.16,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_62",
+"product_id": "LSZ_03029_2CD_EKU_32N301_V1",
+"time": "2010-02-21T23:07:20",
+"width_px": 3654,
+"length_px": 66316,
+"bbox": [
+-59.3165,
+27.2849,
+-58.2461,
+35.7141
+],
+"center": [
+-58.781,
+31.5
+]
+},
+{
+"roi": "ROI_063",
+"split_zh": "训练集",
+"patches": 103,
+"truth_patches": null,
+"incidence": 53.16,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_63",
+"product_id": "LSZ_01752_2CD_EKU_31N359_V1",
+"time": "2009-11-13T15:13:51",
+"width_px": 4328,
+"length_px": 66606,
+"bbox": [
+-1.7448,
+21.8716,
+-0.4769,
+28.5691
+],
+"center": [
+-1.111,
+25.22
+]
+},
+{
+"roi": "ROI_064",
+"split_zh": "训练集",
+"patches": 111,
+"truth_patches": null,
+"incidence": 53.18,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_64",
+"product_id": "LSZ_03307_2CD_EKU_34N014_V1",
+"time": "2010-03-15T19:12:34",
+"width_px": 4436,
+"length_px": 49915,
+"bbox": [
+13.3749,
+34.4766,
+14.6744,
+40.618
+],
+"center": [
+14.025,
+37.547
+]
+},
+{
+"roi": "ROI_065",
+"split_zh": "训练集",
+"patches": 172,
+"truth_patches": null,
+"incidence": 53.02,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位",
+"CE-2 分幅的投影参数被改错，读取时纠正"
+],
+"split": "Train",
+"raw": "ROI_65",
+"product_id": "LSZ_02346_2CD_EKU_32S103_V1",
+"time": "2009-12-30T08:38:13",
+"width_px": 5431,
+"length_px": 65654,
+"bbox": [
+101.927,
+-36.1076,
+103.5182,
+-22.9528
+],
+"center": [
+102.723,
+-29.53
+]
+},
+{
+"roi": "ROI_066",
+"split_zh": "训练集",
+"patches": 130,
+"truth_patches": null,
+"incidence": 52.28,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_66",
+"product_id": "LSZ_01817_2CD_EKU_07N292_V1",
+"time": "2009-11-18T17:44:07",
+"width_px": 1897,
+"length_px": 66473,
+"bbox": [
+-67.9838,
+-2.3319,
+-67.4281,
+7.8611
+],
+"center": [
+-67.706,
+2.765
+]
+},
+{
+"roi": "ROI_067",
+"split_zh": "训练集",
+"patches": 120,
+"truth_patches": null,
+"incidence": 53.71,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_67",
+"product_id": "LSZ_02121_2CD_EKU_53N336_V1",
+"time": "2009-12-12T15:03:46",
+"width_px": 6878,
+"length_px": 50289,
+"bbox": [
+-24.8034,
+48.2863,
+-22.7884,
+56.7121
+],
+"center": [
+-23.796,
+52.499
+]
+},
+{
+"roi": "ROI_068",
+"split_zh": "训练集",
+"patches": 107,
+"truth_patches": null,
+"incidence": 52.55,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_68",
+"product_id": "LSZ_01425_2CD_EKU_10N339_V1",
+"time": "2009-10-18T22:22:21",
+"width_px": 2159,
+"length_px": 26914,
+"bbox": [
+-21.5454,
+6.3394,
+-20.9129,
+14.1254
+],
+"center": [
+-21.229,
+10.232
+]
+},
+{
+"roi": "ROI_069",
+"split_zh": "训练集",
+"patches": 198,
+"truth_patches": null,
+"incidence": 50.1,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_69",
+"product_id": "LSZ_02950_2CD_EKU_16S023_V1",
+"time": "2010-02-15T18:31:03",
+"width_px": 2658,
+"length_px": 65863,
+"bbox": [
+22.201,
+-25.2242,
+22.9796,
+-12.9664
+],
+"center": [
+22.59,
+-19.095
+]
+},
+{
+"roi": "ROI_070",
+"split_zh": "验证集",
+"patches": 168,
+"truth_patches": 113,
+"incidence": 52.72,
+"look": "LEFT",
+"issues": [
+"CE-2 分幅的投影参数被改错，读取时纠正"
+],
+"split": "Val",
+"raw": "ROI_70",
+"product_id": "LSZ_01434_2CD_EKU_28S328_V1",
+"time": "2009-10-19T17:01:43",
+"width_px": 2666,
+"length_px": 30045,
+"bbox": [
+-32.1605,
+-31.9358,
+-31.3795,
+-23.1337
+],
+"center": [
+-31.77,
+-27.535
+]
+},
+{
+"roi": "ROI_071",
+"split_zh": "验证集",
+"patches": 40,
+"truth_patches": 30,
+"incidence": 52.57,
+"look": "LEFT",
+"issues": [
+"与 ROI_038 的范围部分重叠"
+],
+"split": "Val",
+"raw": "ROI_71",
+"product_id": "LSZ_01437_2CD_EKU_27N326_V1",
+"time": "2009-10-19T21:05:02",
+"width_px": 2904,
+"length_px": 30270,
+"bbox": [
+-34.6268,
+27.6973,
+-33.7759,
+31.1785
+],
+"center": [
+-34.201,
+29.438
+]
+},
+{
+"roi": "ROI_072",
+"split_zh": "训练集",
+"patches": 60,
+"truth_patches": null,
+"incidence": 52.2,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_72",
+"product_id": "LSZ_02645_2CD_EKU_28S338_V1",
+"time": "2010-01-22T19:39:00",
+"width_px": 2044,
+"length_px": 33541,
+"bbox": [
+-22.5819,
+-32.4946,
+-21.9831,
+-27.5777
+],
+"center": [
+-22.283,
+-30.036
+]
+},
+{
+"roi": "ROI_073",
+"split_zh": "训练集",
+"patches": 119,
+"truth_patches": null,
+"incidence": 52.96,
+"look": "LEFT",
+"issues": [
+"对齐控制点重标过，patch 重新编号",
+"CE-2 分幅的投影参数被改错，读取时纠正"
+],
+"split": "Train",
+"raw": "ROI_73",
+"product_id": "LSZ_01449_2CD_EKU_30N313_V1",
+"time": "2009-10-20T19:43:13",
+"width_px": 2949,
+"length_px": 33579,
+"bbox": [
+-47.2641,
+25.3612,
+-46.4002,
+31.6985
+],
+"center": [
+-46.832,
+28.53
+]
+},
+{
+"roi": "ROI_074",
+"split_zh": "训练集",
+"patches": 141,
+"truth_patches": null,
+"incidence": 52.1,
+"look": "LEFT",
+"issues": [
+"ROI_73 的一份作废控制点实为本 ROI 的"
+],
+"split": "Train",
+"raw": "ROI_74",
+"product_id": "LSZ_01715_2CD_EKU_10N038_V1",
+"time": "2009-11-10T17:19:25",
+"width_px": 2787,
+"length_px": 66435,
+"bbox": [
+37.3074,
+6.286,
+38.124,
+14.7136
+],
+"center": [
+37.716,
+10.5
+]
+},
+{
+"roi": "ROI_075",
+"split_zh": "验证集",
+"patches": 183,
+"truth_patches": 174,
+"incidence": 51.79,
+"look": "LEFT",
+"issues": [],
+"split": "Val",
+"raw": "ROI_75",
+"product_id": "LSZ_02575_2CD_EKU_39S052_V1",
+"time": "2010-01-17T07:46:42",
+"width_px": 4273,
+"length_px": 26756,
+"bbox": [
+51.2392,
+-42.6534,
+52.491,
+-34.9394
+],
+"center": [
+51.865,
+-38.796
+]
+},
+{
+"roi": "ROI_076",
+"split_zh": "训练集",
+"patches": 58,
+"truth_patches": null,
+"incidence": 53.25,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_76",
+"product_id": "LSZ_01372_2CD_EKU_10S032_V1",
+"time": "2009-10-14T20:13:34",
+"width_px": 1748,
+"length_px": 13748,
+"bbox": [
+31.9039,
+-11.5772,
+32.4159,
+-7.5494
+],
+"center": [
+32.16,
+-9.563
+]
+},
+{
+"roi": "ROI_077",
+"split_zh": "训练集",
+"patches": 165,
+"truth_patches": null,
+"incidence": 51.93,
+"look": "LEFT",
+"issues": [],
+"split": "Train",
+"raw": "ROI_77",
+"product_id": "LSZ_02359_2CD_EKU_09N275_V1",
+"time": "2009-12-31T08:19:26",
+"width_px": 2472,
+"length_px": 65937,
+"bbox": [
+-85.5916,
+6.286,
+-84.8675,
+14.7136
+],
+"center": [
+-85.23,
+10.5
+]
+},
+{
+"roi": "ROI_078",
+"split_zh": "训练集",
+"patches": 167,
+"truth_patches": null,
+"incidence": 48.46,
+"look": "LEFT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_78",
+"product_id": "LSZ_03054_2CD_EKU_34S276_V1",
+"time": "2010-02-23T22:35:27",
+"width_px": 5317,
+"length_px": 66048,
+"bbox": [
+-85.006,
+-42.7129,
+-83.4483,
+-34.2861
+],
+"center": [
+-84.227,
+-38.5
+]
+},
+{
+"roi": "ROI_079",
+"split_zh": "训练集",
+"patches": 185,
+"truth_patches": null,
+"incidence": 50.04,
+"look": "RIGHT",
+"issues": [
+"轻度的局部错位"
+],
+"split": "Train",
+"raw": "ROI_79",
+"product_id": "LSZ_04652_2CD_EKU_34S056_V1",
+"time": "2010-06-29T10:56:02",
+"width_px": 4797,
+"length_px": 65590,
+"bbox": [
+55.0318,
+-35.7142,
+56.437,
+-27.2851
+],
+"center": [
+55.734,
+-31.5
+]
+},
+{
+"roi": "ROI_080",
+"split_zh": "验证集",
+"patches": 107,
+"truth_patches": 75,
+"incidence": 53.71,
+"look": "LEFT",
+"issues": [],
+"split": "Val",
+"raw": "ROI_80",
+"product_id": "LSZ_02094_2CD_EKU_50N003_V1",
+"time": "2009-12-10T12:08:35",
+"width_px": 8836,
+"length_px": 66501,
+"bbox": [
+1.9884,
+41.31,
+4.5772,
+49.7118
+],
+"center": [
+3.283,
+45.511
+]
+}
+]

@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>数据来源 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="" data-root="">
+<header class="top"><a class="site" href="index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="index.html">首页</a><a href="sources.html" aria-current=page>数据来源</a><a href="rois/index.html">ROI 总表</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索文档" aria-label="搜索文档" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main>
+<div class="doc wrap">
+  <article class="prose"><h1>数据来源</h1><h2 id="_2">官方文档</h2>
+<table>
+<thead>
+<tr>
+<th>文档</th>
+<th>版本</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://pds-geosciences.wustl.edu/lro/lro-l-mrflro-4-cdr-v1/lromrf_0001/document/dp_sis/mrflro_dp_sis.pdf">Mini-RF 数据产品 SIS</a></td>
+<td>MRF-4009，2010-02-25</td>
+<td>仪器参数（表 1）、Stokes 参数（§4.3.2.2）、文件命名（§4.7.1.1、表 16）</td>
+</tr>
+<tr>
+<td>Mini-RF 产品标签（<code>.LBL</code>）</td>
+<td><code>DATA_SET_ID = LRO-L-MRFLRO-5-CDR-MAP-V1.0</code></td>
+<td>波段、入射角、视向、投影、特殊值</td>
+</tr>
+<tr>
+<td><a href="https://pds-geosciences.wustl.edu/lro/lro-l-mrflro-4-cdr-v1/lromrf_0001/catalog/mrflro_4_cdr_v1_0_ds.cat">Mini-RF CDR 数据集说明</a></td>
+<td><code>LRO-L-MRFLRO-4-CDR-V1.0</code>，2011-06-15</td>
+<td>数据集层面的说明</td>
+</tr>
+<tr>
+<td><a href="https://moon.bao.ac.cn/">嫦娥数据发布与信息服务系统</a></td>
+<td>—</td>
+<td>CE-2 7 m DOM 下载入口（证书已过期）</td>
+</tr>
+</tbody>
+</table>
+<p>本数据集的产品标签属于 <code>-5-CDR-MAP</code>（地图投影后的 CDR），数据集说明属于 <code>-4-CDR</code>，两者的数据集 ID 不同。</p>
+<h2 id="mini-rf-sar">Mini-RF SAR</h2>
+<h3 id="id">产品 ID</h3>
+<p>产品 ID 同时是文件名。按 SIS §4.7.1.1 与表 16 解码，以 <code>LSZ_02319_2CD_EKU_23S131_V1</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>含义</th>
+<th>本例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>L</code></td>
+<td>平台</td>
+<td>LRO</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td>频段</td>
+<td>S 波段</td>
+</tr>
+<tr>
+<td><code>Z</code></td>
+<td>雷达模式</td>
+<td>Zoom</td>
+</tr>
+<tr>
+<td><code>02319</code></td>
+<td>轨道号</td>
+<td>2319</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>处理级别</td>
+<td>Level 2</td>
+</tr>
+<tr>
+<td><code>CD</code></td>
+<td>文件类型</td>
+<td>Calibrated Data Record</td>
+</tr>
+<tr>
+<td><code>E</code></td>
+<td>投影</td>
+<td>Equirectangular</td>
+</tr>
+<tr>
+<td><code>K</code></td>
+<td>分辨率档位</td>
+<td>1024 ppd</td>
+</tr>
+<tr>
+<td><code>U</code></td>
+<td>数值类型</td>
+<td>Unnormalized float</td>
+</tr>
+<tr>
+<td><code>23</code> <code>S</code></td>
+<td>中心纬度</td>
+<td>23°S</td>
+</tr>
+<tr>
+<td><code>131</code></td>
+<td>中心经度（东经 0–359°）</td>
+<td>131°E</td>
+</tr>
+<tr>
+<td><code>V1</code></td>
+<td>产品版本</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>全部 67 个条带的档位字母为 <code>K</code>（1024 ppd），产品标签的 <code>MAP_RESOLUTION</code> 为 4096 ppd。以标签为准。</li>
+<li>产品 ID 不含成像时间。成像时间见 GeoTIFF 元数据的 <code>START_TIME</code> 或元数据表的「成像时刻UTC」列。</li>
+</ul>
+<h3 id="_3">波段</h3>
+<p>混合极化：发射圆极化，相干接收 H、V 两路线极化。4 个 float32 波段，按波段顺序存放（SIS §4.3.2.2.1）。</p>
+<table>
+<thead>
+<tr>
+<th>波段</th>
+<th><code>BAND_NAME</code></th>
+<th>物理量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>H RECEIVE INTENSITY</td>
+<td>⟨|E<sub>H</sub>|²⟩，功率</td>
+</tr>
+<tr>
+<td>2</td>
+<td>V RECEIVE INTENSITY</td>
+<td>⟨|E<sub>V</sub>|²⟩，功率</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CROSS POWER INTENSITY (REAL)</td>
+<td>Re⟨E<sub>H</sub> E<sub>V</sub>*⟩</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CROSS POWER INTENSITY (IMAGINARY)</td>
+<td>Im⟨E<sub>H</sub> E<sub>V</sub>*⟩</td>
+</tr>
+</tbody>
+</table>
+<p>波段 3、4 可为负值。</p>
+<figure class="bands">
+<div class="band-row">
+<div><img src="../assets/bands/b1.png" alt=""><p>波段 1<br>H 接收功率</p></div>
+<div><img src="../assets/bands/b2.png" alt=""><p>波段 2<br>V 接收功率</p></div>
+<div><img src="../assets/bands/b3.png" alt=""><p>波段 3<br>交叉功率实部</p></div>
+<div><img src="../assets/bands/b4.png" alt=""><p>波段 4<br>交叉功率虚部</p></div>
+<div class="derived"><img src="../assets/bands/s1.png" alt=""><p>S1 总功率<br>（dB）</p></div>
+<div class="derived"><img src="../assets/bands/cpr.png" alt=""><p>CPR<br>圆极化比</p></div>
+</div>
+<figcaption>ROI_007 第 138 对 patch 的 SAR。各图按 2%–98% 分位拉伸。波段 3 的取值范围 -0.049 至 0.124，波段 4 为 -0.185 至 0.015；CPR 为 0.18 至 1.45。</figcaption>
+</figure>
+<h3 id="stokes">Stokes 参数</h3>
+<p>SIS §4.3.2.2.1–2：</p>
+<pre><code class="language-python">S1 = b1 + b2
+S2 = b1 - b2
+S3 = 2 * b3
+S4 = -2 * b4
+
+SC  = 0.5 * (S1 - S4)                        # 同向圆极化
+OC  = 0.5 * (S1 + S4)                        # 反向圆极化
+CPR = SC / OC                                # 圆极化比
+m   = np.sqrt(S2**2 + S3**2 + S4**2) / S1    # 极化度
+</code></pre>
+<p>全月平均 CPR 约 0.3，m 约 0.6（SIS §4.3.2.2.2.3）。</p>
+<h3 id="_4">仪器参数</h3>
+<p>SIS 表 1，S 波段：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>Zoom</th>
+<th>Baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>频率</td>
+<td>2.38 GHz（12.6 cm）</td>
+<td>同左</td>
+</tr>
+<tr>
+<td>斜距分辨率</td>
+<td>23 m</td>
+<td>115 m</td>
+</tr>
+<tr>
+<td>地距 / 方位分辨率</td>
+<td>15 × 30（原表无单位）</td>
+<td>150 m</td>
+</tr>
+<tr>
+<td>视数</td>
+<td>8</td>
+<td>16</td>
+</tr>
+<tr>
+<td>线性调频带宽</td>
+<td>8 MHz</td>
+<td>1.6 MHz</td>
+</tr>
+<tr>
+<td>NESZ</td>
+<td>−25 dB</td>
+<td>−30 dB</td>
+</tr>
+<tr>
+<td>条带长度</td>
+<td>&lt; 400 km</td>
+<td>同左</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">格式与投影</h3>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>值</th>
+<th>出处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>官方格式</td>
+<td>PDS3 <code>IMG</code> + <code>LBL</code>，<code>PC_REAL</code></td>
+<td>产品标签</td>
+</tr>
+<tr>
+<td>空值</td>
+<td><code>CORE_NULL</code> ≈ −3.4028 × 10³⁸</td>
+<td>产品标签</td>
+</tr>
+<tr>
+<td>投影</td>
+<td>等距圆柱，<code>CENTER_LONGITUDE = 180.0</code></td>
+<td>产品标签</td>
+</tr>
+<tr>
+<td>月球半径</td>
+<td>1737.4 km（球体）</td>
+<td>产品标签</td>
+</tr>
+<tr>
+<td>采样间隔</td>
+<td>4096 ppd，<code>MAP_SCALE</code> = 7.4032 m</td>
+<td>产品标签</td>
+</tr>
+<tr>
+<td>数据盘格式</td>
+<td>GeoTIFF，标签字段写入 GeoTIFF 元数据</td>
+<td>数据盘 <code>raw/ROI_&lt;n&gt;/minirf/</code></td>
+</tr>
+</tbody>
+</table>
+<p><a href="rois/ROI_054.html">ROI_054</a> 的 <code>minirf/</code> 目录下有两个 SAR 文件。</p>
+<h2 id="ce-2">CE-2 光学</h2>
+<h3 id="_6">投影参数有误的分幅</h3>
+<p>以下 5 幅的 <code>lat_ts</code> 写成了相邻纬度带的值。读取时按幅名纠正，源文件未改。</p>
+<table>
+<thead>
+<tr>
+<th>分幅</th>
+<th>写成</th>
+<th>应为</th>
+<th>受影响的 ROI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E215、E218、E219</td>
+<td>21°</td>
+<td>35°</td>
+<td><a href="rois/ROI_073.html">ROI_073</a>、<a href="rois/ROI_057.html">ROI_057</a>、<a href="rois/ROI_058.html">ROI_058</a></td>
+</tr>
+<tr>
+<td>I219、I236</td>
+<td>−35°</td>
+<td>−21°</td>
+<td><a href="rois/ROI_070.html">ROI_070</a>、<a href="rois/ROI_065.html">ROI_065</a></td>
+</tr>
+</tbody>
+</table></article>
+  <nav class="toc" aria-label="本页目录"><a class="l2" href="#_2">官方文档</a><a class="l2" href="#mini-rf-sar">Mini-RF SAR</a><a class="l3" href="#id">产品 ID</a><a class="l3" href="#_3">波段</a><a class="l3" href="#stokes">Stokes 参数</a><a class="l3" href="#_4">仪器参数</a><a class="l3" href="#_5">格式与投影</a><a class="l2" href="#ce-2">CE-2 光学</a><a class="l3" href="#_6">投影参数有误的分幅</a></nav>
+</div></main>
+<script src="../assets/data.js"></script>
+<script src="search-index.js"></script>
+<script src="../assets/site.js"></script>
+<script></script>
+<div id="proto-bar"><span>原型</span><a href="../a-atlas/sources.html" aria-current=page>A 月面图集</a><a href="../b-plates/sources.html">B 配对图版</a></div>
+<style>#proto-bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:999;display:flex;gap:6px;align-items:center;
+background:#000;color:#fff;border-radius:999px;padding:5px 8px 5px 14px;font:13px/1.2 system-ui,"Microsoft YaHei";box-shadow:0 6px 20px rgba(0,0,0,.35)}
+#proto-bar span{opacity:.6;margin-right:4px}#proto-bar a{color:#fff;text-decoration:none;padding:4px 10px;border-radius:999px}
+#proto-bar a[aria-current]{background:#fff;color:#000}</style>
+<script>document.addEventListener('keydown',function(e){var t=document.activeElement;if(t&&(t.tagName==='INPUT'||t.isContentEditable))return;
+if(e.key==='ArrowLeft'||e.key==='ArrowRight')location.href='../b-plates/sources.html';});</script></body></html>

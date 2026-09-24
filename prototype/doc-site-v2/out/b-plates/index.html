@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="home" data-root="">
+<header class="top"><a class="site" href="index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="index.html" aria-current=page>首页</a><a href="sources.html">数据来源</a><a href="rois/index.html">ROI 总表</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索文档" aria-label="搜索文档" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main>
+<section class="hero">
+  <div class="plate"><div id="hero"></div></div>
+  <div class="hero-foot">
+    <p class="caption" id="cap"></p>
+    <div class="film" id="film" role="group" aria-label="选择样例"></div>
+  </div>
+</section>
+<section class="col">
+  <h1>月球光学–SAR 配准数据集</h1>
+  <p class="lead">嫦娥二号 CCD 相机 7 m 正射影像与 LRO Mini-RF S 波段 SAR 的配准数据集。67 个 ROI 分布在月球正面与背面，切成 9862 对 512 × 512 的 patch，按 ROI 分为训练集、验证集、测试集；验证集与测试集的 patch 带评测真值点。</p>
+  <table class="splits"><thead><tr><th></th><th>ROI</th><th>patch 对</th><th>带真值点的 patch 对</th><th>评测真值点对</th></tr></thead><tbody><tr><th scope="row"><span class="sw Train"></span>训练集</th><td>54</td><td>7907</td><td>—</td><td>—</td></tr><tr><th scope="row"><span class="sw Val"></span>验证集</th><td>6</td><td>825</td><td>652</td><td>5289</td></tr><tr><th scope="row"><span class="sw Test"></span>测试集</th><td>7</td><td>1130</td><td>953</td><td>7742</td></tr></tbody></table>
+  <p class="more"><a href="sources.html">数据来源</a>　<a href="rois/index.html">ROI 总表</a></p>
+</section>
+<figure class="fig wide">
+  <div class="plate"><div id="map"></div></div>
+  <figcaption><b>图 2</b>　67 个 ROI 在月面的位置。底图为 LRO LROC 全月拼图，等距圆柱投影。圆点面积与该 ROI 的 patch 对数成正比，
+  颜色表示划分：<span class="sw Train"></span>训练集　<span class="sw Val"></span>验证集　<span class="sw Test"></span>测试集。点击圆点进入该 ROI。</figcaption>
+</figure></main>
+<script src="../assets/data.js"></script>
+<script src="search-index.js"></script>
+<script src="../assets/site.js"></script>
+<script>
+var hero = document.getElementById('hero'), cap = document.getElementById('cap'), film = document.getElementById('film');
+var ZH = {Val:'验证集', Test:'测试集'};
+function show(i) {
+  var s = SAMPLES[i];
+  hero.innerHTML = '';
+  Site.pairFigure(hero, s, {gap: 64, lines: true});
+  cap.innerHTML = '<b>图 1</b>　<a href="rois/' + s.roi + '.html">' + s.roi + '</a>（' + ZH[s.split] + '）第 ' + s.patch + ' 对 patch。' +
+    '左为 CE-2 光学，右为 Mini-RF SAR 总功率（dB），各 512 × 512 像素。连线是 ' + s.points.length + ' 对评测真值点。' +
+    '这对 patch 的光学范围相对 SAR 偏移 ' + Math.abs(s.offset_m[0]) + ' m（东西）、' + Math.abs(s.offset_m[1]) + ' m（南北）。';
+  film.querySelectorAll('button').forEach(function (b, j) { b.setAttribute('aria-pressed', i === j); });
+}
+SAMPLES.forEach(function (s, i) {
+  var b = Site.h('button', null, film, '<img src="../assets/samples/' + s.name + '_opt.png" alt=""><img src="../assets/samples/' + s.name + '_sar.png" alt="">');
+  b.type = 'button'; b.title = s.roi + ' patch_' + s.patch;
+  b.setAttribute('aria-label', s.roi + ' 第 ' + s.patch + ' 对');
+  b.addEventListener('click', function () { show(i); });
+});
+show(1);
+Site.moonMap(document.getElementById('map'), {mode:'dots'});</script>
+<div id="proto-bar"><span>原型</span><a href="../a-atlas/index.html">A 月面图集</a><a href="../b-plates/index.html" aria-current=page>B 配对图版</a></div>
+<style>#proto-bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:999;display:flex;gap:6px;align-items:center;
+background:#000;color:#fff;border-radius:999px;padding:5px 8px 5px 14px;font:13px/1.2 system-ui,"Microsoft YaHei";box-shadow:0 6px 20px rgba(0,0,0,.35)}
+#proto-bar span{opacity:.6;margin-right:4px}#proto-bar a{color:#fff;text-decoration:none;padding:4px 10px;border-radius:999px}
+#proto-bar a[aria-current]{background:#fff;color:#000}</style>
+<script>document.addEventListener('keydown',function(e){var t=document.activeElement;if(t&&(t.tagName==='INPUT'||t.isContentEditable))return;
+if(e.key==='ArrowLeft'||e.key==='ArrowRight')location.href='../a-atlas/index.html';});</script></body></html>
