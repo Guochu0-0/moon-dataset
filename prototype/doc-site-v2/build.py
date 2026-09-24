@@ -10,6 +10,7 @@
 
 from __future__ import annotations
 
+import csv
 import html
 import json
 import re
@@ -120,6 +121,41 @@ def roi_facts(r):
         ("产物目录", f"<code>Processed_Data/{split_dir}/{r['roi']}/</code>"),
         ("对齐控制点", f"<code>data/tie-points/{r['raw']}/</code>"),
     ]
+
+
+FACTS = json.loads((A / "roi-facts.json").read_text(encoding="utf-8"))
+MINIRF = {}
+with open(REPO / "data/metadata/minirf_metadata.csv", encoding="utf-8-sig") as _f:
+    for _row in csv.DictReader(_f):
+        MINIRF[f"ROI_{int(_row['ROI'].split('_')[1]):03d}"] = _row
+
+
+def roi_side(r):
+    """「原型：ROI 页内容与版式」：数据集一组 + 光学/SAR 对照表。"""
+    f, m = FACTS[r["roi"]], MINIRF[r["roi"]]
+    w, s, e, nn = r["bbox"]
+    ds = [("划分", f'<span class="sw {r["split"]}"></span>{r["split_zh"]}'), ("patch 对", str(r["patches"]))]
+    if f["missing"]:
+        ds.append(("patch 编号", f"0–{f['last_id']}，缺 {'、'.join(map(str, f['missing']))}"))
+    if r["truth_patches"]:
+        ds.append(("带评测真值点的 patch", f"{r['truth_patches']}，共 {f['truth_points']} 对点"))
+    ds += [("中心", f"{lat(r['center'][1])}，{lon(r['center'][0])}"),
+           ("范围", f"{lat(s)}–{lat(nn)}，{lon(w)}–{lon(e)}"),
+           ("对齐控制点", f'{f["tie_points"]} 对（<a href="#">标注规程</a>）')]
+    fr = f["frames"]
+    opt_id = "<br>".join(f"<code>{x['id']}</code>" for x in fr)
+    projs = sorted({x["proj"] for x in fr})
+    opt_proj = projs[0] if len(projs) == 1 else "<br>".join(f"{x['id'].split('_')[4]}：{x['proj']}" for x in fr)
+    rows = [("产品", opt_id, f"<code>{m['PRODUCT_ID']}</code>"),
+            ("成像时刻（UTC）", "—", m["成像时刻UTC"].replace("T", " ")),
+            ("投影", opt_proj, "等距圆柱，中心经度 180°"),
+            ("像元", "7 m", f"{float(m['原生采样_m']):.4f} m"),
+            ("入射角", "—", f"{float(m['入射角_deg']):.2f}°"),
+            ("视向", "—", {"LEFT": "左视", "RIGHT": "右视"}[m["视向"]]),
+            ("条带尺寸", "—", f"{int(m['条带宽_px']):,} × {int(m['条带长_px']):,} 像素")]
+    cmp = "".join(f'<tr><th scope="row">{k}</th><td>{o}</td><td>{sv}</td></tr>' for k, o, sv in rows)
+    return ('<dl class="facts">' + "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in ds) + "</dl>"
+            f'<table class="cmp"><thead><tr><th></th><th>光学 CE-2 DOM</th><th>SAR Mini-RF</th></tr></thead><tbody>{cmp}</tbody></table>')
 
 
 def neighbours(r):
@@ -246,8 +282,7 @@ document.querySelectorAll('.filters button').forEach(function (b) {
   <div class="roi-grid">
     <div class="roi-side">
       <div id="loc" class="locator"></div>
-      <dl class="facts">{facts}</dl>
-      <h2>已知问题</h2><ul class="issues">{issues}</ul>
+      {roi_side(r)}
     </div>
     <div class="roi-main {r['split']}"><div id="strips"></div>{grid_note}
     <p class="note">对齐影像的缩略图，每 114 × 114 像素取有效值的均值。黑色是没有数据的区域。</p></div>

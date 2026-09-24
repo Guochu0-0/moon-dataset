@@ -166,3 +166,11 @@ h3 { font-size: 18px; margin: 1.8em 0 .4em; }
 main > .wrap:first-child { padding-top: 32px; }
 .dots circle { pointer-events: all; }
 .maptip div { white-space: nowrap; }
+
+/* 「原型：ROI 页内容与版式」：光学/SAR 对照表 */
+.roi-grid { grid-template-columns: 580px minmax(0, 1fr); }
+.cmp { border-collapse: collapse; width: 100%; margin-top: 22px; font-size: 13.5px; }
+.cmp th, .cmp td { text-align: left; vertical-align: top; padding: 5px 10px 5px 0; border-bottom: 1px solid var(--rule); }
+.cmp thead th { font-weight: 600; font-size: 13px; }
+.cmp tbody th { font-weight: 400; color: var(--ink2); white-space: nowrap; }
+.cmp code { font-size: 11.5px; }

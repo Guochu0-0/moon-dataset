@@ -1,0 +1,898 @@
+{
+"ROI_001": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_J135_31S130E_A",
+"proj": "Mercator，标准纬线 -35°"
+}
+],
+"tie_points": 150,
+"truth_points": null,
+"last_id": 39,
+"missing": []
+},
+"ROI_002": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G239_03N108E_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 36,
+"truth_points": null,
+"last_id": 151,
+"missing": []
+},
+"ROI_003": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_C104_66N127W_A",
+"proj": "Mercator，标准纬线 63°"
+}
+],
+"tie_points": 36,
+"truth_points": null,
+"last_id": 170,
+"missing": []
+},
+"ROI_005": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E112_38N076W_A",
+"proj": "Mercator，标准纬线 35°"
+}
+],
+"tie_points": 33,
+"truth_points": null,
+"last_id": 134,
+"missing": []
+},
+"ROI_006": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_I241_24S144E_A",
+"proj": "Mercator，标准纬线 -21°"
+}
+],
+"tie_points": 33,
+"truth_points": 538,
+"last_id": 80,
+"missing": []
+},
+"ROI_007": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_D133_52N145E_A",
+"proj": "Mercator，标准纬线 49°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_D233_45N145E_A",
+"proj": "Mercator，标准纬线 49°"
+}
+],
+"tie_points": 39,
+"truth_points": 2315,
+"last_id": 371,
+"missing": []
+},
+"ROI_008": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G103_10N161W_A",
+"proj": "Mercator，标准纬线 7°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_G203_03N161W_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 32,
+"truth_points": null,
+"last_id": 290,
+"missing": []
+},
+"ROI_009": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G233_03N063E_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 161,
+"missing": []
+},
+"ROI_010": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_F235_17N096E_A",
+"proj": "Mercator，标准纬线 21°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 158,
+"missing": []
+},
+"ROI_011": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_H216_10S063W_A",
+"proj": "Mercator，标准纬线 -7°"
+}
+],
+"tie_points": 30,
+"truth_points": 706,
+"last_id": 91,
+"missing": []
+},
+"ROI_012": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_J102_31S166W_A",
+"proj": "Mercator，标准纬线 -35°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_J202_38S166W_A",
+"proj": "Mercator，标准纬线 -35°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 104,
+"missing": []
+},
+"ROI_013": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_K135_45S165E_A",
+"proj": "Mercator，标准纬线 -49°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 53,
+"missing": []
+},
+"ROI_015": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_C208_59N067W_A",
+"proj": "Mercator，标准纬线 63°"
+}
+],
+"tie_points": 32,
+"truth_points": null,
+"last_id": 97,
+"missing": []
+},
+"ROI_016": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_L212_66S007W_A",
+"proj": "Mercator，标准纬线 -63°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 264,
+"missing": []
+},
+"ROI_017": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G208_03N123W_A",
+"proj": "Mercator，标准纬线 -7°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_H108_03S123W_A",
+"proj": "Mercator，标准纬线 -7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 212,
+"missing": []
+},
+"ROI_018": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_K119_45S005E_A",
+"proj": "Mercator，标准纬线 -49°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 116,
+"missing": []
+},
+"ROI_020": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_K114_45S045W_A",
+"proj": "Mercator，标准纬线 -49°"
+}
+],
+"tie_points": 30,
+"truth_points": 739,
+"last_id": 111,
+"missing": []
+},
+"ROI_021": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G217_03N056W_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 36,
+"truth_points": null,
+"last_id": 107,
+"missing": []
+},
+"ROI_023": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E238_31N157E_A",
+"proj": "Mercator，标准纬线 35°"
+}
+],
+"tie_points": 32,
+"truth_points": null,
+"last_id": 174,
+"missing": []
+},
+"ROI_024": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_K225_52S065E_A",
+"proj": "Mercator，标准纬线 -49°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_K226_52S075E_A",
+"proj": "Mercator，标准纬线 -49°"
+}
+],
+"tie_points": 31,
+"truth_points": null,
+"last_id": 238,
+"missing": []
+},
+"ROI_025": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_L219_66S097E_A",
+"proj": "Mercator，标准纬线 -63°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 221,
+"missing": []
+},
+"ROI_026": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G204_03N153W_A",
+"proj": "Mercator，标准纬线 7°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_G205_03N146W_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 189,
+"missing": []
+},
+"ROI_027": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_L204_66S127W_A",
+"proj": "Mercator，标准纬线 -63°"
+}
+],
+"tie_points": 31,
+"truth_points": null,
+"last_id": 236,
+"missing": [
+95,
+98,
+99
+]
+},
+"ROI_030": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_D211_45N075W_A",
+"proj": "Mercator，标准纬线 49°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 73,
+"missing": []
+},
+"ROI_031": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E112_38N076W_A",
+"proj": "Mercator，标准纬线 35°"
+}
+],
+"tie_points": 34,
+"truth_points": null,
+"last_id": 148,
+"missing": []
+},
+"ROI_033": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_K228_52S095E_A",
+"proj": "Mercator，标准纬线 -49°"
+}
+],
+"tie_points": 32,
+"truth_points": null,
+"last_id": 268,
+"missing": []
+},
+"ROI_034": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_K236_52S175E_A",
+"proj": "Mercator，标准纬线 -49°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 198,
+"missing": []
+},
+"ROI_035": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_I238_24S120E_A",
+"proj": "Mercator，标准纬线 -21°"
+}
+],
+"tie_points": 30,
+"truth_points": 1383,
+"last_id": 213,
+"missing": []
+},
+"ROI_037": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_H219_10S041W_A",
+"proj": "Mercator，标准纬线 -7°"
+}
+],
+"tie_points": 30,
+"truth_points": 1133,
+"last_id": 158,
+"missing": []
+},
+"ROI_038": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E217_31N031W_A",
+"proj": "Mercator，标准纬线 35°"
+}
+],
+"tie_points": 19,
+"truth_points": null,
+"last_id": 63,
+"missing": []
+},
+"ROI_042": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_C202_59N157W_A",
+"proj": "Mercator，标准纬线 63°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 20,
+"missing": []
+},
+"ROI_043": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_F127_24N032E_A",
+"proj": "Mercator，标准纬线 21°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 47,
+"missing": []
+},
+"ROI_045": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G126_10N011E_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 29,
+"truth_points": null,
+"last_id": 57,
+"missing": []
+},
+"ROI_046": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_J215_38S049W_A",
+"proj": "Mercator，标准纬线 -35°"
+}
+],
+"tie_points": 29,
+"truth_points": null,
+"last_id": 164,
+"missing": []
+},
+"ROI_047": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_K105_45S135W_A",
+"proj": "Mercator，标准纬线 -49°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 30,
+"missing": []
+},
+"ROI_048": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G205_03N146W_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 23,
+"missing": []
+},
+"ROI_049": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_F220_17N024W_A",
+"proj": "Mercator，标准纬线 21°"
+}
+],
+"tie_points": 30,
+"truth_points": 706,
+"last_id": 112,
+"missing": []
+},
+"ROI_050": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_I104_17S152W_A",
+"proj": "Mercator，标准纬线 -21°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 159,
+"missing": []
+},
+"ROI_051": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E133_38N112E_A",
+"proj": "Mercator，标准纬线 35°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 195,
+"missing": []
+},
+"ROI_052": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G143_10N138E_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 169,
+"missing": []
+},
+"ROI_053": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_H111_03S101W_A",
+"proj": "Mercator，标准纬线 -7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 92,
+"missing": []
+},
+"ROI_054": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_H107_03S131W_A",
+"proj": "Mercator，标准纬线 -7°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_H108_03S123W_A",
+"proj": "Mercator，标准纬线 -7°"
+}
+],
+"tie_points": 30,
+"truth_points": 1187,
+"last_id": 167,
+"missing": []
+},
+"ROI_055": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E135_38N130E_A",
+"proj": "Mercator，标准纬线 35°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_E136_38N139E_A",
+"proj": "Mercator，标准纬线 35°"
+}
+],
+"tie_points": 33,
+"truth_points": null,
+"last_id": 213,
+"missing": []
+},
+"ROI_056": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G242_03N131E_A",
+"proj": "Mercator，标准纬线 -7°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_H142_03S131E_A",
+"proj": "Mercator，标准纬线 -7°"
+}
+],
+"tie_points": 31,
+"truth_points": null,
+"last_id": 295,
+"missing": []
+},
+"ROI_057": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E218_31N022W_A",
+"proj": "Mercator，标准纬线 35°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_F120_24N024W_A",
+"proj": "Mercator，标准纬线 21°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 228,
+"missing": []
+},
+"ROI_058": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E219_31N013W_A",
+"proj": "Mercator，标准纬线 35°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_F121_24N016W_A",
+"proj": "Mercator，标准纬线 21°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 247,
+"missing": []
+},
+"ROI_059": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_F124_24N008E_A",
+"proj": "Mercator，标准纬线 21°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_F125_24N016E_A",
+"proj": "Mercator，标准纬线 21°"
+}
+],
+"tie_points": 25,
+"truth_points": 1124,
+"last_id": 145,
+"missing": []
+},
+"ROI_061": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E217_31N031W_A",
+"proj": "Mercator，标准纬线 35°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 96,
+"missing": []
+},
+"ROI_062": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E214_31N058W_A",
+"proj": "Mercator，标准纬线 35°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 135,
+"missing": []
+},
+"ROI_063": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_F123_24N000W_A",
+"proj": "Mercator，标准纬线 21°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 102,
+"missing": []
+},
+"ROI_064": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E122_38N013E_A",
+"proj": "Mercator，标准纬线 35°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 110,
+"missing": []
+},
+"ROI_065": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_I236_24S104E_A",
+"proj": "Mercator，标准纬线 -21°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_J132_31S103E_A",
+"proj": "Mercator，标准纬线 -35°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 171,
+"missing": []
+},
+"ROI_066": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G215_03N071W_A",
+"proj": "Mercator，标准纬线 7°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_G216_03N063W_A",
+"proj": "Mercator，标准纬线 7°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_H115_03S071W_A",
+"proj": "Mercator，标准纬线 -7°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_H116_03S063W_A",
+"proj": "Mercator，标准纬线 -7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 129,
+"missing": []
+},
+"ROI_067": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_D116_52N025W_A",
+"proj": "Mercator，标准纬线 49°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_D117_52N015W_A",
+"proj": "Mercator，标准纬线 49°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 119,
+"missing": []
+},
+"ROI_068": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G122_10N018W_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 106,
+"missing": []
+},
+"ROI_069": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_I126_17S024E_A",
+"proj": "Mercator，标准纬线 -21°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_I226_24S024E_A",
+"proj": "Mercator，标准纬线 -21°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 197,
+"missing": []
+},
+"ROI_070": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_I219_24S032W_A",
+"proj": "Mercator，标准纬线 -21°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_J117_31S031W_A",
+"proj": "Mercator，标准纬线 -35°"
+}
+],
+"tie_points": 30,
+"truth_points": 910,
+"last_id": 167,
+"missing": []
+},
+"ROI_071": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E217_31N031W_A",
+"proj": "Mercator，标准纬线 35°"
+}
+],
+"tie_points": 30,
+"truth_points": 241,
+"last_id": 39,
+"missing": []
+},
+"ROI_072": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_J118_31S022W_A",
+"proj": "Mercator，标准纬线 -35°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 59,
+"missing": []
+},
+"ROI_073": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_E215_31N049W_A",
+"proj": "Mercator，标准纬线 35°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_F117_24N048W_A",
+"proj": "Mercator，标准纬线 21°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 118,
+"missing": []
+},
+"ROI_074": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G129_10N033E_A",
+"proj": "Mercator，标准纬线 7°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_G130_10N041E_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 140,
+"missing": []
+},
+"ROI_075": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_J226_38S049E_A",
+"proj": "Mercator，标准纬线 -35°"
+}
+],
+"tie_points": 30,
+"truth_points": 1442,
+"last_id": 182,
+"missing": []
+},
+"ROI_076": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_H129_03S033E_A",
+"proj": "Mercator，标准纬线 -7°"
+},
+{
+"id": "CE2_GRAS_DOM_07m_H229_10S033E_A",
+"proj": "Mercator，标准纬线 -7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 57,
+"missing": []
+},
+"ROI_077": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_G113_10N086W_A",
+"proj": "Mercator，标准纬线 7°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 164,
+"missing": []
+},
+"ROI_078": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_J211_38S085W_A",
+"proj": "Mercator，标准纬线 -35°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 166,
+"missing": []
+},
+"ROI_079": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_J127_31S058E_A",
+"proj": "Mercator，标准纬线 -35°"
+}
+],
+"tie_points": 30,
+"truth_points": null,
+"last_id": 184,
+"missing": []
+},
+"ROI_080": {
+"frames": [
+{
+"id": "CE2_GRAS_DOM_07m_D219_45N005E_A",
+"proj": "Mercator，标准纬线 49°"
+}
+],
+"tie_points": 30,
+"truth_points": 607,
+"last_id": 106,
+"missing": []
+}
+}
