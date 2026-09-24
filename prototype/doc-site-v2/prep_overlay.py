@@ -2,7 +2,7 @@
 
 把各 CE-2 分幅与 Mini-RF 条带重投影到重叠区影像的坐标系，画到同一张画布上：
 
-  assets/overlay/<ROI>/ce2.png   CE-2 分幅（灰度 + 透明）
+  assets/overlay/<ROI>/ce2_<幅号>.png  各 CE-2 分幅（灰度 + 透明，各幅同一拉伸）
   assets/overlay/<ROI>/sar.png   Mini-RF 条带 S1 dB（灰度 + 透明）
   assets/overlay.json            画布尺寸、重叠区在画布上的矩形、各分幅与条带的外框（0–1 相对坐标）
 
@@ -42,9 +42,12 @@ def to_canvas(arr, src_t, src_crs, dst_t, dst_crs, shape):
     return out
 
 
-def la(a):
+def la(a, lo=None, hi=None):
     valid = np.isfinite(a)
-    g = pa.stretch(np.where(valid, a, 0), valid)
+    if lo is None:
+        g = pa.stretch(np.where(valid, a, 0), valid)
+    else:
+        g = (np.clip((np.where(valid, a, lo) - lo) / (hi - lo + 1e-9), 0, 1) * 255).astype(np.uint8)
     return Image.fromarray(np.dstack([g, np.where(valid, 255, 0).astype(np.uint8)]), "LA")
 
 
@@ -70,12 +73,14 @@ def main() -> None:
                          round((b[2] - b[0]) / (R - L), 4), round((b[3] - b[1]) / (T - B), 4)]
 
         ce2 = np.full((H, W), np.nan, np.float32)
+        layers = []
         for p in frames:
             with rasterio.open(p) as d:
                 a, t = small(d, 2000, [1])
                 a[0][a[0] == 0] = np.nan
                 c = to_canvas(a[0], t, d.crs, dst_t, crs, (H, W))
             ce2 = np.where(np.isfinite(c), c, ce2)
+            layers.append((p.stem.split("_")[4], c))
         with rasterio.open(sar_tif) as d:
             a, t = small(d, 3000, [1, 2])
             s1 = a[0] + a[1]
@@ -84,9 +89,12 @@ def main() -> None:
         od = pa.OUT / "overlay" / roi
         od.mkdir(parents=True, exist_ok=True)
         la(ce2).save(od / "ce2.png", optimize=True)
+        lo, hi = np.nanpercentile(ce2, [2, 98])
+        for tile, c in layers:
+            la(c, lo, hi).save(od / f"ce2_{tile}.png", optimize=True)
         la(sar).save(od / "sar.png", optimize=True)
         meta[roi] = dict(w=W, h=H, km=[round((R - L) / 1000), round((T - B) / 1000)], overlap=rel(ob),
-                         frames=[dict(id=p.stem, box=rel(boxes[p])) for p in frames], sar=rel(boxes[sar_tif]))
+                         frames=[dict(id=p.stem, tile=p.stem.split("_")[4], box=rel(boxes[p])) for p in frames], sar=rel(boxes[sar_tif]))
         print(roi, W, H, meta[roi]["km"])
     (pa.OUT / "overlay.json").write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
 

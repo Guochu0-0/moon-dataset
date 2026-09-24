@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROI_054 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="" data-root="../">
+<header class="top"><a class="site" href="../index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="../index.html">首页</a><a href="../sources.html">数据来源</a><a href="../rois/index.html" aria-current=page>ROI 总表</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索文档" aria-label="搜索文档" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main><div class="wrap roi"><header class="roi-head"><h1>ROI_054</h1>
+    <p class="split-tag"><span class="sw Test"></span>测试集</p>
+    <nav class="stepper" aria-label="相邻 ROI"><a href="ROI_003.html">上一个 ROI_003</a><a href="ROI_066.html">下一个 ROI_066</a></nav></header>
+<div class="roi-grid"><div class="roi-side"><div id="loc" class="locator"></div><dl class="facts"><dt>划分</dt><dd><span class="sw Test"></span>测试集</dd><dt>patch 对</dt><dd>168</dd><dt>带评测真值点的 patch</dt><dd>145，共 1187 对点</dd><dt>中心</dt><dd>3.5°S，127.3°W</dd><dt>范围</dt><dd>7.7°S–0.7°N，127.7°W–126.9°W</dd><dt>控制点</dt><dd>30 对（<a href="#">标注规程</a>）</dd></dl><table class="cmp"><thead><tr><th></th><th>光学原图<br><small>CE-2 DOM</small></th><th>SAR 原图<br><small>Mini-RF</small></th><th class="alc">重叠区影像<br><small>光学、SAR 各一幅</small></th></tr></thead><tbody><tr><th scope="row">产品</th><td><code>CE2_GRAS_DOM_07m_H107_03S131W_A</code><br><code>CE2_GRAS_DOM_07m_H108_03S123W_A</code></td><td><code>LSZ_01526_2CD_EKU_06S233_V1</code></td><td class="alc">—</td></tr><tr><th scope="row">成像时刻（UTC）</th><td>—</td><td>2009-10-26 22:39:59</td><td class="alc">—</td></tr><tr><th scope="row">投影</th><td>Mercator，标准纬线 -7°</td><td>等距圆柱，中心经度 180°</td><td class="alc">Mercator，标准纬线 -7°</td></tr><tr><th scope="row">像元</th><td>7 m</td><td>7.4032 m</td><td class="alc">7.5 m</td></tr><tr><th scope="row">图像尺寸</th><td>32,348 × 30,273 像素（每幅）</td><td>2,765 × 52,703 像素</td><td class="alc">3,251 × 33,915 像素</td></tr><tr><th scope="row">入射角</th><td>—</td><td>47.55°</td><td class="alc">—</td></tr><tr><th scope="row">视向</th><td>—</td><td>左视</td><td class="alc">—</td></tr></tbody></table><p class="note">重叠区影像：光学与 SAR 公共覆盖区外扩 1.2 倍，两者重采样到 7.5 m 的同一网格；patch 从这两幅上切出。</p>
+<h2 class="imgh">原始产品</h2><figure class="ovl both">
+  <div class="ovl-img" style="width:534px;height:460px" tabindex="0" role="button" aria-label="放大"><img class="ly" data-l="H107" src="../../assets/overlay/ROI_054/ce2_H107.png" alt=""><img class="ly" data-l="H108" src="../../assets/overlay/ROI_054/ce2_H108.png" alt=""><img class="ly sar" data-l="sar" src="../../assets/overlay/ROI_054/sar.png" alt="">
+    <svg viewBox="0 0 1 1" preserveAspectRatio="none"><rect class="fr" x="0.0" y="0.0684" width="0.5008" height="0.5435" data-l="H107"/><rect class="fr" x="0.4992" y="0.0684" width="0.5008" height="0.5435" data-l="H108"/><rect class="ov" x="0.4888" y="0.0142" width="0.0539" height="0.6524" data-l="ov"/></svg>
+  </div>
+  <div class="layers">
+    <span class="grp"><span class="gl">光学原图</span><button type="button" class="chip opt" data-l="H107" aria-pressed="true" title="CE2_GRAS_DOM_07m_H107_03S131W_A"><span class="box" aria-hidden="true"></span>H107</button><button type="button" class="chip opt" data-l="H108" aria-pressed="true" title="CE2_GRAS_DOM_07m_H108_03S123W_A"><span class="box" aria-hidden="true"></span>H108</button></span>
+    <span class="grp"><span class="gl">SAR 原图</span><button type="button" class="chip sar" data-l="sar" aria-pressed="true" title="LSZ_01526_2CD_EKU_06S233_V1"><span class="box" aria-hidden="true"></span>Mini-RF</button></span>
+    <span class="grp"><button type="button" class="chip ov" data-l="ov" aria-pressed="true" title="重叠区影像的范围"><span class="box" aria-hidden="true"></span>重叠区</button></span>
+  </div>
+  <figcaption>重投影到重叠区影像的坐标系，图宽 452 km。点击图像放大。</figcaption>
+</figure></div>
+<div class="roi-main"><h2 class="imgh">重叠区影像</h2><div class="al"><figure><img src="../../assets/thumbs/ROI_054_optical.png" alt=""><figcaption>光学</figcaption></figure><figure><img src="../../assets/thumbs/ROI_054_sar.png" alt=""><figcaption>SAR</figcaption></figure></div><p class="note">每 114 × 114 像素取均值，黑色是没有数据的区域。</p></div></div></div></main>
+<script src="../../assets/data.js"></script>
+<script src="../search-index.js"></script>
+<script src="../../assets/site.js"></script>
+<script>Site.moonMap(document.getElementById('loc'), {mode:'dots', focus:'ROI_054'});
+function bindOvl(f) {
+  function sync() {
+    var on = {};
+    f.querySelectorAll('.chip').forEach(function (c) { on[c.dataset.l] = c.getAttribute('aria-pressed') === 'true'; });
+    f.querySelectorAll('[data-l]:not(.chip)').forEach(function (el) { el.style.display = on[el.dataset.l] ? '' : 'none'; });
+    var opt = Array.prototype.some.call(f.querySelectorAll('.chip.opt'), function (c) { return on[c.dataset.l]; });
+    f.classList.toggle('both', opt && on.sar);
+  }
+  f.querySelectorAll('.chip').forEach(function (c) { c.addEventListener('click', function (e) {
+    e.stopPropagation(); c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') !== 'true'); sync();
+  }); });
+  sync();
+}
+document.querySelectorAll('.ovl').forEach(bindOvl);
+if (location.hash.indexOf('#off=') === 0) location.hash.slice(5).split(',').forEach(function (l) {
+  var c = document.querySelector('.ovl .chip[data-l="' + l + '"]'); if (c) c.click();
+});
+var lb = Site.h('div', 'lb', document.body); lb.hidden = true;
+function openOvl(f) {
+  var c = f.cloneNode(true), img = c.querySelector('.ovl-img');
+  var ratio = parseFloat(img.style.width) / parseFloat(img.style.height);
+  var hh = Math.min(window.innerHeight * 0.8, window.innerWidth * 0.9 / ratio);
+  img.style.height = hh + 'px'; img.style.width = hh * ratio + 'px';
+  c.querySelector('figcaption').textContent = 'Esc 或点击背景关闭。';
+  lb.innerHTML = ''; lb.appendChild(c); lb.hidden = false; bindOvl(c);
+}
+document.querySelectorAll('.ovl .ovl-img').forEach(function (el) {
+  el.addEventListener('click', function () { openOvl(el.closest('.ovl')); });
+  el.addEventListener('keydown', function (e) { if (e.key === 'Enter') openOvl(el.closest('.ovl')); });
+});
+lb.addEventListener('click', function (e) { if (e.target === lb) lb.hidden = true; });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.hidden = true; });</script>
+</body></html>
