@@ -137,6 +137,8 @@
 /* ---------- D：C + 竖向线路图 ---------- */
 .layoutD { grid-template-columns: 220px minmax(0, 1fr); padding-top: 40px; }
 .layoutD .prose { max-width: 44em; }
+.layoutD .flowB li.data::before, .layoutD .flowB li.st .k { display: none; }
+.layoutD .flowB li.st.manual small { color: var(--ink2); }
 .layoutD .step h2 { margin-top: 0; }
 .iol { display: grid; grid-template-columns: 3em minmax(0, 1fr); gap: 4px 12px; margin: .8em 0 1.2em; font-size: 15px; }
 .iol dt { color: var(--ink2); font-size: 13px; font-weight: 600; padding-top: 2px; }
