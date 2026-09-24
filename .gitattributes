@@ -14,3 +14,6 @@ _site/** -diff
 _site/**/*.html text eol=lf
 _site/**/*.js text eol=lf
 _site/**/*.css text eol=lf
+# 生成器把 docs/theme/ 的样式与脚本原样拷进 _site/assets/，两边要同为 LF。
+docs/theme/*.js text eol=lf
+docs/theme/*.css text eol=lf
