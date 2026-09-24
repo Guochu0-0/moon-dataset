@@ -3,6 +3,7 @@
   out/a-atlas/process.html?variant=A   横幅流程图：深色通栏，节点里嵌真实影像；正文配真实影像
   out/a-atlas/process.html?variant=B   竖向线路图兼目录：左侧固定，随滚动高亮；正文配抽象示意
   out/a-atlas/process.html?variant=C   数据形态主线：节点画数据形态，箭头标操作；第二步配可逐步点开的真实影像
+  out/a-atlas/process.html?variant=D   第二轮（默认）：C 的流程图与配图 + B 的竖向线路图，文字压缩
 
 先跑 prep_process_assets.py 生成 assets/process/。本脚本先调用 build.py 重建整站，再写流程篇。
 用法：python build_process.py
@@ -195,13 +196,13 @@ def flow_a():
 </svg></nav>"""
 
 
-def flow_b():
+def flow_b(with_subs=True):
     """竖向线路图，左侧固定，兼作目录。"""
     items = []
-    items.append('<li class="st in"><a href="sources.html"><b>CE-2 DOM、Mini-RF SAR</b><small>数据来源</small></a></li>')
+    items.append('<li class="st in"><a href="sources.html"><b>原始影像</b><small>CE-2 DOM、Mini-RF SAR</small></a></li>')
     for s in STEPS:
         subs = ""
-        if s["id"] == "patches":
+        if s["id"] == "patches" and with_subs:
             subs = '<ol class="subs">' + "".join(f"<li>{n}</li>" for n in SUBSTEPS) + "</ol>"
         cls = "st manual" if s["script"] is None else "st"
         sc = f'<small><code>{s["script"]}</code></small>' if s["script"] else "<small>人工，ENVI</small>"
@@ -274,15 +275,46 @@ def variant_c():
 <div class="wrap narrow"><article class="prose">{body}</article></div></div>"""
 
 
+def variant_d():
+    """C 的流程图与配图 + B 的竖向线路图（不列子步骤），文字压缩。"""
+    src = '<a href="sources.html">CE-2 DOM</a> 分幅、<a href="sources.html">Mini-RF SAR</a> 条带'
+    steps = [
+        ("overlap", "<li>求光学与 SAR 的公共覆盖区。</li><li>统一坐标系，cubic 重采样到 7.5 m 的同一网格。</li>",
+         src, '重叠区影像 <code>opt.tif</code>、<code>sar.tif</code>　<code class="path">work/01_overlap/ROI_xxx/</code>',
+         real_fig("", "ROI_054 的一段，左光学、右 SAR。")),
+        ("tiepoints", None, "重叠区影像",
+         '控制点　<code class="path">data/tie-points/ROI_xxx.pts</code>',
+         real_fig("points", "同一段上的控制点，同号为一对。")),
+        ("patches", "<li>由控制点最小二乘解算全局仿射（光学 → SAR）。</li><li>在光学上以 512 × 512 滑窗，步长 512。</li>"
+                    "<li>窗口四角经仿射映射到 SAR。</li><li>剔除出界、重叠比低于 70%、含 nodata 的窗口。</li>"
+                    "<li>先行后列编号，从 <code>patch_0</code> 起。</li><li>切片。</li>",
+         "重叠区影像、控制点",
+         'patch 对　<code class="path">work/02_patches/{Train,Val,Test}/ROI_xxx/{Optical,SAR}/</code><br>'
+         '仿射矩阵与窗口列表（JSON）',
+         real_fig("", "同一段，逐步点开。", interactive=True)),
+    ]
+    by_id = {s["id"]: s for s in STEPS}
+    secs = ""
+    for sid, proc, inp, out, fig in steps:
+        s = by_id[sid]
+        body = (f'<ol class="proc">{proc}</ol>' if proc else
+                PROTOCOL + "<p>ROI_073 的控制点最初误标在 ROI_074 的影像上，已重标（30 对），并按新控制点重新切片、编号。</p>")
+        secs += f"""<section class="step">{head(s)}
+<dl class="iol"><dt>输入</dt><dd>{inp}</dd><dt>输出</dt><dd>{out}</dd></dl>
+{body}{fig}</section>"""
+    return f"""<div class="pv" data-v="D"><div class="wrap"><h1 class="hc">流程</h1>{flow_c()}</div>
+<div class="wrap layoutB layoutD">{flow_b(with_subs=False)}<article class="prose">{secs}{PRODUCTS}</article></div></div>"""
+
+
 CSS = (HERE / "process.css").read_text(encoding="utf-8")
 JS = (HERE / "process.js").read_text(encoding="utf-8")
-BAR = """<div id="proto-bar"><span>流程篇原型</span><a data-v="A">A 横幅流程图</a><a data-v="B">B 竖向线路图</a><a data-v="C">C 数据形态</a></div>"""
+BAR = """<div id="proto-bar"><span>流程篇原型</span><a data-v="A">A 横幅流程图</a><a data-v="B">B 竖向线路图</a><a data-v="C">C 数据形态</a><a data-v="D">D 第二轮：C + 竖向线路图</a></div>"""
 
 
 def main():
     build.main()
     shutil.copytree(HERE / "assets/process", build.OUT / "assets/process")
-    body = f"<style>{CSS}</style>" + variant_a() + variant_b() + variant_c() + BAR
+    body = f"<style>{CSS}</style>" + variant_a() + variant_b() + variant_c() + variant_d() + BAR
     script = "window.FIG=" + json.dumps(FIG) + ";\n" + JS
     doc = build.shell("a-atlas", "process.html", "流程", body, script)
     (build.OUT / "a-atlas/process.html").write_text(doc, encoding="utf-8")

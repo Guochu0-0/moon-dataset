@@ -1,8 +1,8 @@
 /* PROTOTYPE：流程篇三个方案的切换、真实影像配图、逐步点开、滚动高亮。 */
 (function () {
-  var V = new URLSearchParams(location.search).get('variant') || 'A';
-  var keys = ['A', 'B', 'C'];
-  if (keys.indexOf(V) < 0) V = 'A';
+  var V = new URLSearchParams(location.search).get('variant') || 'D';
+  var keys = ['A', 'B', 'C', 'D'];
+  if (keys.indexOf(V) < 0) V = 'D';
   document.querySelectorAll('.pv').forEach(function (el) { if (el.dataset.v !== V) el.remove(); });
   document.querySelectorAll('#proto-bar a').forEach(function (a) {
     a.href = '?variant=' + a.dataset.v;
@@ -12,8 +12,8 @@
     var t = document.activeElement;
     if (t && (t.tagName === 'INPUT' || t.isContentEditable)) return;
     var i = keys.indexOf(V);
-    if (e.key === 'ArrowLeft') location.search = '?variant=' + keys[(i + 2) % 3];
-    if (e.key === 'ArrowRight') location.search = '?variant=' + keys[(i + 1) % 3];
+    if (e.key === 'ArrowLeft') location.search = '?variant=' + keys[(i + 3) % 4];
+    if (e.key === 'ArrowRight') location.search = '?variant=' + keys[(i + 1) % 4];
   });
 
   var NS = 'http://www.w3.org/2000/svg', F = window.FIG, K = F.k, P = F.patch / K;

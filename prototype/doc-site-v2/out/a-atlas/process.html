@@ -134,6 +134,16 @@
 .ly.points path { stroke-width: 3px; }
 .ly.points text { font-size: 34px; }
 
+/* ---------- D：C + 竖向线路图 ---------- */
+.layoutD { grid-template-columns: 220px minmax(0, 1fr); padding-top: 40px; }
+.layoutD .prose { max-width: 44em; }
+.layoutD .step h2 { margin-top: 0; }
+.iol { display: grid; grid-template-columns: 3em minmax(0, 1fr); gap: 4px 12px; margin: .8em 0 1.2em; font-size: 15px; }
+.iol dt { color: var(--ink2); font-size: 13px; font-weight: 600; padding-top: 2px; }
+.iol dd { margin: 0; }
+.layoutD .proc { margin-bottom: .4em; }
+.layoutD .step { padding-bottom: 2.4em; border-bottom: 1px solid var(--rule); margin-bottom: 2.4em; }
+
 /* 原型切换条 */
 #proto-bar { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 999; display: flex; gap: 6px; align-items: center;
   background: #000; color: #fff; border-radius: 999px; padding: 5px 8px 5px 14px; font: 13px/1.2 system-ui, "Microsoft YaHei"; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); }
@@ -198,7 +208,7 @@
 <figure class="realfig" data-layers="windows,sar,rejected,numbers">
 <div class="pairwrap"></div><figcaption>同一段上的窗口：白框为保留的窗口及其编号，斜线格为剔除的窗口。指向一个窗口，另一侧的对应窗口随之高亮。</figcaption></figure>
 <h3>输出</h3><ul class="io"><li><b>patch 对</b><span><code>Optical/</code>、<code>SAR/</code>，512 × 512，同号即配对</span><code class="path">work/02_patches/{Train,Val,Test}/ROI_xxx/</code></li><li><b>仿射矩阵与窗口列表</b><span>JSON，供检查</span><code class="path">work/02_patches/…</code></li></ul>
-</section><section class="step"><h2 id="products">产物</h2><p>目录结构、文件格式与标签文件见<a href="#">产物篇</a>（原型未做）。</p></section></article><nav class="toc" aria-label="本页目录"><a href="#overlap">第一步　重叠区提取</a><a href="#tiepoints">人工步骤　标控制点</a><a href="#patches">第二步　协同切片</a></nav></div></div><div class="pv" data-v="B"><div class="wrap layoutB"><nav class="flowB" aria-label="流程图"><ol><li class="st in"><a href="sources.html"><b>CE-2 DOM、Mini-RF SAR</b><small>数据来源</small></a></li><li class="st" data-for="overlap"><a href="#overlap"><span class="k">第一步</span><b>重叠区提取</b><small><code>scripts/01_overlap.py</code></small></a></li><li class="data">重叠区影像</li><li class="st manual" data-for="tiepoints"><a href="#tiepoints"><span class="k">人工步骤</span><b>标控制点</b><small>人工，ENVI</small></a></li><li class="data">控制点</li><li class="st" data-for="patches"><a href="#patches"><span class="k">第二步</span><b>协同切片</b><small><code>scripts/02_patches.py</code></small></a><ol class="subs"><li>解算仿射</li><li>滑窗</li><li>映射</li><li>剔除</li><li>编号</li><li>切片</li></ol></li><li class="data">patch 对</li><li class="st in"><a href="#products"><b>数据集</b><small>产物</small></a></li></ol></nav>
+</section><section class="step"><h2 id="products">产物</h2><p>目录结构、文件格式与标签文件见<a href="#">产物篇</a>（原型未做）。</p></section></article><nav class="toc" aria-label="本页目录"><a href="#overlap">第一步　重叠区提取</a><a href="#tiepoints">人工步骤　标控制点</a><a href="#patches">第二步　协同切片</a></nav></div></div><div class="pv" data-v="B"><div class="wrap layoutB"><nav class="flowB" aria-label="流程图"><ol><li class="st in"><a href="sources.html"><b>原始影像</b><small>CE-2 DOM、Mini-RF SAR</small></a></li><li class="st" data-for="overlap"><a href="#overlap"><span class="k">第一步</span><b>重叠区提取</b><small><code>scripts/01_overlap.py</code></small></a></li><li class="data">重叠区影像</li><li class="st manual" data-for="tiepoints"><a href="#tiepoints"><span class="k">人工步骤</span><b>标控制点</b><small>人工，ENVI</small></a></li><li class="data">控制点</li><li class="st" data-for="patches"><a href="#patches"><span class="k">第二步</span><b>协同切片</b><small><code>scripts/02_patches.py</code></small></a><ol class="subs"><li>解算仿射</li><li>滑窗</li><li>映射</li><li>剔除</li><li>编号</li><li>切片</li></ol></li><li class="data">patch 对</li><li class="st in"><a href="#products"><b>数据集</b><small>产物</small></a></li></ol></nav>
 <article class="prose"><h1>流程</h1><section class="step">
 <h2 id="overlap"><span class="no">第一步</span>重叠区提取</h2><code class="script">scripts/01_overlap.py</code>
 <h3>输入</h3><ul class="io"><li><b><a href="sources.html">CE-2 DOM</a></b><span>7 m 正射影像分幅，一个 ROI 可跨多幅</span></li><li><b><a href="sources.html">Mini-RF SAR</a></b><span>S 波段条带</span></li></ul>
@@ -264,16 +274,43 @@
 <tr><td>选点</td><td>在两幅影像中找到对应的小陨石坑，取坑中心；坑越小，定位的相对误差越小</td></tr>
 </tbody></table><p>ROI_073 的控制点最初误标在 ROI_074 的影像上，2026-09-11 重标为 30 对。该 ROI 在训练集，按重标后的控制点重新切片、重新编号，现有 119 对 patch。</p><figure class="realfig" data-layers="points">
 <div class="pairwrap"></div><figcaption>同一段上的控制点。</figcaption></figure></section><section class="step"><h2 id="patches"><span class="no">第二步</span>协同切片</h2><code class="script">scripts/02_patches.py</code><div class="ioc"><div><h3>输入</h3><ul class="io"><li><b>重叠区影像</b><span>第一步的输出</span></li><li><b>控制点</b><span>人工步骤的输出</span></li></ul></div><div><h3>输出</h3><ul class="io"><li><b>patch 对</b><span><code>Optical/</code>、<code>SAR/</code>，512 × 512，同号即配对</span><code class="path">work/02_patches/{Train,Val,Test}/ROI_xxx/</code></li><li><b>仿射矩阵与窗口列表</b><span>JSON，供检查</span><code class="path">work/02_patches/…</code></li></ul></div></div><h3>处理</h3><ol class=proc><li>由全部控制点最小二乘解算光学到 SAR 的全局仿射。</li><li>在光学上按 512 × 512、步长 512 滑窗，边缘余量丢弃。</li><li>窗口四角经仿射映射到 SAR，确定 SAR 窗口。</li><li>剔除出界、重叠比低于 70%、含 nodata（0）的窗口。</li><li>按先行后列编号，从 <code>patch_0</code> 起。</li><li>切片，写出光学与 SAR patch。</li></ol><figure class="realfig" data-interactive="1" data-layers=""><div class="stepbtns" role="group" aria-label="逐步查看"><button type="button" data-k="0" aria-pressed="true">1　解算仿射</button><button type="button" data-k="1" aria-pressed="false">2　滑窗</button><button type="button" data-k="2" aria-pressed="false">3　映射</button><button type="button" data-k="3" aria-pressed="false">4　剔除</button><button type="button" data-k="4" aria-pressed="false">5　编号</button></div>
-<div class="pairwrap"></div><figcaption>同一段，逐步点开：控制点解算仿射 → 光学上滑窗 → 映射到 SAR → 剔除 → 编号。</figcaption></figure></section><section class="step"><h2 id="products">产物</h2><p>目录结构、文件格式与标签文件见<a href="#">产物篇</a>（原型未做）。</p></section></article></div></div><div id="proto-bar"><span>流程篇原型</span><a data-v="A">A 横幅流程图</a><a data-v="B">B 竖向线路图</a><a data-v="C">C 数据形态</a></div></main>
+<div class="pairwrap"></div><figcaption>同一段，逐步点开：控制点解算仿射 → 光学上滑窗 → 映射到 SAR → 剔除 → 编号。</figcaption></figure></section><section class="step"><h2 id="products">产物</h2><p>目录结构、文件格式与标签文件见<a href="#">产物篇</a>（原型未做）。</p></section></article></div></div><div class="pv" data-v="D"><div class="wrap"><h1 class="hc">流程</h1><nav class="flowC" aria-label="流程图"><svg viewBox="0 0 1100 280" role="img">
+<defs><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1B2733"/></marker></defs>
+<a href="sources.html"><g class="dn"><rect x="20" y="70" width="60" height="60" class="opt"/><rect x="20" y="130" width="60" height="60" class="opt"/><polygon points="100,62 124,58 150,196 126,200" class="sar"/><text x="20" y="232" class="t">原始影像</text><text x="20" y="252" class="s">CE-2 DOM 分幅、Mini-RF 条带</text></g></a>
+<a href="#overlap"><g class="op"><path d="M170 130 H 316" marker-end="url(#ahc)"/><text x="243" y="116" text-anchor="middle">重叠区提取</text><text x="243" y="152" text-anchor="middle" class="m">01_overlap.py</text></g></a>
+<g class="dn"><rect x="330" y="60" width="44" height="140" class="opt"/><rect x="384" y="60" width="44" height="140" class="blank"/><polygon points="392,60 414,60 424,200 402,200" class="sar"/><text x="330" y="232" class="t">重叠区影像</text><text x="330" y="252" class="s">同一网格，7.5 m</text></g>
+<a href="#tiepoints"><g class="op manual"><path d="M446 130 H 616" marker-end="url(#ahc)"/><text x="531" y="116" text-anchor="middle">标控制点</text><text x="531" y="152" text-anchor="middle" class="m">人工，ENVI</text></g></a>
+<g class="dn"><rect x="630" y="60" width="44" height="140" class="opt"/><rect x="684" y="60" width="44" height="140" class="blank"/><polygon points="692,60 714,60 724,200 702,200" class="sar"/><path d="M640 80h10M645 75v10" class="cross"/><path d="M655 130h10M660 125v10" class="cross"/><path d="M643 180h10M648 175v10" class="cross"/><path d="M699 82h10M704 77v10" class="cross"/><path d="M707 132h10M712 127v10" class="cross"/><path d="M711 182h10M716 177v10" class="cross"/><text x="630" y="232" class="t">控制点</text><text x="630" y="252" class="s">约 30 对 / ROI</text></g>
+<a href="#patches"><g class="op"><path d="M746 130 H 916" marker-end="url(#ahc)"/><text x="831" y="116" text-anchor="middle">协同切片</text><text x="831" y="152" text-anchor="middle" class="m">02_patches.py</text></g></a>
+<a href="#products"><g class="dn"><rect x="930" y="80" width="56" height="56" class="opt"/><rect x="939" y="89" width="56" height="56" class="sarp"/><rect x="948" y="98" width="56" height="56" class="opt"/><rect x="957" y="107" width="56" height="56" class="sarp"/><rect x="966" y="116" width="56" height="56" class="opt"/><rect x="975" y="125" width="56" height="56" class="sarp"/><text x="930" y="232" class="t">patch 对</text><text x="930" y="252" class="s">512 × 512</text></g></a>
+</svg></nav></div>
+<div class="wrap layoutB layoutD"><nav class="flowB" aria-label="流程图"><ol><li class="st in"><a href="sources.html"><b>原始影像</b><small>CE-2 DOM、Mini-RF SAR</small></a></li><li class="st" data-for="overlap"><a href="#overlap"><span class="k">第一步</span><b>重叠区提取</b><small><code>scripts/01_overlap.py</code></small></a></li><li class="data">重叠区影像</li><li class="st manual" data-for="tiepoints"><a href="#tiepoints"><span class="k">人工步骤</span><b>标控制点</b><small>人工，ENVI</small></a></li><li class="data">控制点</li><li class="st" data-for="patches"><a href="#patches"><span class="k">第二步</span><b>协同切片</b><small><code>scripts/02_patches.py</code></small></a></li><li class="data">patch 对</li><li class="st in"><a href="#products"><b>数据集</b><small>产物</small></a></li></ol></nav><article class="prose"><section class="step"><h2 id="overlap"><span class="no">第一步</span>重叠区提取</h2><code class="script">scripts/01_overlap.py</code>
+<dl class="iol"><dt>输入</dt><dd><a href="sources.html">CE-2 DOM</a> 分幅、<a href="sources.html">Mini-RF SAR</a> 条带</dd><dt>输出</dt><dd>重叠区影像 <code>opt.tif</code>、<code>sar.tif</code>　<code class="path">work/01_overlap/ROI_xxx/</code></dd></dl>
+<ol class="proc"><li>求光学与 SAR 的公共覆盖区。</li><li>统一坐标系，cubic 重采样到 7.5 m 的同一网格。</li></ol><figure class="realfig" data-layers="">
+<div class="pairwrap"></div><figcaption>ROI_054 的一段，左光学、右 SAR。</figcaption></figure></section><section class="step"><h2 id="tiepoints"><span class="no">人工步骤</span>标控制点</h2>
+<dl class="iol"><dt>输入</dt><dd>重叠区影像</dd><dt>输出</dt><dd>控制点　<code class="path">data/tie-points/ROI_xxx.pts</code></dd></dl>
+<table>
+<thead><tr><th>项目</th><th>做法</th></tr></thead>
+<tbody>
+<tr><td>软件</td><td>ENVI</td></tr>
+<tr><td>标注影像</td><td>重叠区影像（光学与 SAR 已重采样到同一网格）</td></tr>
+<tr><td>数量</td><td>每个 ROI 约 30 对；最早标的几个 ROI 较多（最多 150 对），个别难标的 ROI 较少（最少 19 对）</td></tr>
+<tr><td>分布</td><td>沿条带从上到下尽量均匀覆盖</td></tr>
+<tr><td>选点</td><td>在两幅影像中找到对应的小陨石坑，取坑中心；坑越小，定位的相对误差越小</td></tr>
+</tbody></table><p>ROI_073 的控制点最初误标在 ROI_074 的影像上，已重标（30 对），并按新控制点重新切片、编号。</p><figure class="realfig" data-layers="points">
+<div class="pairwrap"></div><figcaption>同一段上的控制点，同号为一对。</figcaption></figure></section><section class="step"><h2 id="patches"><span class="no">第二步</span>协同切片</h2><code class="script">scripts/02_patches.py</code>
+<dl class="iol"><dt>输入</dt><dd>重叠区影像、控制点</dd><dt>输出</dt><dd>patch 对　<code class="path">work/02_patches/{Train,Val,Test}/ROI_xxx/{Optical,SAR}/</code><br>仿射矩阵与窗口列表（JSON）</dd></dl>
+<ol class="proc"><li>由控制点最小二乘解算全局仿射（光学 → SAR）。</li><li>在光学上以 512 × 512 滑窗，步长 512。</li><li>窗口四角经仿射映射到 SAR。</li><li>剔除出界、重叠比低于 70%、含 nodata 的窗口。</li><li>先行后列编号，从 <code>patch_0</code> 起。</li><li>切片。</li></ol><figure class="realfig" data-interactive="1" data-layers=""><div class="stepbtns" role="group" aria-label="逐步查看"><button type="button" data-k="0" aria-pressed="true">1　解算仿射</button><button type="button" data-k="1" aria-pressed="false">2　滑窗</button><button type="button" data-k="2" aria-pressed="false">3　映射</button><button type="button" data-k="3" aria-pressed="false">4　剔除</button><button type="button" data-k="4" aria-pressed="false">5　编号</button></div>
+<div class="pairwrap"></div><figcaption>同一段，逐步点开。</figcaption></figure></section><section class="step"><h2 id="products">产物</h2><p>目录结构、文件格式与标签文件见<a href="#">产物篇</a>（原型未做）。</p></section></article></div></div><div id="proto-bar"><span>流程篇原型</span><a data-v="A">A 横幅流程图</a><a data-v="B">B 竖向线路图</a><a data-v="C">C 数据形态</a><a data-v="D">D 第二轮：C + 竖向线路图</a></div></main>
 <script src="../assets/data.js"></script>
 <script src="search-index.js"></script>
 <script src="../assets/site.js"></script>
 <script>window.FIG={"roi": "ROI_054", "y0": 9216, "k": 4, "w": 812, "h": 1408, "full_w": 3251, "full_h": 5632, "patch": 512, "points": [[1015.0, 1051.0, 1165.0, 1260.0], [574.0, 1069.0, 701.0, 1279.0], [688.0, 770.0, 819.0, 978.0], [1337.0, 4906.0, 1377.0, 5116.0], [1262.0, 4725.0, 1315.0, 4935.0], [1873.0, 4539.0, 1952.0, 4750.0], [1794.0, 4505.0, 1877.0, 4716.0]], "kept": [{"i": 37, "o": [512, 0], "s": [643, 209]}, {"i": 38, "o": [1024, 0], "s": [1131, 209]}, {"i": 39, "o": [1536, 0], "s": [1618, 208]}, {"i": 40, "o": [2048, 0], "s": [2106, 208]}, {"i": 41, "o": [512, 512], "s": [649, 721]}, {"i": 42, "o": [1024, 512], "s": [1137, 721]}, {"i": 43, "o": [1536, 512], "s": [1624, 721]}, {"i": 44, "o": [2048, 512], "s": [2112, 720]}, {"i": 45, "o": [512, 1024], "s": [655, 1233]}, {"i": 46, "o": [1024, 1024], "s": [1143, 1233]}, {"i": 47, "o": [1536, 1024], "s": [1630, 1233]}, {"i": 48, "o": [2048, 1024], "s": [2118, 1232]}, {"i": 49, "o": [512, 1536], "s": [661, 1745]}, {"i": 50, "o": [1024, 1536], "s": [1149, 1745]}, {"i": 51, "o": [1536, 1536], "s": [1636, 1745]}, {"i": 52, "o": [2048, 1536], "s": [2124, 1745]}, {"i": 53, "o": [512, 2048], "s": [668, 2258]}, {"i": 54, "o": [1024, 2048], "s": [1155, 2257]}, {"i": 55, "o": [1536, 2048], "s": [1643, 2257]}, {"i": 56, "o": [2048, 2048], "s": [2130, 2257]}, {"i": 57, "o": [512, 2560], "s": [674, 2770]}, {"i": 58, "o": [1024, 2560], "s": [1161, 2770]}, {"i": 59, "o": [1536, 2560], "s": [1649, 2769]}, {"i": 60, "o": [512, 3072], "s": [680, 3282]}, {"i": 61, "o": [1024, 3072], "s": [1167, 3282]}, {"i": 62, "o": [1536, 3072], "s": [1655, 3281]}, {"i": 63, "o": [512, 3584], "s": [686, 3794]}, {"i": 64, "o": [1024, 3584], "s": [1173, 3794]}, {"i": 65, "o": [1536, 3584], "s": [1661, 3794]}, {"i": 66, "o": [512, 4096], "s": [692, 4306]}, {"i": 67, "o": [1024, 4096], "s": [1180, 4306]}, {"i": 68, "o": [1536, 4096], "s": [1667, 4306]}, {"i": 69, "o": [512, 4608], "s": [698, 4818]}, {"i": 70, "o": [1024, 4608], "s": [1186, 4818]}, {"i": 71, "o": [1536, 4608], "s": [1673, 4818]}, {"i": 72, "o": [512, 5120], "s": [704, 5331]}, {"i": 73, "o": [1024, 5120], "s": [1192, 5330]}, {"i": 74, "o": [1536, 5120], "s": [1679, 5330]}], "rejected": [[0, 0], [2560, 0], [0, 512], [2560, 512], [0, 1024], [2560, 1024], [0, 1536], [2560, 1536], [0, 2048], [2560, 2048], [0, 2560], [2560, 2560], [0, 3072], [2048, 3072], [2560, 3072], [0, 3584], [2048, 3584], [2560, 3584], [0, 4096], [2048, 4096], [2560, 4096], [0, 4608], [2048, 4608], [2560, 4608], [0, 5120], [2048, 5120], [2560, 5120]], "removed": [[512, -1024], [2048, 2560]]};
 /* PROTOTYPE：流程篇三个方案的切换、真实影像配图、逐步点开、滚动高亮。 */
 (function () {
-  var V = new URLSearchParams(location.search).get('variant') || 'A';
-  var keys = ['A', 'B', 'C'];
-  if (keys.indexOf(V) < 0) V = 'A';
+  var V = new URLSearchParams(location.search).get('variant') || 'D';
+  var keys = ['A', 'B', 'C', 'D'];
+  if (keys.indexOf(V) < 0) V = 'D';
   document.querySelectorAll('.pv').forEach(function (el) { if (el.dataset.v !== V) el.remove(); });
   document.querySelectorAll('#proto-bar a').forEach(function (a) {
     a.href = '?variant=' + a.dataset.v;
@@ -283,8 +320,8 @@
     var t = document.activeElement;
     if (t && (t.tagName === 'INPUT' || t.isContentEditable)) return;
     var i = keys.indexOf(V);
-    if (e.key === 'ArrowLeft') location.search = '?variant=' + keys[(i + 2) % 3];
-    if (e.key === 'ArrowRight') location.search = '?variant=' + keys[(i + 1) % 3];
+    if (e.key === 'ArrowLeft') location.search = '?variant=' + keys[(i + 3) % 4];
+    if (e.key === 'ArrowRight') location.search = '?variant=' + keys[(i + 1) % 4];
   });
 
   var NS = 'http://www.w3.org/2000/svg', F = window.FIG, K = F.k, P = F.patch / K;

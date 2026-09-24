@@ -123,6 +123,16 @@
 .ly.points path { stroke-width: 3px; }
 .ly.points text { font-size: 34px; }
 
+/* ---------- D：C + 竖向线路图 ---------- */
+.layoutD { grid-template-columns: 220px minmax(0, 1fr); padding-top: 40px; }
+.layoutD .prose { max-width: 44em; }
+.layoutD .step h2 { margin-top: 0; }
+.iol { display: grid; grid-template-columns: 3em minmax(0, 1fr); gap: 4px 12px; margin: .8em 0 1.2em; font-size: 15px; }
+.iol dt { color: var(--ink2); font-size: 13px; font-weight: 600; padding-top: 2px; }
+.iol dd { margin: 0; }
+.layoutD .proc { margin-bottom: .4em; }
+.layoutD .step { padding-bottom: 2.4em; border-bottom: 1px solid var(--rule); margin-bottom: 2.4em; }
+
 /* 原型切换条 */
 #proto-bar { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 999; display: flex; gap: 6px; align-items: center;
   background: #000; color: #fff; border-radius: 999px; padding: 5px 8px 5px 14px; font: 13px/1.2 system-ui, "Microsoft YaHei"; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); }
