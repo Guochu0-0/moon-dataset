@@ -176,6 +176,82 @@ main > .wrap:first-child:not(.roi):not(.doc):not(.home) { padding-top: 36px; pad
 .lb .ovl { background: var(--paper); padding: 14px; border-radius: 4px; }
 .lb .ovl-img { max-width: none; cursor: default; }
 
+/* 制作流程：页首流程图 */
+.process { padding-top: 36px; padding-bottom: 96px; }
+.flow svg { display: block; width: 100%; height: auto; background: #fff; border: 1px solid var(--rule); border-radius: 4px; }
+.flow .opt { fill: #D5DADF; stroke: var(--ink); stroke-width: 1px; }
+.flow .sar, .flow .sarp { fill: #3A4756; stroke: var(--ink); stroke-width: 1px; }
+.flow .sarp { stroke: #fff; }
+.flow .blank { fill: none; stroke: var(--ink); stroke-dasharray: 3 3; }
+.flow .cross { stroke: var(--test); stroke-width: 2px; }
+.flow .t { font-size: 16px; font-weight: 600; fill: var(--ink); }
+.flow .s { font-size: 13px; fill: var(--ink2); }
+.flow .s a { fill: var(--link); }
+.flow .op path { stroke: var(--ink); stroke-width: 1.6px; fill: none; }
+.flow .op.manual path { stroke-dasharray: 6 5; }
+.flow .op text { font-size: 17px; font-weight: 600; fill: var(--ink); }
+.flow .op text.m { font: 13px var(--mono); fill: var(--ink2); }
+.flow marker path { fill: var(--ink); }
+.flow a:hover .op text:first-of-type, .flow a:hover .t { fill: var(--link); text-decoration: underline; }
+.flow a:hover .op path { stroke: var(--link); }
+
+/* 制作流程：左侧线路图兼目录 */
+.process-grid { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 64px; margin-top: 40px; }
+.process-grid .prose { max-width: 44em; }
+.rail { position: sticky; top: 76px; align-self: start; }
+.rail ol { list-style: none; margin: 0; padding: 0; position: relative; }
+.rail ol::before { content: ""; position: absolute; left: 9px; top: 14px; bottom: 14px; width: 2px; background: var(--ink); }
+.rail li { position: relative; padding-left: 34px; }
+.rail li.st { padding-top: 6px; padding-bottom: 6px; }
+.rail li.st::before { content: ""; position: absolute; left: 2px; top: 12px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--paper); border: 2px solid var(--ink); }
+.rail li.st.in::before { border-radius: 2px; background: var(--ink); }
+.rail li.st.manual::before { border-style: dashed; }
+.rail li.st.on::before { background: var(--val); border-color: var(--val); box-shadow: 0 0 0 4px rgba(46, 123, 214, .2); }
+.rail a { display: block; color: var(--ink); text-decoration: none; line-height: 1.45; }
+.rail a:hover b { text-decoration: underline; text-underline-offset: 3px; }
+.rail b { display: block; font-size: 17px; font-weight: 600; }
+.rail li.st.on b { color: var(--val); }
+.rail small { display: block; font-size: 12.5px; color: var(--ink2); }
+.rail small code { font-size: 12px; }
+.rail li.data { font-size: 12.5px; color: var(--ink2); padding-top: 2px; padding-bottom: 8px; }
+
+/* 制作流程：各节 */
+.step { padding-bottom: 2.4em; border-bottom: 1px solid var(--rule); margin-bottom: 2.4em; }
+.step:last-child { border-bottom: 0; }
+.step h2 { margin: 0 0 .2em; scroll-margin-top: 72px; }
+.step h3 { font-size: 15px; margin: 1.4em 0 .4em; scroll-margin-top: 72px; }
+.step .script { margin: 0 0 1em; }
+.step .script.manual { display: inline-block; font-size: 13px; color: var(--ink2); border: 1px dashed var(--ink2); border-radius: 3px; padding: 0 8px; line-height: 1.7; }
+.step .io { margin: 0; }
+.step .io strong { display: inline-block; width: 3em; font-size: 13px; color: var(--ink2); }
+.step .io + ol, .step .io + h3 { margin-top: 1.2em; }
+.step ol { padding-left: 1.4em; }
+.step ol li::marker { color: var(--ink2); font-weight: 600; }
+
+/* 制作流程：配图 */
+.pfig { margin: 1.6em 0 .6em; }
+.ppair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: var(--frame); padding: 10px; border-radius: 4px; max-width: 560px; }
+.ppanel { position: relative; }
+.ppanel svg { display: block; width: 100%; height: auto; background: #000; }
+.plabel { position: absolute; left: 8px; top: 6px; font-size: 12px; color: #fff; background: rgba(27, 39, 51, .7); padding: 0 6px; border-radius: 2px; }
+.pfig figcaption { font-size: 13px; color: var(--ink2); margin-top: 8px; max-width: 560px; }
+.pfig .all rect { fill: none; stroke: rgba(255, 255, 255, .55); stroke-width: 1.5px; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; }
+.pfig .rejected rect { stroke: rgba(255, 255, 255, .35); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.pfig .win rect { fill: rgba(227, 155, 27, 0); stroke: #fff; stroke-width: 1.4px; vector-effect: non-scaling-stroke; cursor: crosshair; }
+.pfig .win rect.on { fill: rgba(227, 155, 27, .35); stroke: var(--test); stroke-width: 3px; }
+.pfig .numbers text { fill: #fff; font: 600 20px var(--sans); paint-order: stroke; stroke: rgba(0, 0, 0, .7); stroke-width: 3px; pointer-events: none; }
+.pfig .points circle { fill: none; stroke: var(--test); stroke-width: 4px; }
+.pfig .points path { stroke: var(--test); stroke-width: 3px; }
+.pfig .points text { fill: #fff; font: 600 34px var(--sans); paint-order: stroke; stroke: #000; stroke-width: 4px; }
+.stepbtns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.stepbtns button { font: 14px var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 4px;
+  padding: 4px 12px; cursor: pointer; counter-increment: step; }
+.stepbtns { counter-reset: step; }
+.stepbtns button::before { content: counter(step) "　"; color: var(--ink2); }
+.stepbtns button[aria-pressed=true] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.stepbtns button[aria-pressed=true]::before { color: rgba(255, 255, 255, .6); }
+
 @media (max-width: 1100px) {
   .roi-grid { grid-template-columns: minmax(0, 1fr); }
   .roi-thumbs { position: static; }
@@ -186,6 +262,8 @@ main > .wrap:first-child:not(.roi):not(.doc):not(.home) { padding-top: 36px; pad
   .wrap { padding: 0 16px; }
   .hero-map { padding: 12px; }
   .doc { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .process-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .rail { position: static; }
   .sections { position: static; flex-direction: row; flex-wrap: wrap; border-left: 0; }
   .pair { grid-template-columns: minmax(0, 1fr); }
   .splits { min-width: 0; width: 100%; }

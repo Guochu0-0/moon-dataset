@@ -4,6 +4,7 @@
     python scripts/make_assets.py samples                             首页样例
     python scripts/make_assets.py facts [ROI_054 ...]                 逐 ROI 事实
     python scripts/make_assets.py overlays [ROI_054 ...]              原始产品叠合图
+    python scripts/make_assets.py process                             流程配图（先跑 01_overlap.py ROI_054）
 
 各组可单独重跑。生成后跑一次 `python scripts/build_site.py` 重建文档站。
 """
@@ -34,6 +35,8 @@ def main(argv: list[str]) -> int:
         assets.make_facts(config, rest)
     elif group == "overlays":
         assets.make_overlays(config, rest)
+    elif group == "process" and not rest:
+        assets.make_process(config)
     else:
         print(USAGE, file=sys.stderr)
         return 2

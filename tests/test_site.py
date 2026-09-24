@@ -7,7 +7,9 @@
 
 from __future__ import annotations
 
+import html
 import json
+import posixpath
 import re
 from html.parser import HTMLParser
 from pathlib import Path
@@ -71,7 +73,18 @@ PAGES = {
     "data/imaging.md": "# 成像特征\n",
     "data/pairing.md": "# 配对特征\n",
     "data/statistics.md": "# 统计与分布\n\n## 划分与数量\n\n<!-- 划分表 -->\n\n## ROI 总表\n\n<!-- ROI 总表 -->\n",
-    "process.md": "# 制作流程\n\n## 标注规程\n",
+    "process.md": (
+        '# 制作流程\n\n<div class="flow"><svg><a href="#标控制点"><text>标控制点</text></a></svg></div>\n\n'
+        "## 重叠区提取\n\n## 标控制点\n\n### 标注规程\n\n"
+        "## 协同切片\n\n<!-- 流程配图 windows：同一段，逐步点开。 -->\n"
+    ),
+}
+
+PROCESS = {
+    "roi": "ROI_006", "rows": [0, 1024], "scale": 4, "size": [1024, 1024], "patch": 512,
+    "optical": "process/opt.jpg", "sar": "process/sar.jpg",
+    "points": [[100.0, 200.0, 110.0, 190.0]],
+    "windows": [{"o": [0, 0], "s": [10, -8], "i": None}, {"o": [512, 0], "s": [522, -8], "i": 0}],
 }
 
 
@@ -92,7 +105,9 @@ def fixture_repo(tmp_path_factory: pytest.TempPathFactory) -> Path:
         "frames": [{"tile": f["tile"], "id": f["id"], "box": [0, 0, 1, 0.5]} for f in facts["frames"]],
         "sar": [0.35, 0, 0.1, 1],
     } for roi, facts in FACTS.items()}))
-    for name in ("moon-2k.jpg", "moon-4k.jpg", "samples/ROI_006_p3_opt.jpg", "samples/ROI_006_p3_sar.jpg"):
+    _write(assets / "process.json", json.dumps(PROCESS, ensure_ascii=False))
+    for name in ("moon-2k.jpg", "moon-4k.jpg", "samples/ROI_006_p3_opt.jpg", "samples/ROI_006_p3_sar.jpg",
+                 "process/opt.jpg", "process/sar.jpg"):
         _write(assets / name, "img")
     _write(root / "data" / "metadata" / "minirf_metadata.csv",
            "﻿" + "\r\n".join([METADATA_HEADER, *METADATA_ROWS]) + "\r\n")
@@ -144,6 +159,13 @@ def test_home_samples_carry_the_ground_truth_points(fixture_site: dict[str, byte
     assert "[177.1, 332.9, 262.6, 333.8]" in home  # y 取负存盘，页面上是向下为正的像素行
 
 
+def test_process_figure_carries_the_windows_and_its_caption(fixture_site: dict[str, bytes]) -> None:
+    page = fixture_site["process.html"].decode("utf-8")
+    assert '"windows":[{"o":[0,0],"s":[10,-8],"i":null}' in page
+    assert "同一段，逐步点开。" in _text(fixture_site["process.html"])
+    assert [step for step in ("解算仿射", "滑窗", "映射", "剔除", "编号") if step not in page] == []
+
+
 def test_search_index_holds_page_text_for_substring_search(fixture_site: dict[str, bytes]) -> None:
     index = fixture_site["search-index.js"].decode("utf-8")
     assert index.startswith("window.SEARCH=")
@@ -170,6 +192,21 @@ def test_pages_never_fetch_or_use_es_modules(any_site: dict[str, bytes]) -> None
         assert not re.search(r"^\s*(import|export)\s", text, re.M), path
         if path.endswith(".html"):
             assert re.search(r'<script src="(\.\./)*search-index\.js"></script>', text), path
+
+
+def test_links_inside_the_site_reach_an_existing_page_and_anchor(any_site: dict[str, bytes]) -> None:
+    """ROI 页的控制点链到标注规程、流程图与线路图链到各节：链接写错了，页面不会报错。"""
+    ids = {path: _ids(data) for path, data in any_site.items() if path.endswith(".html")}
+    broken = []
+    for path in ids:
+        for href in _hrefs(any_site[path]):
+            if re.match(r"[a-z]+:", href):
+                continue
+            target, _, anchor = href.partition("#")
+            resolved = posixpath.normpath(posixpath.join(posixpath.dirname(path), target)) if target else path
+            if resolved not in any_site or (anchor and anchor not in ids.get(resolved, set())):
+                broken.append(f"{path} → {href}")
+    assert broken == []
 
 
 def test_rendered_text_has_no_issue_references(any_site: dict[str, bytes]) -> None:
@@ -258,6 +295,14 @@ def _links_inside(page: bytes, css_class: str) -> set[str]:
     collector = _Collector(css_class)
     collector.feed(page.decode("utf-8"))
     return collector.links
+
+
+def _hrefs(page: bytes) -> set[str]:
+    return {html.unescape(href) for href in re.findall(r'\bhref="([^"]*)"', page.decode("utf-8"))}
+
+
+def _ids(page: bytes) -> set[str]:
+    return {html.unescape(value) for value in re.findall(r'\bid="([^"]*)"', page.decode("utf-8"))}
 
 
 def _text(page: bytes) -> str:

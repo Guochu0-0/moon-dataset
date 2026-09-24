@@ -22,6 +22,7 @@ python scripts/make_assets.py basemap <lroc_color_poles_4k.tif>
 python scripts/make_assets.py samples
 python scripts/make_assets.py facts [ROI ...]
 python scripts/make_assets.py overlays [ROI ...]
+python scripts/make_assets.py process          # 先跑 scripts/01_overlap.py ROI_054
 ```
 
 ## 装哪一档

@@ -289,6 +289,14 @@ def preview(path: Path, width: int, height: int, bands: Sequence[int] = (1,)) ->
     return array, (x0, dx * sx, rx, y0, ry, dy * sy)
 
 
+def read_rows(path: Path, top: int, bottom: int, bands: Sequence[int] = (1,)) -> np.ndarray:
+    """整幅宽、行 `[top, bottom)` 的一段，原分辨率，返回 `(波段, 行, 列)` 的 float32。"""
+    dataset = _open(path)
+    array = dataset.ReadAsArray(0, top, dataset.RasterXSize, bottom - top, band_list=list(bands))
+    array = array.astype(np.float32)
+    return array if array.ndim == 3 else array[np.newaxis]
+
+
 def warp_array(
     array: np.ndarray, geotransform: tuple, source_wkt: str, grid: PixelGrid, *, resample: str = "average"
 ) -> np.ndarray:

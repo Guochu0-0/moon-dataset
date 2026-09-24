@@ -32,6 +32,7 @@ from moondata.sources import (
     ASSETS_RELDIR,
     FACTS_NAME,
     OVERLAY_NAME,
+    PROCESS_NAME,
     SAMPLES_NAME,
     ground_truth_file,
     load_metadata,
@@ -75,7 +76,26 @@ SPLIT_TABLE = "<!-- 划分表 -->"
 SPLIT_TABLE_WITH_TRUTH = "<!-- 划分表：含评测真值点 -->"
 ROI_TABLE = "<!-- ROI 总表 -->"
 SAMPLES = "<!-- 样例 -->"
-"""正文里的占位注释，生成器换成由素材算出的表格与交互图。文字留在正文里手写。"""
+PROCESS_FIGURE = re.compile(r"<!-- 流程配图 (\w+)：(.*?) -->")
+"""正文里的占位注释，生成器换成由素材算出的表格与交互图。文字留在正文里手写；流程配图
+的图注写在占位注释里。"""
+
+PROCESS_FIGURES = {"images": "", "points": "points", "windows": ""}
+"""流程配图的种类 → 静态显示的图层。`windows` 可逐步点开，图层随步骤变。"""
+WINDOW_STEPS = ["解算仿射", "滑窗", "映射", "剔除", "编号"]
+"""协同切片配图的逐步按钮。`site.js` 按按钮的先后取各步的图层，两边的顺序要一致。"""
+PROCESS_RAIL = [
+    ("原始影像", "数据说明", "data/sources.html", "in"),
+    "CE-2 分幅、Mini-RF 条带",
+    ("重叠区提取", "<code>01_overlap.py</code>", "#重叠区提取", ""),
+    "重叠区影像",
+    ("标控制点", "人工，ENVI", "#标控制点", "manual"),
+    "控制点",
+    ("协同切片", "<code>02_patches.py</code>", "#协同切片", ""),
+    "patch 对",
+    ("数据集", "统计与分布", "data/statistics.html", "in"),
+]
+"""制作流程左侧的线路图：节点（名称、脚本或来源、链接、样式）与节点之间传递的数据。"""
 
 
 # ---------------------------------------------------------------------------
@@ -118,6 +138,8 @@ class Inputs:
     rois: list[Roi]
     samples: list[dict]
     overlays: dict[str, dict]
+    process: dict
+    """`process.json`：流程配图的那一段影像、控制点与窗口。"""
 
 
 def load_inputs(repo_root: Path) -> Inputs:
@@ -131,7 +153,7 @@ def load_inputs(repo_root: Path) -> Inputs:
             raise SiteInputUnreadable(f"{assets / FACTS_NAME} 里没有 {roi}——跑一次 make_assets.py facts {roi}")
         rois.append(Roi(roi, record["划分"].strip(), facts[roi], record))
     samples = [_sample(repo_root, entry) for entry in _json(assets / SAMPLES_NAME)]
-    return Inputs(repo_root, rois, samples, _json(assets / OVERLAY_NAME))
+    return Inputs(repo_root, rois, samples, _json(assets / OVERLAY_NAME), _json(assets / PROCESS_NAME))
 
 
 def _sample(repo_root: Path, entry: dict) -> dict:
@@ -175,9 +197,15 @@ def build_site(repo_root: Path) -> dict[str, bytes]:
             body = _home(body, inputs)
         elif page in DATA_PAGES:
             body = _data_page(body, page)
+        elif page.path == "process.html":
+            body = _process_page(body)
         else:
             body = f'<div class="wrap"><article class="prose">{body}</article></div>'
-        script = _samples_script(inputs) if page.path == "index.html" else ""
+        script = ""
+        if page.path == "index.html":
+            script = _samples_script(inputs)
+        elif page.path == "process.html":
+            script = _process_script(inputs)
         files[page.path] = _shell(page.path, title, body, page.nav, script)
         search.append(_search_entry(page.path, title, body))
     for position, roi in enumerate(inputs.rois):
@@ -225,12 +253,13 @@ def _render_markdown(path: Path) -> tuple[str, str]:
 
 
 def _fill(body: str, inputs: Inputs, root: str) -> str:
-    return (
+    body = (
         body.replace(SPLIT_TABLE_WITH_TRUTH, _split_table(inputs.rois, with_truth=True))
         .replace(SPLIT_TABLE, _split_table(inputs.rois, with_truth=False))
         .replace(ROI_TABLE, _roi_table(inputs.rois, root))
         .replace(SAMPLES, '<div id="samples" class="samples"></div>')
     )
+    return PROCESS_FIGURE.sub(lambda match: _process_figure(*match.groups()), body)
 
 
 def _root(path: str) -> str:
@@ -351,6 +380,54 @@ def _roi_table(rois: list[Roi], root: str) -> str:
 <tbody>{rows}</tbody>
 </table>
 </div>"""
+
+
+# ---------------------------------------------------------------------------
+# 制作流程
+
+
+def _process_page(body: str) -> str:
+    """页首（标题与流程图）通栏；其下左侧线路图，右侧每个二级标题起一节。"""
+    head, _, rest = body.partition("<h2")
+    sections = "".join(f'<section class="step"><h2{part}</section>' for part in rest.split("<h2") if part)
+    return f"""<div class="wrap process">
+<header class="process-head">{head}</header>
+<div class="process-grid">
+{_rail()}
+<article class="prose">{sections}</article>
+</div>
+</div>"""
+
+
+def _rail() -> str:
+    items = []
+    for entry in PROCESS_RAIL:
+        if isinstance(entry, str):
+            items.append(f'<li class="data">{entry}</li>')
+            continue
+        name, note, href, css = entry
+        target = f' data-for="{href[1:]}"' if href.startswith("#") else ""
+        items.append(f'<li class="{" ".join(["st", css]).strip()}"{target}><a href="{href}"><b>{name}</b><small>{note}</small></a></li>')
+    return f'<nav class="rail" aria-label="制作流程"><ol>{"".join(items)}</ol></nav>'
+
+
+def _process_figure(kind: str, caption: str) -> str:
+    """配图的外框；影像、控制点与窗口由 `site.js` 按 `window.PROCESS` 画进去。"""
+    if kind not in PROCESS_FIGURES:
+        raise SiteInputUnreadable(f"认不出的流程配图：{kind}（可用 {'、'.join(PROCESS_FIGURES)}）")
+    buttons = ""
+    if kind == "windows":
+        buttons = '<div class="stepbtns" role="group" aria-label="逐步查看">' + "".join(
+            f'<button type="button" aria-pressed="{str(i == 0).lower()}">{name}</button>'
+            for i, name in enumerate(WINDOW_STEPS)
+        ) + "</div>"
+    return (f'<figure class="pfig" data-layers="{PROCESS_FIGURES[kind]}">{buttons}'
+            f'<div class="ppair"></div><figcaption>{html.escape(caption)}</figcaption></figure>')
+
+
+def _process_script(inputs: Inputs) -> str:
+    data = json.dumps(inputs.process, ensure_ascii=False, separators=(",", ":"))
+    return f"<script>window.PROCESS={data};</script>\n"
 
 
 # ---------------------------------------------------------------------------

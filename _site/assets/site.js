@@ -192,6 +192,88 @@
     img.addEventListener("keydown", function (e) { if (e.key === "Enter") openOverlay(fig); });
   });
 
+  /* ---------- 制作流程配图：同一段影像上画控制点与窗口；协同切片逐步点开 ---------- */
+  var P = window.PROCESS;
+  function processPanel(pair, side, label) {
+    var k = P.scale, w = P.size[0] / k, hgt = P.size[1] / k;
+    var box = h("div", "ppanel", pair);
+    var s = svg("svg", { viewBox: "0 0 " + w + " " + hgt, role: "img", "aria-label": P.roi + " " + label }, box);
+    var id = "hatch-" + document.querySelectorAll(".ppanel").length;
+    var pattern = svg("pattern", { id: id, width: 8, height: 8, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" },
+      svg("defs", {}, s));
+    svg("rect", { width: 8, height: 8, fill: "rgba(27,39,51,.55)" }, pattern);
+    svg("line", { x1: 0, y1: 0, x2: 0, y2: 8, stroke: "rgba(255,255,255,.55)", "stroke-width": 2 }, pattern);
+    svg("image", { href: root + "assets/" + P[side], x: 0, y: 0, width: w, height: hgt }, s);
+    h("div", "plabel", box, label);
+    return { svg: s, hatch: "url(#" + id + ")", layers: {} };
+  }
+  function processLayer(panel, name) { return panel.layers[name] = svg("g", { "class": name }, panel.svg); }
+
+  /* 协同切片各步显示哪些图层，顺序与 site.py 的 WINDOW_STEPS 一致。all：滑窗的全部窗口；win：光学、SAR 窗口；rejected：剔除的窗口 */
+  var WINDOW_STEPS = [["points"], ["points", "all"], ["all", "win"], ["rejected", "win"], ["rejected", "win", "numbers"]];
+
+  function drawProcess(fig) {
+    var pair = fig.querySelector(".ppair"), k = P.scale, size = P.patch / k;
+    var opt = processPanel(pair, "optical", "光学"), sar = processPanel(pair, "sar", "SAR");
+    var all = processLayer(opt, "all"), rejected = processLayer(opt, "rejected");
+    var optWin = processLayer(opt, "win"), sarWin = processLayer(sar, "win"), numbers = processLayer(opt, "numbers");
+    var steps = fig.querySelectorAll(".stepbtns button"), step = 0;
+    P.windows.forEach(function (win) {
+      svg("rect", { x: win.o[0] / k, y: win.o[1] / k, width: size, height: size }, all);
+      if (win.i === null) svg("rect", { x: win.o[0] / k, y: win.o[1] / k, width: size, height: size, fill: opt.hatch }, rejected);
+      else { var t = svg("text", { x: win.o[0] / k + 7, y: win.o[1] / k + 24 }, numbers); t.textContent = win.i; }
+      var a = svg("rect", { x: win.o[0] / k, y: win.o[1] / k, width: size, height: size }, optWin);
+      var b = svg("rect", { x: win.s[0] / k, y: win.s[1] / k, width: size, height: size }, sarWin);
+      [a, b].forEach(function (r) {
+        r.addEventListener("mouseenter", function () { a.classList.add("on"); b.classList.add("on"); });
+        r.addEventListener("mouseleave", function () { a.classList.remove("on"); b.classList.remove("on"); });
+      });
+      /* 剔除之后，被剔除的窗口不再有对应的 SAR 窗口 */
+      if (win.i === null) { a.dataset.rejected = b.dataset.rejected = "1"; }
+    });
+    var pointsOpt = processLayer(opt, "points"), pointsSar = processLayer(sar, "points");
+    P.points.forEach(function (p, i) {
+      [[pointsOpt, p[0], p[1]], [pointsSar, p[2], p[3]]].forEach(function (q) {
+        var g = svg("g", { transform: "translate(" + q[1] / k + "," + q[2] / k + ")" }, q[0]);
+        svg("circle", { r: 20 }, g);
+        svg("path", { d: "M-26 0h18M8 0h18M0 -26v18M0 8v18" }, g);
+        var t = svg("text", { x: 20, y: -18 }, g);
+        t.textContent = i + 1;
+      });
+    });
+    function show(names) {
+      [opt, sar].forEach(function (panel) {
+        for (var name in panel.layers) panel.layers[name].style.display = names.indexOf(name) >= 0 ? "" : "none";
+      });
+      var afterRejection = names.indexOf("rejected") >= 0;
+      fig.querySelectorAll(".win rect").forEach(function (r) {
+        r.style.display = afterRejection && r.dataset.rejected ? "none" : "";
+      });
+    }
+    if (!steps.length) { show(fig.dataset.layers ? fig.dataset.layers.split(",") : []); return; }
+    function go(i) {
+      step = i;
+      show(WINDOW_STEPS[i]);
+      steps.forEach(function (b, j) { b.setAttribute("aria-pressed", String(j === step)); });
+    }
+    steps.forEach(function (b, i) { b.addEventListener("click", function () { go(i); }); });
+    go(0);
+  }
+  if (P) document.querySelectorAll(".pfig").forEach(drawProcess);
+
+  /* ---------- 制作流程左侧线路图：随滚动高亮当前一节 ---------- */
+  var rail = document.querySelector(".rail");
+  if (rail) {
+    var heads = document.querySelectorAll(".step > h2[id]");
+    var spy = function () {
+      var current = null;
+      heads.forEach(function (head) { if (head.getBoundingClientRect().top < window.innerHeight * 0.35) current = head.id; });
+      rail.querySelectorAll("li[data-for]").forEach(function (li) { li.classList.toggle("on", li.dataset.for === current); });
+    };
+    window.addEventListener("scroll", spy, { passive: true });
+    spy();
+  }
+
   /* ---------- 搜索：search-index.js 经 <script src> 加载，按子串匹配 ---------- */
   var q = document.getElementById("q"), hits = document.getElementById("hits");
   if (q && hits && window.SEARCH) {

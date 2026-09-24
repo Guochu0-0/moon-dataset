@@ -4,6 +4,7 @@
     python scripts/make_assets.py samples
     python scripts/make_assets.py facts [ROI_054 ...]
     python scripts/make_assets.py overlays [ROI_054 ...]
+    python scripts/make_assets.py process
 
 按组分开，每组可单独重跑；`facts`、`overlays` 带 ROI 时只重做这几个，其余条目保留。
 站点生成器（`moondata.site`）只读这些入库的产物，所以数据盘不在也能重建文档站。
@@ -26,12 +27,23 @@ from PIL import Image
 
 from moondata import raster
 from moondata.config import Config
-from moondata.geometry import PixelGrid
+from moondata.errors import OverlapImagesMissing
+from moondata.geometry import (
+    EXCLUDED_WINDOWS,
+    PixelGrid,
+    candidate_windows,
+    estimate_affine,
+    number_windows,
+    sar_window,
+    tile_windows,
+    usable_pair,
+)
 from moondata.sources import (
     ASSETS_RELDIR,
     CE2_TILE,
     FACTS_NAME,
     OVERLAY_NAME,
+    PROCESS_NAME,
     SAMPLES_NAME,
     dataset_overlap_images,
     dataset_patch_dir,
@@ -277,6 +289,86 @@ def _relative(bounds: tuple[float, float, float, float], canvas: PixelGrid) -> l
         round((max_x - min_x) / width, 4),
         round((max_y - min_y) / height, 4),
     ]
+
+
+# ---------------------------------------------------------------------------
+# 流程配图
+
+
+PROCESS_ROI = "ROI_054"
+PROCESS_ROWS = (9216, 14848)
+"""制作流程三节的配图都用 ROI_054 重叠区影像的这一段光学行：11 行窗口，含控制点、保留与
+剔除的窗口（其中一个是剔除表里的）。"""
+PROCESS_SCALE = 4
+"""配图相对重叠区影像的降采样倍数：3251 列降到约 800 列，两幅并排放得进正文栏，窗口编号仍认得清。"""
+
+
+def make_process(config: Config) -> None:
+    """制作流程的配图：`01_overlap.py` 在 `work/` 下做出的 ROI_054 重叠区影像的一段，
+    加上这一段里的控制点与窗口。写 `process/{opt,sar}.jpg` 与 `process.json`。
+
+    窗口用 `geometry` 现算，判据与 `02_patches.py` 相同（出界、重叠比、nodata、剔除表），
+    编号是全 ROI 的编号。坐标都是相对这一段左上角的重叠区影像像素。
+    """
+    roi, (top, bottom), size = PROCESS_ROI, PROCESS_ROWS, config.patch_size
+    overlap = config.overlap_dir(roi)
+    optical_path, sar_path = overlap / "opt.tif", overlap / "sar.tif"
+    for path in (optical_path, sar_path):
+        if not path.is_file():
+            raise OverlapImagesMissing(f"{path} 不存在——先跑 python scripts/01_overlap.py {roi}")
+    optical_tie, sar_tie = load_tie_points(config.repo_root, roi)
+    matrix = estimate_affine(optical_tie, sar_tie)
+    grid, sar_grid = raster.read_grid(optical_path), raster.read_grid(sar_path)
+    plan = candidate_windows((grid.width, grid.height), (sar_grid.width, sar_grid.height), matrix, size)
+    with raster.Blocks(optical_path) as optical, raster.Blocks(sar_path) as sar:
+        kept = number_windows(
+            plan.pairs,
+            usable=lambda pair: usable_pair(optical.read(pair.optical, size), sar.read(pair.sar, size)),
+            excluded=EXCLUDED_WINDOWS.get(roi, frozenset()),
+        )
+    numbers = {window.optical: window.index for window in kept}
+    windows = []
+    for corner in tile_windows(grid.width, grid.height, size):
+        if top <= corner[1] and corner[1] + size <= bottom:
+            x, y = sar_window(corner, size, matrix)
+            windows.append({"o": [corner[0], corner[1] - top], "s": [x, y - top], "i": numbers.get(corner)})
+    points = [
+        [round(ox, 1), round(oy - top, 1), round(sx, 1), round(sy - top, 1)]
+        for (ox, oy), (sx, sy) in zip(optical_tie.tolist(), sar_tie.tolist())
+        if top <= oy < bottom
+    ]
+
+    out = _assets(config) / "process"
+    out.mkdir(exist_ok=True)
+    image = raster.read_rows(optical_path, top, bottom)[0]
+    _shrink(_gray_masked(image, image > 0)).save(out / "opt.jpg", quality=85)
+    sar_rows = raster.read_rows(sar_path, top, bottom, bands=(1, 2))
+    decibels = _decibels(sar_rows[0], sar_rows[1])
+    _shrink(_gray_masked(np.nan_to_num(decibels), np.isfinite(decibels))).save(out / "sar.jpg", quality=85)
+    _write_json(_assets(config) / PROCESS_NAME, {
+        "roi": roi,
+        "rows": [top, bottom],
+        "scale": PROCESS_SCALE,
+        "size": [grid.width, bottom - top],
+        "patch": size,
+        "optical": "process/opt.jpg",
+        "sar": "process/sar.jpg",
+        "points": points,
+        "windows": windows,
+    })
+    print(f"  {roi} 行 {top}–{bottom}：{len(points)} 对控制点，{len(windows)} 个窗口，"
+          f"其中保留 {sum(1 for w in windows if w['i'] is not None)} 个", flush=True)
+
+
+def _gray_masked(array: np.ndarray, valid: np.ndarray) -> Image.Image:
+    """灰度拉伸，无数据画成黑色：重叠区影像两侧大片是 nodata。"""
+    gray = np.asarray(_gray(array, valid)).copy()
+    gray[~valid] = 0
+    return Image.fromarray(gray, "L")
+
+
+def _shrink(image: Image.Image) -> Image.Image:
+    return image.resize((image.width // PROCESS_SCALE, image.height // PROCESS_SCALE), Image.BOX)
 
 
 # ---------------------------------------------------------------------------

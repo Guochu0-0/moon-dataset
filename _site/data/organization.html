@@ -15,7 +15,91 @@
 <main>
 <div class="doc wrap">
 <nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html" aria-current="page">组织</a><a href="../data/imaging.html">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/statistics.html">统计与分布</a></nav>
-<article class="prose"><h1 id="组织">组织</h1></article>
+<article class="prose"><h1 id="组织">组织</h1>
+<h2 id="目录">目录</h2>
+<p>数据盘上原始数据与成品的目录：</p>
+<pre><code>&lt;数据根&gt;/
+├── raw/                                    原始数据
+│   └── ROI_&lt;n&gt;/
+│       ├── ce2/        CE2_GRAS_DOM_07m_&lt;分幅&gt;_A.tif（.tfw、.prj）    CE-2 DOM 分幅
+│       ├── minirf/     lsz_&lt;…&gt;_v1.tif                                  Mini-RF 条带
+│       └── cropped/ce2/
+│                       opt.tif、sar.tif                                 重叠区影像
+└── Processed_Data/                         成品
+    ├── Train/
+    │   └── ROI_&lt;nnn&gt;/
+    │       ├── Optical/   patch_&lt;n&gt;.tif
+    │       └── SAR/       patch_&lt;n&gt;.tif
+    ├── Val/
+    │   └── ROI_&lt;nnn&gt;/
+    │       ├── Optical/   patch_&lt;n&gt;.tif
+    │       ├── SAR/       patch_&lt;n&gt;.tif
+    │       └── Label/     patch_&lt;n&gt;.txt、patch_&lt;n&gt;.prj
+    └── Test/              同 Val
+</code></pre>
+<ul>
+<li><code>raw/</code> 下有 73 个 ROI 目录，数据集用到其中 67 个。ROI 目录里另有 LRO NAC 等其他数据，不属于本数据集。</li>
+<li>划分按 ROI：同一个 ROI 的 patch 全在同一个划分里。</li>
+</ul>
+<h2 id="文件">文件</h2>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>内容</th>
+<th>数据类型</th>
+<th>尺寸与波段</th>
+<th>nodata</th>
+<th>值域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Optical/patch_&lt;n&gt;.tif</code></td>
+<td>CE-2 光学 patch</td>
+<td>uint8</td>
+<td>512 × 512，1 个波段</td>
+<td>0</td>
+<td>1–255</td>
+</tr>
+<tr>
+<td><code>SAR/patch_&lt;n&gt;.tif</code></td>
+<td>Mini-RF SAR patch，波段见<a href="imaging.html#波段">成像特征</a></td>
+<td>float32</td>
+<td>512 × 512，4 个波段</td>
+<td>0</td>
+<td>波段 1：−0.014–9.56<br>波段 2：−0.022–10.01<br>波段 3：−3.13–3.02<br>波段 4：−3.23–2.74</td>
+</tr>
+<tr>
+<td><code>Label/patch_&lt;n&gt;.txt</code></td>
+<td>评测真值点</td>
+<td>文本</td>
+<td>每行一对点，4 列</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Label/patch_&lt;n&gt;.prj</code></td>
+<td>ArcGIS 随链接表写出的文件</td>
+<td>文本</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>patch 是 GeoTIFF，按条带存储，Deflate 压缩，像元 7.5 m，带地理参考。光学 patch 共 1.27 GB，SAR patch 共 38.5 GB。</li>
+<li>值域是全部 patch 上有效像素的最小、最大值。</li>
+</ul>
+<p>命名规则：</p>
+<ul>
+<li><code>Processed_Data/</code> 下的 ROI 目录名补零到三位（<code>ROI_006</code>）；<code>raw/</code> 下不补零（<code>ROI_6</code>）。</li>
+<li><code>patch_&lt;n&gt;</code> 在每个 ROI 内从 0 起编号，不补零。</li>
+<li>同一个 ROI 里，同编号的光学、SAR、标签文件是一对。</li>
+</ul>
+<h2 id="标签文件">标签文件</h2>
+<p>评测真值点在 ArcGIS 中逐 patch 标注，文件为地理配准链接表的导出格式：制表符分隔的 4 列（光学 x、y，SAR x、y），单位为 patch 内像素。ArcGIS 对无地理参考的影像以左上角为原点、y 轴向上，因此 y 为负值，取绝对值即为行号。同名 <code>.prj</code> 为 ArcGIS 随链接表写出的文件，不含有效坐标系。</p></article>
 </div>
 </main>
 <script src="../search-index.js"></script>

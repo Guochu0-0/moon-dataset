@@ -15,7 +15,418 @@
 <main>
 <div class="doc wrap">
 <nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html">组织</a><a href="../data/imaging.html" aria-current="page">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/statistics.html">统计与分布</a></nav>
-<article class="prose"><h1 id="成像特征">成像特征</h1></article>
+<article class="prose"><h1 id="成像特征">成像特征</h1>
+<h2 id="sarmini-rf">SAR：Mini-RF</h2>
+<h3 id="产品-id">产品 ID</h3>
+<p>每条条带的产品 ID 也是它的文件名（数据盘上为小写）。按 SIS §4.7.1.1 与表 16 逐段解码，以 <code>LSZ_02833_2CD_EKU_16S144_V1</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>本例</th>
+<th>含义</th>
+<th>取值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>L</code></td>
+<td>平台</td>
+<td><code>L</code> LRO，<code>F</code> Forerunner，<code>B</code> 两者</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>S</code></td>
+<td>频段</td>
+<td><code>S</code> S 波段，<code>X</code> X 波段，<code>B</code> 两者，<code>N</code> 无</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>Z</code></td>
+<td>雷达模式</td>
+<td><code>B</code> Baseline SAR，<code>I</code> 干涉，<code>S</code> 散射计，<code>Z</code> Zoom，<code>A</code>、<code>G</code>、<code>C</code> 定标，<code>O</code> 其他</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>02833</code></td>
+<td>轨道号（开始采集的那一轨）</td>
+<td>5 位数字</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>2</code></td>
+<td>处理级别</td>
+<td><code>R</code> 原始，<code>1</code>–<code>3</code> Level 1–3</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>CD</code></td>
+<td>文件类型</td>
+<td><code>PD</code> 打包数据，<code>CD</code> 定标数据（Calibrated Data Record），<code>S1</code>–<code>S4</code> Stokes 参数，<code>SC</code>、<code>OC</code> 同向、反向圆极化图像，<code>CP</code> 圆极化比图像，<code>HK</code> 仪器遥测</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>E</code></td>
+<td>投影</td>
+<td><code>O</code> 斜圆柱，<code>E</code> 等距圆柱，<code>P</code> 极射赤面，<code>X</code> 无</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>K</code></td>
+<td>分辨率档位</td>
+<td><code>A</code>–<code>O</code>，<code>A</code> 为 1 ppd，其后每个字母翻一倍；<code>K</code> 为 1024 ppd</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>U</code></td>
+<td>数值类型</td>
+<td><code>U</code> 未归一化浮点，<code>F</code> 归一化浮点，<code>B</code> 字节</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>16S</code></td>
+<td>中心纬度，取整到度</td>
+<td>2 位数字加 <code>N</code> / <code>S</code></td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>144</code></td>
+<td>中心经度，取整到度，东经 0–359</td>
+<td>3 位数字</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>V1</code></td>
+<td>产品版本</td>
+<td><code>V</code> 加数字</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>分辨率档位字母与标签不符：67 条条带的档位字母都是 <code>K</code>（1024 ppd），产品标签的 <code>MAP_RESOLUTION</code> 为 4096 ppd。以标签为准。</li>
+<li>ID 里不含成像时间。成像时间见 GeoTIFF 元数据 <code>START_TIME</code>。</li>
+</ul>
+<h3 id="波段">波段</h3>
+<p>Mini-RF 为混合极化：发射圆极化，相干接收 H、V 两路线极化。每个产品 4 个 32 位浮点波段，官方 <code>IMG</code> 按波段顺序存放（<code>BAND_SEQUENTIAL</code>）。</p>
+<table>
+<thead>
+<tr>
+<th>波段</th>
+<th><code>BAND_NAME</code></th>
+<th>物理量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>H RECEIVE INTENSITY</td>
+<td>⟨|E<sub>H</sub>|²⟩，H 路接收功率</td>
+</tr>
+<tr>
+<td>2</td>
+<td>V RECEIVE INTENSITY</td>
+<td>⟨|E<sub>V</sub>|²⟩，V 路接收功率</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CROSS POWER INTENSITY (REAL)</td>
+<td>Re⟨E<sub>H</sub> E<sub>V</sub>*⟩</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CROSS POWER INTENSITY (IMAGINARY)</td>
+<td>Im⟨E<sub>H</sub> E<sub>V</sub>*⟩</td>
+</tr>
+</tbody>
+</table>
+<p>波段 1、2 是功率；波段 3、4 是交叉功率的实部与虚部，可为负。</p>
+<h3 id="stokes-参数">Stokes 参数</h3>
+<p>SIS §4.3.2.2 的定义，<code>b1</code>–<code>b4</code> 为四个波段：</p>
+<pre><code class="language-python">S1 = b1 + b2          # 总功率
+S2 = b1 - b2
+S3 = 2 * b3
+S4 = -2 * b4
+
+SC  = 0.5 * (S1 - S4)                        # 同向圆极化
+OC  = 0.5 * (S1 + S4)                        # 反向圆极化
+CPR = SC / OC                                # 圆极化比
+m   = np.sqrt(S2**2 + S3**2 + S4**2) / S1    # 极化度
+</code></pre>
+<p>参考值：全月平均 CPR ≈ 0.3，m ≈ 0.6（SIS §4.3.2.2）。</p>
+<h3 id="仪器参数">仪器参数</h3>
+<p>SIS 表 1 中 S 波段 Zoom 模式一栏：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>Zoom</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>频率</td>
+<td>2.38 GHz（波长 12.6 cm）</td>
+</tr>
+<tr>
+<td>极化</td>
+<td>发射 RCP 或 LCP，相干接收 H 与 V</td>
+</tr>
+<tr>
+<td>视数</td>
+<td>8</td>
+</tr>
+<tr>
+<td>线性调频带宽</td>
+<td>8 MHz</td>
+</tr>
+<tr>
+<td>噪声等效后向散射系数（NESZ）</td>
+<td>−25 dB</td>
+</tr>
+<tr>
+<td>条带长度</td>
+<td>&lt; 400 km</td>
+</tr>
+<tr>
+<td>极化纯度</td>
+<td>串扰 19 dB，轴比 1.7 dB</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分辨率">分辨率</h3>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>数值</th>
+<th>出处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>采样间隔</td>
+<td>7.4032 m</td>
+<td>产品标签 <code>MAP_SCALE</code></td>
+</tr>
+<tr>
+<td>斜距分辨率</td>
+<td>23 m</td>
+<td>SIS 表 1</td>
+</tr>
+<tr>
+<td>地距 / 方位分辨率</td>
+<td>15 × 30（原表未写单位）</td>
+<td>SIS 表 1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="格式与投影">格式与投影</h3>
+<ul>
+<li>官方产品为 PDS3 <code>IMG</code> + <code>LBL</code>，32 位 IEEE 浮点（<code>PC_REAL</code>）。空值 <code>CORE_NULL = 16#FF7FFFFB#</code>，约 −3.4028 × 10³⁸。</li>
+<li>等距圆柱投影（<code>EQUIRECTANGULAR</code>），<code>CENTER_LONGITUDE = 180.0</code>，<code>CENTER_LATITUDE = 0.0</code>；月球取球体，半径 1737.4 km；行星中心坐标，东经为正。</li>
+<li><code>MAP_RESOLUTION = 4096 &lt;pix/deg&gt;</code>，<code>MAP_SCALE = 0.0074031617 &lt;KM/PIXEL&gt;</code>，即约 7.4032 m。</li>
+<li>数据盘上只有转换后的 GeoTIFF：像元为 <code>MAP_SCALE</code>，nodata 为 <code>CORE_NULL</code> 的浮点值，<code>PRODUCT_ID</code>、<code>DATA_SET_ID</code>、<code>START_TIME</code> 等标签字段写在 GeoTIFF 元数据里。</li>
+</ul>
+<h3 id="条带汇总">条带汇总</h3>
+<p>数据集的 67 个 ROI 各用一条条带。逐条带的值见各 ROI 页。</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>取值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务阶段</td>
+<td>NOMINAL MISSION</td>
+</tr>
+<tr>
+<td>模式</td>
+<td><code>ZOOM_S</code></td>
+</tr>
+<tr>
+<td>中心频率</td>
+<td>2.38 GHz</td>
+</tr>
+<tr>
+<td>投影</td>
+<td>等距圆柱</td>
+</tr>
+<tr>
+<td><code>MAP_RESOLUTION</code></td>
+<td>4096 ppd</td>
+</tr>
+<tr>
+<td>采样间隔</td>
+<td>7.4032 m</td>
+</tr>
+<tr>
+<td>波段数</td>
+<td>4</td>
+</tr>
+<tr>
+<td>入射角</td>
+<td>45.52°–54.92°，中位 51.70°</td>
+</tr>
+<tr>
+<td>视向</td>
+<td>左视 53 条，右视 14 条</td>
+</tr>
+<tr>
+<td>条带宽</td>
+<td>1,748–21,282 像素，中位 3,654</td>
+</tr>
+<tr>
+<td>条带长</td>
+<td>7,329–99,601 像素，中位 65,317</td>
+</tr>
+<tr>
+<td>成像时间（UTC）</td>
+<td>2009-10-14 16:37:17 至 2010-12-06 09:14:59</td>
+</tr>
+</tbody>
+</table>
+<h2 id="光学ce-2-dom">光学：CE-2 DOM</h2>
+<h3 id="产品">产品</h3>
+<p>据 2018 年的数据发布公告：</p>
+<ul>
+<li>嫦娥二号 CCD 立体相机在 100 km 轨道获取的影像，制成 7 m 分辨率全月数字正射影像（DOM），共 844 幅。</li>
+<li>每幅由同名的 <code>tif</code>、<code>tfw</code>、<code>prj</code> 三个文件组成。</li>
+<li>70°S–70°N 用墨卡托投影，两极用极射赤面投影。</li>
+</ul>
+<p>该产品属 CE2TMap2015 系列（李春来等，2018）。</p>
+<p>从文件读出：</p>
+<ul>
+<li>单波段 uint8，像元 7 m × 7 m。</li>
+<li>投影信息的存放方式不统一：有的分幅带旁挂 <code>.prj</code>、<code>.tfw</code>，有的只把坐标系嵌在 GeoTIFF 里；<code>raw/ROI_28/ce2/</code> 下的 G123 分幅，GeoTIFF 里没有坐标系，只有旁挂 <code>.prj</code>。</li>
+</ul>
+<h3 id="分幅命名">分幅命名</h3>
+<p>分幅文件名形如 <code>CE2_GRAS_DOM_07m_G203_03N161W_A</code>，中间两段是分幅号与名义位置：</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>本例</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>纬度带</td>
+<td><code>G</code></td>
+<td>见下表</td>
+</tr>
+<tr>
+<td>行号</td>
+<td><code>2</code></td>
+<td>每条纬度带分南北两行，各 7°，<code>1</code> 在北、<code>2</code> 在南</td>
+</tr>
+<tr>
+<td>列号</td>
+<td><code>03</code></td>
+<td>从 180°W 起向东编号，每幅的经度宽随纬度带不同</td>
+</tr>
+<tr>
+<td>名义纬度</td>
+<td><code>03N</code></td>
+<td>本幅中心附近的纬度，取整到度</td>
+</tr>
+<tr>
+<td>名义经度</td>
+<td><code>161W</code></td>
+<td>本幅中心附近的经度，取整到度</td>
+</tr>
+</tbody>
+</table>
+<p>按这套规则从名字算出的经纬范围，与数据集用到的全部分幅由 geotransform 反算的范围相差不超过 0.03°。</p>
+<h3 id="分带墨卡托参数">分带墨卡托参数</h3>
+<p>70°S–70°N 按纬度带分幅，每带一套墨卡托投影（GDAL 读作 <code>Mercator_2SP</code>）。各带相同的参数：月球球体，半径 1737400 m（<code>Moon_2000_IAU_IAG</code>）；中央经线 0°；东偏移、北偏移为 0；像元 7 m。只有标准纬线 <code>lat_ts</code> 随带变化：</p>
+<table>
+<thead>
+<tr>
+<th>纬度带</th>
+<th>纬度范围</th>
+<th style="text-align: right;"><code>lat_ts</code></th>
+<th style="text-align: right;">每幅经度宽</th>
+<th style="text-align: right;">每行幅数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C</td>
+<td>56°N–70°N</td>
+<td style="text-align: right;">63°</td>
+<td style="text-align: right;">15°</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr>
+<td>D</td>
+<td>42°N–56°N</td>
+<td style="text-align: right;">49°</td>
+<td style="text-align: right;">10°</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr>
+<td>E</td>
+<td>28°N–42°N</td>
+<td style="text-align: right;">35°</td>
+<td style="text-align: right;">9°</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr>
+<td>F</td>
+<td>14°N–28°N</td>
+<td style="text-align: right;">21°</td>
+<td style="text-align: right;">8°</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr>
+<td>G</td>
+<td>0°–14°N</td>
+<td style="text-align: right;">7°</td>
+<td style="text-align: right;">7.5°</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr>
+<td>H</td>
+<td>14°S–0°</td>
+<td style="text-align: right;">−7°</td>
+<td style="text-align: right;">7.5°</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr>
+<td>I</td>
+<td>28°S–14°S</td>
+<td style="text-align: right;">−21°</td>
+<td style="text-align: right;">8°</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr>
+<td>J</td>
+<td>42°S–28°S</td>
+<td style="text-align: right;">−35°</td>
+<td style="text-align: right;">9°</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr>
+<td>K</td>
+<td>56°S–42°S</td>
+<td style="text-align: right;">−49°</td>
+<td style="text-align: right;">10°</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr>
+<td>L</td>
+<td>70°S–56°S</td>
+<td style="text-align: right;">−63°</td>
+<td style="text-align: right;">15°</td>
+<td style="text-align: right;">24</td>
+</tr>
+</tbody>
+</table>
+<p>70° 以外为极射赤面投影，本数据集未用到。</p></article>
 </div>
 </main>
 <script src="../search-index.js"></script>

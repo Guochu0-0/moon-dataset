@@ -128,6 +128,7 @@ ASSETS_RELDIR = Path("docs") / "assets"
 FACTS_NAME = "roi-facts.json"
 SAMPLES_NAME = "samples.json"
 OVERLAY_NAME = "overlay.json"
+PROCESS_NAME = "process.json"
 
 
 def ground_truth_files(repo_root: Path, split: str, roi: str) -> list[Path]:

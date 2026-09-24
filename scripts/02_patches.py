@@ -33,6 +33,7 @@ from moondata import raster
 from moondata.config import Config, load_config
 from moondata.errors import MoonDataError, OverlapImagesMissing
 from moondata.geometry import (
+    EXCLUDED_WINDOWS,
     Window,
     candidate_windows,
     estimate_affine,
@@ -44,25 +45,6 @@ from moondata.sources import load_roi_table, load_tie_points, padded_roi
 
 OPTICAL_DIRNAME, SAR_DIRNAME = "Optical", "SAR"
 WINDOWS_NAME = "windows.json"
-
-EXCLUDED_WINDOWS: dict[str, frozenset[tuple[int, int]]] = {
-    "ROI_007": frozenset({(1024, 16384), (2560, 17408), (2560, 17920)}),
-    "ROI_020": frozenset({(3072, 11264)}),
-    "ROI_037": frozenset({(2048, 5632)}),
-    "ROI_054": frozenset({(512, 8192), (2048, 11776)}),
-    "ROI_070": frozenset({(2560, 3584), (2560, 4096), (2560, 4608), (2560, 5120)}),
-}
-"""剔除表：这些窗口过得了上面的三条判据，但不在现有数据集里。键是光学窗口左上角 (列, 行)。
-
-当年判「含不含 nodata」看的是另一版重叠区影像：光学一次最近邻 warp、SAR 先重投影落盘
-再裁切降采样（两次最近邻）。现在两边都是一次 cubic（少插值一次、没有网纹），nodata
-边缘因此差一两个像素，贴着影像边缘的窗口就会多留下来。表里这 11 个窗口就是差出来的
-全部——它们都在验证集与测试集上，那两个划分的 patch 上有人工标的评测真值点，窗口一变
-编号就错位、真值点全部作废，所以宁可照名单剔除，也不为了「判据更自然」把它们留下。
-
-训练集不设表：那 54 个 ROI 上多出来的贴边窗口（27 个，另有 ROI_065 的 87 个）没有真值点
-绑着，接受 cubic 的结果。
-"""
 
 DELETED_NUMBERS: dict[str, frozenset[int]] = {"ROI_027": frozenset({95, 98, 99})}
 """编号之后才删掉的 patch，编号留空。

@@ -13,9 +13,111 @@
 <div class="find"><input id="q" type="search" placeholder="搜索" aria-label="搜索" autocomplete="off"><div id="hits" hidden></div></div>
 </header>
 <main>
-<div class="wrap"><article class="prose"><h1 id="制作流程">制作流程</h1></article></div>
+<div class="wrap process">
+<header class="process-head"><h1 id="制作流程">制作流程</h1>
+<div class="flow">
+<svg viewBox="0 0 1100 280" role="img" aria-label="流程图：原始影像经重叠区提取得到重叠区影像，经标控制点得到控制点，经协同切片得到 patch 对">
+<defs><marker id="flow-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z"/></marker></defs>
+<a href="data/sources.html"><g class="dn">
+<rect x="20" y="70" width="60" height="60" class="opt"/><rect x="20" y="130" width="60" height="60" class="opt"/>
+<polygon points="100,62 124,58 150,196 126,200" class="sar"/>
+<text x="20" y="232" class="t">原始影像</text></g></a>
+<text x="20" y="252" class="s"><a href="data/sources.html">出处</a> · <a href="data/organization.html">组织</a></text>
+<a href="#重叠区提取"><g class="op">
+<path d="M170 130 H 316" marker-end="url(#flow-head)"/>
+<text x="243" y="116" text-anchor="middle">重叠区提取</text><text x="243" y="152" text-anchor="middle" class="m">01_overlap.py</text></g></a>
+<g class="dn">
+<rect x="330" y="60" width="44" height="140" class="opt"/><rect x="384" y="60" width="44" height="140" class="blank"/>
+<polygon points="392,60 414,60 424,200 402,200" class="sar"/>
+<text x="330" y="232" class="t">重叠区影像</text><text x="330" y="252" class="s">同一网格，7.5 m</text></g>
+<a href="#标控制点"><g class="op manual">
+<path d="M446 130 H 616" marker-end="url(#flow-head)"/>
+<text x="531" y="116" text-anchor="middle">标控制点</text><text x="531" y="152" text-anchor="middle" class="m">人工，ENVI</text></g></a>
+<g class="dn">
+<rect x="630" y="60" width="44" height="140" class="opt"/><rect x="684" y="60" width="44" height="140" class="blank"/>
+<polygon points="692,60 714,60 724,200 702,200" class="sar"/>
+<path d="M640 80h10M645 75v10M655 130h10M660 125v10M643 180h10M648 175v10M699 82h10M704 77v10M707 132h10M712 127v10M711 182h10M716 177v10" class="cross"/>
+<text x="630" y="232" class="t">控制点</text><text x="630" y="252" class="s">光学–SAR 同名点</text></g>
+<a href="#协同切片"><g class="op">
+<path d="M746 130 H 916" marker-end="url(#flow-head)"/>
+<text x="831" y="116" text-anchor="middle">协同切片</text><text x="831" y="152" text-anchor="middle" class="m">02_patches.py</text></g></a>
+<a href="data/statistics.html"><g class="dn">
+<rect x="930" y="80" width="56" height="56" class="opt"/><rect x="939" y="89" width="56" height="56" class="sarp"/>
+<rect x="948" y="98" width="56" height="56" class="opt"/><rect x="957" y="107" width="56" height="56" class="sarp"/>
+<rect x="966" y="116" width="56" height="56" class="opt"/><rect x="975" y="125" width="56" height="56" class="sarp"/>
+<text x="930" y="232" class="t">patch 对</text><text x="930" y="252" class="s">512 × 512</text></g></a>
+</svg>
+</div>
+
+</header>
+<div class="process-grid">
+<nav class="rail" aria-label="制作流程"><ol><li class="st in"><a href="data/sources.html"><b>原始影像</b><small>数据说明</small></a></li><li class="data">CE-2 分幅、Mini-RF 条带</li><li class="st" data-for="重叠区提取"><a href="#重叠区提取"><b>重叠区提取</b><small><code>01_overlap.py</code></small></a></li><li class="data">重叠区影像</li><li class="st manual" data-for="标控制点"><a href="#标控制点"><b>标控制点</b><small>人工，ENVI</small></a></li><li class="data">控制点</li><li class="st" data-for="协同切片"><a href="#协同切片"><b>协同切片</b><small><code>02_patches.py</code></small></a></li><li class="data">patch 对</li><li class="st in"><a href="data/statistics.html"><b>数据集</b><small>统计与分布</small></a></li></ol></nav>
+<article class="prose"><section class="step"><h2 id="重叠区提取">重叠区提取</h2>
+<p class="script"><code>scripts/01_overlap.py</code></p>
+<p class="io"><strong>输入</strong>　CE-2 DOM 分幅、Mini-RF SAR 条带（<a href="data/sources.html">出处</a>、<a href="data/organization.html#目录">组织</a>）</p>
+<p class="io"><strong>输出</strong>　重叠区影像 <code>opt.tif</code>、<code>sar.tif</code>，<code>work/01_overlap/ROI_xxx/</code></p>
+<ol>
+<li>求光学与 SAR 的公共覆盖区。</li>
+<li>统一坐标系，cubic 重采样到 7.5 m 的同一网格。</li>
+</ol>
+<figure class="pfig" data-layers=""><div class="ppair"></div><figcaption>ROI_054 重叠区影像的一段（光学行 9216–14848），左光学、右 SAR。</figcaption></figure>
+
+</section><section class="step"><h2 id="标控制点">标控制点</h2>
+<p class="script manual">人工，ENVI</p>
+<p class="io"><strong>输入</strong>　重叠区影像</p>
+<p class="io"><strong>输出</strong>　控制点 <code>data/tie-points/ROI_xxx.pts</code></p>
+<h3 id="标注规程">标注规程</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>软件</td>
+<td>ENVI</td>
+</tr>
+<tr>
+<td>标注影像</td>
+<td>重叠区影像</td>
+</tr>
+<tr>
+<td>数量</td>
+<td>每个 ROI 约 30 对；最多 150 对，最少 19 对</td>
+</tr>
+<tr>
+<td>分布</td>
+<td>沿条带从上到下均匀覆盖</td>
+</tr>
+<tr>
+<td>选点</td>
+<td>在两幅影像中找到对应的小陨石坑，取坑中心</td>
+</tr>
+</tbody>
+</table>
+<p>ROI_073 的控制点最初误标在 ROI_074 的影像上，已重标（30 对），并按新控制点重新切片、编号。</p>
+<figure class="pfig" data-layers="points"><div class="ppair"></div><figcaption>同一段上的控制点，同号为一对。</figcaption></figure>
+
+</section><section class="step"><h2 id="协同切片">协同切片</h2>
+<p class="script"><code>scripts/02_patches.py</code></p>
+<p class="io"><strong>输入</strong>　重叠区影像、控制点</p>
+<p class="io"><strong>输出</strong>　patch 对 <code>work/02_patches/{Train,Val,Test}/ROI_xxx/{Optical,SAR}/</code>；仿射矩阵与窗口列表（JSON）</p>
+<ol>
+<li>由控制点最小二乘解算全局仿射（光学 → SAR）。</li>
+<li>在光学上以 512 × 512 滑窗，步长 512。</li>
+<li>窗口四角经仿射映射到 SAR。</li>
+<li>剔除出界、重叠比低于 70%、含 nodata 的窗口。</li>
+<li>先行后列编号，从 <code>patch_0</code> 起。</li>
+<li>切片。</li>
+</ol>
+<figure class="pfig" data-layers=""><div class="stepbtns" role="group" aria-label="逐步查看"><button type="button" aria-pressed="true">解算仿射</button><button type="button" aria-pressed="false">滑窗</button><button type="button" aria-pressed="false">映射</button><button type="button" aria-pressed="false">剔除</button><button type="button" aria-pressed="false">编号</button></div><div class="ppair"></div><figcaption>同一段，逐步点开。斜线格为剔除的窗口；指向一个窗口，另一侧的对应窗口同时高亮。</figcaption></figure></section></article>
+</div>
+</div>
 </main>
 <script src="search-index.js"></script>
+<script>window.PROCESS={"roi":"ROI_054","rows":[9216,14848],"scale":4,"size":[3251,5632],"patch":512,"optical":"process/opt.jpg","sar":"process/sar.jpg","points":[[1015.0,1051.0,1165.0,1260.0],[574.0,1069.0,701.0,1279.0],[688.0,770.0,819.0,978.0],[1337.0,4906.0,1377.0,5116.0],[1262.0,4725.0,1315.0,4935.0],[1873.0,4539.0,1952.0,4750.0],[1794.0,4505.0,1877.0,4716.0]],"windows":[{"o":[0,0],"s":[156,209],"i":null},{"o":[512,0],"s":[643,209],"i":37},{"o":[1024,0],"s":[1131,209],"i":38},{"o":[1536,0],"s":[1618,208],"i":39},{"o":[2048,0],"s":[2106,208],"i":40},{"o":[2560,0],"s":[2593,208],"i":null},{"o":[0,512],"s":[162,721],"i":null},{"o":[512,512],"s":[649,721],"i":41},{"o":[1024,512],"s":[1137,721],"i":42},{"o":[1536,512],"s":[1624,721],"i":43},{"o":[2048,512],"s":[2112,720],"i":44},{"o":[2560,512],"s":[2599,720],"i":null},{"o":[0,1024],"s":[168,1234],"i":null},{"o":[512,1024],"s":[655,1233],"i":45},{"o":[1024,1024],"s":[1143,1233],"i":46},{"o":[1536,1024],"s":[1630,1233],"i":47},{"o":[2048,1024],"s":[2118,1232],"i":48},{"o":[2560,1024],"s":[2605,1232],"i":null},{"o":[0,1536],"s":[174,1746],"i":null},{"o":[512,1536],"s":[661,1745],"i":49},{"o":[1024,1536],"s":[1149,1745],"i":50},{"o":[1536,1536],"s":[1636,1745],"i":51},{"o":[2048,1536],"s":[2124,1745],"i":52},{"o":[2560,1536],"s":[2611,1744],"i":null},{"o":[0,2048],"s":[180,2258],"i":null},{"o":[512,2048],"s":[668,2258],"i":53},{"o":[1024,2048],"s":[1155,2257],"i":54},{"o":[1536,2048],"s":[1643,2257],"i":55},{"o":[2048,2048],"s":[2130,2257],"i":56},{"o":[2560,2048],"s":[2618,2256],"i":null},{"o":[0,2560],"s":[186,2770],"i":null},{"o":[512,2560],"s":[674,2770],"i":57},{"o":[1024,2560],"s":[1161,2770],"i":58},{"o":[1536,2560],"s":[1649,2769],"i":59},{"o":[2048,2560],"s":[2136,2769],"i":null},{"o":[2560,2560],"s":[2624,2769],"i":null},{"o":[0,3072],"s":[192,3282],"i":null},{"o":[512,3072],"s":[680,3282],"i":60},{"o":[1024,3072],"s":[1167,3282],"i":61},{"o":[1536,3072],"s":[1655,3281],"i":62},{"o":[2048,3072],"s":[2142,3281],"i":null},{"o":[2560,3072],"s":[2630,3281],"i":null},{"o":[0,3584],"s":[198,3794],"i":null},{"o":[512,3584],"s":[686,3794],"i":63},{"o":[1024,3584],"s":[1173,3794],"i":64},{"o":[1536,3584],"s":[1661,3794],"i":65},{"o":[2048,3584],"s":[2148,3793],"i":null},{"o":[2560,3584],"s":[2636,3793],"i":null},{"o":[0,4096],"s":[205,4307],"i":null},{"o":[512,4096],"s":[692,4306],"i":66},{"o":[1024,4096],"s":[1180,4306],"i":67},{"o":[1536,4096],"s":[1667,4306],"i":68},{"o":[2048,4096],"s":[2155,4305],"i":null},{"o":[2560,4096],"s":[2642,4305],"i":null},{"o":[0,4608],"s":[211,4819],"i":null},{"o":[512,4608],"s":[698,4818],"i":69},{"o":[1024,4608],"s":[1186,4818],"i":70},{"o":[1536,4608],"s":[1673,4818],"i":71},{"o":[2048,4608],"s":[2161,4818],"i":null},{"o":[2560,4608],"s":[2648,4817],"i":null},{"o":[0,5120],"s":[217,5331],"i":null},{"o":[512,5120],"s":[704,5331],"i":72},{"o":[1024,5120],"s":[1192,5330],"i":73},{"o":[1536,5120],"s":[1679,5330],"i":74},{"o":[2048,5120],"s":[2167,5330],"i":null},{"o":[2560,5120],"s":[2654,5329],"i":null}]};</script>
 <script src="assets/site.js"></script>
 </body>
 </html>
