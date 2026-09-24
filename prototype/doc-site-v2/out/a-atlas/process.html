@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>流程 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="" data-root="">
+<header class="top"><a class="site" href="index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="index.html">首页</a><a href="process.html" aria-current=page>流程</a><a href="sources.html">数据来源</a><a href="rois/index.html">ROI 总表</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索文档" aria-label="搜索文档" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main><style>/* PROTOTYPE：流程篇。只用月面图集已有的颜色。 */
+
+/* 共用：步骤标题、输入输出、处理列表 */
+.step { margin-bottom: 3.2em; }
+.step h2 { margin-bottom: .1em; display: flex; align-items: baseline; gap: 12px; scroll-margin-top: 72px; }
+.step h2 .no { font-size: 14px; font-weight: 600; color: var(--ink2); border: 1px solid var(--rule); border-radius: 3px; padding: 1px 8px; }
+.step h2#products { display: block; }
+.script { display: inline-block; margin-bottom: .6em; font-size: 13.5px; }
+.script.manual { color: var(--ink2); border: 1px dashed var(--ink2); border-radius: 3px; padding: 0 8px; font-size: 13px; }
+.step h3 { font-size: 13px; font-weight: 600; color: var(--ink2); margin: 1.6em 0 .4em; letter-spacing: .02em; }
+.io { list-style: none; padding: 0; margin: 0; }
+.io li { display: grid; grid-template-columns: 9em minmax(0, 1fr); column-gap: 14px; padding: 6px 0; border-bottom: 1px solid var(--rule); }
+.io li b { font-weight: 600; }
+.io li .path { grid-column: 2; justify-self: start; margin-top: 2px; }
+.proc { padding-left: 1.4em; margin: 0; }
+.proc li { padding: 3px 0; }
+.proc li::marker { color: var(--ink2); font-weight: 600; }
+
+/* 真实影像配图 */
+.realfig { margin: 1.6em 0 .6em; }
+.pairwrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: var(--frame); padding: 10px; border-radius: 4px; max-width: 560px; }
+.panel { position: relative; }
+.panel svg { display: block; width: 100%; height: auto; background: #000; }
+.plabel { position: absolute; left: 8px; top: 6px; font-size: 12px; color: #fff; background: rgba(27, 39, 51, .7); padding: 0 6px; border-radius: 2px; }
+.realfig figcaption { font-size: 13px; color: var(--ink2); margin-top: 8px; max-width: 560px; }
+.ly.cand rect { fill: none; stroke: rgba(255, 255, 255, .55); stroke-width: 1.5px; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; }
+.ly.rejected rect { stroke: rgba(255, 255, 255, .35); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.ly.windows rect, .ly.sar rect { fill: rgba(227, 155, 27, 0); stroke: #fff; stroke-width: 1.4px; vector-effect: non-scaling-stroke; cursor: crosshair; }
+.ly.windows rect.on, .ly.sar rect.on { fill: rgba(227, 155, 27, .35); stroke: var(--test); stroke-width: 3px; }
+.ly.numbers text { fill: #fff; font: 600 20px var(--sans); paint-order: stroke; stroke: rgba(0, 0, 0, .7); stroke-width: 3px; pointer-events: none; }
+.ly.points circle { fill: none; stroke: var(--test); stroke-width: 3px; }
+.ly.points path { stroke: var(--test); stroke-width: 3px; }
+.ly.points text { fill: #fff; font: 600 26px var(--sans); paint-order: stroke; stroke: #000; stroke-width: 4px; }
+.stepbtns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.stepbtns button { font: 14px var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 4px; padding: 4px 12px; cursor: pointer; }
+.stepbtns button[aria-pressed=true] { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+/* ---------- A 横幅流程图 ---------- */
+.bandA { background: var(--frame); color: #fff; padding: 28px 0 30px; }
+.bandA h1 { color: #fff; margin: 0 0 10px; }
+.flowA { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+.flowA svg { display: block; width: 100%; height: auto; font-family: var(--sans); }
+.flowA .e { fill: none; stroke: rgba(255, 255, 255, .75); stroke-width: 1.6px; }
+.flowA .e.dim { stroke: rgba(255, 255, 255, .35); stroke-dasharray: 4 4; }
+.flowA .lab { fill: rgba(255, 255, 255, .7); font-size: 13px; }
+.flowA .in rect { fill: rgba(255, 255, 255, .06); stroke: rgba(255, 255, 255, .4); }
+.flowA .in text { fill: #fff; font-size: 16px; font-weight: 600; } .flowA .in text.s { fill: rgba(255, 255, 255, .65); font-size: 13px; font-weight: 400; }
+.flowA .node rect:first-child { fill: #24344A; stroke: rgba(255, 255, 255, .5); stroke-width: 1.2px; }
+.flowA .node.manual rect:first-child { stroke-dasharray: 6 5; fill: transparent; }
+.flowA .node text { fill: #fff; font-size: 19px; font-weight: 600; } .flowA .node text.k { fill: rgba(255, 255, 255, .6); font-size: 13px; font-weight: 400; }
+.flowA .node .subs text { font-size: 13px; font-weight: 400; fill: rgba(255, 255, 255, .8); }
+.flowA .node .g { fill: none; stroke: #fff; stroke-width: 1px; }
+.flowA .cp circle { fill: none; stroke: var(--test); stroke-width: 2.4px; }
+.flowA .out rect { stroke: #fff; stroke-width: 1px; } .flowA .t1 { fill: #6E7B88; } .flowA .t2 { fill: #3A4756; } .flowA .t3 { fill: #9AA4AE; }
+.flowA .out text { fill: #fff; font-size: 14px; font-weight: 600; }
+.flowA a:hover .node rect:first-child, .flowA a:focus .node rect:first-child { stroke: #fff; stroke-width: 2.4px; }
+.flowA a:hover .in rect { stroke: #fff; }
+
+/* ---------- B 竖向线路图兼目录 ---------- */
+.layoutB { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 64px; padding-top: 36px; padding-bottom: 96px; }
+.layoutB .prose h1 { margin-bottom: 1em; }
+.flowB { position: sticky; top: 76px; align-self: start; }
+.flowB ol { list-style: none; margin: 0; padding: 0; position: relative; }
+.flowB > ol::before { content: ""; position: absolute; left: 9px; top: 14px; bottom: 14px; width: 2px; background: var(--ink); }
+.flowB li { position: relative; padding-left: 34px; }
+.flowB li.st { padding-top: 6px; padding-bottom: 6px; }
+.flowB li.st::before { content: ""; position: absolute; left: 2px; top: 12px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+.flowB li.st.in::before { border-radius: 2px; background: var(--ink); }
+.flowB li.st.manual::before { border-style: dashed; }
+.flowB li.st.on::before { background: var(--val); border-color: var(--val); box-shadow: 0 0 0 4px rgba(46, 123, 214, .2); }
+.flowB li.st a { display: block; color: var(--ink); text-decoration: none; line-height: 1.45; }
+.flowB li.st a:hover b { text-decoration: underline; text-underline-offset: 3px; }
+.flowB li.st .k { display: block; font-size: 12px; color: var(--ink2); }
+.flowB li.st b { display: block; font-size: 17px; font-weight: 600; }
+.flowB li.st.on b { color: var(--val); }
+.flowB li.st small { display: block; font-size: 12.5px; color: var(--ink2); }
+.flowB li.st small code { font-size: 12px; }
+.flowB li.data { font-size: 12.5px; color: var(--ink2); padding-top: 2px; padding-bottom: 8px; }
+.flowB li.data::before { content: "↓"; position: absolute; left: 3px; top: 0; font-size: 12px; background: var(--paper); color: var(--ink2); line-height: 1.4; }
+.flowB .subs { list-style: none; margin: 6px 0 0; padding: 0; counter-reset: s; }
+.flowB .subs li { padding-left: 0; font-size: 13px; color: var(--ink2); counter-increment: s; }
+.flowB .subs li::before { content: counter(s) "　"; color: var(--rule); font-weight: 600; }
+.absfig { margin: 1.6em 0 .6em; }
+.absfig svg { display: block; width: 100%; max-width: 640px; height: auto; background: #fff; border: 1px solid var(--rule); border-radius: 4px; font-family: var(--sans); }
+.absfig text { font-size: 13px; fill: var(--ink2); }
+.absfig text.n { font-size: 11px; fill: var(--ink); font-weight: 600; }
+.absfig .opt { fill: #D5DADF; stroke: var(--ink); stroke-width: 1px; }
+.absfig .sarr { fill: #3A4756; stroke: var(--ink); }
+.absfig .sar { fill: rgba(58, 71, 86, .85); stroke: var(--ink); }
+.absfig .blank { fill: none; stroke: var(--ink); stroke-dasharray: 3 3; }
+.absfig .seam { stroke: var(--ink2); stroke-dasharray: 3 3; }
+.absfig .px line { stroke: rgba(27, 39, 51, .18); stroke-width: .6px; }
+.absfig .arr { stroke: var(--ink); stroke-width: 1.4px; fill: none; } .absfig .arrh { fill: none; stroke: var(--ink); stroke-width: 1.4px; }
+.absfig .crater { fill: rgba(27, 39, 51, .12); stroke: var(--ink2); }
+.absfig .sarr ~ .crater { fill: rgba(255, 255, 255, .15); }
+.absfig .cross { stroke: var(--test); stroke-width: 2px; }
+.absfig .tie { stroke: var(--test); stroke-width: 1px; stroke-dasharray: 3 3; opacity: .7; }
+.absfig .win { fill: rgba(255, 255, 255, .5); stroke: var(--ink); stroke-width: 1px; }
+.absfig .rej { fill: url(#hx); stroke: var(--ink2); stroke-width: 1px; }
+
+/* ---------- C 数据形态 ---------- */
+.hc { margin-top: 36px; }
+.flowC svg { display: block; width: 100%; height: auto; font-family: var(--sans); background: #fff; border: 1px solid var(--rule); border-radius: 4px; }
+.flowC .dn .opt { fill: #D5DADF; stroke: var(--ink); stroke-width: 1px; }
+.flowC .dn .sar { fill: #3A4756; stroke: var(--ink); stroke-width: 1px; }
+.flowC .dn .sarp { fill: #3A4756; stroke: #fff; stroke-width: 1px; }
+.flowC .dn .blank { fill: none; stroke: var(--ink); stroke-dasharray: 3 3; }
+.flowC .dn .cross { stroke: var(--test); stroke-width: 2px; }
+.flowC .dn .t { font-size: 16px; font-weight: 600; fill: var(--ink); } .flowC .dn .s { font-size: 13px; fill: var(--ink2); }
+.flowC .op path { stroke: var(--ink); stroke-width: 1.6px; fill: none; }
+.flowC .op.manual path { stroke-dasharray: 6 5; }
+.flowC .op text { font-size: 17px; font-weight: 600; fill: var(--ink); } .flowC .op text.m { font: 13px var(--mono); fill: var(--ink2); }
+.flowC a:hover .op text:first-of-type { fill: var(--link); text-decoration: underline; }
+.flowC a:hover .op path { stroke: var(--link); }
+.narrow { max-width: 860px; padding-top: 24px; padding-bottom: 96px; }
+.ioc { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.ioc .io li { grid-template-columns: minmax(0, 1fr); }
+.ioc .io li .path { grid-column: 1; }
+
+.absfig .common { fill: rgba(227, 155, 27, .12); stroke: var(--test); stroke-width: 1.6px; stroke-dasharray: 5 4; }
+.absfig .ab-l .sar { fill: rgba(58, 71, 86, .6); }
+.ly.points circle { r: 20px; stroke-width: 4px; }
+.ly.points path { stroke-width: 3px; }
+.ly.points text { font-size: 34px; }
+
+/* 原型切换条 */
+#proto-bar { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 999; display: flex; gap: 6px; align-items: center;
+  background: #000; color: #fff; border-radius: 999px; padding: 5px 8px 5px 14px; font: 13px/1.2 system-ui, "Microsoft YaHei"; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); }
+#proto-bar span { opacity: .6; margin-right: 4px; }
+#proto-bar a { color: #fff; text-decoration: none; padding: 4px 10px; border-radius: 999px; }
+#proto-bar a[aria-current] { background: #fff; color: #000; }
+
+@media (max-width: 860px) {
+  .layoutB { grid-template-columns: minmax(0, 1fr); } .flowB { position: static; }
+  .ioc { grid-template-columns: minmax(0, 1fr); }
+}
+</style><div class="pv" data-v="A">
+<section class="bandA"><div class="wrap"><h1>流程</h1></div><nav class="flowA" aria-label="流程图"><svg viewBox="0 0 1180 300" role="img">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff"/></marker></defs>
+<a href="sources.html"><g class="in"><rect x="10" y="70" width="150" height="58" rx="4"/><text x="24" y="96">CE-2 DOM</text><text x="24" y="116" class="s">7 m 正射影像</text></g></a>
+<a href="sources.html"><g class="in"><rect x="10" y="170" width="150" height="58" rx="4"/><text x="24" y="196">Mini-RF SAR</text><text x="24" y="216" class="s">S 波段条带</text></g></a>
+<path d="M160 99 C 200 99, 200 150, 236 150" class="e" marker-end="url(#ah)"/><path d="M160 199 C 200 199, 200 150, 236 150" class="e" marker-end="url(#ah)"/>
+<a href="#overlap"><g class="node"><rect x="240" y="40" width="220" height="220" rx="6"/>
+<text x="256" y="68" class="k">第一步</text><text x="256" y="92">重叠区提取</text>
+<clipPath id="ca"><rect x="256" y="110" width="90" height="130" rx="2"/></clipPath><image href="../assets/process/opt.png" x="256" y="110" width="90" height="130" preserveAspectRatio="xMidYMid slice" clip-path="url(#ca)"/><clipPath id="cb"><rect x="354" y="110" width="90" height="130" rx="2"/></clipPath><image href="../assets/process/sar.png" x="354" y="110" width="90" height="130" preserveAspectRatio="xMidYMid slice" clip-path="url(#cb)"/></g></a>
+<path d="M460 150 H 536" class="e" marker-end="url(#ah)"/><text x="498" y="140" class="lab" text-anchor="middle">重叠区影像</text>
+<a href="#tiepoints"><g class="node manual"><rect x="540" y="40" width="220" height="220" rx="6"/>
+<text x="556" y="68" class="k">人工</text><text x="556" y="92">标控制点</text>
+<clipPath id="cc"><rect x="556" y="110" width="90" height="130" rx="2"/></clipPath><image href="../assets/process/opt.png" x="556" y="110" width="90" height="130" preserveAspectRatio="xMidYMid slice" clip-path="url(#cc)"/><clipPath id="cd"><rect x="654" y="110" width="90" height="130" rx="2"/></clipPath><image href="../assets/process/sar.png" x="654" y="110" width="90" height="130" preserveAspectRatio="xMidYMid slice" clip-path="url(#cd)"/>
+<g class="cp"><circle cx="590" cy="150" r="6"/><circle cx="690" cy="156" r="6"/><circle cx="578" cy="205" r="6"/><circle cx="680" cy="211" r="6"/></g></g></a>
+<path d="M760 150 H 836" class="e" marker-end="url(#ah)"/><text x="798" y="140" class="lab" text-anchor="middle">控制点</text>
+<path d="M350 40 C 350 4, 950 4, 950 36" class="e dim" marker-end="url(#ah)"/><text x="650" y="16" class="lab" text-anchor="middle">重叠区影像</text>
+<a href="#patches"><g class="node"><rect x="840" y="40" width="220" height="220" rx="6"/>
+<text x="856" y="68" class="k">第二步</text><text x="856" y="92">协同切片</text>
+<clipPath id="ce"><rect x="866" y="96" width="66" height="88" rx="2"/></clipPath><image href="../assets/process/opt.png" x="866" y="96" width="66" height="88" preserveAspectRatio="xMidYMid slice" clip-path="url(#ce)"/><rect x="866" y="96" width="22" height="22" class="g"/><rect x="888" y="96" width="22" height="22" class="g"/><rect x="910" y="96" width="22" height="22" class="g"/><rect x="866" y="118" width="22" height="22" class="g"/><rect x="888" y="118" width="22" height="22" class="g"/><rect x="910" y="118" width="22" height="22" class="g"/><rect x="866" y="140" width="22" height="22" class="g"/><rect x="888" y="140" width="22" height="22" class="g"/><rect x="910" y="140" width="22" height="22" class="g"/><rect x="866" y="162" width="22" height="22" class="g"/><rect x="888" y="162" width="22" height="22" class="g"/><rect x="910" y="162" width="22" height="22" class="g"/>
+<g class="subs"><text x="946" y="112">1 解算仿射</text><text x="946" y="134">2 滑窗</text><text x="946" y="156">3 映射</text><text x="946" y="178">4 剔除</text><text x="946" y="200">5 编号</text><text x="946" y="222">6 切片</text></g></g></a>
+<path d="M1060 150 H 1096" class="e" marker-end="url(#ah)"/>
+<a href="#products"><g class="out"><rect x="1100" y="104" width="44" height="44" class="t1"/><rect x="1110" y="114" width="44" height="44" class="t2"/><rect x="1120" y="124" width="44" height="44" class="t3"/>
+<text x="1100" y="196">patch 对</text></g></a>
+</svg></nav></section>
+<div class="doc wrap"><article class="prose"><section class="step">
+<h2 id="overlap"><span class="no">第一步</span>重叠区提取</h2><code class="script">scripts/01_overlap.py</code>
+<h3>输入</h3><ul class="io"><li><b><a href="sources.html">CE-2 DOM</a></b><span>7 m 正射影像分幅，一个 ROI 可跨多幅</span></li><li><b><a href="sources.html">Mini-RF SAR</a></b><span>S 波段条带</span></li></ul>
+<h3>处理</h3><ol class=proc><li>求光学与 SAR 的公共覆盖区。</li><li>把两者统一到同一坐标系和像素网格，cubic 重采样到 7.5 m。</li></ol>
+<figure class="realfig" data-layers="">
+<div class="pairwrap"></div><figcaption>ROI_054 重叠区影像的一段（光学行 9216–14848），左为光学，右为 SAR。SAR 条带较窄，两侧为 nodata。</figcaption></figure>
+<h3>输出</h3><ul class="io"><li><b>重叠区影像</b><span><code>opt.tif</code>、<code>sar.tif</code>，同一网格、同一尺寸</span><code class="path">work/01_overlap/ROI_xxx/</code></li></ul>
+</section><section class="step">
+<h2 id="tiepoints"><span class="no">人工步骤</span>标控制点</h2>
+<h3>输入</h3><ul class="io"><li><b>重叠区影像</b><span>第一步的输出</span></li></ul>
+<h3>标注规程</h3><table>
+<thead><tr><th>项目</th><th>做法</th></tr></thead>
+<tbody>
+<tr><td>软件</td><td>ENVI</td></tr>
+<tr><td>标注影像</td><td>重叠区影像（光学与 SAR 已重采样到同一网格）</td></tr>
+<tr><td>数量</td><td>每个 ROI 约 30 对；最早标的几个 ROI 较多（最多 150 对），个别难标的 ROI 较少（最少 19 对）</td></tr>
+<tr><td>分布</td><td>沿条带从上到下尽量均匀覆盖</td></tr>
+<tr><td>选点</td><td>在两幅影像中找到对应的小陨石坑，取坑中心；坑越小，定位的相对误差越小</td></tr>
+</tbody></table><p>ROI_073 的控制点最初误标在 ROI_074 的影像上，2026-09-11 重标为 30 对。该 ROI 在训练集，按重标后的控制点重新切片、重新编号，现有 119 对 patch。</p>
+<figure class="realfig" data-layers="points">
+<div class="pairwrap"></div><figcaption>同一段上的控制点，编号相同的为一对。</figcaption></figure>
+<h3>输出</h3><ul class="io"><li><b>控制点</b><span>每行一对：光学 x、y，SAR x、y，单位为重叠区影像像素</span><code class="path">data/tie-points/ROI_xxx.pts</code></li></ul>
+</section><section class="step">
+<h2 id="patches"><span class="no">第二步</span>协同切片</h2><code class="script">scripts/02_patches.py</code>
+<h3>输入</h3><ul class="io"><li><b>重叠区影像</b><span>第一步的输出</span></li><li><b>控制点</b><span>人工步骤的输出</span></li></ul>
+<h3>处理</h3><ol class=proc><li>由全部控制点最小二乘解算光学到 SAR 的全局仿射。</li><li>在光学上按 512 × 512、步长 512 滑窗，边缘余量丢弃。</li><li>窗口四角经仿射映射到 SAR，确定 SAR 窗口。</li><li>剔除出界、重叠比低于 70%、含 nodata（0）的窗口。</li><li>按先行后列编号，从 <code>patch_0</code> 起。</li><li>切片，写出光学与 SAR patch。</li></ol>
+<figure class="realfig" data-layers="windows,sar,rejected,numbers">
+<div class="pairwrap"></div><figcaption>同一段上的窗口：白框为保留的窗口及其编号，斜线格为剔除的窗口。指向一个窗口，另一侧的对应窗口随之高亮。</figcaption></figure>
+<h3>输出</h3><ul class="io"><li><b>patch 对</b><span><code>Optical/</code>、<code>SAR/</code>，512 × 512，同号即配对</span><code class="path">work/02_patches/{Train,Val,Test}/ROI_xxx/</code></li><li><b>仿射矩阵与窗口列表</b><span>JSON，供检查</span><code class="path">work/02_patches/…</code></li></ul>
+</section><section class="step"><h2 id="products">产物</h2><p>目录结构、文件格式与标签文件见<a href="#">产物篇</a>（原型未做）。</p></section></article><nav class="toc" aria-label="本页目录"><a href="#overlap">第一步　重叠区提取</a><a href="#tiepoints">人工步骤　标控制点</a><a href="#patches">第二步　协同切片</a></nav></div></div><div class="pv" data-v="B"><div class="wrap layoutB"><nav class="flowB" aria-label="流程图"><ol><li class="st in"><a href="sources.html"><b>CE-2 DOM、Mini-RF SAR</b><small>数据来源</small></a></li><li class="st" data-for="overlap"><a href="#overlap"><span class="k">第一步</span><b>重叠区提取</b><small><code>scripts/01_overlap.py</code></small></a></li><li class="data">重叠区影像</li><li class="st manual" data-for="tiepoints"><a href="#tiepoints"><span class="k">人工步骤</span><b>标控制点</b><small>人工，ENVI</small></a></li><li class="data">控制点</li><li class="st" data-for="patches"><a href="#patches"><span class="k">第二步</span><b>协同切片</b><small><code>scripts/02_patches.py</code></small></a><ol class="subs"><li>解算仿射</li><li>滑窗</li><li>映射</li><li>剔除</li><li>编号</li><li>切片</li></ol></li><li class="data">patch 对</li><li class="st in"><a href="#products"><b>数据集</b><small>产物</small></a></li></ol></nav>
+<article class="prose"><h1>流程</h1><section class="step">
+<h2 id="overlap"><span class="no">第一步</span>重叠区提取</h2><code class="script">scripts/01_overlap.py</code>
+<h3>输入</h3><ul class="io"><li><b><a href="sources.html">CE-2 DOM</a></b><span>7 m 正射影像分幅，一个 ROI 可跨多幅</span></li><li><b><a href="sources.html">Mini-RF SAR</a></b><span>S 波段条带</span></li></ul>
+<h3>处理</h3><ol class=proc><li>求光学与 SAR 的公共覆盖区。</li><li>把两者统一到同一坐标系和像素网格，cubic 重采样到 7.5 m。</li></ol>
+<figure class="absfig"><svg viewBox="0 0 680 312"><defs><pattern id="hx" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<line x1="0" y1="0" x2="0" y2="6" stroke="#8C96A1" stroke-width="2"/></pattern></defs>
+<g class="ab-l"><text x="20" y="24">CE-2 DOM 分幅与 Mini-RF 条带</text>
+<rect x="20" y="36" width="200" height="120" class="opt"/><rect x="20" y="156" width="200" height="120" class="opt"/>
+<line x1="20" y1="156" x2="220" y2="156" class="seam"/>
+<polygon points="112,36 148,34 192,282 156,284" class="sar"/>
+<rect x="109" y="36" width="90" height="240" class="common"/>
+<text x="206" y="298" class="n">公共覆盖区</text></g>
+<path d="M 330 160 h 50" class="arr"/><path d="M372 153 l 8 7 l -8 7" class="arrh"/>
+<g class="ab-l"><text x="410" y="24">重叠区影像，7.5 m 同一网格</text>
+<rect x="410" y="36" width="110" height="240" class="opt"/><rect x="540" y="36" width="110" height="240" class="blank"/>
+<polygon points="552,36 600,36 638,276 590,276" class="sar"/>
+<g class="px"><line x1="410" y1="36" x2="410" y2="276"/><line x1="420" y1="36" x2="420" y2="276"/><line x1="430" y1="36" x2="430" y2="276"/><line x1="440" y1="36" x2="440" y2="276"/><line x1="450" y1="36" x2="450" y2="276"/><line x1="460" y1="36" x2="460" y2="276"/><line x1="470" y1="36" x2="470" y2="276"/><line x1="480" y1="36" x2="480" y2="276"/><line x1="490" y1="36" x2="490" y2="276"/><line x1="500" y1="36" x2="500" y2="276"/><line x1="510" y1="36" x2="510" y2="276"/><line x1="520" y1="36" x2="520" y2="276"/><line x1="410" y1="36" x2="520" y2="36"/><line x1="410" y1="46" x2="520" y2="46"/><line x1="410" y1="56" x2="520" y2="56"/><line x1="410" y1="66" x2="520" y2="66"/><line x1="410" y1="76" x2="520" y2="76"/><line x1="410" y1="86" x2="520" y2="86"/><line x1="410" y1="96" x2="520" y2="96"/><line x1="410" y1="106" x2="520" y2="106"/><line x1="410" y1="116" x2="520" y2="116"/><line x1="410" y1="126" x2="520" y2="126"/><line x1="410" y1="136" x2="520" y2="136"/><line x1="410" y1="146" x2="520" y2="146"/><line x1="410" y1="156" x2="520" y2="156"/><line x1="410" y1="166" x2="520" y2="166"/><line x1="410" y1="176" x2="520" y2="176"/><line x1="410" y1="186" x2="520" y2="186"/><line x1="410" y1="196" x2="520" y2="196"/><line x1="410" y1="206" x2="520" y2="206"/><line x1="410" y1="216" x2="520" y2="216"/><line x1="410" y1="226" x2="520" y2="226"/><line x1="410" y1="236" x2="520" y2="236"/><line x1="410" y1="246" x2="520" y2="246"/><line x1="410" y1="256" x2="520" y2="256"/><line x1="410" y1="266" x2="520" y2="266"/><line x1="410" y1="276" x2="520" y2="276"/></g></g></svg><figcaption>示意：公共覆盖区上，两幅影像落到同一像素网格。</figcaption></figure>
+<h3>输出</h3><ul class="io"><li><b>重叠区影像</b><span><code>opt.tif</code>、<code>sar.tif</code>，同一网格、同一尺寸</span><code class="path">work/01_overlap/ROI_xxx/</code></li></ul>
+</section><section class="step">
+<h2 id="tiepoints"><span class="no">人工步骤</span>标控制点</h2>
+<h3>输入</h3><ul class="io"><li><b>重叠区影像</b><span>第一步的输出</span></li></ul>
+<h3>标注规程</h3><table>
+<thead><tr><th>项目</th><th>做法</th></tr></thead>
+<tbody>
+<tr><td>软件</td><td>ENVI</td></tr>
+<tr><td>标注影像</td><td>重叠区影像（光学与 SAR 已重采样到同一网格）</td></tr>
+<tr><td>数量</td><td>每个 ROI 约 30 对；最早标的几个 ROI 较多（最多 150 对），个别难标的 ROI 较少（最少 19 对）</td></tr>
+<tr><td>分布</td><td>沿条带从上到下尽量均匀覆盖</td></tr>
+<tr><td>选点</td><td>在两幅影像中找到对应的小陨石坑，取坑中心；坑越小，定位的相对误差越小</td></tr>
+</tbody></table><p>ROI_073 的控制点最初误标在 ROI_074 的影像上，2026-09-11 重标为 30 对。该 ROI 在训练集，按重标后的控制点重新切片、重新编号，现有 119 对 patch。</p>
+<figure class="absfig"><svg viewBox="0 0 680 300"><rect x="150" y="20" width="130" height="260" class="opt"/><rect x="400" y="20" width="130" height="260" class="sarr"/>
+<text x="150" y="14">光学</text><text x="400" y="14">SAR</text><circle cx="190" cy="60" r="9" class="crater"/><circle cx="438" cy="66" r="9" class="crater"/><path d="M185 60h10M190 55v10" class="cross"/><path d="M433 66h10M438 61v10" class="cross"/><line x1="202" y1="60" x2="426" y2="66" class="tie"/><text x="204" y="50" class="n">1</text><circle cx="230" cy="130" r="9" class="crater"/><circle cx="484" cy="135" r="9" class="crater"/><path d="M225 130h10M230 125v10" class="cross"/><path d="M479 135h10M484 130v10" class="cross"/><line x1="242" y1="130" x2="472" y2="135" class="tie"/><text x="244" y="120" class="n">2</text><circle cx="180" cy="200" r="9" class="crater"/><circle cx="436" cy="207" r="9" class="crater"/><path d="M175 200h10M180 195v10" class="cross"/><path d="M431 207h10M436 202v10" class="cross"/><line x1="192" y1="200" x2="424" y2="207" class="tie"/><text x="194" y="190" class="n">3</text><circle cx="240" cy="250" r="9" class="crater"/><circle cx="495" cy="255" r="9" class="crater"/><path d="M235 250h10M240 245v10" class="cross"/><path d="M490 255h10M495 250v10" class="cross"/><line x1="252" y1="250" x2="483" y2="255" class="tie"/><text x="254" y="240" class="n">4</text></svg><figcaption>示意：两幅重叠区影像中的同一个小陨石坑，取坑中心为一对控制点。</figcaption></figure>
+<h3>输出</h3><ul class="io"><li><b>控制点</b><span>每行一对：光学 x、y，SAR x、y，单位为重叠区影像像素</span><code class="path">data/tie-points/ROI_xxx.pts</code></li></ul>
+</section><section class="step">
+<h2 id="patches"><span class="no">第二步</span>协同切片</h2><code class="script">scripts/02_patches.py</code>
+<h3>输入</h3><ul class="io"><li><b>重叠区影像</b><span>第一步的输出</span></li><li><b>控制点</b><span>人工步骤的输出</span></li></ul>
+<h3>处理</h3><ol class=proc><li>由全部控制点最小二乘解算光学到 SAR 的全局仿射。</li><li>在光学上按 512 × 512、步长 512 滑窗，边缘余量丢弃。</li><li>窗口四角经仿射映射到 SAR，确定 SAR 窗口。</li><li>剔除出界、重叠比低于 70%、含 nodata（0）的窗口。</li><li>按先行后列编号，从 <code>patch_0</code> 起。</li><li>切片，写出光学与 SAR patch。</li></ol>
+<figure class="absfig"><svg viewBox="0 0 680 300"><defs><pattern id="hx" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<line x1="0" y1="0" x2="0" y2="6" stroke="#8C96A1" stroke-width="2"/></pattern></defs><text x="40" y="20">光学：512 × 512 滑窗</text><text x="420" y="20">SAR：经仿射映射的窗口</text>
+<rect x="40" y="30" width="170" height="262" class="opt"/><rect x="40" y="30" width="50" height="50" class="rej"/><rect x="90" y="30" width="50" height="50" class="win"/><text x="96" y="46" class="n">0</text><rect x="140" y="30" width="50" height="50" class="win"/><text x="146" y="46" class="n">1</text><rect x="40" y="80" width="50" height="50" class="win"/><text x="46" y="96" class="n">2</text><rect x="90" y="80" width="50" height="50" class="win"/><text x="96" y="96" class="n">3</text><rect x="140" y="80" width="50" height="50" class="win"/><text x="146" y="96" class="n">4</text><rect x="40" y="130" width="50" height="50" class="win"/><text x="46" y="146" class="n">5</text><rect x="90" y="130" width="50" height="50" class="win"/><text x="96" y="146" class="n">6</text><rect x="140" y="130" width="50" height="50" class="rej"/><rect x="40" y="180" width="50" height="50" class="win"/><text x="46" y="196" class="n">7</text><rect x="90" y="180" width="50" height="50" class="win"/><text x="96" y="196" class="n">8</text><rect x="140" y="180" width="50" height="50" class="win"/><text x="146" y="196" class="n">9</text><rect x="40" y="230" width="50" height="50" class="win"/><text x="46" y="246" class="n">10</text><rect x="90" y="230" width="50" height="50" class="win"/><text x="96" y="246" class="n">11</text><rect x="140" y="230" width="50" height="50" class="rej"/>
+<path d="M 250 160 h 120" class="arr"/><path d="M362 153 l 8 7 l -8 7" class="arrh"/><text x="262" y="150">全局仿射</text>
+<polygon points="470,35 520,32 524,82 474,85" class="win"/><polygon points="520,32 570,29 574,79 524,82" class="win"/><polygon points="424,88 474,85 478,135 428,138" class="win"/><polygon points="474,85 524,82 528,132 478,135" class="win"/><polygon points="524,82 574,79 578,129 528,132" class="win"/><polygon points="428,138 478,135 482,185 432,188" class="win"/><polygon points="478,135 528,132 532,182 482,185" class="win"/><polygon points="432,188 482,185 486,235 436,238" class="win"/><polygon points="482,185 532,182 536,232 486,235" class="win"/><polygon points="532,182 582,179 586,229 536,232" class="win"/><polygon points="436,238 486,235 490,285 440,288" class="win"/><polygon points="486,235 536,232 540,282 490,285" class="win"/></svg><figcaption>示意：斜线格为剔除的窗口；保留的窗口按先行后列编号，编号跳过剔除的格子。</figcaption></figure>
+<h3>输出</h3><ul class="io"><li><b>patch 对</b><span><code>Optical/</code>、<code>SAR/</code>，512 × 512，同号即配对</span><code class="path">work/02_patches/{Train,Val,Test}/ROI_xxx/</code></li><li><b>仿射矩阵与窗口列表</b><span>JSON，供检查</span><code class="path">work/02_patches/…</code></li></ul>
+</section><section class="step"><h2 id="products">产物</h2><p>目录结构、文件格式与标签文件见<a href="#">产物篇</a>（原型未做）。</p></section></article></div></div><div class="pv" data-v="C"><div class="wrap"><h1 class="hc">流程</h1></div>
+<div class="wrap"><nav class="flowC" aria-label="流程图"><svg viewBox="0 0 1100 280" role="img">
+<defs><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1B2733"/></marker></defs>
+<a href="sources.html"><g class="dn"><rect x="20" y="70" width="60" height="60" class="opt"/><rect x="20" y="130" width="60" height="60" class="opt"/><polygon points="100,62 124,58 150,196 126,200" class="sar"/><text x="20" y="232" class="t">原始影像</text><text x="20" y="252" class="s">CE-2 DOM 分幅、Mini-RF 条带</text></g></a>
+<a href="#overlap"><g class="op"><path d="M170 130 H 316" marker-end="url(#ahc)"/><text x="243" y="116" text-anchor="middle">重叠区提取</text><text x="243" y="152" text-anchor="middle" class="m">01_overlap.py</text></g></a>
+<g class="dn"><rect x="330" y="60" width="44" height="140" class="opt"/><rect x="384" y="60" width="44" height="140" class="blank"/><polygon points="392,60 414,60 424,200 402,200" class="sar"/><text x="330" y="232" class="t">重叠区影像</text><text x="330" y="252" class="s">同一网格，7.5 m</text></g>
+<a href="#tiepoints"><g class="op manual"><path d="M446 130 H 616" marker-end="url(#ahc)"/><text x="531" y="116" text-anchor="middle">标控制点</text><text x="531" y="152" text-anchor="middle" class="m">人工，ENVI</text></g></a>
+<g class="dn"><rect x="630" y="60" width="44" height="140" class="opt"/><rect x="684" y="60" width="44" height="140" class="blank"/><polygon points="692,60 714,60 724,200 702,200" class="sar"/><path d="M640 80h10M645 75v10" class="cross"/><path d="M655 130h10M660 125v10" class="cross"/><path d="M643 180h10M648 175v10" class="cross"/><path d="M699 82h10M704 77v10" class="cross"/><path d="M707 132h10M712 127v10" class="cross"/><path d="M711 182h10M716 177v10" class="cross"/><text x="630" y="232" class="t">控制点</text><text x="630" y="252" class="s">约 30 对 / ROI</text></g>
+<a href="#patches"><g class="op"><path d="M746 130 H 916" marker-end="url(#ahc)"/><text x="831" y="116" text-anchor="middle">协同切片</text><text x="831" y="152" text-anchor="middle" class="m">02_patches.py</text></g></a>
+<a href="#products"><g class="dn"><rect x="930" y="80" width="56" height="56" class="opt"/><rect x="939" y="89" width="56" height="56" class="sarp"/><rect x="948" y="98" width="56" height="56" class="opt"/><rect x="957" y="107" width="56" height="56" class="sarp"/><rect x="966" y="116" width="56" height="56" class="opt"/><rect x="975" y="125" width="56" height="56" class="sarp"/><text x="930" y="232" class="t">patch 对</text><text x="930" y="252" class="s">512 × 512</text></g></a>
+</svg></nav></div>
+<div class="wrap narrow"><article class="prose"><section class="step"><h2 id="overlap"><span class="no">第一步</span>重叠区提取</h2><code class="script">scripts/01_overlap.py</code><div class="ioc"><div><h3>输入</h3><ul class="io"><li><b><a href="sources.html">CE-2 DOM</a></b><span>7 m 正射影像分幅，一个 ROI 可跨多幅</span></li><li><b><a href="sources.html">Mini-RF SAR</a></b><span>S 波段条带</span></li></ul></div><div><h3>输出</h3><ul class="io"><li><b>重叠区影像</b><span><code>opt.tif</code>、<code>sar.tif</code>，同一网格、同一尺寸</span><code class="path">work/01_overlap/ROI_xxx/</code></li></ul></div></div><h3>处理</h3><ol class=proc><li>求光学与 SAR 的公共覆盖区。</li><li>把两者统一到同一坐标系和像素网格，cubic 重采样到 7.5 m。</li></ol><figure class="realfig" data-layers="">
+<div class="pairwrap"></div><figcaption>ROI_054 的一段：输出的两幅重叠区影像。</figcaption></figure></section><section class="step"><h2 id="tiepoints"><span class="no">人工步骤</span>标控制点</h2><div class="ioc"><div><h3>输入</h3><ul class="io"><li><b>重叠区影像</b><span>第一步的输出</span></li></ul></div><div><h3>输出</h3><ul class="io"><li><b>控制点</b><span>每行一对：光学 x、y，SAR x、y，单位为重叠区影像像素</span><code class="path">data/tie-points/ROI_xxx.pts</code></li></ul></div></div><h3>标注规程</h3><table>
+<thead><tr><th>项目</th><th>做法</th></tr></thead>
+<tbody>
+<tr><td>软件</td><td>ENVI</td></tr>
+<tr><td>标注影像</td><td>重叠区影像（光学与 SAR 已重采样到同一网格）</td></tr>
+<tr><td>数量</td><td>每个 ROI 约 30 对；最早标的几个 ROI 较多（最多 150 对），个别难标的 ROI 较少（最少 19 对）</td></tr>
+<tr><td>分布</td><td>沿条带从上到下尽量均匀覆盖</td></tr>
+<tr><td>选点</td><td>在两幅影像中找到对应的小陨石坑，取坑中心；坑越小，定位的相对误差越小</td></tr>
+</tbody></table><p>ROI_073 的控制点最初误标在 ROI_074 的影像上，2026-09-11 重标为 30 对。该 ROI 在训练集，按重标后的控制点重新切片、重新编号，现有 119 对 patch。</p><figure class="realfig" data-layers="points">
+<div class="pairwrap"></div><figcaption>同一段上的控制点。</figcaption></figure></section><section class="step"><h2 id="patches"><span class="no">第二步</span>协同切片</h2><code class="script">scripts/02_patches.py</code><div class="ioc"><div><h3>输入</h3><ul class="io"><li><b>重叠区影像</b><span>第一步的输出</span></li><li><b>控制点</b><span>人工步骤的输出</span></li></ul></div><div><h3>输出</h3><ul class="io"><li><b>patch 对</b><span><code>Optical/</code>、<code>SAR/</code>，512 × 512，同号即配对</span><code class="path">work/02_patches/{Train,Val,Test}/ROI_xxx/</code></li><li><b>仿射矩阵与窗口列表</b><span>JSON，供检查</span><code class="path">work/02_patches/…</code></li></ul></div></div><h3>处理</h3><ol class=proc><li>由全部控制点最小二乘解算光学到 SAR 的全局仿射。</li><li>在光学上按 512 × 512、步长 512 滑窗，边缘余量丢弃。</li><li>窗口四角经仿射映射到 SAR，确定 SAR 窗口。</li><li>剔除出界、重叠比低于 70%、含 nodata（0）的窗口。</li><li>按先行后列编号，从 <code>patch_0</code> 起。</li><li>切片，写出光学与 SAR patch。</li></ol><figure class="realfig" data-interactive="1" data-layers=""><div class="stepbtns" role="group" aria-label="逐步查看"><button type="button" data-k="0" aria-pressed="true">1　解算仿射</button><button type="button" data-k="1" aria-pressed="false">2　滑窗</button><button type="button" data-k="2" aria-pressed="false">3　映射</button><button type="button" data-k="3" aria-pressed="false">4　剔除</button><button type="button" data-k="4" aria-pressed="false">5　编号</button></div>
+<div class="pairwrap"></div><figcaption>同一段，逐步点开：控制点解算仿射 → 光学上滑窗 → 映射到 SAR → 剔除 → 编号。</figcaption></figure></section><section class="step"><h2 id="products">产物</h2><p>目录结构、文件格式与标签文件见<a href="#">产物篇</a>（原型未做）。</p></section></article></div></div><div id="proto-bar"><span>流程篇原型</span><a data-v="A">A 横幅流程图</a><a data-v="B">B 竖向线路图</a><a data-v="C">C 数据形态</a></div></main>
+<script src="../assets/data.js"></script>
+<script src="search-index.js"></script>
+<script src="../assets/site.js"></script>
+<script>window.FIG={"roi": "ROI_054", "y0": 9216, "k": 4, "w": 812, "h": 1408, "full_w": 3251, "full_h": 5632, "patch": 512, "points": [[1015.0, 1051.0, 1165.0, 1260.0], [574.0, 1069.0, 701.0, 1279.0], [688.0, 770.0, 819.0, 978.0], [1337.0, 4906.0, 1377.0, 5116.0], [1262.0, 4725.0, 1315.0, 4935.0], [1873.0, 4539.0, 1952.0, 4750.0], [1794.0, 4505.0, 1877.0, 4716.0]], "kept": [{"i": 37, "o": [512, 0], "s": [643, 209]}, {"i": 38, "o": [1024, 0], "s": [1131, 209]}, {"i": 39, "o": [1536, 0], "s": [1618, 208]}, {"i": 40, "o": [2048, 0], "s": [2106, 208]}, {"i": 41, "o": [512, 512], "s": [649, 721]}, {"i": 42, "o": [1024, 512], "s": [1137, 721]}, {"i": 43, "o": [1536, 512], "s": [1624, 721]}, {"i": 44, "o": [2048, 512], "s": [2112, 720]}, {"i": 45, "o": [512, 1024], "s": [655, 1233]}, {"i": 46, "o": [1024, 1024], "s": [1143, 1233]}, {"i": 47, "o": [1536, 1024], "s": [1630, 1233]}, {"i": 48, "o": [2048, 1024], "s": [2118, 1232]}, {"i": 49, "o": [512, 1536], "s": [661, 1745]}, {"i": 50, "o": [1024, 1536], "s": [1149, 1745]}, {"i": 51, "o": [1536, 1536], "s": [1636, 1745]}, {"i": 52, "o": [2048, 1536], "s": [2124, 1745]}, {"i": 53, "o": [512, 2048], "s": [668, 2258]}, {"i": 54, "o": [1024, 2048], "s": [1155, 2257]}, {"i": 55, "o": [1536, 2048], "s": [1643, 2257]}, {"i": 56, "o": [2048, 2048], "s": [2130, 2257]}, {"i": 57, "o": [512, 2560], "s": [674, 2770]}, {"i": 58, "o": [1024, 2560], "s": [1161, 2770]}, {"i": 59, "o": [1536, 2560], "s": [1649, 2769]}, {"i": 60, "o": [512, 3072], "s": [680, 3282]}, {"i": 61, "o": [1024, 3072], "s": [1167, 3282]}, {"i": 62, "o": [1536, 3072], "s": [1655, 3281]}, {"i": 63, "o": [512, 3584], "s": [686, 3794]}, {"i": 64, "o": [1024, 3584], "s": [1173, 3794]}, {"i": 65, "o": [1536, 3584], "s": [1661, 3794]}, {"i": 66, "o": [512, 4096], "s": [692, 4306]}, {"i": 67, "o": [1024, 4096], "s": [1180, 4306]}, {"i": 68, "o": [1536, 4096], "s": [1667, 4306]}, {"i": 69, "o": [512, 4608], "s": [698, 4818]}, {"i": 70, "o": [1024, 4608], "s": [1186, 4818]}, {"i": 71, "o": [1536, 4608], "s": [1673, 4818]}, {"i": 72, "o": [512, 5120], "s": [704, 5331]}, {"i": 73, "o": [1024, 5120], "s": [1192, 5330]}, {"i": 74, "o": [1536, 5120], "s": [1679, 5330]}], "rejected": [[0, 0], [2560, 0], [0, 512], [2560, 512], [0, 1024], [2560, 1024], [0, 1536], [2560, 1536], [0, 2048], [2560, 2048], [0, 2560], [2560, 2560], [0, 3072], [2048, 3072], [2560, 3072], [0, 3584], [2048, 3584], [2560, 3584], [0, 4096], [2048, 4096], [2560, 4096], [0, 4608], [2048, 4608], [2560, 4608], [0, 5120], [2048, 5120], [2560, 5120]], "removed": [[512, -1024], [2048, 2560]]};
+/* PROTOTYPE：流程篇三个方案的切换、真实影像配图、逐步点开、滚动高亮。 */
+(function () {
+  var V = new URLSearchParams(location.search).get('variant') || 'A';
+  var keys = ['A', 'B', 'C'];
+  if (keys.indexOf(V) < 0) V = 'A';
+  document.querySelectorAll('.pv').forEach(function (el) { if (el.dataset.v !== V) el.remove(); });
+  document.querySelectorAll('#proto-bar a').forEach(function (a) {
+    a.href = '?variant=' + a.dataset.v;
+    if (a.dataset.v === V) a.setAttribute('aria-current', 'page');
+  });
+  document.addEventListener('keydown', function (e) {
+    var t = document.activeElement;
+    if (t && (t.tagName === 'INPUT' || t.isContentEditable)) return;
+    var i = keys.indexOf(V);
+    if (e.key === 'ArrowLeft') location.search = '?variant=' + keys[(i + 2) % 3];
+    if (e.key === 'ArrowRight') location.search = '?variant=' + keys[(i + 1) % 3];
+  });
+
+  var NS = 'http://www.w3.org/2000/svg', F = window.FIG, K = F.k, P = F.patch / K;
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  var uid = 0;
+  function panel(wrap, img, label) {
+    var f = document.createElement('div'); f.className = 'panel';
+    var s = el('svg', { viewBox: '0 0 ' + F.w + ' ' + F.h, preserveAspectRatio: 'xMidYMin meet' }, f);
+    var pid = 'h' + (uid++);
+    var d = el('defs', {}, s);
+    var p = el('pattern', { id: pid, width: 8, height: 8, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, d);
+    el('rect', { width: 8, height: 8, fill: 'rgba(27,39,51,.55)' }, p);
+    el('line', { x1: 0, y1: 0, x2: 0, y2: 8, stroke: 'rgba(255,255,255,.55)', 'stroke-width': 2 }, p);
+    el('image', { href: '../assets/process/' + img, x: 0, y: 0, width: F.w, height: F.h }, s);
+    var cap = document.createElement('div'); cap.className = 'plabel'; cap.textContent = label; f.appendChild(cap);
+    wrap.appendChild(f);
+    return { svg: s, hatch: 'url(#' + pid + ')', layers: {} };
+  }
+  function layer(pn, name) { return pn.layers[name] = el('g', { class: 'ly ' + name }, pn.svg); }
+
+  function draw(fig) {
+    var wrap = fig.querySelector('.pairwrap');
+    var o = panel(wrap, 'opt.png', '光学'), s = panel(wrap, 'sar.png', 'SAR');
+    // 候选窗口（滑窗）
+    var cand = layer(o, 'cand');
+    F.kept.concat(F.rejected.map(function (r) { return { o: r }; })).concat(F.removed.map(function (r) { return { o: r }; }))
+      .forEach(function (w) { el('rect', { x: w.o[0] / K, y: w.o[1] / K, width: P, height: P }, cand); });
+    // 剔除
+    var rej = layer(o, 'rejected');
+    F.rejected.concat(F.removed).forEach(function (r) { el('rect', { x: r[0] / K, y: r[1] / K, width: P, height: P, fill: o.hatch }, rej); });
+    // 保留窗口（光学、SAR），带编号
+    var ko = layer(o, 'windows'), ks = layer(s, 'sar'), no = layer(o, 'numbers');
+    F.kept.forEach(function (w) {
+      var a = el('rect', { x: w.o[0] / K, y: w.o[1] / K, width: P, height: P, 'data-i': w.i }, ko);
+      var b = el('rect', { x: w.s[0] / K, y: w.s[1] / K, width: P, height: P, 'data-i': w.i }, ks);
+      var t = el('text', { x: w.o[0] / K + 7, y: w.o[1] / K + 24 }, no); t.textContent = w.i;
+      [a, b].forEach(function (r) {
+        r.addEventListener('mouseenter', function () { a.classList.add('on'); b.classList.add('on'); fig.classList.add('whl'); });
+        r.addEventListener('mouseleave', function () { a.classList.remove('on'); b.classList.remove('on'); fig.classList.remove('whl'); });
+      });
+    });
+    // 控制点
+    var po = layer(o, 'points'), ps = layer(s, 'points');
+    F.points.forEach(function (p, i) {
+      [[po, p[0], p[1]], [ps, p[2], p[3]]].forEach(function (q) {
+        var g = el('g', { transform: 'translate(' + q[1] / K + ',' + q[2] / K + ')' }, q[0]);
+        el('circle', { r: 16 }, g);
+        el('path', { d: 'M-26 0h18M8 0h18M0 -26v18M0 8v18' }, g);
+        var t = el('text', { x: 20, y: -18 }, g); t.textContent = i + 1;
+      });
+    });
+    return function show(names) {
+      [o, s].forEach(function (pn) {
+        for (var k in pn.layers) pn.layers[k].style.display = names.indexOf(k) >= 0 ? '' : 'none';
+      });
+    };
+  }
+
+  var STEPS = [['points'], ['points', 'cand'], ['cand', 'windows', 'sar'], ['rejected', 'windows', 'sar'], ['rejected', 'windows', 'sar', 'numbers']];
+  document.querySelectorAll('.realfig').forEach(function (fig) {
+    var show = draw(fig);
+    if (!fig.dataset.interactive) { show(fig.dataset.layers.split(',')); return; }
+    var btns = fig.querySelectorAll('.stepbtns button');
+    function go(k) {
+      show(STEPS[k]);
+      btns.forEach(function (b, i) { b.setAttribute('aria-pressed', String(i === k)); });
+    }
+    btns.forEach(function (b, i) { b.addEventListener('click', function () { go(i); }); });
+    go(0);
+  });
+
+  // 方案 B：随滚动高亮当前步骤
+  var rail = document.querySelector('.flowB');
+  if (rail) {
+    var heads = document.querySelectorAll('.prose h2[id]');
+    function spy() {
+      var cur = null;
+      heads.forEach(function (h) { if (h.getBoundingClientRect().top < window.innerHeight * 0.35) cur = h.id; });
+      rail.querySelectorAll('li[data-for]').forEach(function (li) { li.classList.toggle('on', li.dataset.for === cur); });
+    }
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  }
+})();
+</script>
+</body></html>

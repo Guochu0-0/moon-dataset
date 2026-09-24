@@ -1,0 +1,136 @@
+/* PROTOTYPE：流程篇。只用月面图集已有的颜色。 */
+
+/* 共用：步骤标题、输入输出、处理列表 */
+.step { margin-bottom: 3.2em; }
+.step h2 { margin-bottom: .1em; display: flex; align-items: baseline; gap: 12px; scroll-margin-top: 72px; }
+.step h2 .no { font-size: 14px; font-weight: 600; color: var(--ink2); border: 1px solid var(--rule); border-radius: 3px; padding: 1px 8px; }
+.step h2#products { display: block; }
+.script { display: inline-block; margin-bottom: .6em; font-size: 13.5px; }
+.script.manual { color: var(--ink2); border: 1px dashed var(--ink2); border-radius: 3px; padding: 0 8px; font-size: 13px; }
+.step h3 { font-size: 13px; font-weight: 600; color: var(--ink2); margin: 1.6em 0 .4em; letter-spacing: .02em; }
+.io { list-style: none; padding: 0; margin: 0; }
+.io li { display: grid; grid-template-columns: 9em minmax(0, 1fr); column-gap: 14px; padding: 6px 0; border-bottom: 1px solid var(--rule); }
+.io li b { font-weight: 600; }
+.io li .path { grid-column: 2; justify-self: start; margin-top: 2px; }
+.proc { padding-left: 1.4em; margin: 0; }
+.proc li { padding: 3px 0; }
+.proc li::marker { color: var(--ink2); font-weight: 600; }
+
+/* 真实影像配图 */
+.realfig { margin: 1.6em 0 .6em; }
+.pairwrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: var(--frame); padding: 10px; border-radius: 4px; max-width: 560px; }
+.panel { position: relative; }
+.panel svg { display: block; width: 100%; height: auto; background: #000; }
+.plabel { position: absolute; left: 8px; top: 6px; font-size: 12px; color: #fff; background: rgba(27, 39, 51, .7); padding: 0 6px; border-radius: 2px; }
+.realfig figcaption { font-size: 13px; color: var(--ink2); margin-top: 8px; max-width: 560px; }
+.ly.cand rect { fill: none; stroke: rgba(255, 255, 255, .55); stroke-width: 1.5px; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; }
+.ly.rejected rect { stroke: rgba(255, 255, 255, .35); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.ly.windows rect, .ly.sar rect { fill: rgba(227, 155, 27, 0); stroke: #fff; stroke-width: 1.4px; vector-effect: non-scaling-stroke; cursor: crosshair; }
+.ly.windows rect.on, .ly.sar rect.on { fill: rgba(227, 155, 27, .35); stroke: var(--test); stroke-width: 3px; }
+.ly.numbers text { fill: #fff; font: 600 20px var(--sans); paint-order: stroke; stroke: rgba(0, 0, 0, .7); stroke-width: 3px; pointer-events: none; }
+.ly.points circle { fill: none; stroke: var(--test); stroke-width: 3px; }
+.ly.points path { stroke: var(--test); stroke-width: 3px; }
+.ly.points text { fill: #fff; font: 600 26px var(--sans); paint-order: stroke; stroke: #000; stroke-width: 4px; }
+.stepbtns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.stepbtns button { font: 14px var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 4px; padding: 4px 12px; cursor: pointer; }
+.stepbtns button[aria-pressed=true] { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+/* ---------- A 横幅流程图 ---------- */
+.bandA { background: var(--frame); color: #fff; padding: 28px 0 30px; }
+.bandA h1 { color: #fff; margin: 0 0 10px; }
+.flowA { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+.flowA svg { display: block; width: 100%; height: auto; font-family: var(--sans); }
+.flowA .e { fill: none; stroke: rgba(255, 255, 255, .75); stroke-width: 1.6px; }
+.flowA .e.dim { stroke: rgba(255, 255, 255, .35); stroke-dasharray: 4 4; }
+.flowA .lab { fill: rgba(255, 255, 255, .7); font-size: 13px; }
+.flowA .in rect { fill: rgba(255, 255, 255, .06); stroke: rgba(255, 255, 255, .4); }
+.flowA .in text { fill: #fff; font-size: 16px; font-weight: 600; } .flowA .in text.s { fill: rgba(255, 255, 255, .65); font-size: 13px; font-weight: 400; }
+.flowA .node rect:first-child { fill: #24344A; stroke: rgba(255, 255, 255, .5); stroke-width: 1.2px; }
+.flowA .node.manual rect:first-child { stroke-dasharray: 6 5; fill: transparent; }
+.flowA .node text { fill: #fff; font-size: 19px; font-weight: 600; } .flowA .node text.k { fill: rgba(255, 255, 255, .6); font-size: 13px; font-weight: 400; }
+.flowA .node .subs text { font-size: 13px; font-weight: 400; fill: rgba(255, 255, 255, .8); }
+.flowA .node .g { fill: none; stroke: #fff; stroke-width: 1px; }
+.flowA .cp circle { fill: none; stroke: var(--test); stroke-width: 2.4px; }
+.flowA .out rect { stroke: #fff; stroke-width: 1px; } .flowA .t1 { fill: #6E7B88; } .flowA .t2 { fill: #3A4756; } .flowA .t3 { fill: #9AA4AE; }
+.flowA .out text { fill: #fff; font-size: 14px; font-weight: 600; }
+.flowA a:hover .node rect:first-child, .flowA a:focus .node rect:first-child { stroke: #fff; stroke-width: 2.4px; }
+.flowA a:hover .in rect { stroke: #fff; }
+
+/* ---------- B 竖向线路图兼目录 ---------- */
+.layoutB { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 64px; padding-top: 36px; padding-bottom: 96px; }
+.layoutB .prose h1 { margin-bottom: 1em; }
+.flowB { position: sticky; top: 76px; align-self: start; }
+.flowB ol { list-style: none; margin: 0; padding: 0; position: relative; }
+.flowB > ol::before { content: ""; position: absolute; left: 9px; top: 14px; bottom: 14px; width: 2px; background: var(--ink); }
+.flowB li { position: relative; padding-left: 34px; }
+.flowB li.st { padding-top: 6px; padding-bottom: 6px; }
+.flowB li.st::before { content: ""; position: absolute; left: 2px; top: 12px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+.flowB li.st.in::before { border-radius: 2px; background: var(--ink); }
+.flowB li.st.manual::before { border-style: dashed; }
+.flowB li.st.on::before { background: var(--val); border-color: var(--val); box-shadow: 0 0 0 4px rgba(46, 123, 214, .2); }
+.flowB li.st a { display: block; color: var(--ink); text-decoration: none; line-height: 1.45; }
+.flowB li.st a:hover b { text-decoration: underline; text-underline-offset: 3px; }
+.flowB li.st .k { display: block; font-size: 12px; color: var(--ink2); }
+.flowB li.st b { display: block; font-size: 17px; font-weight: 600; }
+.flowB li.st.on b { color: var(--val); }
+.flowB li.st small { display: block; font-size: 12.5px; color: var(--ink2); }
+.flowB li.st small code { font-size: 12px; }
+.flowB li.data { font-size: 12.5px; color: var(--ink2); padding-top: 2px; padding-bottom: 8px; }
+.flowB li.data::before { content: "↓"; position: absolute; left: 3px; top: 0; font-size: 12px; background: var(--paper); color: var(--ink2); line-height: 1.4; }
+.flowB .subs { list-style: none; margin: 6px 0 0; padding: 0; counter-reset: s; }
+.flowB .subs li { padding-left: 0; font-size: 13px; color: var(--ink2); counter-increment: s; }
+.flowB .subs li::before { content: counter(s) "　"; color: var(--rule); font-weight: 600; }
+.absfig { margin: 1.6em 0 .6em; }
+.absfig svg { display: block; width: 100%; max-width: 640px; height: auto; background: #fff; border: 1px solid var(--rule); border-radius: 4px; font-family: var(--sans); }
+.absfig text { font-size: 13px; fill: var(--ink2); }
+.absfig text.n { font-size: 11px; fill: var(--ink); font-weight: 600; }
+.absfig .opt { fill: #D5DADF; stroke: var(--ink); stroke-width: 1px; }
+.absfig .sarr { fill: #3A4756; stroke: var(--ink); }
+.absfig .sar { fill: rgba(58, 71, 86, .85); stroke: var(--ink); }
+.absfig .blank { fill: none; stroke: var(--ink); stroke-dasharray: 3 3; }
+.absfig .seam { stroke: var(--ink2); stroke-dasharray: 3 3; }
+.absfig .px line { stroke: rgba(27, 39, 51, .18); stroke-width: .6px; }
+.absfig .arr { stroke: var(--ink); stroke-width: 1.4px; fill: none; } .absfig .arrh { fill: none; stroke: var(--ink); stroke-width: 1.4px; }
+.absfig .crater { fill: rgba(27, 39, 51, .12); stroke: var(--ink2); }
+.absfig .sarr ~ .crater { fill: rgba(255, 255, 255, .15); }
+.absfig .cross { stroke: var(--test); stroke-width: 2px; }
+.absfig .tie { stroke: var(--test); stroke-width: 1px; stroke-dasharray: 3 3; opacity: .7; }
+.absfig .win { fill: rgba(255, 255, 255, .5); stroke: var(--ink); stroke-width: 1px; }
+.absfig .rej { fill: url(#hx); stroke: var(--ink2); stroke-width: 1px; }
+
+/* ---------- C 数据形态 ---------- */
+.hc { margin-top: 36px; }
+.flowC svg { display: block; width: 100%; height: auto; font-family: var(--sans); background: #fff; border: 1px solid var(--rule); border-radius: 4px; }
+.flowC .dn .opt { fill: #D5DADF; stroke: var(--ink); stroke-width: 1px; }
+.flowC .dn .sar { fill: #3A4756; stroke: var(--ink); stroke-width: 1px; }
+.flowC .dn .sarp { fill: #3A4756; stroke: #fff; stroke-width: 1px; }
+.flowC .dn .blank { fill: none; stroke: var(--ink); stroke-dasharray: 3 3; }
+.flowC .dn .cross { stroke: var(--test); stroke-width: 2px; }
+.flowC .dn .t { font-size: 16px; font-weight: 600; fill: var(--ink); } .flowC .dn .s { font-size: 13px; fill: var(--ink2); }
+.flowC .op path { stroke: var(--ink); stroke-width: 1.6px; fill: none; }
+.flowC .op.manual path { stroke-dasharray: 6 5; }
+.flowC .op text { font-size: 17px; font-weight: 600; fill: var(--ink); } .flowC .op text.m { font: 13px var(--mono); fill: var(--ink2); }
+.flowC a:hover .op text:first-of-type { fill: var(--link); text-decoration: underline; }
+.flowC a:hover .op path { stroke: var(--link); }
+.narrow { max-width: 860px; padding-top: 24px; padding-bottom: 96px; }
+.ioc { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.ioc .io li { grid-template-columns: minmax(0, 1fr); }
+.ioc .io li .path { grid-column: 1; }
+
+.absfig .common { fill: rgba(227, 155, 27, .12); stroke: var(--test); stroke-width: 1.6px; stroke-dasharray: 5 4; }
+.absfig .ab-l .sar { fill: rgba(58, 71, 86, .6); }
+.ly.points circle { r: 20px; stroke-width: 4px; }
+.ly.points path { stroke-width: 3px; }
+.ly.points text { font-size: 34px; }
+
+/* 原型切换条 */
+#proto-bar { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 999; display: flex; gap: 6px; align-items: center;
+  background: #000; color: #fff; border-radius: 999px; padding: 5px 8px 5px 14px; font: 13px/1.2 system-ui, "Microsoft YaHei"; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); }
+#proto-bar span { opacity: .6; margin-right: 4px; }
+#proto-bar a { color: #fff; text-decoration: none; padding: 4px 10px; border-radius: 999px; }
+#proto-bar a[aria-current] { background: #fff; color: #000; }
+
+@media (max-width: 860px) {
+  .layoutB { grid-template-columns: minmax(0, 1fr); } .flowB { position: static; }
+  .ioc { grid-template-columns: minmax(0, 1fr); }
+}
