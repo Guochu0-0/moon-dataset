@@ -332,7 +332,7 @@ def _data_page(body: str, page: Page) -> str:
     for other in DATA_PAGES:
         current = ' aria-current="page"' if other == page else ""
         links.append(f'<a href="{_root(page.path)}{other.path}"{current}>{other.section}</a>')
-    wide = " wide" if page.path.endswith("statistics.html") else ""
+    wide = " wide" if page.path.endswith(("statistics.html", "difficulty.html")) else ""  # PROTOTYPE #47
     return f"""<div class="doc wrap">
 <nav class="sections" aria-label="数据说明">{"".join(links)}</nav>
 <article class="prose{wide}">{body}</article>
@@ -516,8 +516,8 @@ def _dataset_facts(roi: Roi) -> str:
         proto = Path(__file__).parents[2] / "docs" / "assets" / "prototype-difficulty" / "roi.json"
         if proto.exists() and roi.roi in (d := json.loads(proto.read_text(encoding="utf-8"))):
             r = d[roi.roi]
-            rows.append(("样本难度", f'点上 RMSE 中位 {r["p50"]:.1f} 像素，10–90 分位 {r["p10"]:.1f}–{r["p90"]:.1f}；'
-                         f'{r["of"]} 个 ROI 中第 {r["rank"]} 难（<a href="../data/difficulty.html">样本难度</a>）'))
+            rows.append(('<a href="../data/difficulty.html">样本难度</a>',
+                         f'点上 RMSE 中位 {r["p50"]:.1f} 像素，10–90 分位 {r["p10"]:.1f}–{r["p90"]:.1f} 像素'))
     rows += [
         ("中心", f"{_lat(roi.lat)}，{_lon(roi.lon)}"),
         ("范围", f"{_lat(south)}–{_lat(north)}，{_lon(west)}–{_lon(east)}"),

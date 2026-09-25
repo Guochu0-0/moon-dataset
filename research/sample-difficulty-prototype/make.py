@@ -165,7 +165,17 @@ def fig_example():
     opt = Image.open(REPO / "docs" / "assets" / "samples" / f"{roi}_p{patch}_opt.jpg").convert("L")
     sar = Image.open(REPO / "docs" / "assets" / "samples" / f"{roi}_p{patch}_sar.jpg").convert("L")
 
-    fig, ax = plt.subplots(1, 4, figsize=(11.5, 3.2), gridspec_kw={"width_ratios": [1, 1, 1, 1.15]})
+    for shape, size, name in (((1, 4), (11.5, 3.2), "example.png"), ((2, 2), (6.0, 6.2), "example-grid.png")):
+        fig, ax = plt.subplots(*shape, figsize=size)
+        draw_example(ax.ravel(), opt, sar, p, qq, dist, rmse)
+        fig.tight_layout()
+        fig.savefig(OUT_ASSETS / name)
+        plt.close(fig)
+    return {"roi": roi, "patch": patch, "split": split, "n": len(dist), "rmse": rmse,
+            "dx_min": float(d[:, 0].min()), "dx_max": float(d[:, 0].max())}
+
+
+def draw_example(ax, opt, sar, p, qq, dist, rmse):
     red, cyan = "#E0402B", "#19B5C8"
     for k, (img, pts, col, title) in enumerate([(opt, p, red, "① 光学 patch：点 pᵢ"),
                                                 (sar, qq, cyan, "② SAR patch：同名点 qᵢ")]):
@@ -195,12 +205,20 @@ def fig_example():
     ax[3].set_xlabel("点 i")
     ax[3].set_ylabel("|dᵢ|（像素）")
     ax[3].set_title("④ 距离的均方根", fontsize=9)
-    fig.tight_layout()
-    fig.savefig(OUT_ASSETS / "example.png")
-    plt.close(fig)
-    return {"roi": roi, "patch": patch, "split": split, "n": len(dist), "rmse": rmse,
-            "dmin": float(dist.min()), "dmax": float(dist.max()), "dx": float(d[:, 0].mean()), "dy": float(d[:, 1].mean()),
-            "dx_min": float(d[:, 0].min()), "dx_max": float(d[:, 0].max()), "dy_absmax": float(np.abs(d[:, 1]).max())}
+
+
+def fig_sparklines(rows, rois):
+    """每个 ROI 一条沿条带的迷你曲线，给「以 ROI 表为主轴」的变体用。"""
+    for roi in rois:
+        s = sorted((r for r in rows if r["roi"] == roi["roi"]), key=lambda r: r["row"])
+        fig, ax = plt.subplots(figsize=(1.9, .42))
+        ax.scatter([r["row"] for r in s], [r["rmse"] for r in s], s=1.5, color=C[roi["split"]], lw=0)
+        ax.set_yscale("log")
+        ax.set_ylim(2, 300)
+        ax.axis("off")
+        fig.subplots_adjust(0, 0, 1, 1)
+        fig.savefig(OUT_ASSETS / f"spark-{roi['roi']}.png")
+        plt.close(fig)
 
 
 def main():
@@ -219,6 +237,7 @@ def main():
     fig_box(rows, rois)
     fig_dxdy(rows)
     fig_strip(rows, rois)
+    fig_sparklines(rows, rois)
 
     stats = {"n": len(rows), **{f"p{p}": q(all_rmse, p) for p in (10, 25, 50, 75, 90, 99)},
              "max": max(all_rmse), "min_n": min(r["n"] for r in rows), "med_n": float(np.median([r["n"] for r in rows]))}
@@ -245,112 +264,234 @@ def f(v):
     return f"{v:.1f}" if v < 100 else f"{v:.0f}"
 
 
-def roi_table(rois):
-    body = "".join(
-        f"<tr><td><a href=\"../rois/{r['roi']}.html\">{r['roi']}</a></td><td>{SPLIT_CN[r['split']]}</td>"
-        f"<td>{r['incidence']:.1f}°</td><td>{r['patches']}</td><td>{f(r['p10'])}</td><td>{f(r['p50'])}</td>"
-        f"<td>{f(r['p90'])}</td></tr>" for r in rois)
-    return ("<table><thead><tr><th>ROI</th><th>划分</th><th>入射角</th><th>patch</th><th>10 分位</th>"
-            f"<th>中位</th><th>90 分位</th></tr></thead><tbody>{body}</tbody></table>")
+LOG_LO, LOG_HI = 2, 300
+"""范围条的对数刻度（像素）。"""
+
+
+def _x(v, width):
+    return width * (np.log(v) - np.log(LOG_LO)) / (np.log(LOG_HI) - np.log(LOG_LO))
+
+
+def range_bar(r, width=200):
+    lo, mid, hi = _x(r["p10"], width), _x(r["p50"], width), _x(r["p90"], width)
+    col = C[r["split"]]
+    return (f'<svg width="{width}" height="14" class="rbar"><rect x="0" y="6" width="{width}" height="2" fill="#E3E7EA"/>'
+            f'<rect x="{lo:.1f}" y="3" width="{hi - lo:.1f}" height="8" rx="2" fill="{col}" opacity=".55"/>'
+            f'<rect x="{mid - 1:.1f}" y="1" width="2" height="12" fill="{C["ink"]}"/></svg>')
+
+
+def range_axis(width=200):
+    ticks = "".join(f'<span style="left:{_x(v, width):.0f}px">{v}</span>' for v in (2, 5, 10, 20, 50, 100, 200))
+    return f'<div class="raxis" style="width:{width}px">{ticks}</div>'
 
 
 def page(s, rois, ex):
-    img = lambda name, alt: f'<figure><img src="../assets/prototype-difficulty/{name}" alt="{alt}" style="max-width:100%"></figure>'
-    quant = ("<table><thead><tr><th></th><th>10 分位</th><th>25</th><th>中位</th><th>75</th><th>90</th><th>99</th>"
-             f"<th>最大</th></tr></thead><tbody><tr><td>点上 RMSE（像素）</td><td>{f(s['p10'])}</td><td>{f(s['p25'])}</td>"
-             f"<td>{f(s['p50'])}</td><td>{f(s['p75'])}</td><td>{f(s['p90'])}</td><td>{f(s['p99'])}</td><td>{f(s['max'])}</td>"
-             f"</tr><tr><td>约合米</td><td>{s['p10']*PIXEL_M:.0f}</td><td>{s['p25']*PIXEL_M:.0f}</td><td>{s['p50']*PIXEL_M:.0f}</td>"
-             f"<td>{s['p75']*PIXEL_M:.0f}</td><td>{s['p90']*PIXEL_M:.0f}</td><td>{s['p99']*PIXEL_M:.0f}</td>"
-             f"<td>{s['max']*PIXEL_M:.0f}</td></tr></tbody></table>")
+    easiest = min(rois, key=lambda r: r["p50"])
+    hardest = max(rois, key=lambda r: r["p50"])
+    img = lambda name, alt, cls="": f'<img src="../assets/prototype-difficulty/{name}" alt="{alt}" class="{cls}">'
+
+    # ---- 正文：四个变体共用 ----
+    define = (
+        "<p>样本难度用<b>点上 RMSE</b> 衡量：一个 patch 对上，每对评测真值点的光学位置 p<sub>i</sub> 与 SAR 位置 "
+        "q<sub>i</sub> 之间距离的均方根。单位是像素，1 像素 = 7.5 m。</p>"
+        '<p class="formula">点上 RMSE = √( (1/N) · Σ<sub>i</sub> |q<sub>i</sub> − p<sub>i</sub>|² )</p>'
+        "<p>p<sub>i</sub>、q<sub>i</sub> 是各自 patch 内的像素坐标，N 是这个 patch 对上的点数。它等于不做配准时"
+        "在评测真值点上的误差，两个 patch 完全对齐时为 0。真值点的文件格式见"
+        '<a href="organization.html#标签文件">组织</a>。</p>')
+    caption = (f"{ex['roi']} 的 patch {ex['patch']}，{ex['n']} 对点，点上 RMSE {ex['rmse']:.1f} 像素。"
+               "① ② 两个 patch 上的同名点；③ 放进同一坐标，箭头从 p<sub>i</sub> 指向 q<sub>i</sub>；"
+               "④ 各对点的距离，横线是它们的均方根。")
+    t_dist = (f"验证集、测试集里有评测真值点的 {s['n']} 个 patch 对都有值。中位 {f(s['p50'])} 像素（约 "
+              f"{s['p50'] * PIXEL_M:.0f} m），90% 在 {f(s['p90'])} 像素以内。验证集、测试集的中位分别为 "
+              f"{f(s['Val']['p50'])} 与 {f(s['Test']['p50'])} 像素。")
+    t_roi = (f"中位最小的是 {easiest['roi']}（{f(easiest['p50'])} 像素），最大的是 "
+             f"{hardest['roi']}（{f(hardest['p50'])} 像素）。入射角越小的 ROI 越难。")
+    t_dir = (f"x 方向接近 SAR 的距离向。只算 y 方向时，RMSE 的中位是 {s['ry50']:.1f} 像素。"
+             f"同一个 patch 里各对点的 x 错位也不相同，示例 patch 里从 {ex['dx_min']:.1f} 到 +{ex['dx_max']:.1f} 像素。")
+    t_strip = "相邻 patch 的值相近，易段与难段交替。"
+    t_err = "评测真值点本身有约 1 像素的标注误差，对 10 像素以上的值影响可以忽略。"
+    h = {"dist": f"中位 {s['p50']:.0f} 像素，测试集更难", "roi": "ROI 之间相差一个数量级",
+         "dir": "错位几乎都在 x 方向", "strip": "沿条带成段起伏"}
+    quant = ("<table><thead><tr><th>分位</th><th>10</th><th>25</th><th>50</th><th>75</th><th>90</th><th>99</th>"
+             f"<th>最大</th></tr></thead><tbody><tr><td>像素</td>"
+             + "".join(f"<td>{f(s[k])}</td>" for k in ("p10", "p25", "p50", "p75", "p90", "p99", "max"))
+             + "</tr><tr><td>米</td>"
+             + "".join(f"<td>{s[k] * PIXEL_M:.0f}</td>" for k in ("p10", "p25", "p50", "p75", "p90", "p99", "max"))
+             + "</tr></tbody></table>")
+    roi_rows = "".join(
+        f"<tr><td><a href=\"../rois/{r['roi']}.html\">{r['roi']}</a></td><td>{SPLIT_CN[r['split']]}</td>"
+        f"<td>{r['incidence']:.1f}°</td><td>{r['patches']}</td><td>{f(r['p10'])}</td><td>{f(r['p50'])}</td>"
+        f"<td>{f(r['p90'])}</td></tr>" for r in rois)
+    roi_table = ("<table><thead><tr><th>ROI</th><th>划分</th><th>入射角</th><th>patch 对</th><th>10 分位</th>"
+                 f"<th>中位</th><th>90 分位</th></tr></thead><tbody>{roi_rows}</tbody></table>")
+    fig = lambda name, alt, cap: f"<figure>{img(name, alt)}<figcaption>{cap}</figcaption></figure>"
+    example = fig("example.png", "点上 RMSE 的计算示例", caption)
+
+    # ---- A：数字卡 + 图墙 ----
+    cards = "".join(f'<div class="card"><b>{v}</b><span>{k}</span></div>' for v, k in (
+        (f"{s['n']}", "个 patch 对有值"), (f"{f(s['p50'])}", f"中位（像素，约 {s['p50'] * PIXEL_M:.0f} m）"),
+        (f"{f(s['p90'])}", "90 分位（像素）"), (f"{f(s['Val']['p50'])} / {f(s['Test']['p50'])}", "验证集 / 测试集中位")))
+    tiles = "".join(f'<figure class="tile">{img(n, a, "zoom")}<figcaption><b>{h[k]}</b>{t}</figcaption></figure>'
+                    for n, a, k, t in (("cdf.png", "累计分布", "dist", t_dist), ("box-roi.png", "各 ROI", "roi", t_roi),
+                                       ("dxdy.png", "错位方向", "dir", t_dir), ("strip.png", "沿条带", "strip", t_strip)))
+    var_a = f"""<div data-variant="A" data-name="数字卡 + 图墙">
+<div class="cards">{cards}</div>
+<details class="box"><summary>点上 RMSE 是什么、怎么算</summary>{define}{example}</details>
+<div class="tiles">{tiles}</div>
+<details class="box"><summary>分位数与各 ROI 的数值</summary>{quant}{roi_table}</details>
+<p class="note">{t_err}</p>
+</div>"""
+
+    # ---- B：以 ROI 表为主轴 ----
+    b_rows = "".join(
+        f'<tr data-roi="{r["roi"]}" data-inc="{r["incidence"]}" data-med="{r["p50"]}">'
+        f'<td><a href="../rois/{r["roi"]}.html">{r["roi"]}</a></td><td><span class="sw {r["split"]}"></span>{SPLIT_CN[r["split"]]}</td>'
+        f'<td>{r["incidence"]:.1f}°</td><td>{r["patches"]}</td><td><b>{f(r["p50"])}</b></td>'
+        f'<td>{range_bar(r)}</td><td>{img("spark-" + r["roi"] + ".png", r["roi"] + " 沿条带", "spark")}</td></tr>'
+        for r in rois)
+    var_b = f"""<div data-variant="B" data-name="以 ROI 表为主轴">
+<div class="split2">
+<div>{define}<details class="box"><summary>计算示例</summary>{example}</details></div>
+<figure>{img("cdf.png", "累计分布")}<figcaption>{t_dist}</figcaption></figure>
+</div>
+<h2>{h["roi"]}</h2>
+<p>{t_roi} {t_strip}</p>
+<table class="spine"><thead><tr><th data-key="roi">ROI</th><th>划分</th><th data-key="inc">入射角 ↕</th><th>patch 对</th>
+<th data-key="med">中位 ↕</th><th>10–90 分位（像素，对数）{range_axis()}</th><th>沿条带</th></tr></thead><tbody>{b_rows}</tbody></table>
+<h2>{h["dir"]}</h2>
+<figure>{img("dxdy.png", "错位方向")}<figcaption>{t_dir}</figcaption></figure>
+<details class="box"><summary>全部分位数</summary>{quant}</details>
+<p class="note">{t_err}</p>
+</div>"""
+
+    # ---- C：定义在上，图区用标签切换 ----
+    panels = [("dist", "分布", img("cdf.png", "累计分布"), t_dist, quant),
+              ("roi", "各 ROI", img("box-roi.png", "各 ROI"), t_roi, roi_table),
+              ("dir", "方向", img("dxdy.png", "错位方向"), t_dir, ""),
+              ("strip", "沿条带", img("strip.png", "沿条带"), t_strip, "")]
+    tabs = "".join(f'<button data-tab="{k}">{label}</button>' for k, label, *_ in panels)
+    tab_panels = "".join(f'<section data-panel="{k}"><h3>{h[k]}</h3>{im}<p>{t}</p>{tb}</section>'
+                         for k, _, im, t, tb in panels)
+    var_c = f"""<div data-variant="C" data-name="定义在上 + 标签页">
+{define}
+{example}
+<div class="tabs">{tabs}</div>
+<div class="panels">{tab_panels}</div>
+<p class="note">{t_err}</p>
+</div>"""
+
+    # ---- D：左侧定义固定，右侧滚动 ----
+    var_d = f"""<div data-variant="D" data-name="固定侧栏 + 滚动">
+<div class="sticky2">
+<aside>{define}<figure>{img("example-grid.png", "点上 RMSE 的计算示例")}<figcaption>{caption}</figcaption></figure>
+<p class="note">{t_err}</p></aside>
+<div>
+<h2>{h["dist"]}</h2><figure>{img("cdf.png", "累计分布")}</figure><p>{t_dist}</p>{quant}
+<h2>{h["roi"]}</h2><figure>{img("box-roi.png", "各 ROI")}</figure><p>{t_roi}</p>{roi_table}
+<h2>{h["dir"]}</h2><figure>{img("dxdy.png", "错位方向")}</figure><p>{t_dir}</p>
+<h2>{h["strip"]}</h2><figure>{img("strip.png", "沿条带")}</figure><p>{t_strip}</p>
+</div>
+</div>
+</div>"""
+
     return f"""# 样本难度
 
-<p style="background:#FFF4D6;border:1px solid #E39B1B;padding:8px 12px;border-radius:4px;font-size:14px">
-PROTOTYPE（issue #47，第二轮）：数字是真的，图是粗稿。</p>
+<style>
+[data-variant] img {{ max-width: 100%; }}
+[data-variant] figure {{ margin: 12px 0 20px; }}
+[data-variant] figcaption {{ font-size: 13px; color: var(--ink2); }}
+.formula {{ font-size: 18px; text-align: center; margin: 14px 0; }}
+.box {{ border: 1px solid var(--rule); border-radius: 4px; padding: 6px 14px; margin: 14px 0; background: #fff; }}
+.box summary {{ cursor: pointer; font-weight: 600; }}
+.cards {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 8px 0 16px; }}
+.card {{ background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 12px 14px; }}
+.card b {{ display: block; font-size: 28px; line-height: 1.2; }}
+.card span {{ font-size: 13px; color: var(--ink2); }}
+.tiles {{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }}
+.tile {{ background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 10px; margin: 0 !important; }}
+.tile figcaption b {{ display: block; color: var(--ink); font-size: 14px; }}
+.zoom {{ cursor: zoom-in; }}
+#lightbox {{ position: fixed; inset: 0; background: rgba(27,39,51,.85); display: none; align-items: center; justify-content: center; z-index: 98; cursor: zoom-out; }}
+#lightbox img {{ max-width: 92vw; max-height: 88vh; background: #fff; padding: 12px; border-radius: 4px; }}
+.split2 {{ display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }}
+.spine td {{ vertical-align: middle; }}
+.spine th[data-key] {{ cursor: pointer; }}
+.spark {{ width: 190px; height: 42px; display: block; }}
+.raxis {{ position: relative; height: 14px; font-size: 10px; font-weight: 400; color: var(--ink2); }}
+.raxis span {{ position: absolute; transform: translateX(-50%); }}
+.tabs {{ display: flex; gap: 4px; border-bottom: 1px solid var(--rule); margin-top: 20px; }}
+.tabs button {{ font: 14px var(--sans); background: none; border: 1px solid transparent; border-bottom: 0; padding: 6px 16px; cursor: pointer; color: var(--ink2); border-radius: 4px 4px 0 0; }}
+.tabs button[aria-selected=true] {{ border-color: var(--rule); background: #fff; color: var(--ink); font-weight: 600; margin-bottom: -1px; }}
+.panels img {{ max-width: 820px; display: block; }}
+.panels section {{ background: #fff; border: 1px solid var(--rule); border-top: 0; padding: 4px 18px 12px; }}
+.sticky2 {{ display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 36px; align-items: start; }}
+.sticky2 aside {{ position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; font-size: 14px; }}
+.sticky2 h2:first-child {{ margin-top: 0; }}
+</style>
 
-一对 patch 有多难配准，这里只看几何：数据集交付时，光学与 SAR patch 之间还差多少。
-验证集、测试集里有评测真值点的 {s['n']} 个 patch 对都给出一个值；训练集没有评测真值点，暂不给。
+{var_a}
 
-## 度量：点上 RMSE
+{var_b}
 
-### 为什么选它
+{var_c}
 
-- **只用真值点，不拟合，不外推。** 光学与 SAR patch 之间真实的坐标对应（真值变换）只在真值点上被观测到。
-  在 patch 内，x 向（≈ 距离向）的错位随地形变化几十像素，用一个平移、仿射或单应去概括，都会与真值点自相矛盾；
-  直接在点上量，就绕开了这个问题。
-- **与评测一致。** 它就是「不做任何配准时的评测误差」：配准方法交出结果后，同样在这些点上算误差，两者可以直接比。
-  医学影像配准的基准（ANHIR、DIR-Lab）用同样的办法报告配准前的难度。
-- **换别的量，难易排序几乎不变。** 讨论过的六个位移类度量（包括 patch 中心的错位、四角的最大错位）
-  给 patch 排序的秩相关都在 0.93 以上。选 RMSE 是因为它最好解释。
+{var_d}
 
-放弃的候选：
-
-| 候选 | 放弃的原因 |
-|---|---|
-| 光学与 SAR 窗口的面积重合度 | 每个 patch 都在约 0.73 以上，基本只由平移决定，分不出难易 |
-| 拟合仿射后分解成平移、旋转、缩放、剪切 | 会把 x 向的剪切误读成旋转；而且要拟合 |
-| patch 中心或四角的错位 | 要先拟合一个变换，四角还要外推到没有点的地方 |
-
-### 定义
-
-一个 patch 有 N 个评测真值点。第 i 个点在光学 patch 里的位置是 pᵢ，在 SAR patch 里的位置是 qᵢ，
-都用各自 patch 的像素坐标（原点在左上角，1 像素 = 7.5 m）。
-
-<p style="text-align:center;font-size:18px">点上 RMSE = √( (1/N) · Σᵢ |qᵢ − pᵢ|² )</p>
-
-数据集交付时两个 patch 已经按控制点的全局仿射对齐，完全对齐时每个 qᵢ = pᵢ，值为 0。值越大，
-配准方法要纠正的错位越大。
-
-### 怎么算
-
-以 {ex['roi']} 的 patch {ex['patch']}（{SPLIT_CN[ex['split']]}，{ex['n']} 个点）为例，它的值 {ex['rmse']:.1f} 像素，接近全体中位。
-
-{img("example.png", "点上 RMSE 的计算示例")}
-
-1. 读 `data/ground-truth/<划分>/<ROI>/patch_<n>.txt`，每行一对点：光学 x、y，SAR x、y。y 存的是负的行号，取负。
-2. 每对点求错位 dᵢ = qᵢ − pᵢ（图 ③ 里的箭头）。这个 patch 里的箭头都几乎是水平的
-   （|dy| 不超过 {ex['dy_absmax']:.1f} 像素），但 dx 从 {ex['dx_min']:.1f} 到 {ex['dx_max']:.1f} 像素，有的朝左、有的朝右：
-   x 向错位在一个 patch 内随位置变化，这正是不用一个平移去概括 patch 的原因。
-3. 求每个箭头的长度 |dᵢ|（{ex['dmin']:.1f}–{ex['dmax']:.1f} 像素），平方后取平均，再开方（图 ④）。
-
-每个 patch 至少 {s['min_n']} 个点、中位 {s['med_n']:.0f} 个；不剔除任何点。
-
-### 测量误差
-
-每个真值点带约 1 像素的标注抖动（见「标注质量」）。相对中位 {f(s['p50'])} 像素可以忽略，
-只会把最小的一批值（10 分位 {f(s['p10'])} 像素）略微抬高。
-
-## 分布
-
-{img("cdf.png", "点上 RMSE 的累计分布")}
-
-{quant}
-
-测试集比验证集难：中位 {f(s['Test']['p50'])} 对 {f(s['Val']['p50'])} 像素，90 分位 {f(s['Test']['p90'])} 对 {f(s['Val']['p90'])} 像素。
-
-## 各 ROI 与入射角
-
-{img("box-roi.png", "各 ROI 的点上 RMSE 箱线图")}
-
-难度主要由 ROI 决定：同一 ROI 内的 patch 相差几倍，ROI 之间的中位相差一个数量级。ROI 按入射角从小到大排。
-入射角越小，地形引起的距离向位移越大（与 cot θ 成正比）；13 个 ROI 的中位 RMSE 与入射角的秩相关为 {s['rho_inc']:.2f}。
-数据集的 SAR 窗口只按每个 ROI 的全局仿射放置，地形带来的这部分错位留在了 patch 对里。
-
-{roi_table(rois)}
-
-## 错位的方向
-
-{img("dxdy.png", "patch 内平均错位 dx–dy 散点")}
-
-每个点是一个 patch 的平均错位，两轴等比例。x（≈ 距离向）从 −250 到 +270 像素铺开，y（≈ 方位向）贴着 0：
-RMSE² 里 x 分量的占比中位为 {s['x_share']*100:.1f}%，y 分量的 RMSE 中位只有 {s['ry50']:.1f} 像素。
-y 向在 patch 内几乎是纯平移；x 向在一个 patch 内还会随地形变化几十像素。
-
-## 沿条带的变化
-
-{img("strip.png", "各 ROI 沿条带的点上 RMSE")}
-
-每个小图是一条 ROI，横轴是 patch 在条带上的位置。难度成片连续变化，易段与难段交替，与地形起伏一致；
-入射角小的条带整体更难。
+<div id="lightbox"><img alt=""></div>
+<div id="proto-bar" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99;display:flex;gap:10px;align-items:center;background:#111;color:#fff;padding:8px 14px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.35);font:14px sans-serif">
+<button id="proto-prev" style="all:unset;cursor:pointer;padding:0 6px">◀</button><span id="proto-label"></span><button id="proto-next" style="all:unset;cursor:pointer;padding:0 6px">▶</button></div>
+<script>
+(function () {{
+  var keys = ["A", "B", "C", "D"];
+  function show(k) {{
+    document.querySelectorAll("[data-variant]").forEach(function (el) {{ el.hidden = el.dataset.variant !== k; }});
+    var el = document.querySelector('[data-variant="' + k + '"]');
+    document.getElementById("proto-label").textContent = "原型 " + k + "：" + el.dataset.name;
+    var u = new URL(location.href); u.searchParams.set("variant", k); history.replaceState(null, "", u);
+  }}
+  function step(d) {{
+    var k = new URL(location.href).searchParams.get("variant") || "A";
+    show(keys[(keys.indexOf(k) + d + keys.length) % keys.length]);
+  }}
+  document.getElementById("proto-prev").onclick = function () {{ step(-1); }};
+  document.getElementById("proto-next").onclick = function () {{ step(1); }};
+  document.addEventListener("keydown", function (e) {{
+    if (e.target.closest("input,textarea,[contenteditable]")) return;
+    if (e.key === "ArrowLeft") step(-1); else if (e.key === "ArrowRight") step(1);
+    if (e.key === "Escape") lb.style.display = "none";
+  }});
+  // A：点图放大
+  var lb = document.getElementById("lightbox");
+  document.querySelectorAll("img.zoom").forEach(function (im) {{
+    im.onclick = function () {{ lb.querySelector("img").src = im.src; lb.style.display = "flex"; }};
+  }});
+  lb.onclick = function () {{ lb.style.display = "none"; }};
+  // B：表头排序
+  var tbody = document.querySelector(".spine tbody");
+  document.querySelectorAll(".spine th[data-key]").forEach(function (th) {{
+    var asc = true;
+    th.onclick = function () {{
+      var key = th.dataset.key, rows = Array.prototype.slice.call(tbody.rows);
+      rows.sort(function (a, b) {{
+        var x = a.dataset[key], y = b.dataset[key];
+        var c = key === "roi" ? x.localeCompare(y) : parseFloat(x) - parseFloat(y);
+        return asc ? c : -c;
+      }});
+      asc = !asc;
+      rows.forEach(function (r) {{ tbody.appendChild(r); }});
+    }};
+  }});
+  // C：标签页
+  var tabs = document.querySelectorAll(".tabs button");
+  function tab(k) {{
+    tabs.forEach(function (b) {{ b.setAttribute("aria-selected", b.dataset.tab === k); }});
+    document.querySelectorAll("[data-panel]").forEach(function (p) {{ p.hidden = p.dataset.panel !== k; }});
+  }}
+  tabs.forEach(function (b) {{ b.onclick = function () {{ tab(b.dataset.tab); }}; }});
+  tab("dist");
+  step(0);
+}})();
+</script>
 """
 
 

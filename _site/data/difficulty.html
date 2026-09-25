@@ -15,93 +15,139 @@
 <main>
 <div class="doc wrap">
 <nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html">组织</a><a href="../data/imaging.html">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/statistics.html">统计与分布</a><a href="../data/usage.html">使用建议</a><a href="../data/difficulty.html" aria-current="page">样本难度</a></nav>
-<article class="prose"><h1 id="样本难度">样本难度</h1>
-<p style="background:#FFF4D6;border:1px solid #E39B1B;padding:8px 12px;border-radius:4px;font-size:14px">
-PROTOTYPE（issue #47，第二轮）：数字是真的，图是粗稿。</p>
+<article class="prose wide"><h1 id="样本难度">样本难度</h1>
+<style>
+[data-variant] img { max-width: 100%; }
+[data-variant] figure { margin: 12px 0 20px; }
+[data-variant] figcaption { font-size: 13px; color: var(--ink2); }
+.formula { font-size: 18px; text-align: center; margin: 14px 0; }
+.box { border: 1px solid var(--rule); border-radius: 4px; padding: 6px 14px; margin: 14px 0; background: #fff; }
+.box summary { cursor: pointer; font-weight: 600; }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 8px 0 16px; }
+.card { background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 12px 14px; }
+.card b { display: block; font-size: 28px; line-height: 1.2; }
+.card span { font-size: 13px; color: var(--ink2); }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.tile { background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 10px; margin: 0 !important; }
+.tile figcaption b { display: block; color: var(--ink); font-size: 14px; }
+.zoom { cursor: zoom-in; }
+#lightbox { position: fixed; inset: 0; background: rgba(27,39,51,.85); display: none; align-items: center; justify-content: center; z-index: 98; cursor: zoom-out; }
+#lightbox img { max-width: 92vw; max-height: 88vh; background: #fff; padding: 12px; border-radius: 4px; }
+.split2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+.spine td { vertical-align: middle; }
+.spine th[data-key] { cursor: pointer; }
+.spark { width: 190px; height: 42px; display: block; }
+.raxis { position: relative; height: 14px; font-size: 10px; font-weight: 400; color: var(--ink2); }
+.raxis span { position: absolute; transform: translateX(-50%); }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--rule); margin-top: 20px; }
+.tabs button { font: 14px var(--sans); background: none; border: 1px solid transparent; border-bottom: 0; padding: 6px 16px; cursor: pointer; color: var(--ink2); border-radius: 4px 4px 0 0; }
+.tabs button[aria-selected=true] { border-color: var(--rule); background: #fff; color: var(--ink); font-weight: 600; margin-bottom: -1px; }
+.panels img { max-width: 820px; display: block; }
+.panels section { background: #fff; border: 1px solid var(--rule); border-top: 0; padding: 4px 18px 12px; }
+.sticky2 { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 36px; align-items: start; }
+.sticky2 aside { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; font-size: 14px; }
+.sticky2 h2:first-child { margin-top: 0; }
+</style>
 
-<p>一对 patch 有多难配准，这里只看几何：数据集交付时，光学与 SAR patch 之间还差多少。
-验证集、测试集里有评测真值点的 1605 个 patch 对都给出一个值；训练集没有评测真值点，暂不给。</p>
-<h2 id="度量点上-rmse">度量：点上 RMSE</h2>
-<h3 id="为什么选它">为什么选它</h3>
-<ul>
-<li><strong>只用真值点，不拟合，不外推。</strong> 光学与 SAR patch 之间真实的坐标对应（真值变换）只在真值点上被观测到。
-  在 patch 内，x 向（≈ 距离向）的错位随地形变化几十像素，用一个平移、仿射或单应去概括，都会与真值点自相矛盾；
-  直接在点上量，就绕开了这个问题。</li>
-<li><strong>与评测一致。</strong> 它就是「不做任何配准时的评测误差」：配准方法交出结果后，同样在这些点上算误差，两者可以直接比。
-  医学影像配准的基准（ANHIR、DIR-Lab）用同样的办法报告配准前的难度。</li>
-<li><strong>换别的量，难易排序几乎不变。</strong> 讨论过的六个位移类度量（包括 patch 中心的错位、四角的最大错位）
-  给 patch 排序的秩相关都在 0.93 以上。选 RMSE 是因为它最好解释。</li>
-</ul>
-<p>放弃的候选：</p>
-<table>
-<thead>
-<tr>
-<th>候选</th>
-<th>放弃的原因</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>光学与 SAR 窗口的面积重合度</td>
-<td>每个 patch 都在约 0.73 以上，基本只由平移决定，分不出难易</td>
-</tr>
-<tr>
-<td>拟合仿射后分解成平移、旋转、缩放、剪切</td>
-<td>会把 x 向的剪切误读成旋转；而且要拟合</td>
-</tr>
-<tr>
-<td>patch 中心或四角的错位</td>
-<td>要先拟合一个变换，四角还要外推到没有点的地方</td>
-</tr>
-</tbody>
-</table>
-<h3 id="定义">定义</h3>
-<p>一个 patch 有 N 个评测真值点。第 i 个点在光学 patch 里的位置是 pᵢ，在 SAR patch 里的位置是 qᵢ，
-都用各自 patch 的像素坐标（原点在左上角，1 像素 = 7.5 m）。</p>
-<p style="text-align:center;font-size:18px">点上 RMSE = √( (1/N) · Σᵢ |qᵢ − pᵢ|² )</p>
+<div data-variant="A" data-name="数字卡 + 图墙">
+<div class="cards"><div class="card"><b>1605</b><span>个 patch 对有值</span></div><div class="card"><b>27.1</b><span>中位（像素，约 203 m）</span></div><div class="card"><b>104</b><span>90 分位（像素）</span></div><div class="card"><b>24.7 / 30.0</b><span>验证集 / 测试集中位</span></div></div>
+<details class="box"><summary>点上 RMSE 是什么、怎么算</summary><p>样本难度用<b>点上 RMSE</b> 衡量：一个 patch 对上，每对评测真值点的光学位置 p<sub>i</sub> 与 SAR 位置 q<sub>i</sub> 之间距离的均方根。单位是像素，1 像素 = 7.5 m。</p><p class="formula">点上 RMSE = √( (1/N) · Σ<sub>i</sub> |q<sub>i</sub> − p<sub>i</sub>|² )</p><p>p<sub>i</sub>、q<sub>i</sub> 是各自 patch 内的像素坐标，N 是这个 patch 对上的点数。它等于不做配准时在评测真值点上的误差，两个 patch 完全对齐时为 0。真值点的文件格式见<a href="organization.html#标签文件">组织</a>。</p><figure><img src="../assets/prototype-difficulty/example.png" alt="点上 RMSE 的计算示例" class=""><figcaption>ROI_020 的 patch 39，9 对点，点上 RMSE 30.0 像素。① ② 两个 patch 上的同名点；③ 放进同一坐标，箭头从 p<sub>i</sub> 指向 q<sub>i</sub>；④ 各对点的距离，横线是它们的均方根。</figcaption></figure></details>
+<div class="tiles"><figure class="tile"><img src="../assets/prototype-difficulty/cdf.png" alt="累计分布" class="zoom"><figcaption><b>中位 27 像素，测试集更难</b>验证集、测试集里有评测真值点的 1605 个 patch 对都有值。中位 27.1 像素（约 203 m），90% 在 104 像素以内。验证集、测试集的中位分别为 24.7 与 30.0 像素。</figcaption></figure><figure class="tile"><img src="../assets/prototype-difficulty/box-roi.png" alt="各 ROI" class="zoom"><figcaption><b>ROI 之间相差一个数量级</b>中位最小的是 ROI_059（6.9 像素），最大的是 ROI_054（84.3 像素）。入射角越小的 ROI 越难。</figcaption></figure><figure class="tile"><img src="../assets/prototype-difficulty/dxdy.png" alt="错位方向" class="zoom"><figcaption><b>错位几乎都在 x 方向</b>x 方向接近 SAR 的距离向。只算 y 方向时，RMSE 的中位是 1.7 像素。同一个 patch 里各对点的 x 错位也不相同，示例 patch 里从 -52.7 到 +22.1 像素。</figcaption></figure><figure class="tile"><img src="../assets/prototype-difficulty/strip.png" alt="沿条带" class="zoom"><figcaption><b>沿条带成段起伏</b>相邻 patch 的值相近，易段与难段交替。</figcaption></figure></div>
+<details class="box"><summary>分位数与各 ROI 的数值</summary><table><thead><tr><th>分位</th><th>10</th><th>25</th><th>50</th><th>75</th><th>90</th><th>99</th><th>最大</th></tr></thead><tbody><tr><td>像素</td><td>6.8</td><td>11.7</td><td>27.1</td><td>58.2</td><td>104</td><td>210</td><td>268</td></tr><tr><td>米</td><td>51</td><td>88</td><td>203</td><td>437</td><td>783</td><td>1573</td><td>2012</td></tr></tbody></table><table><thead><tr><th>ROI</th><th>划分</th><th>入射角</th><th>patch 对</th><th>10 分位</th><th>中位</th><th>90 分位</th></tr></thead><tbody><tr><td><a href="../rois/ROI_054.html">ROI_054</a></td><td>测试集</td><td>47.5°</td><td>145</td><td>26.9</td><td>84.3</td><td>170</td></tr><tr><td><a href="../rois/ROI_020.html">ROI_020</a></td><td>测试集</td><td>49.4°</td><td>91</td><td>13.7</td><td>23.7</td><td>55.7</td></tr><tr><td><a href="../rois/ROI_006.html">ROI_006</a></td><td>测试集</td><td>49.5°</td><td>67</td><td>16.4</td><td>44.0</td><td>88.7</td></tr><tr><td><a href="../rois/ROI_007.html">ROI_007</a></td><td>测试集</td><td>50.7°</td><td>286</td><td>12.2</td><td>57.4</td><td>173</td></tr><tr><td><a href="../rois/ROI_035.html">ROI_035</a></td><td>验证集</td><td>51.0°</td><td>172</td><td>13.9</td><td>37.8</td><td>86.7</td></tr><tr><td><a href="../rois/ROI_011.html">ROI_011</a></td><td>测试集</td><td>51.4°</td><td>83</td><td>10.0</td><td>30.1</td><td>89.8</td></tr><tr><td><a href="../rois/ROI_075.html">ROI_075</a></td><td>验证集</td><td>51.8°</td><td>174</td><td>13.0</td><td>35.2</td><td>107</td></tr><tr><td><a href="../rois/ROI_049.html">ROI_049</a></td><td>验证集</td><td>52.5°</td><td>88</td><td>4.3</td><td>9.0</td><td>36.9</td></tr><tr><td><a href="../rois/ROI_071.html">ROI_071</a></td><td>验证集</td><td>52.6°</td><td>30</td><td>6.9</td><td>10.6</td><td>29.3</td></tr><tr><td><a href="../rois/ROI_070.html">ROI_070</a></td><td>验证集</td><td>52.7°</td><td>113</td><td>7.8</td><td>24.2</td><td>47.0</td></tr><tr><td><a href="../rois/ROI_037.html">ROI_037</a></td><td>测试集</td><td>53.0°</td><td>141</td><td>6.3</td><td>13.2</td><td>52.7</td></tr><tr><td><a href="../rois/ROI_059.html">ROI_059</a></td><td>测试集</td><td>53.7°</td><td>140</td><td>5.2</td><td>6.9</td><td>11.8</td></tr><tr><td><a href="../rois/ROI_080.html">ROI_080</a></td><td>验证集</td><td>53.7°</td><td>75</td><td>5.8</td><td>11.0</td><td>25.3</td></tr></tbody></table></details>
+<p class="note">评测真值点本身有约 1 像素的标注误差，对 10 像素以上的值影响可以忽略。</p>
+</div>
 
-<p>数据集交付时两个 patch 已经按控制点的全局仿射对齐，完全对齐时每个 qᵢ = pᵢ，值为 0。值越大，
-配准方法要纠正的错位越大。</p>
-<h3 id="怎么算">怎么算</h3>
-<p>以 ROI_020 的 patch 39（测试集，9 个点）为例，它的值 30.0 像素，接近全体中位。</p>
-<figure><img src="../assets/prototype-difficulty/example.png" alt="点上 RMSE 的计算示例" style="max-width:100%"></figure>
+<div data-variant="B" data-name="以 ROI 表为主轴">
+<div class="split2">
+<div><p>样本难度用<b>点上 RMSE</b> 衡量：一个 patch 对上，每对评测真值点的光学位置 p<sub>i</sub> 与 SAR 位置 q<sub>i</sub> 之间距离的均方根。单位是像素，1 像素 = 7.5 m。</p><p class="formula">点上 RMSE = √( (1/N) · Σ<sub>i</sub> |q<sub>i</sub> − p<sub>i</sub>|² )</p><p>p<sub>i</sub>、q<sub>i</sub> 是各自 patch 内的像素坐标，N 是这个 patch 对上的点数。它等于不做配准时在评测真值点上的误差，两个 patch 完全对齐时为 0。真值点的文件格式见<a href="organization.html#标签文件">组织</a>。</p><details class="box"><summary>计算示例</summary><figure><img src="../assets/prototype-difficulty/example.png" alt="点上 RMSE 的计算示例" class=""><figcaption>ROI_020 的 patch 39，9 对点，点上 RMSE 30.0 像素。① ② 两个 patch 上的同名点；③ 放进同一坐标，箭头从 p<sub>i</sub> 指向 q<sub>i</sub>；④ 各对点的距离，横线是它们的均方根。</figcaption></figure></details></div>
+<figure><img src="../assets/prototype-difficulty/cdf.png" alt="累计分布" class=""><figcaption>验证集、测试集里有评测真值点的 1605 个 patch 对都有值。中位 27.1 像素（约 203 m），90% 在 104 像素以内。验证集、测试集的中位分别为 24.7 与 30.0 像素。</figcaption></figure>
+</div>
+<h2>ROI 之间相差一个数量级</h2>
+<p>中位最小的是 ROI_059（6.9 像素），最大的是 ROI_054（84.3 像素）。入射角越小的 ROI 越难。 相邻 patch 的值相近，易段与难段交替。</p>
+<table class="spine"><thead><tr><th data-key="roi">ROI</th><th>划分</th><th data-key="inc">入射角 ↕</th><th>patch 对</th>
+<th data-key="med">中位 ↕</th><th>10–90 分位（像素，对数）<div class="raxis" style="width:200px"><span style="left:0px">2</span><span style="left:37px">5</span><span style="left:64px">10</span><span style="left:92px">20</span><span style="left:128px">50</span><span style="left:156px">100</span><span style="left:184px">200</span></div></th><th>沿条带</th></tr></thead><tbody><tr data-roi="ROI_054" data-inc="47.55" data-med="84.32526150254841"><td><a href="../rois/ROI_054.html">ROI_054</a></td><td><span class="sw Test"></span>测试集</td><td>47.5°</td><td>145</td><td><b>84.3</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="103.8" y="3" width="73.5" height="8" rx="2" fill="#E39B1B" opacity=".55"/><rect x="148.3" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_054.png" alt="ROI_054 沿条带" class="spark"></td></tr><tr data-roi="ROI_020" data-inc="49.39" data-med="23.71410451131768"><td><a href="../rois/ROI_020.html">ROI_020</a></td><td><span class="sw Test"></span>测试集</td><td>49.4°</td><td>91</td><td><b>23.7</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="76.7" y="3" width="56.1" height="8" rx="2" fill="#E39B1B" opacity=".55"/><rect x="97.7" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_020.png" alt="ROI_020 沿条带" class="spark"></td></tr><tr data-roi="ROI_006" data-inc="49.47" data-med="43.99164547881086"><td><a href="../rois/ROI_006.html">ROI_006</a></td><td><span class="sw Test"></span>测试集</td><td>49.5°</td><td>67</td><td><b>44.0</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="83.9" y="3" width="67.5" height="8" rx="2" fill="#E39B1B" opacity=".55"/><rect x="122.4" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_006.png" alt="ROI_006 沿条带" class="spark"></td></tr><tr data-roi="ROI_007" data-inc="50.66" data-med="57.4367118644262"><td><a href="../rois/ROI_007.html">ROI_007</a></td><td><span class="sw Test"></span>测试集</td><td>50.7°</td><td>286</td><td><b>57.4</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="72.3" y="3" width="105.7" height="8" rx="2" fill="#E39B1B" opacity=".55"/><rect x="133.0" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_007.png" alt="ROI_007 沿条带" class="spark"></td></tr><tr data-roi="ROI_035" data-inc="50.97" data-med="37.79430977751909"><td><a href="../rois/ROI_035.html">ROI_035</a></td><td><span class="sw Val"></span>验证集</td><td>51.0°</td><td>172</td><td><b>37.8</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="77.4" y="3" width="73.0" height="8" rx="2" fill="#2E7BD6" opacity=".55"/><rect x="116.3" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_035.png" alt="ROI_035 沿条带" class="spark"></td></tr><tr data-roi="ROI_011" data-inc="51.41" data-med="30.124886889006806"><td><a href="../rois/ROI_011.html">ROI_011</a></td><td><span class="sw Test"></span>测试集</td><td>51.4°</td><td>83</td><td><b>30.1</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="64.1" y="3" width="87.7" height="8" rx="2" fill="#E39B1B" opacity=".55"/><rect x="107.3" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_011.png" alt="ROI_011 沿条带" class="spark"></td></tr><tr data-roi="ROI_075" data-inc="51.79" data-med="35.22207706709462"><td><a href="../rois/ROI_075.html">ROI_075</a></td><td><span class="sw Val"></span>验证集</td><td>51.8°</td><td>174</td><td><b>35.2</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="74.7" y="3" width="84.2" height="8" rx="2" fill="#2E7BD6" opacity=".55"/><rect x="113.5" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_075.png" alt="ROI_075 沿条带" class="spark"></td></tr><tr data-roi="ROI_049" data-inc="52.47" data-med="9.019978750666345"><td><a href="../rois/ROI_049.html">ROI_049</a></td><td><span class="sw Val"></span>验证集</td><td>52.5°</td><td>88</td><td><b>9.0</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="30.5" y="3" width="85.8" height="8" rx="2" fill="#2E7BD6" opacity=".55"/><rect x="59.1" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_049.png" alt="ROI_049 沿条带" class="spark"></td></tr><tr data-roi="ROI_071" data-inc="52.57" data-med="10.58480602188775"><td><a href="../rois/ROI_071.html">ROI_071</a></td><td><span class="sw Val"></span>验证集</td><td>52.6°</td><td>30</td><td><b>10.6</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="49.7" y="3" width="57.5" height="8" rx="2" fill="#2E7BD6" opacity=".55"/><rect x="65.5" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_071.png" alt="ROI_071 沿条带" class="spark"></td></tr><tr data-roi="ROI_070" data-inc="52.72" data-med="24.154355930204108"><td><a href="../rois/ROI_070.html">ROI_070</a></td><td><span class="sw Val"></span>验证集</td><td>52.7°</td><td>113</td><td><b>24.2</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="54.4" y="3" width="71.6" height="8" rx="2" fill="#2E7BD6" opacity=".55"/><rect x="98.4" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_070.png" alt="ROI_070 沿条带" class="spark"></td></tr><tr data-roi="ROI_037" data-inc="53.04" data-med="13.23951595629197"><td><a href="../rois/ROI_037.html">ROI_037</a></td><td><span class="sw Test"></span>测试集</td><td>53.0°</td><td>141</td><td><b>13.2</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="46.1" y="3" width="84.5" height="8" rx="2" fill="#E39B1B" opacity=".55"/><rect x="74.4" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_037.png" alt="ROI_037 沿条带" class="spark"></td></tr><tr data-roi="ROI_059" data-inc="53.67" data-med="6.897349240318249"><td><a href="../rois/ROI_059.html">ROI_059</a></td><td><span class="sw Test"></span>测试集</td><td>53.7°</td><td>140</td><td><b>6.9</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="38.0" y="3" width="32.8" height="8" rx="2" fill="#E39B1B" opacity=".55"/><rect x="48.4" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_059.png" alt="ROI_059 沿条带" class="spark"></td></tr><tr data-roi="ROI_080" data-inc="53.71" data-med="11.035402859287842"><td><a href="../rois/ROI_080.html">ROI_080</a></td><td><span class="sw Val"></span>验证集</td><td>53.7°</td><td>75</td><td><b>11.0</b></td><td><svg width="200" height="14" class="rbar"><rect x="0" y="6" width="200" height="2" fill="#E3E7EA"/><rect x="42.2" y="3" width="59.1" height="8" rx="2" fill="#2E7BD6" opacity=".55"/><rect x="67.2" y="1" width="2" height="12" fill="#1B2733"/></svg></td><td><img src="../assets/prototype-difficulty/spark-ROI_080.png" alt="ROI_080 沿条带" class="spark"></td></tr></tbody></table>
+<h2>错位几乎都在 x 方向</h2>
+<figure><img src="../assets/prototype-difficulty/dxdy.png" alt="错位方向" class=""><figcaption>x 方向接近 SAR 的距离向。只算 y 方向时，RMSE 的中位是 1.7 像素。同一个 patch 里各对点的 x 错位也不相同，示例 patch 里从 -52.7 到 +22.1 像素。</figcaption></figure>
+<details class="box"><summary>全部分位数</summary><table><thead><tr><th>分位</th><th>10</th><th>25</th><th>50</th><th>75</th><th>90</th><th>99</th><th>最大</th></tr></thead><tbody><tr><td>像素</td><td>6.8</td><td>11.7</td><td>27.1</td><td>58.2</td><td>104</td><td>210</td><td>268</td></tr><tr><td>米</td><td>51</td><td>88</td><td>203</td><td>437</td><td>783</td><td>1573</td><td>2012</td></tr></tbody></table></details>
+<p class="note">评测真值点本身有约 1 像素的标注误差，对 10 像素以上的值影响可以忽略。</p>
+</div>
 
-<ol>
-<li>读 <code>data/ground-truth/&lt;划分&gt;/&lt;ROI&gt;/patch_&lt;n&gt;.txt</code>，每行一对点：光学 x、y，SAR x、y。y 存的是负的行号，取负。</li>
-<li>每对点求错位 dᵢ = qᵢ − pᵢ（图 ③ 里的箭头）。这个 patch 里的箭头都几乎是水平的
-   （|dy| 不超过 3.1 像素），但 dx 从 -52.7 到 22.1 像素，有的朝左、有的朝右：
-   x 向错位在一个 patch 内随位置变化，这正是不用一个平移去概括 patch 的原因。</li>
-<li>求每个箭头的长度 |dᵢ|（3.5–52.7 像素），平方后取平均，再开方（图 ④）。</li>
-</ol>
-<p>每个 patch 至少 7 个点、中位 8 个；不剔除任何点。</p>
-<h3 id="测量误差">测量误差</h3>
-<p>每个真值点带约 1 像素的标注抖动（见「标注质量」）。相对中位 27.1 像素可以忽略，
-只会把最小的一批值（10 分位 6.8 像素）略微抬高。</p>
-<h2 id="分布">分布</h2>
-<figure><img src="../assets/prototype-difficulty/cdf.png" alt="点上 RMSE 的累计分布" style="max-width:100%"></figure>
+<div data-variant="C" data-name="定义在上 + 标签页">
+<p>样本难度用<b>点上 RMSE</b> 衡量：一个 patch 对上，每对评测真值点的光学位置 p<sub>i</sub> 与 SAR 位置 q<sub>i</sub> 之间距离的均方根。单位是像素，1 像素 = 7.5 m。</p><p class="formula">点上 RMSE = √( (1/N) · Σ<sub>i</sub> |q<sub>i</sub> − p<sub>i</sub>|² )</p><p>p<sub>i</sub>、q<sub>i</sub> 是各自 patch 内的像素坐标，N 是这个 patch 对上的点数。它等于不做配准时在评测真值点上的误差，两个 patch 完全对齐时为 0。真值点的文件格式见<a href="organization.html#标签文件">组织</a>。</p>
+<figure><img src="../assets/prototype-difficulty/example.png" alt="点上 RMSE 的计算示例" class=""><figcaption>ROI_020 的 patch 39，9 对点，点上 RMSE 30.0 像素。① ② 两个 patch 上的同名点；③ 放进同一坐标，箭头从 p<sub>i</sub> 指向 q<sub>i</sub>；④ 各对点的距离，横线是它们的均方根。</figcaption></figure>
+<div class="tabs"><button data-tab="dist">分布</button><button data-tab="roi">各 ROI</button><button data-tab="dir">方向</button><button data-tab="strip">沿条带</button></div>
+<div class="panels"><section data-panel="dist"><h3>中位 27 像素，测试集更难</h3><img src="../assets/prototype-difficulty/cdf.png" alt="累计分布" class=""><p>验证集、测试集里有评测真值点的 1605 个 patch 对都有值。中位 27.1 像素（约 203 m），90% 在 104 像素以内。验证集、测试集的中位分别为 24.7 与 30.0 像素。</p><table><thead><tr><th>分位</th><th>10</th><th>25</th><th>50</th><th>75</th><th>90</th><th>99</th><th>最大</th></tr></thead><tbody><tr><td>像素</td><td>6.8</td><td>11.7</td><td>27.1</td><td>58.2</td><td>104</td><td>210</td><td>268</td></tr><tr><td>米</td><td>51</td><td>88</td><td>203</td><td>437</td><td>783</td><td>1573</td><td>2012</td></tr></tbody></table></section><section data-panel="roi"><h3>ROI 之间相差一个数量级</h3><img src="../assets/prototype-difficulty/box-roi.png" alt="各 ROI" class=""><p>中位最小的是 ROI_059（6.9 像素），最大的是 ROI_054（84.3 像素）。入射角越小的 ROI 越难。</p><table><thead><tr><th>ROI</th><th>划分</th><th>入射角</th><th>patch 对</th><th>10 分位</th><th>中位</th><th>90 分位</th></tr></thead><tbody><tr><td><a href="../rois/ROI_054.html">ROI_054</a></td><td>测试集</td><td>47.5°</td><td>145</td><td>26.9</td><td>84.3</td><td>170</td></tr><tr><td><a href="../rois/ROI_020.html">ROI_020</a></td><td>测试集</td><td>49.4°</td><td>91</td><td>13.7</td><td>23.7</td><td>55.7</td></tr><tr><td><a href="../rois/ROI_006.html">ROI_006</a></td><td>测试集</td><td>49.5°</td><td>67</td><td>16.4</td><td>44.0</td><td>88.7</td></tr><tr><td><a href="../rois/ROI_007.html">ROI_007</a></td><td>测试集</td><td>50.7°</td><td>286</td><td>12.2</td><td>57.4</td><td>173</td></tr><tr><td><a href="../rois/ROI_035.html">ROI_035</a></td><td>验证集</td><td>51.0°</td><td>172</td><td>13.9</td><td>37.8</td><td>86.7</td></tr><tr><td><a href="../rois/ROI_011.html">ROI_011</a></td><td>测试集</td><td>51.4°</td><td>83</td><td>10.0</td><td>30.1</td><td>89.8</td></tr><tr><td><a href="../rois/ROI_075.html">ROI_075</a></td><td>验证集</td><td>51.8°</td><td>174</td><td>13.0</td><td>35.2</td><td>107</td></tr><tr><td><a href="../rois/ROI_049.html">ROI_049</a></td><td>验证集</td><td>52.5°</td><td>88</td><td>4.3</td><td>9.0</td><td>36.9</td></tr><tr><td><a href="../rois/ROI_071.html">ROI_071</a></td><td>验证集</td><td>52.6°</td><td>30</td><td>6.9</td><td>10.6</td><td>29.3</td></tr><tr><td><a href="../rois/ROI_070.html">ROI_070</a></td><td>验证集</td><td>52.7°</td><td>113</td><td>7.8</td><td>24.2</td><td>47.0</td></tr><tr><td><a href="../rois/ROI_037.html">ROI_037</a></td><td>测试集</td><td>53.0°</td><td>141</td><td>6.3</td><td>13.2</td><td>52.7</td></tr><tr><td><a href="../rois/ROI_059.html">ROI_059</a></td><td>测试集</td><td>53.7°</td><td>140</td><td>5.2</td><td>6.9</td><td>11.8</td></tr><tr><td><a href="../rois/ROI_080.html">ROI_080</a></td><td>验证集</td><td>53.7°</td><td>75</td><td>5.8</td><td>11.0</td><td>25.3</td></tr></tbody></table></section><section data-panel="dir"><h3>错位几乎都在 x 方向</h3><img src="../assets/prototype-difficulty/dxdy.png" alt="错位方向" class=""><p>x 方向接近 SAR 的距离向。只算 y 方向时，RMSE 的中位是 1.7 像素。同一个 patch 里各对点的 x 错位也不相同，示例 patch 里从 -52.7 到 +22.1 像素。</p></section><section data-panel="strip"><h3>沿条带成段起伏</h3><img src="../assets/prototype-difficulty/strip.png" alt="沿条带" class=""><p>相邻 patch 的值相近，易段与难段交替。</p></section></div>
+<p class="note">评测真值点本身有约 1 像素的标注误差，对 10 像素以上的值影响可以忽略。</p>
+</div>
 
-<table><thead><tr><th></th><th>10 分位</th><th>25</th><th>中位</th><th>75</th><th>90</th><th>99</th><th>最大</th></tr></thead><tbody><tr><td>点上 RMSE（像素）</td><td>6.8</td><td>11.7</td><td>27.1</td><td>58.2</td><td>104</td><td>210</td><td>268</td></tr><tr><td>约合米</td><td>51</td><td>88</td><td>203</td><td>437</td><td>783</td><td>1573</td><td>2012</td></tr></tbody></table>
+<div data-variant="D" data-name="固定侧栏 + 滚动">
+<div class="sticky2">
+<aside><p>样本难度用<b>点上 RMSE</b> 衡量：一个 patch 对上，每对评测真值点的光学位置 p<sub>i</sub> 与 SAR 位置 q<sub>i</sub> 之间距离的均方根。单位是像素，1 像素 = 7.5 m。</p><p class="formula">点上 RMSE = √( (1/N) · Σ<sub>i</sub> |q<sub>i</sub> − p<sub>i</sub>|² )</p><p>p<sub>i</sub>、q<sub>i</sub> 是各自 patch 内的像素坐标，N 是这个 patch 对上的点数。它等于不做配准时在评测真值点上的误差，两个 patch 完全对齐时为 0。真值点的文件格式见<a href="organization.html#标签文件">组织</a>。</p><figure><img src="../assets/prototype-difficulty/example-grid.png" alt="点上 RMSE 的计算示例" class=""><figcaption>ROI_020 的 patch 39，9 对点，点上 RMSE 30.0 像素。① ② 两个 patch 上的同名点；③ 放进同一坐标，箭头从 p<sub>i</sub> 指向 q<sub>i</sub>；④ 各对点的距离，横线是它们的均方根。</figcaption></figure>
+<p class="note">评测真值点本身有约 1 像素的标注误差，对 10 像素以上的值影响可以忽略。</p></aside>
+<div>
+<h2>中位 27 像素，测试集更难</h2><figure><img src="../assets/prototype-difficulty/cdf.png" alt="累计分布" class=""></figure><p>验证集、测试集里有评测真值点的 1605 个 patch 对都有值。中位 27.1 像素（约 203 m），90% 在 104 像素以内。验证集、测试集的中位分别为 24.7 与 30.0 像素。</p><table><thead><tr><th>分位</th><th>10</th><th>25</th><th>50</th><th>75</th><th>90</th><th>99</th><th>最大</th></tr></thead><tbody><tr><td>像素</td><td>6.8</td><td>11.7</td><td>27.1</td><td>58.2</td><td>104</td><td>210</td><td>268</td></tr><tr><td>米</td><td>51</td><td>88</td><td>203</td><td>437</td><td>783</td><td>1573</td><td>2012</td></tr></tbody></table>
+<h2>ROI 之间相差一个数量级</h2><figure><img src="../assets/prototype-difficulty/box-roi.png" alt="各 ROI" class=""></figure><p>中位最小的是 ROI_059（6.9 像素），最大的是 ROI_054（84.3 像素）。入射角越小的 ROI 越难。</p><table><thead><tr><th>ROI</th><th>划分</th><th>入射角</th><th>patch 对</th><th>10 分位</th><th>中位</th><th>90 分位</th></tr></thead><tbody><tr><td><a href="../rois/ROI_054.html">ROI_054</a></td><td>测试集</td><td>47.5°</td><td>145</td><td>26.9</td><td>84.3</td><td>170</td></tr><tr><td><a href="../rois/ROI_020.html">ROI_020</a></td><td>测试集</td><td>49.4°</td><td>91</td><td>13.7</td><td>23.7</td><td>55.7</td></tr><tr><td><a href="../rois/ROI_006.html">ROI_006</a></td><td>测试集</td><td>49.5°</td><td>67</td><td>16.4</td><td>44.0</td><td>88.7</td></tr><tr><td><a href="../rois/ROI_007.html">ROI_007</a></td><td>测试集</td><td>50.7°</td><td>286</td><td>12.2</td><td>57.4</td><td>173</td></tr><tr><td><a href="../rois/ROI_035.html">ROI_035</a></td><td>验证集</td><td>51.0°</td><td>172</td><td>13.9</td><td>37.8</td><td>86.7</td></tr><tr><td><a href="../rois/ROI_011.html">ROI_011</a></td><td>测试集</td><td>51.4°</td><td>83</td><td>10.0</td><td>30.1</td><td>89.8</td></tr><tr><td><a href="../rois/ROI_075.html">ROI_075</a></td><td>验证集</td><td>51.8°</td><td>174</td><td>13.0</td><td>35.2</td><td>107</td></tr><tr><td><a href="../rois/ROI_049.html">ROI_049</a></td><td>验证集</td><td>52.5°</td><td>88</td><td>4.3</td><td>9.0</td><td>36.9</td></tr><tr><td><a href="../rois/ROI_071.html">ROI_071</a></td><td>验证集</td><td>52.6°</td><td>30</td><td>6.9</td><td>10.6</td><td>29.3</td></tr><tr><td><a href="../rois/ROI_070.html">ROI_070</a></td><td>验证集</td><td>52.7°</td><td>113</td><td>7.8</td><td>24.2</td><td>47.0</td></tr><tr><td><a href="../rois/ROI_037.html">ROI_037</a></td><td>测试集</td><td>53.0°</td><td>141</td><td>6.3</td><td>13.2</td><td>52.7</td></tr><tr><td><a href="../rois/ROI_059.html">ROI_059</a></td><td>测试集</td><td>53.7°</td><td>140</td><td>5.2</td><td>6.9</td><td>11.8</td></tr><tr><td><a href="../rois/ROI_080.html">ROI_080</a></td><td>验证集</td><td>53.7°</td><td>75</td><td>5.8</td><td>11.0</td><td>25.3</td></tr></tbody></table>
+<h2>错位几乎都在 x 方向</h2><figure><img src="../assets/prototype-difficulty/dxdy.png" alt="错位方向" class=""></figure><p>x 方向接近 SAR 的距离向。只算 y 方向时，RMSE 的中位是 1.7 像素。同一个 patch 里各对点的 x 错位也不相同，示例 patch 里从 -52.7 到 +22.1 像素。</p>
+<h2>沿条带成段起伏</h2><figure><img src="../assets/prototype-difficulty/strip.png" alt="沿条带" class=""></figure><p>相邻 patch 的值相近，易段与难段交替。</p>
+</div>
+</div>
+</div>
 
-<p>测试集比验证集难：中位 30.0 对 24.7 像素，90 分位 120 对 72.5 像素。</p>
-<h2 id="各-roi-与入射角">各 ROI 与入射角</h2>
-<figure><img src="../assets/prototype-difficulty/box-roi.png" alt="各 ROI 的点上 RMSE 箱线图" style="max-width:100%"></figure>
-
-<p>难度主要由 ROI 决定：同一 ROI 内的 patch 相差几倍，ROI 之间的中位相差一个数量级。ROI 按入射角从小到大排。
-入射角越小，地形引起的距离向位移越大（与 cot θ 成正比）；13 个 ROI 的中位 RMSE 与入射角的秩相关为 -0.76。
-数据集的 SAR 窗口只按每个 ROI 的全局仿射放置，地形带来的这部分错位留在了 patch 对里。</p>
-<table><thead><tr><th>ROI</th><th>划分</th><th>入射角</th><th>patch</th><th>10 分位</th><th>中位</th><th>90 分位</th></tr></thead><tbody><tr><td><a href="../rois/ROI_054.html">ROI_054</a></td><td>测试集</td><td>47.5°</td><td>145</td><td>26.9</td><td>84.3</td><td>170</td></tr><tr><td><a href="../rois/ROI_020.html">ROI_020</a></td><td>测试集</td><td>49.4°</td><td>91</td><td>13.7</td><td>23.7</td><td>55.7</td></tr><tr><td><a href="../rois/ROI_006.html">ROI_006</a></td><td>测试集</td><td>49.5°</td><td>67</td><td>16.4</td><td>44.0</td><td>88.7</td></tr><tr><td><a href="../rois/ROI_007.html">ROI_007</a></td><td>测试集</td><td>50.7°</td><td>286</td><td>12.2</td><td>57.4</td><td>173</td></tr><tr><td><a href="../rois/ROI_035.html">ROI_035</a></td><td>验证集</td><td>51.0°</td><td>172</td><td>13.9</td><td>37.8</td><td>86.7</td></tr><tr><td><a href="../rois/ROI_011.html">ROI_011</a></td><td>测试集</td><td>51.4°</td><td>83</td><td>10.0</td><td>30.1</td><td>89.8</td></tr><tr><td><a href="../rois/ROI_075.html">ROI_075</a></td><td>验证集</td><td>51.8°</td><td>174</td><td>13.0</td><td>35.2</td><td>107</td></tr><tr><td><a href="../rois/ROI_049.html">ROI_049</a></td><td>验证集</td><td>52.5°</td><td>88</td><td>4.3</td><td>9.0</td><td>36.9</td></tr><tr><td><a href="../rois/ROI_071.html">ROI_071</a></td><td>验证集</td><td>52.6°</td><td>30</td><td>6.9</td><td>10.6</td><td>29.3</td></tr><tr><td><a href="../rois/ROI_070.html">ROI_070</a></td><td>验证集</td><td>52.7°</td><td>113</td><td>7.8</td><td>24.2</td><td>47.0</td></tr><tr><td><a href="../rois/ROI_037.html">ROI_037</a></td><td>测试集</td><td>53.0°</td><td>141</td><td>6.3</td><td>13.2</td><td>52.7</td></tr><tr><td><a href="../rois/ROI_059.html">ROI_059</a></td><td>测试集</td><td>53.7°</td><td>140</td><td>5.2</td><td>6.9</td><td>11.8</td></tr><tr><td><a href="../rois/ROI_080.html">ROI_080</a></td><td>验证集</td><td>53.7°</td><td>75</td><td>5.8</td><td>11.0</td><td>25.3</td></tr></tbody></table>
-
-<h2 id="错位的方向">错位的方向</h2>
-<figure><img src="../assets/prototype-difficulty/dxdy.png" alt="patch 内平均错位 dx–dy 散点" style="max-width:100%"></figure>
-
-<p>每个点是一个 patch 的平均错位，两轴等比例。x（≈ 距离向）从 −250 到 +270 像素铺开，y（≈ 方位向）贴着 0：
-RMSE² 里 x 分量的占比中位为 99.6%，y 分量的 RMSE 中位只有 1.7 像素。
-y 向在 patch 内几乎是纯平移；x 向在一个 patch 内还会随地形变化几十像素。</p>
-<h2 id="沿条带的变化">沿条带的变化</h2>
-<figure><img src="../assets/prototype-difficulty/strip.png" alt="各 ROI 沿条带的点上 RMSE" style="max-width:100%"></figure>
-
-<p>每个小图是一条 ROI，横轴是 patch 在条带上的位置。难度成片连续变化，易段与难段交替，与地形起伏一致；
-入射角小的条带整体更难。</p></article>
+<div id="lightbox"><img alt=""></div>
+<div id="proto-bar" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99;display:flex;gap:10px;align-items:center;background:#111;color:#fff;padding:8px 14px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.35);font:14px sans-serif">
+<button id="proto-prev" style="all:unset;cursor:pointer;padding:0 6px">◀</button><span id="proto-label"></span><button id="proto-next" style="all:unset;cursor:pointer;padding:0 6px">▶</button></div>
+<script>
+(function () {
+  var keys = ["A", "B", "C", "D"];
+  function show(k) {
+    document.querySelectorAll("[data-variant]").forEach(function (el) { el.hidden = el.dataset.variant !== k; });
+    var el = document.querySelector('[data-variant="' + k + '"]');
+    document.getElementById("proto-label").textContent = "原型 " + k + "：" + el.dataset.name;
+    var u = new URL(location.href); u.searchParams.set("variant", k); history.replaceState(null, "", u);
+  }
+  function step(d) {
+    var k = new URL(location.href).searchParams.get("variant") || "A";
+    show(keys[(keys.indexOf(k) + d + keys.length) % keys.length]);
+  }
+  document.getElementById("proto-prev").onclick = function () { step(-1); };
+  document.getElementById("proto-next").onclick = function () { step(1); };
+  document.addEventListener("keydown", function (e) {
+    if (e.target.closest("input,textarea,[contenteditable]")) return;
+    if (e.key === "ArrowLeft") step(-1); else if (e.key === "ArrowRight") step(1);
+    if (e.key === "Escape") lb.style.display = "none";
+  });
+  // A：点图放大
+  var lb = document.getElementById("lightbox");
+  document.querySelectorAll("img.zoom").forEach(function (im) {
+    im.onclick = function () { lb.querySelector("img").src = im.src; lb.style.display = "flex"; };
+  });
+  lb.onclick = function () { lb.style.display = "none"; };
+  // B：表头排序
+  var tbody = document.querySelector(".spine tbody");
+  document.querySelectorAll(".spine th[data-key]").forEach(function (th) {
+    var asc = true;
+    th.onclick = function () {
+      var key = th.dataset.key, rows = Array.prototype.slice.call(tbody.rows);
+      rows.sort(function (a, b) {
+        var x = a.dataset[key], y = b.dataset[key];
+        var c = key === "roi" ? x.localeCompare(y) : parseFloat(x) - parseFloat(y);
+        return asc ? c : -c;
+      });
+      asc = !asc;
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    };
+  });
+  // C：标签页
+  var tabs = document.querySelectorAll(".tabs button");
+  function tab(k) {
+    tabs.forEach(function (b) { b.setAttribute("aria-selected", b.dataset.tab === k); });
+    document.querySelectorAll("[data-panel]").forEach(function (p) { p.hidden = p.dataset.panel !== k; });
+  }
+  tabs.forEach(function (b) { b.onclick = function () { tab(b.dataset.tab); }; });
+  tab("dist");
+  step(0);
+})();
+</script></article>
 </div>
 </main>
 <script src="../search-index.js"></script>
