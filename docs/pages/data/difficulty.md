@@ -1,0 +1,74 @@
+# 样本难度
+
+<div class="prototype-banner" style="background:#FFF4D6;border:1px solid #E39B1B;padding:8px 12px;border-radius:4px;font-size:14px">
+PROTOTYPE（issue #47）：同一节的三种写法，用底部浮条或 ←/→ 切换。数字是真的，图是粗稿。</div>
+
+<div data-variant="A" data-name="极简：一张 CDF + 分位表">
+<p class="note">PROTOTYPE 变体 A——文字只到「是什么、多大」；逐 ROI 的数放到各 ROI 页的一行摘要里。</p>
+<p><b>点上 RMSE</b>：一个 patch 里所有评测真值点上，光学点与 SAR 点在 patch 坐标下的距离的均方根，也就是不做任何配准时的评测误差。不拟合模型，不外推。</p>
+<p>验证集、测试集共 1605 个 patch 对有评测真值点，每个都给值。中位 27.1 像素（约 203 m），
+90 分位 104 像素；测试集比验证集难（中位 30.0 对 24.7 像素）。</p>
+<figure><img src="../assets/prototype-difficulty/cdf.png" alt="点上 RMSE 的累计分布" style="max-width:100%"></figure>
+<table><thead><tr><th></th><th>10 分位</th><th>25</th><th>中位</th><th>75</th><th>90</th><th>99</th><th>最大</th></tr></thead><tbody><tr><td>点上 RMSE（像素）</td><td>6.8</td><td>11.7</td><td>27.1</td><td>58.2</td><td>104</td><td>210</td><td>268</td></tr><tr><td>约合米</td><td>51</td><td>88</td><td>203</td><td>437</td><td>783</td><td>1573</td><td>2012</td></tr></tbody></table>
+<p class="note">每个 ROI 的中位与 10–90 分位写在对应的 ROI 页上。</p>
+</div>
+
+<div data-variant="B" data-name="按 ROI 展开：箱线图 + ROI 表">
+<p class="note">PROTOTYPE 变体 B——主角是 ROI 之间的差别；文字多一段「为什么」。</p>
+<p><b>点上 RMSE</b>：一个 patch 里所有评测真值点上，光学点与 SAR 点在 patch 坐标下的距离的均方根，也就是不做任何配准时的评测误差。不拟合模型，不外推。</p>
+<p>全体 1605 个 patch：中位 27.1 像素，10–90 分位 6.8–104 像素。
+难度主要由 ROI 决定：同一 ROI 内的 patch 相差几倍，ROI 之间的中位相差一个数量级以上。</p>
+<figure><img src="../assets/prototype-difficulty/box-roi.png" alt="各 ROI 的点上 RMSE 箱线图" style="max-width:100%"></figure>
+<p>ROI 按入射角从小到大排。入射角越小，地形引起的距离向位移越大（与 cot θ 成正比），
+ROI 中位 RMSE 与入射角的秩相关为 -0.76。数据集的 SAR 窗口只按每个 ROI 的全局仿射放置，
+地形带来的这部分错位留在了 patch 对里。</p>
+<table><thead><tr><th>ROI</th><th>划分</th><th>入射角</th><th>patch</th><th>10 分位</th><th>中位</th><th>90 分位</th></tr></thead><tbody><tr><td><a href="../rois/ROI_054.html">ROI_054</a></td><td>测试集</td><td>47.5°</td><td>145</td><td>26.9</td><td>84.3</td><td>170</td></tr><tr><td><a href="../rois/ROI_020.html">ROI_020</a></td><td>测试集</td><td>49.4°</td><td>91</td><td>13.7</td><td>23.7</td><td>55.7</td></tr><tr><td><a href="../rois/ROI_006.html">ROI_006</a></td><td>测试集</td><td>49.5°</td><td>67</td><td>16.4</td><td>44.0</td><td>88.7</td></tr><tr><td><a href="../rois/ROI_007.html">ROI_007</a></td><td>测试集</td><td>50.7°</td><td>286</td><td>12.2</td><td>57.4</td><td>173</td></tr><tr><td><a href="../rois/ROI_035.html">ROI_035</a></td><td>验证集</td><td>51.0°</td><td>172</td><td>13.9</td><td>37.8</td><td>86.7</td></tr><tr><td><a href="../rois/ROI_011.html">ROI_011</a></td><td>测试集</td><td>51.4°</td><td>83</td><td>10.0</td><td>30.1</td><td>89.8</td></tr><tr><td><a href="../rois/ROI_075.html">ROI_075</a></td><td>验证集</td><td>51.8°</td><td>174</td><td>13.0</td><td>35.2</td><td>107</td></tr><tr><td><a href="../rois/ROI_049.html">ROI_049</a></td><td>验证集</td><td>52.5°</td><td>88</td><td>4.3</td><td>9.0</td><td>36.9</td></tr><tr><td><a href="../rois/ROI_071.html">ROI_071</a></td><td>验证集</td><td>52.6°</td><td>30</td><td>6.9</td><td>10.6</td><td>29.3</td></tr><tr><td><a href="../rois/ROI_070.html">ROI_070</a></td><td>验证集</td><td>52.7°</td><td>113</td><td>7.8</td><td>24.2</td><td>47.0</td></tr><tr><td><a href="../rois/ROI_037.html">ROI_037</a></td><td>测试集</td><td>53.0°</td><td>141</td><td>6.3</td><td>13.2</td><td>52.7</td></tr><tr><td><a href="../rois/ROI_059.html">ROI_059</a></td><td>测试集</td><td>53.7°</td><td>140</td><td>5.2</td><td>6.9</td><td>11.8</td></tr><tr><td><a href="../rois/ROI_080.html">ROI_080</a></td><td>验证集</td><td>53.7°</td><td>75</td><td>5.8</td><td>11.0</td><td>25.3</td></tr></tbody></table>
+</div>
+
+<div data-variant="C" data-name="分量与沿条带：散点 + 小多图 + 全部说明">
+<p class="note">PROTOTYPE 变体 C——把「错位长什么样」讲透：分量、沿条带的变化、测量误差都写出来。</p>
+<h2>度量</h2>
+<p><b>点上 RMSE</b>：一个 patch 里所有评测真值点上，光学点与 SAR 点在 patch 坐标下的距离的均方根，也就是不做任何配准时的评测误差。不拟合模型，不外推。</p>
+<p>所有有评测真值点的 patch 都给值，每个 patch 至少 7 个点、中位 8 个。沿用医学配准（ANHIR、DIR-Lab）报告配准前真值点误差的做法。</p>
+<h2>分布</h2>
+<figure><img src="../assets/prototype-difficulty/cdf.png" alt="点上 RMSE 的累计分布" style="max-width:100%"></figure>
+<table><thead><tr><th></th><th>10 分位</th><th>25</th><th>中位</th><th>75</th><th>90</th><th>99</th><th>最大</th></tr></thead><tbody><tr><td>点上 RMSE（像素）</td><td>6.8</td><td>11.7</td><td>27.1</td><td>58.2</td><td>104</td><td>210</td><td>268</td></tr><tr><td>约合米</td><td>51</td><td>88</td><td>203</td><td>437</td><td>783</td><td>1573</td><td>2012</td></tr></tbody></table>
+<h2>错位几乎全在距离向</h2>
+<figure><img src="../assets/prototype-difficulty/dxdy.png" alt="patch 内平均错位 dx–dy 散点" style="max-width:100%"></figure>
+<p>每个点是一个 patch 的平均错位。x（≈ 距离向）从 −200 到 +200 像素铺开，y（≈ 方位向）几乎贴着 0：
+RMSE² 里 x 分量的占比中位为 100%，y 分量的 RMSE 中位只有 1.7 像素。
+y 向在 patch 内几乎是纯平移；x 向在一个 patch 内还会随地形变化几十像素，所以一个平移或一个单应概括不了一个 patch。</p>
+<h2>沿条带的变化</h2>
+<figure><img src="../assets/prototype-difficulty/strip.png" alt="各 ROI 沿条带的点上 RMSE" style="max-width:100%"></figure>
+<p>同一条带上，难度成片连续变化，易段与难段交替，与地形起伏一致；入射角小的条带整体更难。</p>
+<h2>测量误差</h2>
+<p>难度量的测量误差：每个真值点带约 1 像素的标注抖动（见「标注质量」），相对中位 27.1 像素可以忽略，
+只会把最小的一批值（10 分位 6.8 像素）略微抬高。</p>
+<h2>各 ROI</h2>
+<table><thead><tr><th>ROI</th><th>划分</th><th>入射角</th><th>patch</th><th>10 分位</th><th>中位</th><th>90 分位</th></tr></thead><tbody><tr><td><a href="../rois/ROI_054.html">ROI_054</a></td><td>测试集</td><td>47.5°</td><td>145</td><td>26.9</td><td>84.3</td><td>170</td></tr><tr><td><a href="../rois/ROI_020.html">ROI_020</a></td><td>测试集</td><td>49.4°</td><td>91</td><td>13.7</td><td>23.7</td><td>55.7</td></tr><tr><td><a href="../rois/ROI_006.html">ROI_006</a></td><td>测试集</td><td>49.5°</td><td>67</td><td>16.4</td><td>44.0</td><td>88.7</td></tr><tr><td><a href="../rois/ROI_007.html">ROI_007</a></td><td>测试集</td><td>50.7°</td><td>286</td><td>12.2</td><td>57.4</td><td>173</td></tr><tr><td><a href="../rois/ROI_035.html">ROI_035</a></td><td>验证集</td><td>51.0°</td><td>172</td><td>13.9</td><td>37.8</td><td>86.7</td></tr><tr><td><a href="../rois/ROI_011.html">ROI_011</a></td><td>测试集</td><td>51.4°</td><td>83</td><td>10.0</td><td>30.1</td><td>89.8</td></tr><tr><td><a href="../rois/ROI_075.html">ROI_075</a></td><td>验证集</td><td>51.8°</td><td>174</td><td>13.0</td><td>35.2</td><td>107</td></tr><tr><td><a href="../rois/ROI_049.html">ROI_049</a></td><td>验证集</td><td>52.5°</td><td>88</td><td>4.3</td><td>9.0</td><td>36.9</td></tr><tr><td><a href="../rois/ROI_071.html">ROI_071</a></td><td>验证集</td><td>52.6°</td><td>30</td><td>6.9</td><td>10.6</td><td>29.3</td></tr><tr><td><a href="../rois/ROI_070.html">ROI_070</a></td><td>验证集</td><td>52.7°</td><td>113</td><td>7.8</td><td>24.2</td><td>47.0</td></tr><tr><td><a href="../rois/ROI_037.html">ROI_037</a></td><td>测试集</td><td>53.0°</td><td>141</td><td>6.3</td><td>13.2</td><td>52.7</td></tr><tr><td><a href="../rois/ROI_059.html">ROI_059</a></td><td>测试集</td><td>53.7°</td><td>140</td><td>5.2</td><td>6.9</td><td>11.8</td></tr><tr><td><a href="../rois/ROI_080.html">ROI_080</a></td><td>验证集</td><td>53.7°</td><td>75</td><td>5.8</td><td>11.0</td><td>25.3</td></tr></tbody></table>
+</div>
+
+<div id="proto-bar" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99;display:flex;gap:10px;align-items:center;background:#111;color:#fff;padding:8px 14px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.35);font:14px sans-serif">
+<button id="proto-prev" style="all:unset;cursor:pointer;padding:0 6px">◀</button><span id="proto-label"></span><button id="proto-next" style="all:unset;cursor:pointer;padding:0 6px">▶</button></div>
+<script>
+(function () {
+  var keys = ["A", "B", "C"];
+  function show(k) {
+    document.querySelectorAll("[data-variant]").forEach(function (el) { el.hidden = el.dataset.variant !== k; });
+    var el = document.querySelector('[data-variant="' + k + '"]');
+    document.getElementById("proto-label").textContent = k + "（" + el.dataset.name + "）";
+    var u = new URL(location.href); u.searchParams.set("variant", k); history.replaceState(null, "", u);
+  }
+  function step(d) {
+    var k = new URL(location.href).searchParams.get("variant") || "A";
+    show(keys[(keys.indexOf(k) + d + keys.length) % keys.length]);
+  }
+  document.getElementById("proto-prev").onclick = function () { step(-1); };
+  document.getElementById("proto-next").onclick = function () { step(1); };
+  document.addEventListener("keydown", function (e) {
+    if (e.target.closest("input,textarea,[contenteditable]")) return;
+    if (e.key === "ArrowLeft") step(-1); else if (e.key === "ArrowRight") step(1);
+  });
+  step(0);
+})();
+</script>

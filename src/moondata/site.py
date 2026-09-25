@@ -69,6 +69,7 @@ DATA_PAGES = [
     Page("data/pairing.html", "data/pairing.md", "数据说明", "配对特征"),
     Page("data/statistics.html", "data/statistics.md", "数据说明", "统计与分布"),
     Page("data/usage.html", "data/usage.md", "数据说明", "使用建议"),
+    Page("data/difficulty.html", "data/difficulty.md", "数据说明", "样本难度"),  # PROTOTYPE #47
 ]
 PAGES = [Page("index.html", "index.md", "首页"), *DATA_PAGES, Page("process.html", "process.md", "制作流程")]
 NAV = [("首页", "index.html"), ("数据说明", DATA_PAGES[0].path), ("制作流程", "process.html")]
@@ -511,6 +512,12 @@ def _dataset_facts(roi: Roi) -> str:
         rows.append(("patch 编号", f"0–{facts['last_patch']}，缺 {missing}"))
     if roi.truth_patches:
         rows.append(("带评测真值点的 patch", f"{roi.truth_patches}，共 {roi.truth_points} 对点"))
+        # PROTOTYPE #47：样本难度的一行摘要
+        proto = Path(__file__).parents[2] / "docs" / "assets" / "prototype-difficulty" / "roi.json"
+        if proto.exists() and roi.roi in (d := json.loads(proto.read_text(encoding="utf-8"))):
+            r = d[roi.roi]
+            rows.append(("样本难度", f'点上 RMSE 中位 {r["p50"]:.1f} 像素，10–90 分位 {r["p10"]:.1f}–{r["p90"]:.1f}；'
+                         f'{r["of"]} 个 ROI 中第 {r["rank"]} 难（<a href="../data/difficulty.html">样本难度</a>）'))
     rows += [
         ("中心", f"{_lat(roi.lat)}，{_lon(roi.lon)}"),
         ("范围", f"{_lat(south)}–{_lat(north)}，{_lon(west)}–{_lon(east)}"),
