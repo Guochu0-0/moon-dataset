@@ -73,6 +73,7 @@ PAGES = {
     "data/imaging.md": "# 成像特征\n",
     "data/pairing.md": "# 配对特征\n",
     "data/statistics.md": "# 统计与分布\n\n## 划分与数量\n\n<!-- 划分表 -->\n\n## ROI 总表\n\n<!-- ROI 总表 -->\n",
+    "data/usage.md": "# 使用建议\n",
     "process.md": (
         '# 制作流程\n\n<div class="flow"><svg><a href="#标控制点"><text>标控制点</text></a></svg></div>\n\n'
         "## 重叠区提取\n\n## 标控制点\n\n### 标注规程\n\n"

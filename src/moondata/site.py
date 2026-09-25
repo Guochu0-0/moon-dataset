@@ -68,6 +68,7 @@ DATA_PAGES = [
     Page("data/imaging.html", "data/imaging.md", "数据说明", "成像特征"),
     Page("data/pairing.html", "data/pairing.md", "数据说明", "配对特征"),
     Page("data/statistics.html", "data/statistics.md", "数据说明", "统计与分布"),
+    Page("data/usage.html", "data/usage.md", "数据说明", "使用建议"),
 ]
 PAGES = [Page("index.html", "index.md", "首页"), *DATA_PAGES, Page("process.html", "process.md", "制作流程")]
 NAV = [("首页", "index.html"), ("数据说明", DATA_PAGES[0].path), ("制作流程", "process.html")]
