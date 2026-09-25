@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>沿条带的变化 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root="../">
+<header class="top">
+<a class="site" href="../index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="../index.html">首页</a><a href="../data/sources.html" aria-current="page">数据说明</a><a href="../process.html">制作流程</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索" aria-label="搜索" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main>
+<div class="doc wrap">
+<nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html">组织</a><a href="../data/imaging.html">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/statistics.html">统计与分布</a><a href="../data/usage.html">使用建议</a><a href="../data/difficulty.html" aria-current="page">样本难度</a></nav>
+<article class="prose wide"><p class="crumb"><a href="difficulty.html">样本难度</a> ›</p><h1 id="沿条带的变化">沿条带的变化</h1>
+<p>每个 ROI 是 SAR 条带上的一段狭长区域，patch 对按行、列排列，行沿条带方向。</p>
+<p><img alt="13 个 ROI 沿条带的点上 RMSE" src="../assets/difficulty/strip.png" /></p>
+<p>每张小图一个 ROI，按入射角从小到大排，标题是 ROI 名与入射角。每点一个 patch 对，横轴是 patch 行号，纵轴是点上 RMSE，对数刻度，各图相同。</p>
+<p>上下或左右相邻的 patch 对有 2262 组。两者点上 RMSE 之比（大比小）的中位数是 1.35，90 分位 2.57；取对数后的相关系数是 0.84。</p>
+<p>同一 ROI 内，点上 RMSE 沿条带成段起伏，高低可以差十倍以上。把 ROI_049 的行按顺序分成三段，三段的中位数依次是 6.3、9.4、32.9 像素。ROI_059 三段的中位数都在 6–8 像素之间。</p></article>
+</div>
+</main>
+<script src="../search-index.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

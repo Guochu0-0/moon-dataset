@@ -25,6 +25,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import markdown
+import numpy as np
 from markdown.extensions.toc import slugify_unicode
 
 from moondata.errors import SiteInputUnreadable
@@ -35,6 +36,7 @@ from moondata.sources import (
     PROCESS_NAME,
     SAMPLES_NAME,
     ground_truth_file,
+    ground_truth_files,
     load_metadata,
 )
 
@@ -69,14 +71,23 @@ DATA_PAGES = [
     Page("data/pairing.html", "data/pairing.md", "数据说明", "配对特征"),
     Page("data/statistics.html", "data/statistics.md", "数据说明", "统计与分布"),
     Page("data/usage.html", "data/usage.md", "数据说明", "使用建议"),
+    Page("data/difficulty.html", "data/difficulty.md", "数据说明", "样本难度"),
 ]
-PAGES = [Page("index.html", "index.md", "首页"), *DATA_PAGES, Page("process.html", "process.md", "制作流程")]
+DIFFICULTY_PAGES = [
+    Page(f"data/difficulty-{name}.html", f"data/difficulty-{name}.md", "数据说明", "样本难度")
+    for name in ("distribution", "rois", "direction", "strip")
+]
+"""「样本难度」概览页上 4 张图卡各自点进的详情页。侧栏不列它们，停在其上时「样本难度」高亮。"""
+PAGES = [
+    Page("index.html", "index.md", "首页"), *DATA_PAGES, *DIFFICULTY_PAGES, Page("process.html", "process.md", "制作流程"),
+]
 NAV = [("首页", "index.html"), ("数据说明", DATA_PAGES[0].path), ("制作流程", "process.html")]
 
 SPLIT_TABLE = "<!-- 划分表 -->"
 SPLIT_TABLE_WITH_TRUTH = "<!-- 划分表：含评测真值点 -->"
 ROI_TABLE = "<!-- ROI 总表 -->"
 SAMPLES = "<!-- 样例 -->"
+DIFFICULTY_TABLE = "<!-- 难度：ROI 表 -->"
 PROCESS_FIGURE = re.compile(r"<!-- 流程配图 (\w+)：(.*?) -->")
 """正文里的占位注释，生成器换成由素材算出的表格与交互图。文字留在正文里手写；流程配图
 的图注写在占位注释里。"""
@@ -141,6 +152,8 @@ class Inputs:
     overlays: dict[str, dict]
     process: dict
     """`process.json`：流程配图的那一段影像、控制点与窗口。"""
+    difficulty: dict[str, list[tuple[int, float]]]
+    """有评测真值点的 ROI → 按编号升序的 (patch 编号, 点上 RMSE)。"""
 
 
 def load_inputs(repo_root: Path) -> Inputs:
@@ -154,7 +167,23 @@ def load_inputs(repo_root: Path) -> Inputs:
             raise SiteInputUnreadable(f"{assets / FACTS_NAME} 里没有 {roi}——跑一次 make_assets.py facts {roi}")
         rois.append(Roi(roi, record["划分"].strip(), facts[roi], record))
     samples = [_sample(repo_root, entry) for entry in _json(assets / SAMPLES_NAME)]
-    return Inputs(repo_root, rois, samples, _json(assets / OVERLAY_NAME), _json(assets / PROCESS_NAME))
+    difficulty = {roi.roi: _point_rmse(repo_root, roi) for roi in rois if roi.truth_patches}
+    return Inputs(repo_root, rois, samples, _json(assets / OVERLAY_NAME), _json(assets / PROCESS_NAME), difficulty)
+
+
+def _point_rmse(repo_root: Path, roi: Roi) -> list[tuple[int, float]]:
+    """这个 ROI 每个带评测真值点的 patch 对的点上 RMSE：各对点距离的均方根。"""
+    values = []
+    for path in ground_truth_files(repo_root, roi.split, roi.roi):
+        try:
+            a = np.loadtxt(path, ndmin=2)
+        except (OSError, ValueError) as error:
+            raise SiteInputUnreadable(f"{roi.roi} 的评测真值点读不动：{path}（{error}）") from error
+        # 每行：光学 x、光学 y、SAR x、SAR y。距离与 y 的符号约定无关
+        values.append((int(path.stem.split("_")[1]), float(np.sqrt(((a[:, 2:] - a[:, :2]) ** 2).sum(axis=1).mean()))))
+    if not values:
+        raise SiteInputUnreadable(f"{roi.roi} 标了 {roi.truth_patches} 个带评测真值点的 patch，仓库里却没有它的真值点文件")
+    return values
 
 
 def _sample(repo_root: Path, entry: dict) -> dict:
@@ -196,7 +225,7 @@ def build_site(repo_root: Path) -> dict[str, bytes]:
         body = _fill(body, inputs, _root(page.path))
         if page.path == "index.html":
             body = _home(body, inputs)
-        elif page in DATA_PAGES:
+        elif page.nav == "数据说明":
             body = _data_page(body, page)
         elif page.path == "process.html":
             body = _process_page(body)
@@ -241,7 +270,7 @@ def _render_markdown(path: Path) -> tuple[str, str]:
     except OSError as error:
         raise SiteInputUnreadable(f"正文读不动：{path}（{error}）") from error
     converter = markdown.Markdown(
-        extensions=["tables", "fenced_code", "toc", "attr_list"],
+        extensions=["tables", "fenced_code", "toc", "attr_list", "md_in_html"],
         extension_configs={"toc": {"slugify": slugify_unicode}},
     )
     body = converter.convert(text)
@@ -259,6 +288,7 @@ def _fill(body: str, inputs: Inputs, root: str) -> str:
         .replace(SPLIT_TABLE, _split_table(inputs.rois, with_truth=False))
         .replace(ROI_TABLE, _roi_table(inputs.rois, root))
         .replace(SAMPLES, '<div id="samples" class="samples"></div>')
+        .replace(DIFFICULTY_TABLE, _difficulty_table(inputs))
     )
     return PROCESS_FIGURE.sub(lambda match: _process_figure(*match.groups()), body)
 
@@ -329,12 +359,13 @@ def _samples_script(inputs: Inputs) -> str:
 def _data_page(body: str, page: Page) -> str:
     links = []
     for other in DATA_PAGES:
-        current = ' aria-current="page"' if other == page else ""
+        current = ' aria-current="page"' if other.section == page.section else ""
         links.append(f'<a href="{_root(page.path)}{other.path}"{current}>{other.section}</a>')
-    wide = " wide" if page.path.endswith("statistics.html") else ""
+    wide = " wide" if page.path.endswith("statistics.html") or page.section == "样本难度" else ""
+    crumb = f'<p class="crumb"><a href="difficulty.html">样本难度</a> ›</p>' if page in DIFFICULTY_PAGES else ""
     return f"""<div class="doc wrap">
 <nav class="sections" aria-label="数据说明">{"".join(links)}</nav>
-<article class="prose{wide}">{body}</article>
+<article class="prose{wide}">{crumb}{body}</article>
 </div>"""
 
 
@@ -381,6 +412,60 @@ def _roi_table(rois: list[Roi], root: str) -> str:
 <tbody>{rows}</tbody>
 </table>
 </div>"""
+
+
+DIFFICULTY_AXIS = (2.0, 300.0)
+"""难度表里范围条与迷你曲线共用的对数刻度（像素），覆盖全部点上 RMSE。"""
+RANGE_TICKS = [3, 10, 30, 100, 300]
+
+
+def _log_unit(value: float) -> float:
+    """点上 RMSE 在 `DIFFICULTY_AXIS` 对数刻度上的位置，0–1。"""
+    low, high = (math.log(v) for v in DIFFICULTY_AXIS)
+    return (math.log(min(max(value, DIFFICULTY_AXIS[0]), DIFFICULTY_AXIS[1])) - low) / (high - low)
+
+
+def _log_x(value: float, width: float) -> float:
+    return round(_log_unit(value) * width, 1)
+
+
+def _difficulty_table(inputs: Inputs) -> str:
+    """有评测真值点的 ROI 按入射角排的表：分位数、10–90 分位的范围条、沿条带的迷你曲线。
+
+    迷你曲线的横轴是 patch 编号：编号按铺窗顺序逐行递增，所以沿条带单调。
+    表头点击排序由 `site.js` 按各行的 `data-*` 值做。
+    """
+    rois = sorted((r for r in inputs.rois if r.roi in inputs.difficulty), key=lambda r: float(r.metadata["入射角_deg"]))
+    width, spark_height = 170, 30
+    axis = "".join(f'<span style="left:{_log_x(t, width)}px">{t}</span>' for t in RANGE_TICKS)
+    rows = []
+    for r in rois:
+        numbers, values = zip(*inputs.difficulty[r.roi])
+        p10, p50, p90 = np.percentile(values, [10, 50, 90])
+        incidence = float(r.metadata["入射角_deg"])
+        bar = (f'<svg class="range {r.split}" width="{width}" height="14" viewBox="0 0 {width} 14" aria-hidden="true">'
+               f'<line x1="{_log_x(p10, width)}" y1="7" x2="{_log_x(p90, width)}" y2="7"/>'
+               f'<line class="med" x1="{_log_x(p50, width)}" y1="1" x2="{_log_x(p50, width)}" y2="13"/></svg>')
+        last = max(numbers) or 1
+        dots = "".join(
+            f'<circle cx="{round(n / last * (width - 4) + 2, 1)}" '
+            f'cy="{round(spark_height - 2 - _log_unit(v) * (spark_height - 4), 1)}" r="1.1"/>'
+            for n, v in zip(numbers, values)
+        )
+        spark = f'<svg class="spark {r.split}" width="{width}" height="{spark_height}" viewBox="0 0 {width} {spark_height}" aria-hidden="true">{dots}</svg>'
+        rows.append(
+            f'<tr data-incidence="{incidence:.2f}" data-median="{p50:.3f}" data-patches="{len(values)}">'
+            f'<th scope="row">{r.roi}</th><td><span class="sw {r.split}"></span>{SPLITS[r.split]}</td>'
+            f'<td class="num">{incidence:.1f}°</td><td class="num">{len(values)}</td>'
+            f'<td class="num">{p10:.1f}</td><td class="num"><b>{p50:.1f}</b></td><td class="num">{p90:.1f}</td>'
+            f"<td>{bar}</td><td>{spark}</td></tr>"
+        )
+    return f"""<table class="difftable sortable">
+<thead><tr><th>ROI</th><th>划分</th><th class="num" data-key="incidence" aria-sort="ascending">入射角</th>
+<th class="num" data-key="patches">patch 对</th><th class="num">10 分位</th><th class="num" data-key="median">中位数</th><th class="num">90 分位</th>
+<th>10–90 分位<div class="raxis" style="width:{width}px">{axis}</div></th><th>沿条带</th></tr></thead>
+<tbody>{"".join(rows)}</tbody>
+</table>"""
 
 
 # ---------------------------------------------------------------------------
@@ -485,7 +570,7 @@ def _roi_page(roi: Roi, inputs: Inputs, position: int) -> str:
 <div class="roi-grid">
 <div class="roi-side">
 <div class="locator">{_moon_map(inputs.rois, "../", image="moon-2k.jpg", focus=roi.roi)}</div>
-{_dataset_facts(roi)}
+{_dataset_facts(roi, inputs.difficulty)}
 {_comparison(roi)}
 <h2 class="imgh">原始产品</h2>
 {_overlay(roi, inputs.overlays.get(roi.roi))}
@@ -502,7 +587,7 @@ def _roi_page(roi: Roi, inputs: Inputs, position: int) -> str:
 </div>"""
 
 
-def _dataset_facts(roi: Roi) -> str:
+def _dataset_facts(roi: Roi, difficulty: dict[str, list[tuple[int, float]]]) -> str:
     facts = roi.facts
     west, south, east, north = facts["bbox"]
     rows = [("划分", f'<span class="sw {roi.split}"></span>{SPLITS[roi.split]}'), ("patch 对", str(roi.patches))]
@@ -511,6 +596,10 @@ def _dataset_facts(roi: Roi) -> str:
         rows.append(("patch 编号", f"0–{facts['last_patch']}，缺 {missing}"))
     if roi.truth_patches:
         rows.append(("带评测真值点的 patch", f"{roi.truth_patches}，共 {roi.truth_points} 对点"))
+    if roi.roi in difficulty:
+        p10, p50, p90 = np.percentile([v for _, v in difficulty[roi.roi]], [10, 50, 90])
+        rows.append(('<a href="../data/difficulty.html">样本难度</a>',
+                     f"点上 RMSE 中位数 {p50:.1f} 像素，10–90 分位 {p10:.1f}–{p90:.1f} 像素"))
     rows += [
         ("中心", f"{_lat(roi.lat)}，{_lon(roi.lon)}"),
         ("范围", f"{_lat(south)}–{_lat(north)}，{_lon(west)}–{_lon(east)}"),
