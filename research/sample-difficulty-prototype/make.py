@@ -1,10 +1,11 @@
-"""PROTOTYPE（一次性，issue #47）：「样本难度」一节的三种写法，挂在真实文档站里对比。
+"""PROTOTYPE（一次性，issue #47）：「样本难度」一节的粗稿，挂在真实文档站里看。
 
     PYTHONPATH=src conda run -n moon-dataset python research/sample-difficulty-prototype/make.py
     PYTHONPATH=src conda run -n moon-dataset python scripts/build_site.py
 
-然后打开 `_site/data/difficulty.html?variant=A`（B、C），底部浮条或 ←/→ 切换。
-只读仓库：`data/ground-truth/`、`data/metadata/minirf_metadata.csv`、
+然后打开 `_site/data/difficulty.html`。第一轮的 A/B/C 三变体见提交 f85013d；作者认为三者
+本质相同，第二轮合成一版：先讲度量（为什么、定义、怎么算 + 图示），再放全部图表。
+只读仓库：`data/ground-truth/`、`data/metadata/minirf_metadata.csv`、`docs/assets/samples/`、
 `patches_from_40.csv`（#40 研究分支上的逐 patch 表，只取 patch 在重叠区里的位置）。
 """
 
@@ -147,8 +148,64 @@ def fig_strip(rows, rois):
     plt.close(fig)
 
 
+EXAMPLE = ("Test", "ROI_020", 39)
+"""计算图示用的 patch：入库样例图里 RMSE 最接近全体中位的一个。"""
+
+
+def fig_example():
+    from PIL import Image
+
+    split, roi, patch = EXAMPLE
+    a = np.loadtxt(REPO / "data" / "ground-truth" / split / roi / f"patch_{patch}.txt", ndmin=2)
+    p = np.c_[a[:, 0], -a[:, 1]]  # 光学点（列，行）
+    qq = np.c_[a[:, 2], -a[:, 3]]  # SAR 点
+    d = qq - p
+    dist = np.hypot(d[:, 0], d[:, 1])
+    rmse = float(np.sqrt(np.mean(dist**2)))
+    opt = Image.open(REPO / "docs" / "assets" / "samples" / f"{roi}_p{patch}_opt.jpg").convert("L")
+    sar = Image.open(REPO / "docs" / "assets" / "samples" / f"{roi}_p{patch}_sar.jpg").convert("L")
+
+    fig, ax = plt.subplots(1, 4, figsize=(11.5, 3.2), gridspec_kw={"width_ratios": [1, 1, 1, 1.15]})
+    red, cyan = "#E0402B", "#19B5C8"
+    for k, (img, pts, col, title) in enumerate([(opt, p, red, "① 光学 patch：点 pᵢ"),
+                                                (sar, qq, cyan, "② SAR patch：同名点 qᵢ")]):
+        ax[k].imshow(img, cmap="gray")
+        ax[k].scatter(pts[:, 0], pts[:, 1], s=46, facecolors="none", edgecolors=col, lw=1.6)
+        for i, (x, y) in enumerate(pts):
+            ax[k].text(x + 12, y - 10, str(i + 1), color=col, fontsize=8, weight="bold")
+        ax[k].set_title(title, fontsize=9)
+    ax[2].imshow(opt, cmap="gray", alpha=.35)
+    ax[2].scatter(p[:, 0], p[:, 1], s=30, facecolors="none", edgecolors=red, lw=1.4)
+    ax[2].scatter(qq[:, 0], qq[:, 1], s=30, facecolors="none", edgecolors=cyan, lw=1.4)
+    for (x0, y0), (x1, y1) in zip(p, qq):
+        ax[2].annotate("", (x1, y1), (x0, y0), arrowprops={"arrowstyle": "->", "color": C["ink"], "lw": 1.1})
+    ax[2].set_title("③ 放进同一 patch 坐标：dᵢ = qᵢ − pᵢ", fontsize=9)
+    for k in range(3):
+        ax[k].set_xlim(0, 512)
+        ax[k].set_ylim(512, 0)
+        ax[k].set_xticks([])
+        ax[k].set_yticks([])
+    idx = np.arange(1, len(dist) + 1)
+    ax[3].bar(idx, dist, color=C["ink2"], width=.6)
+    ax[3].axhline(rmse, color=C["Test"], lw=1.6)
+    ax[3].text(.4, rmse + 1, f"RMSE = {rmse:.1f}", color=C["Test"], ha="left", va="bottom", fontsize=9,
+               bbox={"facecolor": "white", "edgecolor": "none", "pad": 1})
+    ax[3].set_xlim(.4, len(dist) + .6)
+    ax[3].set_xticks(idx)
+    ax[3].set_xlabel("点 i")
+    ax[3].set_ylabel("|dᵢ|（像素）")
+    ax[3].set_title("④ 距离的均方根", fontsize=9)
+    fig.tight_layout()
+    fig.savefig(OUT_ASSETS / "example.png")
+    plt.close(fig)
+    return {"roi": roi, "patch": patch, "split": split, "n": len(dist), "rmse": rmse,
+            "dmin": float(dist.min()), "dmax": float(dist.max()), "dx": float(d[:, 0].mean()), "dy": float(d[:, 1].mean()),
+            "dx_min": float(d[:, 0].min()), "dx_max": float(d[:, 0].max()), "dy_absmax": float(np.abs(d[:, 1]).max())}
+
+
 def main():
     OUT_ASSETS.mkdir(parents=True, exist_ok=True)
+    ex = fig_example()
     rows, inc = load()
     all_rmse = [r["rmse"] for r in rows]
     rois = []
@@ -180,7 +237,7 @@ def main():
     (OUT_ASSETS / "roi.json").write_text(json.dumps(roi_lines, ensure_ascii=False, indent=1), encoding="utf-8")
     (HERE / "summary.json").write_text(json.dumps({"stats": stats, "rois": rois}, ensure_ascii=False, indent=1),
                                        encoding="utf-8")
-    OUT_PAGE.write_text(page(stats, rois), encoding="utf-8")
+    OUT_PAGE.write_text(page(stats, rois, ex), encoding="utf-8")
     print(json.dumps(stats, ensure_ascii=False, indent=1))
 
 
@@ -197,7 +254,7 @@ def roi_table(rois):
             f"<th>中位</th><th>90 分位</th></tr></thead><tbody>{body}</tbody></table>")
 
 
-def page(s, rois):
+def page(s, rois, ex):
     img = lambda name, alt: f'<figure><img src="../assets/prototype-difficulty/{name}" alt="{alt}" style="max-width:100%"></figure>'
     quant = ("<table><thead><tr><th></th><th>10 分位</th><th>25</th><th>中位</th><th>75</th><th>90</th><th>99</th>"
              f"<th>最大</th></tr></thead><tbody><tr><td>点上 RMSE（像素）</td><td>{f(s['p10'])}</td><td>{f(s['p25'])}</td>"
@@ -205,89 +262,95 @@ def page(s, rois):
              f"</tr><tr><td>约合米</td><td>{s['p10']*PIXEL_M:.0f}</td><td>{s['p25']*PIXEL_M:.0f}</td><td>{s['p50']*PIXEL_M:.0f}</td>"
              f"<td>{s['p75']*PIXEL_M:.0f}</td><td>{s['p90']*PIXEL_M:.0f}</td><td>{s['p99']*PIXEL_M:.0f}</td>"
              f"<td>{s['max']*PIXEL_M:.0f}</td></tr></tbody></table>")
-    define = ("<p><b>点上 RMSE</b>：一个 patch 里所有评测真值点上，光学点与 SAR 点在 patch 坐标下的距离的均方根，"
-              "也就是不做任何配准时的评测误差。不拟合模型，不外推。</p>")
-
-    a = f"""<div data-variant="A" data-name="极简：一张 CDF + 分位表">
-<p class="note">PROTOTYPE 变体 A——文字只到「是什么、多大」；逐 ROI 的数放到各 ROI 页的一行摘要里。</p>
-{define}
-<p>验证集、测试集共 {s['n']} 个 patch 对有评测真值点，每个都给值。中位 {f(s['p50'])} 像素（约 {s['p50']*PIXEL_M:.0f} m），
-90 分位 {f(s['p90'])} 像素；测试集比验证集难（中位 {f(s['Test']['p50'])} 对 {f(s['Val']['p50'])} 像素）。</p>
-{img("cdf.png", "点上 RMSE 的累计分布")}
-{quant}
-<p class="note">每个 ROI 的中位与 10–90 分位写在对应的 ROI 页上。</p>
-</div>"""
-
-    b = f"""<div data-variant="B" data-name="按 ROI 展开：箱线图 + ROI 表">
-<p class="note">PROTOTYPE 变体 B——主角是 ROI 之间的差别；文字多一段「为什么」。</p>
-{define}
-<p>全体 {s['n']} 个 patch：中位 {f(s['p50'])} 像素，10–90 分位 {f(s['p10'])}–{f(s['p90'])} 像素。
-难度主要由 ROI 决定：同一 ROI 内的 patch 相差几倍，ROI 之间的中位相差一个数量级以上。</p>
-{img("box-roi.png", "各 ROI 的点上 RMSE 箱线图")}
-<p>ROI 按入射角从小到大排。入射角越小，地形引起的距离向位移越大（与 cot θ 成正比），
-ROI 中位 RMSE 与入射角的秩相关为 {s['rho_inc']:.2f}。数据集的 SAR 窗口只按每个 ROI 的全局仿射放置，
-地形带来的这部分错位留在了 patch 对里。</p>
-{roi_table(rois)}
-</div>"""
-
-    c = f"""<div data-variant="C" data-name="分量与沿条带：散点 + 小多图 + 全部说明">
-<p class="note">PROTOTYPE 变体 C——把「错位长什么样」讲透：分量、沿条带的变化、测量误差都写出来。</p>
-<h2>度量</h2>
-{define}
-<p>所有有评测真值点的 patch 都给值，每个 patch 至少 {s['min_n']} 个点、中位 {s['med_n']:.0f} 个。沿用医学配准（ANHIR、DIR-Lab）报告配准前真值点误差的做法。</p>
-<h2>分布</h2>
-{img("cdf.png", "点上 RMSE 的累计分布")}
-{quant}
-<h2>错位几乎全在距离向</h2>
-{img("dxdy.png", "patch 内平均错位 dx–dy 散点")}
-<p>每个点是一个 patch 的平均错位。x（≈ 距离向）从 −200 到 +200 像素铺开，y（≈ 方位向）几乎贴着 0：
-RMSE² 里 x 分量的占比中位为 {s['x_share']*100:.0f}%，y 分量的 RMSE 中位只有 {s['ry50']:.1f} 像素。
-y 向在 patch 内几乎是纯平移；x 向在一个 patch 内还会随地形变化几十像素，所以一个平移或一个单应概括不了一个 patch。</p>
-<h2>沿条带的变化</h2>
-{img("strip.png", "各 ROI 沿条带的点上 RMSE")}
-<p>同一条带上，难度成片连续变化，易段与难段交替，与地形起伏一致；入射角小的条带整体更难。</p>
-<h2>测量误差</h2>
-<p>难度量的测量误差：每个真值点带约 1 像素的标注抖动（见「标注质量」），相对中位 {f(s['p50'])} 像素可以忽略，
-只会把最小的一批值（10 分位 {f(s['p10'])} 像素）略微抬高。</p>
-<h2>各 ROI</h2>
-{roi_table(rois)}
-</div>"""
-
     return f"""# 样本难度
 
-<div class="prototype-banner" style="background:#FFF4D6;border:1px solid #E39B1B;padding:8px 12px;border-radius:4px;font-size:14px">
-PROTOTYPE（issue #47）：同一节的三种写法，用底部浮条或 ←/→ 切换。数字是真的，图是粗稿。</div>
+<p style="background:#FFF4D6;border:1px solid #E39B1B;padding:8px 12px;border-radius:4px;font-size:14px">
+PROTOTYPE（issue #47，第二轮）：数字是真的，图是粗稿。</p>
 
-{a}
+一对 patch 有多难配准，这里只看几何：数据集交付时，光学与 SAR patch 之间还差多少。
+验证集、测试集里有评测真值点的 {s['n']} 个 patch 对都给出一个值；训练集没有评测真值点，暂不给。
 
-{b}
+## 度量：点上 RMSE
 
-{c}
+### 为什么选它
 
-<div id="proto-bar" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99;display:flex;gap:10px;align-items:center;background:#111;color:#fff;padding:8px 14px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.35);font:14px sans-serif">
-<button id="proto-prev" style="all:unset;cursor:pointer;padding:0 6px">◀</button><span id="proto-label"></span><button id="proto-next" style="all:unset;cursor:pointer;padding:0 6px">▶</button></div>
-<script>
-(function () {{
-  var keys = ["A", "B", "C"];
-  function show(k) {{
-    document.querySelectorAll("[data-variant]").forEach(function (el) {{ el.hidden = el.dataset.variant !== k; }});
-    var el = document.querySelector('[data-variant="' + k + '"]');
-    document.getElementById("proto-label").textContent = k + "（" + el.dataset.name + "）";
-    var u = new URL(location.href); u.searchParams.set("variant", k); history.replaceState(null, "", u);
-  }}
-  function step(d) {{
-    var k = new URL(location.href).searchParams.get("variant") || "A";
-    show(keys[(keys.indexOf(k) + d + keys.length) % keys.length]);
-  }}
-  document.getElementById("proto-prev").onclick = function () {{ step(-1); }};
-  document.getElementById("proto-next").onclick = function () {{ step(1); }};
-  document.addEventListener("keydown", function (e) {{
-    if (e.target.closest("input,textarea,[contenteditable]")) return;
-    if (e.key === "ArrowLeft") step(-1); else if (e.key === "ArrowRight") step(1);
-  }});
-  step(0);
-}})();
-</script>
+- **只用真值点，不拟合，不外推。** 光学与 SAR patch 之间真实的坐标对应（真值变换）只在真值点上被观测到。
+  在 patch 内，x 向（≈ 距离向）的错位随地形变化几十像素，用一个平移、仿射或单应去概括，都会与真值点自相矛盾；
+  直接在点上量，就绕开了这个问题。
+- **与评测一致。** 它就是「不做任何配准时的评测误差」：配准方法交出结果后，同样在这些点上算误差，两者可以直接比。
+  医学影像配准的基准（ANHIR、DIR-Lab）用同样的办法报告配准前的难度。
+- **换别的量，难易排序几乎不变。** 讨论过的六个位移类度量（包括 patch 中心的错位、四角的最大错位）
+  给 patch 排序的秩相关都在 0.93 以上。选 RMSE 是因为它最好解释。
+
+放弃的候选：
+
+| 候选 | 放弃的原因 |
+|---|---|
+| 光学与 SAR 窗口的面积重合度 | 每个 patch 都在约 0.73 以上，基本只由平移决定，分不出难易 |
+| 拟合仿射后分解成平移、旋转、缩放、剪切 | 会把 x 向的剪切误读成旋转；而且要拟合 |
+| patch 中心或四角的错位 | 要先拟合一个变换，四角还要外推到没有点的地方 |
+
+### 定义
+
+一个 patch 有 N 个评测真值点。第 i 个点在光学 patch 里的位置是 pᵢ，在 SAR patch 里的位置是 qᵢ，
+都用各自 patch 的像素坐标（原点在左上角，1 像素 = 7.5 m）。
+
+<p style="text-align:center;font-size:18px">点上 RMSE = √( (1/N) · Σᵢ |qᵢ − pᵢ|² )</p>
+
+数据集交付时两个 patch 已经按控制点的全局仿射对齐，完全对齐时每个 qᵢ = pᵢ，值为 0。值越大，
+配准方法要纠正的错位越大。
+
+### 怎么算
+
+以 {ex['roi']} 的 patch {ex['patch']}（{SPLIT_CN[ex['split']]}，{ex['n']} 个点）为例，它的值 {ex['rmse']:.1f} 像素，接近全体中位。
+
+{img("example.png", "点上 RMSE 的计算示例")}
+
+1. 读 `data/ground-truth/<划分>/<ROI>/patch_<n>.txt`，每行一对点：光学 x、y，SAR x、y。y 存的是负的行号，取负。
+2. 每对点求错位 dᵢ = qᵢ − pᵢ（图 ③ 里的箭头）。这个 patch 里的箭头都几乎是水平的
+   （|dy| 不超过 {ex['dy_absmax']:.1f} 像素），但 dx 从 {ex['dx_min']:.1f} 到 {ex['dx_max']:.1f} 像素，有的朝左、有的朝右：
+   x 向错位在一个 patch 内随位置变化，这正是不用一个平移去概括 patch 的原因。
+3. 求每个箭头的长度 |dᵢ|（{ex['dmin']:.1f}–{ex['dmax']:.1f} 像素），平方后取平均，再开方（图 ④）。
+
+每个 patch 至少 {s['min_n']} 个点、中位 {s['med_n']:.0f} 个；不剔除任何点。
+
+### 测量误差
+
+每个真值点带约 1 像素的标注抖动（见「标注质量」）。相对中位 {f(s['p50'])} 像素可以忽略，
+只会把最小的一批值（10 分位 {f(s['p10'])} 像素）略微抬高。
+
+## 分布
+
+{img("cdf.png", "点上 RMSE 的累计分布")}
+
+{quant}
+
+测试集比验证集难：中位 {f(s['Test']['p50'])} 对 {f(s['Val']['p50'])} 像素，90 分位 {f(s['Test']['p90'])} 对 {f(s['Val']['p90'])} 像素。
+
+## 各 ROI 与入射角
+
+{img("box-roi.png", "各 ROI 的点上 RMSE 箱线图")}
+
+难度主要由 ROI 决定：同一 ROI 内的 patch 相差几倍，ROI 之间的中位相差一个数量级。ROI 按入射角从小到大排。
+入射角越小，地形引起的距离向位移越大（与 cot θ 成正比）；13 个 ROI 的中位 RMSE 与入射角的秩相关为 {s['rho_inc']:.2f}。
+数据集的 SAR 窗口只按每个 ROI 的全局仿射放置，地形带来的这部分错位留在了 patch 对里。
+
+{roi_table(rois)}
+
+## 错位的方向
+
+{img("dxdy.png", "patch 内平均错位 dx–dy 散点")}
+
+每个点是一个 patch 的平均错位，两轴等比例。x（≈ 距离向）从 −250 到 +270 像素铺开，y（≈ 方位向）贴着 0：
+RMSE² 里 x 分量的占比中位为 {s['x_share']*100:.1f}%，y 分量的 RMSE 中位只有 {s['ry50']:.1f} 像素。
+y 向在 patch 内几乎是纯平移；x 向在一个 patch 内还会随地形变化几十像素。
+
+## 沿条带的变化
+
+{img("strip.png", "各 ROI 沿条带的点上 RMSE")}
+
+每个小图是一条 ROI，横轴是 patch 在条带上的位置。难度成片连续变化，易段与难段交替，与地形起伏一致；
+入射角小的条带整体更难。
 """
 
 
