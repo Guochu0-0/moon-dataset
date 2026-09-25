@@ -77,8 +77,8 @@ pytest
 | 路径 | 内容 |
 |---|---|
 | `scripts/` | 两个编号脚本、素材脚本 `make_assets.py`、站点生成 `build_site.py` |
-| `src/moondata/` | 脚本背后的包：`geometry`（纯 numpy 的网格、窗口与仿射）、`raster`（全部 GDAL/pyproj 调用）、`sources`（定位原始输入）、`config`、`assets`、`site`、`errors` |
-| `tests/` | `geometry` 与站点生成器的测试 |
+| `src/moondata/` | 脚本背后的包：`geometry`（纯 numpy 的网格、窗口与仿射）、`raster`（全部 GDAL/pyproj 调用）、`sources`（定位原始输入）、`preprocess`（纯 numpy 的输入表示）、`config`、`assets`、`site`、`errors` |
+| `tests/` | `geometry`、`preprocess` 与站点生成器的测试 |
 | `config.toml` | 全部参数 |
 | `environment.yml` | conda 环境 |
 | `data/` | 控制点、评测真值点、Mini-RF 元数据表，见 [`data/README.md`](data/README.md) |

@@ -24,7 +24,7 @@ docstring；本文件是给 reviewer 的速查，两者冲突时以仓库文档�
 - 编号脚本的唯一命令行参数是 ROI 列表，不带参数跑全部 ROI，已有产物直接覆盖。
   不加 argparse 子命令，不加 `moondata` 控制台命令。
 - `moondata` 是扁平小包，每个模块一个文件：`config`、`errors`、`geometry`、`raster`、
-  `sources`、`assets`、`site`。不要再长出子包。
+  `sources`、`preprocess`、`assets`、`site`。不要再长出子包。
 
 ## 架构
 
@@ -74,7 +74,8 @@ docstring；本文件是给 reviewer 的速查，两者冲突时以仓库文档�
 
 - 测试放 `tests/`，用 pytest。只测外部可观察的行为：给定输入得到什么输出；不测内部
   调用关系、不测私有函数。期望值手算或来自已知变换，不拿被测代码的算法重算一遍。
-- 两个接缝：`tests/test_geometry.py`（`geometry` 的公开函数）与 `tests/test_site.py`
+- 三个接缝：`tests/test_geometry.py`（`geometry` 的公开函数）、`tests/test_preprocess.py`
+  （输入表示的两个函数）与 `tests/test_site.py`
   （站点生成器的整体输出，含「入库的 `_site/` 与生成器输出逐字节一致」）。
   `raster`、`sources`、素材脚本与编号脚本不设单测。
 - 测试不得依赖数据盘，也不得依赖 GDAL/pyproj。
