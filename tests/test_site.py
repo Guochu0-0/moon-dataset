@@ -81,6 +81,11 @@ PAGES = {
     "data/annotation-quality/repeat.md": "# 重复测量\n\n<!-- 卡片：同一处标两次。 -->\n",
     "data/statistics.md": "# 统计与分布\n\n## 划分与数量\n\n<!-- 划分表 -->\n\n## ROI 总表\n\n<!-- ROI 总表 -->\n",
     "data/usage.md": "# 使用建议\n",
+    "data/difficulty.md": "# 样本难度\n\n[分布](difficulty-distribution.md)\n",
+    "data/difficulty-distribution.md": "# 难度的分布\n",
+    "data/difficulty-rois.md": "# 各 ROI 的难度\n\n<!-- 难度：ROI 表 -->\n",
+    "data/difficulty-direction.md": "# 错位的方向\n",
+    "data/difficulty-strip.md": "# 沿条带的变化\n",
     "process.md": (
         '# 制作流程\n\n<div class="flow"><svg><a href="#标控制点"><text>标控制点</text></a></svg></div>\n\n'
         "## 重叠区提取\n\n## 标控制点\n\n### 标注规程\n\n"
@@ -121,6 +126,11 @@ def fixture_repo(tmp_path_factory: pytest.TempPathFactory) -> Path:
            "﻿" + "\r\n".join([METADATA_HEADER, *METADATA_ROWS]) + "\r\n")
     _write(root / "data" / "ground-truth" / "Test" / "ROI_006" / "patch_3.txt",
            "177.1\t-332.9\t262.6\t-333.8\r\n205.5\t-244.7\t297.3\t-244.8\r\n")
+    # 点上 RMSE：patch_0 两对点都错开 5（3-4-5），patch_1 都错开 13（5-12-13）
+    _write(root / "data" / "ground-truth" / "Val" / "ROI_035" / "patch_0.txt",
+           "10\t-10\t13\t-14\r\n100\t-50\t96\t-47\r\n")
+    _write(root / "data" / "ground-truth" / "Val" / "ROI_035" / "patch_1.txt",
+           "10\t-10\t15\t-22\r\n200\t-300\t188\t-295\r\n")
     return root
 
 
@@ -162,6 +172,26 @@ def test_truth_points_are_shown_only_for_validation_and_test(fixture_site: dict[
     assert row[:3] == ["ROI_027", "训练集", "234"] and row[3:5] == ["—", "—"]
 
 
+def test_roi_page_gives_the_point_rmse_quantiles(fixture_site: dict[str, bytes]) -> None:
+    # 两个 patch 对的点上 RMSE 为 5 与 13；线性插值的 10、50、90 分位为 5.8、9、12.2
+    assert "点上 RMSE 中位数 9.0 像素，10–90 分位 5.8–12.2 像素" in _text(fixture_site["rois/ROI_035.html"])
+    assert "样本难度" not in _text(fixture_site["rois/ROI_027.html"])
+
+
+def test_difficulty_table_lists_rois_with_truth_points_by_incidence(fixture_site: dict[str, bytes]) -> None:
+    collector = _Collector()
+    collector.feed(fixture_site["data/difficulty-rois.html"].decode("utf-8"))
+    rows = [row for row in collector.rows if row and row[0].startswith("ROI_")]
+    assert [row[0] for row in rows] == ["ROI_006", "ROI_035"]  # 入射角 48.10° 在 49.00° 之前；训练集不列
+    assert rows[1][2:7] == ["49.0°", "2", "5.8", "9.0", "12.2"]
+
+
+def test_difficulty_detail_pages_keep_the_section_highlighted(fixture_site: dict[str, bytes]) -> None:
+    page = fixture_site["data/difficulty-strip.html"].decode("utf-8")
+    assert '<a href="../data/difficulty.html" aria-current="page">样本难度</a>' in page
+    assert "difficulty-strip.html" not in _links_inside(fixture_site["data/sources.html"], "sections")
+
+
 def test_home_samples_carry_the_ground_truth_points(fixture_site: dict[str, bytes]) -> None:
     home = fixture_site["index.html"].decode("utf-8")
     assert "[177.1, 332.9, 262.6, 333.8]" in home  # y 取负存盘，页面上是向下为正的像素行
@@ -176,7 +206,7 @@ def test_process_figure_carries_the_windows_and_its_caption(fixture_site: dict[s
 
 def test_overview_cards_lead_to_sub_pages_that_page_through_in_order(fixture_site: dict[str, bytes]) -> None:
     overview = fixture_site["data/annotation-quality.html"].decode("utf-8")
-    assert _links_inside(fixture_site["data/annotation-quality.html"], "cards") == {
+    assert _links_inside(fixture_site["data/annotation-quality.html"], "subcards") == {
         f"../data/annotation-quality/{name}.html" for name in ("least-squares", "variogram", "repeat")
     }
     assert "../assets/annotation-quality/affine-example.svg" in overview  # 子页的第一张图作缩略图

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>错位的方向 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root="../">
+<header class="top">
+<a class="site" href="../index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="../index.html">首页</a><a href="../data/sources.html" aria-current="page">数据说明</a><a href="../process.html">制作流程</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索" aria-label="搜索" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main>
+<div class="doc wrap">
+<nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html">组织</a><a href="../data/imaging.html">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/annotation-quality.html">标注质量</a><a href="../data/statistics.html">统计与分布</a><a href="../data/usage.html">使用建议</a><a href="../data/difficulty.html" aria-current="page">样本难度</a></nav>
+<article class="prose wide"><p class="crumb"><a href="difficulty.html">样本难度</a> ›</p><h1 id="错位的方向">错位的方向</h1>
+<p>x 轴近似 SAR 的距离向，y 轴近似方位向。点上 RMSE 可以按坐标轴拆开：</p>
+<p><img alt="RMSE_x = √( (1/N) Σ dᵢ,ₓ² )，RMSE_y = √( (1/N) Σ dᵢ,ᵧ² )" class="formula" src="../assets/difficulty/formula-xy.svg" /></p>
+<p>两者的平方和等于点上 RMSE 的平方。</p>
+<figure class="fig"><img src="../assets/difficulty/dxdy.png" alt="各 patch 对的平均错位，x 与 y 两轴同比例"><figcaption>各 patch 对的平均错位，x 与 y 两轴同比例</figcaption></figure>
+<p>每点一个 patch 对，坐标是这个 patch 对上各个 d 的平均。两轴比例相同。</p>
+<table>
+<thead>
+<tr>
+<th>分位（n = 1605）</th>
+<th>10</th>
+<th>25</th>
+<th>50</th>
+<th>75</th>
+<th>90</th>
+<th>99</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RMSE_x（像素）</td>
+<td>6.6</td>
+<td>11.6</td>
+<td>27.1</td>
+<td>58.2</td>
+<td>104.3</td>
+<td>209.6</td>
+</tr>
+<tr>
+<td>RMSE_y（像素）</td>
+<td>1.0</td>
+<td>1.2</td>
+<td>1.7</td>
+<td>2.4</td>
+<td>3.8</td>
+<td>9.5</td>
+</tr>
+</tbody>
+</table>
+<p>1605 个 patch 对中，每一个都是 RMSE_x 大于 RMSE_y。RMSE_y 有 84% 低于 3 像素，与每轴约 1 像素的标注误差相差不大。</p>
+<p>x 方向的错位有正有负：按 patch 对内的平均，52% 的 patch 对 SAR 点在光学点右侧，48% 在左侧。</p>
+<p>同一 patch 对内，各点的 x 错位也不相同。ROI_020 的 patch 39 里，9 对点的 x 分量从 −52.7 到 +22.1 像素，y 分量都在 ±3.1 像素以内。</p></article>
+</div>
+</main>
+<script src="../search-index.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
