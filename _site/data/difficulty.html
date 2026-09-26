@@ -14,7 +14,7 @@
 </header>
 <main>
 <div class="doc wrap">
-<nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html">组织</a><a href="../data/imaging.html">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/statistics.html">统计与分布</a><a href="../data/usage.html">使用建议</a><a href="../data/difficulty.html" aria-current="page">样本难度</a></nav>
+<nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html">组织</a><a href="../data/imaging.html">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/annotation-quality.html">标注质量</a><a href="../data/statistics.html">统计与分布</a><a href="../data/usage.html">使用建议</a><a href="../data/difficulty.html" aria-current="page">样本难度</a></nav>
 <article class="prose wide"><h1 id="样本难度">样本难度</h1>
 <p>不同的 patch 对，配准的难度不一样。最直接的因素是两张图原本错开了多远：把光学 patch 和 SAR patch 叠在一起，同一个撞击坑在两张图上可能只差几个像素，也可能差上百个像素。我们用这个错开的距离来近似衡量样本难度，称为点上 RMSE：数越大，两张图错开得越多，配准越难。</p>
 <p>点上 RMSE 由评测真值点算出。只有验证集、测试集有评测真值点，训练集没有这个值。</p>
@@ -33,7 +33,7 @@
 <details>
 <summary>例子</summary>
 <p>测试集 ROI_020 的 patch 39 上有 9 对点。把光学 patch 上的点和 SAR patch 上的同名点画进同一个坐标，每对点连一个箭头。9 个箭头都接近水平，长短、方向各不相同，最长 52.7 像素。9 个长度的均方根是 30.0 像素。</p>
-<p><img alt="ROI_020 patch 39 的点上 RMSE 计算" src="../assets/difficulty/example.png" /></p>
+<figure class="fig"><img src="../assets/difficulty/example.png" alt="ROI_020 patch 39 的点上 RMSE 计算"><figcaption>ROI_020 patch 39 的点上 RMSE 计算</figcaption></figure>
 </details>
 <p><strong>原理</strong>　医学图像配准把配准后同一标记点在两幅图上的距离称为目标配准误差（target registration error，TRE），把配准前的称为初始 TRE，并用它描述一个病例有多难配。点上 RMSE 是一个 patch 对上各点初始 TRE 的均方根。它只在评测真值点上取值，不拟合任何变换。</p>
 <p><strong>计算</strong>　对每个 patch 对：</p>

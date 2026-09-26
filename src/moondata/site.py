@@ -19,6 +19,7 @@ from __future__ import annotations
 import html
 import json
 import math
+import posixpath
 import re
 import shutil
 from dataclasses import dataclass
@@ -62,6 +63,8 @@ class Page:
     """顶栏里哪一项高亮。"""
     section: str = ""
     """「数据说明」各节在侧栏里的名字。"""
+    parent: str = ""
+    """子页所属的「数据说明」一节（它的输出路径）。子页不进侧栏，侧栏里高亮它的父页。"""
 
 
 DATA_PAGES = [
@@ -69,6 +72,7 @@ DATA_PAGES = [
     Page("data/organization.html", "data/organization.md", "数据说明", "组织"),
     Page("data/imaging.html", "data/imaging.md", "数据说明", "成像特征"),
     Page("data/pairing.html", "data/pairing.md", "数据说明", "配对特征"),
+    Page("data/annotation-quality.html", "data/annotation-quality.md", "数据说明", "标注质量"),
     Page("data/statistics.html", "data/statistics.md", "数据说明", "统计与分布"),
     Page("data/usage.html", "data/usage.md", "数据说明", "使用建议"),
     Page("data/difficulty.html", "data/difficulty.md", "数据说明", "样本难度"),
@@ -78,8 +82,15 @@ DIFFICULTY_PAGES = [
     for name in ("distribution", "rois", "direction", "strip")
 ]
 """「样本难度」概览页上 4 张图卡各自点进的详情页。侧栏不列它们，停在其上时「样本难度」高亮。"""
+SUB_PAGES = [
+    Page(f"data/annotation-quality/{name}.html", f"data/annotation-quality/{name}.md", "数据说明",
+         parent="data/annotation-quality.html")
+    for name in ("least-squares", "variogram", "repeat")
+]
+"""一节拆成概览加几个详情页时的详情页，按翻页顺序。概览里 `<!-- 子页卡片 -->` 处列出它们。"""
 PAGES = [
-    Page("index.html", "index.md", "首页"), *DATA_PAGES, *DIFFICULTY_PAGES, Page("process.html", "process.md", "制作流程"),
+    Page("index.html", "index.md", "首页"), *DATA_PAGES, *DIFFICULTY_PAGES, *SUB_PAGES,
+    Page("process.html", "process.md", "制作流程"),
 ]
 NAV = [("首页", "index.html"), ("数据说明", DATA_PAGES[0].path), ("制作流程", "process.html")]
 
@@ -88,6 +99,11 @@ SPLIT_TABLE_WITH_TRUTH = "<!-- 划分表：含评测真值点 -->"
 ROI_TABLE = "<!-- ROI 总表 -->"
 SAMPLES = "<!-- 样例 -->"
 DIFFICULTY_TABLE = "<!-- 难度：ROI 表 -->"
+SUB_PAGE_CARDS = "<!-- 子页卡片 -->"
+CARD_TEXT = re.compile(r"<!-- 卡片：(.*?) -->\n?", re.S)
+"""子页正文里写给卡片的摘要，每行一段；不在子页上显示。"""
+FIGURE = re.compile(r'<p><img alt="([^"]*)" src="([^"]*)" /></p>')
+"""单独成段的图片。替代文字同时作图注。"""
 PROCESS_FIGURE = re.compile(r"<!-- 流程配图 (\w+)：(.*?) -->")
 """正文里的占位注释，生成器换成由素材算出的表格与交互图。文字留在正文里手写；流程配图
 的图注写在占位注释里。"""
@@ -220,13 +236,17 @@ def build_site(repo_root: Path) -> dict[str, bytes]:
     inputs = load_inputs(repo_root)
     files: dict[str, bytes] = {}
     search = []
+    rendered = {page.path: _render_markdown(repo_root / PAGES_RELDIR / page.source) for page in PAGES}
     for page in PAGES:
-        title, body = _render_markdown(repo_root / PAGES_RELDIR / page.source)
+        title, body = rendered[page.path]
         body = _fill(body, inputs, _root(page.path))
+        if SUB_PAGE_CARDS in body:
+            body = body.replace(SUB_PAGE_CARDS, _sub_page_cards(page, rendered))
+        body = CARD_TEXT.sub("", body)
         if page.path == "index.html":
             body = _home(body, inputs)
         elif page.nav == "数据说明":
-            body = _data_page(body, page)
+            body = _data_page(body, page, rendered)
         elif page.path == "process.html":
             body = _process_page(body)
         else:
@@ -274,6 +294,7 @@ def _render_markdown(path: Path) -> tuple[str, str]:
         extension_configs={"toc": {"slugify": slugify_unicode}},
     )
     body = converter.convert(text)
+    body = FIGURE.sub(r'<figure class="fig"><img src="\2" alt="\1"><figcaption>\1</figcaption></figure>', body)
     # 正文之间用 .md 互链（编辑器里点得开），输出时换成 .html
     body = re.sub(r'href="([^":#]+)\.md(#[^"]*)?"', r'href="\1.html\2"', body)
     match = re.search(r"<h1[^>]*>(.*?)</h1>", body, re.S)
@@ -356,17 +377,51 @@ def _samples_script(inputs: Inputs) -> str:
     return f"<script>window.SAMPLES={data};</script>\n"
 
 
-def _data_page(body: str, page: Page) -> str:
+def _data_page(body: str, page: Page, rendered: dict[str, tuple[str, str]]) -> str:
+    root = _root(page.path)
     links = []
     for other in DATA_PAGES:
-        current = ' aria-current="page"' if other.section == page.section else ""
-        links.append(f'<a href="{_root(page.path)}{other.path}"{current}>{other.section}</a>')
+        current = ' aria-current="page"' if other.section == page.section or other.path == page.parent else ""
+        links.append(f'<a href="{root}{other.path}"{current}>{other.section}</a>')
     wide = " wide" if page.path.endswith("statistics.html") or page.section == "样本难度" else ""
     crumb = f'<p class="crumb"><a href="difficulty.html">样本难度</a> ›</p>' if page in DIFFICULTY_PAGES else ""
+    if page.parent:
+        siblings = [p for p in SUB_PAGES if p.parent == page.parent]
+        at = siblings.index(page)
+        step = [
+            f'<a href="{root}{p.path}">{label}{html.escape(rendered[p.path][0])}{tail}</a>' if p else "<span></span>"
+            for p, label, tail in (
+                (siblings[at - 1] if at > 0 else None, "← ", ""),
+                (siblings[at + 1] if at + 1 < len(siblings) else None, "", " →"),
+            )
+        ]
+        crumb = f'<p class="crumb"><a href="{root}{page.parent}">{html.escape(rendered[page.parent][0])}</a></p>'
+        body = f'{body}<nav class="pager" aria-label="翻页">{"".join(step)}</nav>'
     return f"""<div class="doc wrap">
 <nav class="sections" aria-label="数据说明">{"".join(links)}</nav>
 <article class="prose{wide}">{crumb}{body}</article>
 </div>"""
+
+
+def _sub_page_cards(page: Page, rendered: dict[str, tuple[str, str]]) -> str:
+    """每个子页一张卡片：子页的第一张图作缩略图、标题、子页里写给卡片的摘要。"""
+    root = _root(page.path)
+    cards = []
+    for child in (p for p in SUB_PAGES if p.parent == page.path):
+        title, body = rendered[child.path]
+        text = CARD_TEXT.search(body)
+        if text is None:
+            raise SiteInputUnreadable(f"{child.source} 没有写给卡片的摘要（<!-- 卡片：… -->）")
+        image = re.search(r'<img src="([^"]*)"', body)
+        thumb = ""
+        if image:
+            src = posixpath.normpath(posixpath.join(posixpath.dirname(child.path), image.group(1)))
+            thumb = f'<img src="{root}{src}" alt="">'
+        lines = "".join(f"<p>{html.escape(line.strip())}</p>" for line in text.group(1).splitlines() if line.strip())
+        cards.append(f'<a class="subcard" href="{root}{child.path}">{thumb}<h3>{html.escape(title)}</h3>{lines}</a>')
+    if not cards:
+        raise SiteInputUnreadable(f"{page.source} 里有 {SUB_PAGE_CARDS}，但它没有子页")
+    return f'<div class="subcards">{"".join(cards)}</div>'
 
 
 def _split_table(rois: list[Roi], *, with_truth: bool) -> str:

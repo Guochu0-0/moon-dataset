@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>最小二乘拟合残差 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+<header class="top">
+<a class="site" href="../../index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="../../index.html">首页</a><a href="../../data/sources.html" aria-current="page">数据说明</a><a href="../../process.html">制作流程</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索" aria-label="搜索" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main>
+<div class="doc wrap">
+<nav class="sections" aria-label="数据说明"><a href="../../data/sources.html">出处</a><a href="../../data/organization.html">组织</a><a href="../../data/imaging.html">成像特征</a><a href="../../data/pairing.html">配对特征</a><a href="../../data/annotation-quality.html" aria-current="page">标注质量</a><a href="../../data/statistics.html">统计与分布</a><a href="../../data/usage.html">使用建议</a><a href="../../data/difficulty.html">样本难度</a></nav>
+<article class="prose"><p class="crumb"><a href="../../data/annotation-quality.html">标注质量</a></p><h1 id="最小二乘拟合残差">最小二乘拟合残差</h1>
+
+<details>
+<summary>例子</summary>
+<p>一个 patch 上有 8 对点。如果真实错位在 patch 内恰好是一个仿射变换，用最小二乘拟合出这个仿射后，剩下的残差只来自标注误差。如果真实错位比仿射复杂，残差里还带着没拟合掉的部分，由残差算出的 σ 就偏大。</p>
+<figure class="fig"><img src="../../assets/annotation-quality/affine-example.svg" alt="一个 patch 上的 8 对点、错位箭头与拟合的仿射"><figcaption>一个 patch 上的 8 对点、错位箭头与拟合的仿射</figcaption></figure>
+</details>
+<p><strong>原理</strong>　在每个 patch 内用仿射变换近似真实错位 g，把拟合后的残差当作标注误差的样本。g 中仿射描述不了的部分也留在残差里，所以估计值是 σ 的上界。点配准文献把这种残差称为配准点误差（fiducial registration error，FRE）。</p>
+<p><strong>计算</strong>　对每个 patch、每个坐标轴分别拟合</p>
+<pre><code>d = a·x + b·y + c
+</code></pre>
+<p>x、y 是光学点在 patch 内的坐标。跨 patch 汇总残差平方和 RSS：</p>
+<pre><code>σ̂² = Σ RSS / Σ (N − 3)
+</code></pre>
+<p>N 是该 patch 的点数。汇总前迭代剔除粗差：每轮找出学生化残差最大的点，超过 3 就剔除并重新拟合该 patch，直到没有点超过 3。</p>
+<pre><code class="language-python">def fit_affine(p, d):
+    &quot;&quot;&quot;p：光学点 (N, 2)；d：偏差 q − p (N, 2)。返回残差与杠杆值。&quot;&quot;&quot;
+    X = np.column_stack([p, np.ones(len(p))])
+    coef, *_ = np.linalg.lstsq(X, d, rcond=None)
+    hat = np.einsum(&quot;ij,jk,ik-&gt;i&quot;, X, np.linalg.pinv(X.T @ X), X)
+    return d - X @ coef, hat
+
+
+def pooled_sigma(residuals):
+    &quot;&quot;&quot;residuals：各 patch 的残差 (N, 2)。返回 (σ̂x, σ̂y)。&quot;&quot;&quot;
+    rss = sum((r**2).sum(axis=0) for r in residuals)
+    dof = sum(len(r) - 3 for r in residuals)
+    return np.sqrt(rss / dof)
+</code></pre>
+<p><strong>结果</strong>　数据是验证集、测试集中有评测真值点的 1605 个 patch，共 13031 个点，每个 patch 7–11 个点。剔除 424 个点后，每轴自由度为 7792。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>σ̂x（像素）</th>
+<th>σ̂y（像素）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>剔除前</td>
+<td>4.44</td>
+<td>1.42</td>
+</tr>
+<tr>
+<td>剔除后</td>
+<td>3.47（3.41–3.52）</td>
+<td>1.21（1.19–1.23）</td>
+</tr>
+</tbody>
+</table>
+<p>括号内为 95% 置信区间。</p>
+<p>剔除的点中有 126 个由 y 残差超限触发，约占全部点的 1%。剔除这些点后，y 残差的超额峰度由 10.1 降到 −0.15，这 126 个点是标注粗差。评测真值点文件保留原样。</p>
+<p>13 个 ROI 各自的 σ̂y 在 1.03–1.31 之间；σ̂x 在 1.69–4.22 之间，并随 SAR 入射角减小而增大（Spearman 秩相关 −0.68，p = 0.01；σ̂y 为 0.10，p = 0.73）。标注误差与入射角无关，x 残差中多出的部分是仿射描述不了的错位，推测来自地形，未经验证。本方法因此只给出 y 方向的上界：σ̂y = 1.21 像素。</p>
+<figure class="fig"><img src="../../assets/annotation-quality/roi-incidence.svg" alt="13 个 ROI 的 σ̂x、σ̂y 对入射角"><figcaption>13 个 ROI 的 σ̂x、σ̂y 对入射角</figcaption></figure>
+<p><strong>出处</strong></p>
+<ul>
+<li>Fitzpatrick J. M., West J. B., Maurer C. R. Predicting error in rigid-body point-based registration. <em>IEEE Transactions on Medical Imaging</em>, 17(5), 1998. doi:10.1109/42.736021</li>
+</ul><nav class="pager" aria-label="翻页"><span></span><a href="../../data/annotation-quality/variogram.html">变异函数 →</a></nav></article>
+</div>
+</main>
+<script src="../../search-index.js"></script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

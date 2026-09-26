@@ -72,6 +72,13 @@ PAGES = {
     "data/organization.md": "# 组织\n",
     "data/imaging.md": "# 成像特征\n",
     "data/pairing.md": "# 配对特征\n",
+    "data/annotation-quality.md": "# 标注质量\n\n## 估计方法\n\n<!-- 子页卡片 -->\n",
+    "data/annotation-quality/least-squares.md": (
+        "# 最小二乘拟合残差\n\n<!-- 卡片：用仿射近似真实错位。\nσ̂y 1.21　上界 -->\n\n"
+        "![拟合的仿射](../../assets/annotation-quality/affine-example.svg)\n"
+    ),
+    "data/annotation-quality/variogram.md": "# 变异函数\n\n<!-- 卡片：外推到 h = 0。 -->\n",
+    "data/annotation-quality/repeat.md": "# 重复测量\n\n<!-- 卡片：同一处标两次。 -->\n",
     "data/statistics.md": "# 统计与分布\n\n## 划分与数量\n\n<!-- 划分表 -->\n\n## ROI 总表\n\n<!-- ROI 总表 -->\n",
     "data/usage.md": "# 使用建议\n",
     "data/difficulty.md": "# 样本难度\n\n[分布](difficulty-distribution.md)\n",
@@ -113,7 +120,7 @@ def fixture_repo(tmp_path_factory: pytest.TempPathFactory) -> Path:
     } for roi, facts in FACTS.items()}))
     _write(assets / "process.json", json.dumps(PROCESS, ensure_ascii=False))
     for name in ("moon-2k.jpg", "moon-4k.jpg", "samples/ROI_006_p3_opt.jpg", "samples/ROI_006_p3_sar.jpg",
-                 "process/opt.jpg", "process/sar.jpg"):
+                 "process/opt.jpg", "process/sar.jpg", "annotation-quality/affine-example.svg"):
         _write(assets / name, "img")
     _write(root / "data" / "metadata" / "minirf_metadata.csv",
            "﻿" + "\r\n".join([METADATA_HEADER, *METADATA_ROWS]) + "\r\n")
@@ -195,6 +202,27 @@ def test_process_figure_carries_the_windows_and_its_caption(fixture_site: dict[s
     assert '"windows":[{"o":[0,0],"s":[10,-8],"i":null}' in page
     assert "同一段，逐步点开。" in _text(fixture_site["process.html"])
     assert [step for step in ("解算仿射", "滑窗", "映射", "剔除", "编号") if step not in page] == []
+
+
+def test_overview_cards_lead_to_sub_pages_that_page_through_in_order(fixture_site: dict[str, bytes]) -> None:
+    overview = fixture_site["data/annotation-quality.html"].decode("utf-8")
+    assert _links_inside(fixture_site["data/annotation-quality.html"], "subcards") == {
+        f"../data/annotation-quality/{name}.html" for name in ("least-squares", "variogram", "repeat")
+    }
+    assert "../assets/annotation-quality/affine-example.svg" in overview  # 子页的第一张图作缩略图
+    assert "σ̂y 1.21　上界" in _text(fixture_site["data/annotation-quality.html"])
+
+    middle = fixture_site["data/annotation-quality/variogram.html"]
+    assert _links_inside(middle, "pager") == {
+        "../../data/annotation-quality/least-squares.html", "../../data/annotation-quality/repeat.html",
+    }
+    assert "外推到 h = 0。" not in _text(middle)  # 卡片摘要只在概览上
+    assert '<a href="../../data/annotation-quality.html" aria-current="page">' in middle.decode("utf-8")
+
+
+def test_a_lone_image_paragraph_becomes_a_captioned_figure(fixture_site: dict[str, bytes]) -> None:
+    page = fixture_site["data/annotation-quality/least-squares.html"].decode("utf-8")
+    assert "<figcaption>拟合的仿射</figcaption>" in page
 
 
 def test_search_index_holds_page_text_for_substring_search(fixture_site: dict[str, bytes]) -> None:

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>重复测量 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+<header class="top">
+<a class="site" href="../../index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="../../index.html">首页</a><a href="../../data/sources.html" aria-current="page">数据说明</a><a href="../../process.html">制作流程</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索" aria-label="搜索" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main>
+<div class="doc wrap">
+<nav class="sections" aria-label="数据说明"><a href="../../data/sources.html">出处</a><a href="../../data/organization.html">组织</a><a href="../../data/imaging.html">成像特征</a><a href="../../data/pairing.html">配对特征</a><a href="../../data/annotation-quality.html" aria-current="page">标注质量</a><a href="../../data/statistics.html">统计与分布</a><a href="../../data/usage.html">使用建议</a><a href="../../data/difficulty.html">样本难度</a></nav>
+<article class="prose"><p class="crumb"><a href="../../data/annotation-quality.html">标注质量</a></p><h1 id="重复测量">重复测量</h1>
+
+<details>
+<summary>例子</summary>
+<p>同一个撞击坑被同一个人先后独立点了两次。两次都量的是同一处的错位，两次读数之差与错位无关，只来自两次标注误差。</p>
+<figure class="fig"><img src="../../assets/annotation-quality/repeat-example.svg" alt="同一个撞击坑上的两次点击"><figcaption>同一个撞击坑上的两次点击</figcaption></figure>
+</details>
+<p><strong>原理</strong>　同一处地物独立标注两次，两次偏差之差 δ 中真实错位相消，只剩两次标注误差之差。两次标注同样准、相互独立时，每轴 Var(δ) = 2σ²。这种方法不需要对真实错位作任何假设；但同一人稳定的系统偏好在两次标注中都会出现，在差中相消，所以它估计的是标注误差的随机部分。</p>
+<p><strong>计算</strong>　控制点与评测真值点由同一人先后独立标注：控制点用 ENVI 标在整幅重叠区影像上，坐标为整数像素；评测真值点用 ArcGIS 逐 patch 标注，标注时没有参考控制点。两套点中有一部分落在同一处地物上。</p>
+<ol>
+<li>把评测真值点换到重叠区影像坐标。</li>
+<li>光学侧相距小于 r 的评测真值点与控制点配成一对，δ = d_评测真值点 − d_控制点。</li>
+<li>按 3 倍 MAD 剔除离群的配对。</li>
+<li>σ̂² = (s²_δ − 2/12) / 2，s²_δ 是 δ 的样本方差，2/12 是控制点光学、SAR 坐标取整带来的量化方差；标准误取 σ̂ / √(2(n − 1))。</li>
+</ol>
+<pre><code class="language-python">dev = delta - np.median(delta, axis=0)
+mad = 1.4826 * np.median(np.abs(dev), axis=0)
+keep = np.all(np.abs(dev) &lt; 3 * mad, axis=1)
+s2 = delta[keep].var(axis=0, ddof=1)
+sigma = np.sqrt((s2 - 2 / 12) / 2)
+</code></pre>
+<p><strong>结果</strong>　13 个验证、测试 ROI 共有 397 个控制点、13031 个评测真值点，光学侧相距 5 像素以内的配对有 124 对。把控制点整体随机平移后，同样半径内平均只有 0.7 对（200 次，最多 5 对），所以这些配对几乎都是同一处地物。</p>
+<table>
+<thead>
+<tr>
+<th>r（像素）</th>
+<th>配对</th>
+<th>剔除</th>
+<th>σ̂x（像素）</th>
+<th>σ̂y（像素）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 1</td>
+<td>31</td>
+<td>1</td>
+<td>1.14 ± 0.15</td>
+<td>0.93 ± 0.12</td>
+</tr>
+<tr>
+<td>&lt; 2</td>
+<td>69</td>
+<td>3</td>
+<td>1.32 ± 0.12</td>
+<td>0.88 ± 0.08</td>
+</tr>
+<tr>
+<td>&lt; 3</td>
+<td>113</td>
+<td>6</td>
+<td>1.42 ± 0.10</td>
+<td>1.03 ± 0.07</td>
+</tr>
+<tr>
+<td>&lt; 5</td>
+<td>124</td>
+<td>6</td>
+<td>1.40 ± 0.09</td>
+<td>1.04 ± 0.07</td>
+</tr>
+</tbody>
+</table>
+<p>± 为标准误。r 越大，两次标注越可能不在同一处，δ 中混入两处错位的差，x 上最明显。取 r &lt; 1 的结果：σ̂x = 1.14 ± 0.15，σ̂y = 0.93 ± 0.12 像素。</p>
+<p>两次标注之间有系统差：δ 的中位数 x 为 −0.6 到 −1.2 像素，y 为 −0.1 到 −0.5 像素，来自两套工具或两次操作习惯的差别，不影响 σ̂。</p>
+<p>光学侧与 SAR 侧的点击误差分不开。两次标注相互独立、同样准，是本方法的假定。</p>
+<p><strong>出处</strong></p>
+<ul>
+<li>Bland J. M., Altman D. G. Measurement error. <em>BMJ</em>, 313:744, 1996. doi:10.1136/bmj.313.7059.744</li>
+<li>Castillo R. et al. A framework for evaluation of deformable image registration spatial accuracy using large landmark point sets. <em>Physics in Medicine and Biology</em>, 54(7), 2009. doi:10.1088/0031-9155/54/7/001</li>
+</ul><nav class="pager" aria-label="翻页"><a href="../../data/annotation-quality/variogram.html">← 变异函数</a><span></span></nav></article>
+</div>
+</main>
+<script src="../../search-index.js"></script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

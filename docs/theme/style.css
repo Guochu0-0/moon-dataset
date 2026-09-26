@@ -111,6 +111,20 @@ h3 { font-size: 18px; margin: 1.7em 0 .4em; }
 .prose pre { background: #fff; border: 1px solid var(--rule); padding: 14px 16px; overflow: auto; border-radius: 4px; }
 .prose pre code { background: none; padding: 0; font-size: 13.5px; }
 .prose > .wrap { padding: 0; }
+.fig { margin: 1.4em 0; }
+.fig img { display: block; max-width: 100%; height: auto; }
+.fig figcaption { font-size: 13px; color: var(--ink2); margin-top: 6px; }
+
+/* 一节拆成概览与子页：概览里链到子页的卡片，子页底部的翻页 */
+.subcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; margin: 1.2em 0 2em; }
+.subcard { display: block; background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 12px 14px;
+  color: var(--ink); text-decoration: none; }
+.subcard:hover { border-color: var(--ink); }
+.subcard img { display: block; width: 100%; height: 110px; object-fit: contain; }
+.subcard h3 { margin: 10px 0 4px; }
+.subcard p { font-size: 14px; margin: 4px 0; }
+.subcard p:last-child { font-weight: 600; }
+.pager { display: flex; justify-content: space-between; border-top: 1px solid var(--rule); margin-top: 3em; padding-top: 1em; }
 main > .wrap:first-child:not(.roi):not(.doc):not(.home) { padding-top: 36px; padding-bottom: 96px; }
 
 /* ROI 总表 */
