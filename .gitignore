@@ -10,3 +10,6 @@ __pycache__/
 
 # 两个编号脚本的产物（重叠区影像、patch 对），见 config.toml 的 work_root
 /work/
+
+# Claude Code 的临时工作树
+/.claude/worktrees/
