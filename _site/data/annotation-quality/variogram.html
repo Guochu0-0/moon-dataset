@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>变异函数 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+<header class="top">
+<a class="site" href="../../index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="../../index.html">首页</a><a href="../../data/sources.html" aria-current="page">数据说明</a><a href="../../process.html">制作流程</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索" aria-label="搜索" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main>
+<div class="doc wrap">
+<nav class="sections" aria-label="数据说明"><a href="../../data/sources.html">出处</a><a href="../../data/organization.html">组织</a><a href="../../data/imaging.html">成像特征</a><a href="../../data/pairing.html">配对特征</a><a href="../../data/annotation-quality.html" aria-current="page">标注质量</a><a href="../../data/statistics.html">统计与分布</a><a href="../../data/usage.html">使用建议</a></nav>
+<article class="prose"><p class="crumb"><a href="../../data/annotation-quality.html">标注质量</a></p><h1 id="变异函数">变异函数</h1>
+
+<details>
+<summary>例子</summary>
+<p>沿一条线标注若干点。真实错位 f(s) 随位置平滑变化，每个点的读数 r = f(s) + e 还带着这一次的标注误差。相距 h 的两个点：</p>
+<pre><code>r₂ − r₁ = [f(s + h) − f(s)] + (e₂ − e₁)
+</code></pre>
+<p>两点越近，第一项越小；两点挨在一起时，差里只剩两次标注误差。把相距约为 h 的所有点对的 ½(r₂ − r₁)² 取平均，记作 γ(h)。画出 γ(h) 并外推到 h = 0，截距就是 σ²。</p>
+<figure class="fig"><img src="../../assets/annotation-quality/variogram-example.svg" alt="左，错位曲线 f(s) 与带误差的读数；右，γ(h) 与外推到 h = 0 的截距"><figcaption>左，错位曲线 f(s) 与带误差的读数；右，γ(h) 与外推到 h = 0 的截距</figcaption></figure>
+</details>
+<p><strong>原理</strong>　若真实错位在空间上连续、标注误差在点与点之间相互独立，则变异函数</p>
+<pre><code>γ(h) = ½ E[(rᵢ − rⱼ)²]，  |pᵢ − pⱼ| ≈ h
+</code></pre>
+<p>在 h → 0 时趋于 σ²。这个极限在地统计中称为块金值（nugget）。相距 15 像素以内的点对不足 30 对，距离最短的一档平均也相距约 25 像素，块金值只能由短距离段外推得到；比这更小尺度上的真实错位变化也会计入块金值，所以估计值是 σ² 的上界。</p>
+<p><strong>计算</strong></p>
+<ol>
+<li>按 patch 窗口在重叠区影像上的位置，把评测真值点换到重叠区影像坐标（光学 P、SAR Q），取对全局仿射的残差 r = Q − G(P)。G 是该 ROI 由控制点解算出的全局仿射。</li>
+<li>在同一 ROI 内取全部点对，按光学侧距离 h 分档，每轴计算 γ(h)；13 个 ROI 的点对合并。使用剔除粗差后的 12607 个点。</li>
+<li>取 h ≤ 60、100、150 像素的档，分别作线性、二次加权拟合，截距即块金值，共 6 个估计。</li>
+</ol>
+<pre><code class="language-python">from scipy.spatial.distance import pdist
+
+h = pdist(P)                            # 点对的光学侧距离
+half_sq = 0.5 * pdist(r[:, [1]]) ** 2   # y 分量的 ½(rᵢ − rⱼ)²
+b = np.digitize(h, edges) - 1
+gamma = np.bincount(b, half_sq) / np.bincount(b)
+</code></pre>
+<p><strong>结果</strong>　y 分量最短一档 h ≈ 25 像素时 γ = 0.91 像素²（43 对），39 像素时为 1.28 像素²（208 对）。6 个外推估计的块金值在 0.69–1.35 像素²之间，即 σ̂y = 0.83–1.16 像素。</p>
+<p>x 分量的 γ 在 25 像素处已达 4.8 像素²，随距离陡升，外推截距定不下来。</p>
+<p>同一 patch 内的点对与跨 patch 的点对，在相同距离上 γ 一致，x、y 都是如此：不存在逐 patch 的系统标注偏差。</p>
+<figure class="fig"><img src="../../assets/annotation-quality/moon-variogram.svg" alt="x、y 两个分量的经验变异函数与 6 条外推线"><figcaption>x、y 两个分量的经验变异函数与 6 条外推线</figcaption></figure>
+<p><strong>出处</strong></p>
+<ul>
+<li>Cressie N. <em>Statistics for Spatial Data</em>, revised edition. Wiley, 1993.</li>
+<li>Hugonnet R. et al. Uncertainty analysis of digital elevation models by spatial inference from stable terrain. <em>IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing</em>, 15, 2022.</li>
+</ul><nav class="pager" aria-label="翻页"><a href="../../data/annotation-quality/least-squares.html">← 最小二乘拟合残差</a><a href="../../data/annotation-quality/repeat.html">重复测量 →</a></nav></article>
+</div>
+</main>
+<script src="../../search-index.js"></script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>
