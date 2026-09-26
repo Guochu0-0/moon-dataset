@@ -192,6 +192,24 @@
     img.addEventListener("keydown", function (e) { if (e.key === "Enter") openOverlay(fig); });
   });
 
+  /* ---------- 可排序的表：点带 data-key 的表头，按各行同名 data-* 的数值排序，再点反向 ---------- */
+  document.querySelectorAll("table.sortable").forEach(function (table) {
+    var heads = table.querySelectorAll("th[data-key]"), body = table.tBodies[0];
+    heads.forEach(function (th) {
+      th.tabIndex = 0;
+      function sort() {
+        var dir = th.getAttribute("aria-sort") === "ascending" ? -1 : 1;
+        heads.forEach(function (x) { x.removeAttribute("aria-sort"); });
+        th.setAttribute("aria-sort", dir > 0 ? "ascending" : "descending");
+        Array.prototype.slice.call(body.rows).sort(function (a, b) {
+          return dir * (parseFloat(a.dataset[th.dataset.key]) - parseFloat(b.dataset[th.dataset.key]));
+        }).forEach(function (tr) { body.appendChild(tr); });
+      }
+      th.addEventListener("click", sort);
+      th.addEventListener("keydown", function (e) { if (e.key === "Enter") sort(); });
+    });
+  });
+
   /* ---------- 制作流程配图：同一段影像上画控制点与窗口；协同切片逐步点开 ---------- */
   var P = window.PROCESS;
   function processPanel(pair, side, label) {

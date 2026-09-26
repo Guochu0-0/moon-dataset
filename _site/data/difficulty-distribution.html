@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>难度的分布 – 月球光学–SAR 配准数据集</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root="../">
+<header class="top">
+<a class="site" href="../index.html">月球光学–SAR 配准数据集</a>
+<nav><a href="../index.html">首页</a><a href="../data/sources.html" aria-current="page">数据说明</a><a href="../process.html">制作流程</a></nav>
+<div class="find"><input id="q" type="search" placeholder="搜索" aria-label="搜索" autocomplete="off"><div id="hits" hidden></div></div>
+</header>
+<main>
+<div class="doc wrap">
+<nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html">组织</a><a href="../data/imaging.html">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/statistics.html">统计与分布</a><a href="../data/usage.html">使用建议</a><a href="../data/difficulty.html" aria-current="page">样本难度</a></nav>
+<article class="prose wide"><p class="crumb"><a href="difficulty.html">样本难度</a> ›</p><h1 id="难度的分布">难度的分布</h1>
+<p><img alt="点上 RMSE 的累计分布，验证集、测试集各一条" src="../assets/difficulty/cdf.png" /></p>
+<p>曲线上一点的纵坐标，是点上 RMSE 不超过横坐标的 patch 对所占的比例。横轴是对数刻度。</p>
+<table>
+<thead>
+<tr>
+<th>分位</th>
+<th>10</th>
+<th>25</th>
+<th>50</th>
+<th>75</th>
+<th>90</th>
+<th>99</th>
+<th>最大</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全部，n = 1605（像素）</td>
+<td>6.8</td>
+<td>11.7</td>
+<td>27.1</td>
+<td>58.2</td>
+<td>104.5</td>
+<td>209.7</td>
+<td>268.3</td>
+</tr>
+<tr>
+<td>全部（米）</td>
+<td>51</td>
+<td>88</td>
+<td>203</td>
+<td>437</td>
+<td>783</td>
+<td>1573</td>
+<td>2012</td>
+</tr>
+<tr>
+<td>验证集，n = 652（像素）</td>
+<td>6.9</td>
+<td>11.6</td>
+<td>24.7</td>
+<td>45.0</td>
+<td>72.5</td>
+<td>149.2</td>
+<td>250.0</td>
+</tr>
+<tr>
+<td>测试集，n = 953（像素）</td>
+<td>6.7</td>
+<td>11.7</td>
+<td>30.0</td>
+<td>67.7</td>
+<td>120.1</td>
+<td>233.7</td>
+<td>268.3</td>
+</tr>
+</tbody>
+</table>
+<p>20% 的 patch 对低于 10 像素，71% 低于 50 像素，11% 高于 100 像素。最小值 2.6 像素。</p>
+<p>验证集与测试集的 10、25 分位几乎相同，差别在难的一端：90 分位测试集是验证集的 1.7 倍。测试集 7 个 ROI 里有中位数最大的两个，ROI_054 与 ROI_007。</p></article>
+</div>
+</main>
+<script src="../search-index.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
