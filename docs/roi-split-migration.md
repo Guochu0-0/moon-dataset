@@ -33,7 +33,7 @@
 
 ## 数据盘验收
 
-Sandcastle 所挂载的数据根下的 `Processed_Data/` 已切换到当前划分。原树有 9,862 对，保存在同级的 `Processed_Data-9862/`。切换前用同卷硬链接准备了应用 ROI_017 剔除的成品树，再按清单移动整目录。
+Sandcastle 所挂载的数据根下的 `Processed_Data/` 已切换到当前划分。切换时先对原有的 9,862 对成品应用 ROI_017 文件补丁，再按清单移动整目录。
 
 已核对全部 67 个 ROI 的唯一归属、每个 ROI 的光学和 SAR 文件名、ROI_017 原编号缺口和表中数量。测试集的 1,605 个 `.txt` 标签与仓库内文件逐字节一致，同名 `.prj` 随目录保留。其他部署的数据根需分别按清单切换和核对。
 
@@ -43,4 +43,4 @@ Sandcastle 所挂载的数据根下的 `Processed_Data/` 已切换到当前划�
 
 当前站点的历史难度表从 `docs/assets/difficulty-roi-splits.json` 读取旧归属。该表来自 `0388796` 的 `research/sample-difficulty/patch-positions.csv`，仅用于历史图表。
 
-输入表示常数的历史重算使用剔除前的 9,862 对成品。如需在本机复现，把历史 `research/preprocess-constants/recompute.py` 的输入目录指向保留的 `Processed_Data-9862/`。
+输入表示常数的历史重算需要 ROI_017 剔除前的 9,862 对成品。
