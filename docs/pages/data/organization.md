@@ -37,13 +37,13 @@
 | `Label/patch_<n>.txt` | 评测真值点 | 文本 | 每行一对点，4 列 | — | — |
 | `Label/patch_<n>.prj` | ArcGIS 随链接表写出的文件 | 文本 | — | — | — |
 
-- patch 是 GeoTIFF，按条带存储，Deflate 压缩，像元 7.5 m，带地理参考。光学 patch 共 1.27 GB，SAR patch 共 38.5 GB。
+- patch 是 GeoTIFF，按条带存储，Deflate 压缩，像元 7.5 m，带地理参考。光学 patch 共 1.27 GB，SAR patch 共 38.4 GB。
 - 值域是全部 patch 上有效像素的最小、最大值。
 
 命名规则：
 
 - `Processed_Data/` 下的 ROI 目录名补零到三位（`ROI_006`）；`raw/` 下不补零（`ROI_6`）。
-- `patch_<n>` 在每个 ROI 内从 0 起编号，不补零。
+- `patch_<n>` 在每个 ROI 内从 0 起编号，不补零。编号后排除的 patch 对留下空号。
 - 同一个 ROI 里，同编号的光学、SAR、标签文件是一对。
 
 ## 标签文件

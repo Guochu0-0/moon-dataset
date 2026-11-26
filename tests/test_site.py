@@ -288,6 +288,18 @@ def test_every_roi_in_the_metadata_table_has_a_page(real_site: dict[str, bytes])
         assert f"rois/{roi}.html" in home and f"../rois/{roi}.html" in table
 
 
+def test_site_reports_the_revised_patch_counts_and_roi_017_gaps(real_site: dict[str, bytes]) -> None:
+    stats = real_site["data/statistics.html"]
+    expected_counts = {"训练集": "7889", "验证集": "825", "测试集": "1130", "合计": "9844"}
+    for page in (real_site["index.html"], stats):
+        for split, count in expected_counts.items():
+            assert _table_row(page, split)[2] == count
+    assert _table_row(stats, "ROI_017")[:3] == ["ROI_017", "训练集", "195"]
+    roi = _text(real_site["rois/ROI_017.html"])
+    assert "patch 对 195" in roi
+    assert "0–212，缺 9、12、15、18、21、24、27、30、33、36、39、42、45、48、51、54、57、61" in roi
+
+
 def test_committed_site_is_the_generator_output(real_site: dict[str, bytes]) -> None:
     """改了正文、素材或元数据却忘了重建，页面不会报错，只会悄悄过期。"""
     committed = {
