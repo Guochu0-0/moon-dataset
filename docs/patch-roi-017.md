@@ -42,4 +42,4 @@ print(f"已生成 {target}，ROI_017 排除了 {len(numbers)} 对 patch")
 PY
 ```
 
-修订版的 `Train/ROI_017/Optical` 与 `SAR` 应各有 195 个 TIFF，训练集应有 7,889 对 patch。切换读取路径时记录成品目录及 patch 对数。复核旧实验或回退时，使用原版目录及其 7,907 对训练 patch。
+修订版的 `Train/ROI_017/Optical` 与 `SAR` 应各有 195 个 TIFF。此时仍是 Git 修订 `0388796` 的划分，训练集有 7,889 对 patch。要得到当前划分，继续执行 [ROI 划分迁移](roi-split-migration.md)。复核剔除前的实验时，使用原版目录及其 7,907 对训练 patch。

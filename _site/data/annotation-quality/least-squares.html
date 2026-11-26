@@ -44,7 +44,7 @@ def pooled_sigma(residuals):
     dof = sum(len(r) - 3 for r in residuals)
     return np.sqrt(rss / dof)
 </code></pre>
-<p><strong>结果</strong>　数据是验证集、测试集中有评测真值点的 1605 个 patch，共 13031 个点，每个 patch 7–11 个点。剔除 424 个点后，每轴自由度为 7792。</p>
+<p><strong>结果</strong>　按 Git 修订 <code>0388796</code> 的历史划分，数据是原验证集和原测试集中有评测真值点的 1,605 个 patch，共 13,031 个点，每个 patch 7–11 个点。这些样本现均归入<a href="../statistics.html#划分与数量">测试集</a>。剔除 424 个点后，每轴自由度为 7792。</p>
 <table>
 <thead>
 <tr>

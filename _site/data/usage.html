@@ -17,7 +17,7 @@
 <nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html">组织</a><a href="../data/imaging.html">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/annotation-quality.html">标注质量</a><a href="../data/statistics.html">统计与分布</a><a href="../data/usage.html" aria-current="page">使用建议</a><a href="../data/difficulty.html">样本难度</a></nav>
 <article class="prose"><h1 id="使用建议">使用建议</h1>
 <h2 id="输入表示">输入表示</h2>
-<p>光学与 SAR 各变成一个单通道 float32 的 z 值图，常数只取自训练集，三个划分共用：</p>
+<p>光学与 SAR 各变成一个单通道 float32 的 z 值图。标准化常数取自制定输入表示时的训练集，当前三个划分共用。下表的 z 范围及随附的像素占比来自当时的划分。</p>
 <table>
 <thead>
 <tr>
@@ -87,7 +87,7 @@ optical = optical_input(gdal.Open(&quot;Optical/patch_0.tif&quot;).ReadAsArray()
 <p>常数是模块常量：<code>SAR_FLOOR_DB</code>、<code>SAR_MEAN_DB</code>、<code>SAR_STD_DB</code>、<code>OPTICAL_MEAN</code>、<code>OPTICAL_STD</code>。</p>
 <p>用三通道的预训练权重时，把单通道复制成 3 份：<code>np.repeat(z[None], 3, axis=0)</code>。</p>
 <h2 id="已知的亮度差异">已知的亮度差异</h2>
-<p>全局标准化保留下面这些差异。</p>
+<p>全局标准化保留下面这些差异。以划分为单位的统计来自制定输入表示时的划分。</p>
 <table>
 <thead>
 <tr>

@@ -20,13 +20,16 @@
     ├── Val/
     │   └── ROI_<nnn>/
     │       ├── Optical/   patch_<n>.tif
-    │       ├── SAR/       patch_<n>.tif
-    │       └── Label/     patch_<n>.txt、patch_<n>.prj
-    └── Test/              同 Val
+    │       └── SAR/       patch_<n>.tif
+    └── Test/
+        └── ROI_<nnn>/
+            ├── Optical/   patch_<n>.tif
+            ├── SAR/       patch_<n>.tif
+            └── Label/     patch_<n>.txt、patch_<n>.prj
 ```
 
 - `raw/` 下有 73 个 ROI 目录，数据集用到其中 67 个。ROI 目录里另有 LRO NAC 等其他数据，不属于本数据集。
-- 划分按 ROI：同一个 ROI 的 patch 全在同一个划分里。
+- 同一个 ROI 的 patch 全在同一个划分里。当前归属见 [ROI 总表](statistics.md#roi-总表)。
 
 ## 文件
 
@@ -47,5 +50,7 @@
 - 同一个 ROI 里，同编号的光学、SAR、标签文件是一对。
 
 ## 标签文件
+
+仅测试集提供标签文件。
 
 评测真值点在 ArcGIS 中逐 patch 标注，文件为地理配准链接表的导出格式：制表符分隔的 4 列（光学 x、y，SAR x、y），单位为 patch 内像素。ArcGIS 对无地理参考的影像以左上角为原点、y 轴向上，因此 y 为负值，取绝对值即为行号。同名 `.prj` 为 ArcGIS 随链接表写出的文件，不含有效坐标系。

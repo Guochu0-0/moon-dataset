@@ -26,6 +26,8 @@ conda 23.10 起默认求解器就是 libmamba，`--solver=libmamba` 可省；更
 
 相对路径按 `config.toml` 所在目录解析。
 
+当前划分以 [Mini-RF 逐 ROI 元数据表](data/metadata/minirf_metadata.csv) 的「划分」列为准。旧成品切换目录和复现历史划分见 [ROI 划分迁移记录](docs/roi-split-migration.md)。
+
 ## 运行
 
 ### 两个编号脚本
@@ -44,7 +46,7 @@ python scripts/02_patches.py [ROI_054 ...]   # 协同切片
 
 ### 修订已有成品
 
-服务器已有同版冻结成品时，可用 [ROI_017 文件补丁](docs/patch-roi-017.md) 派生修订版。
+服务器已有 9,862 对的旧划分成品时，可先用 [ROI_017 文件补丁](docs/patch-roi-017.md) 得到迁移基线，再按迁移记录切换划分。
 
 ### 素材
 

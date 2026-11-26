@@ -3,7 +3,7 @@
     python scripts/build_site.py
 
 输入只有入库文件——`docs/pages/` 的正文、`docs/theme/` 的样式脚本字体、`docs/assets/`
-的素材与 `roi-facts.json`、`data/metadata/` 的元数据表、`data/ground-truth/` 的评测真值点。
+的素材与 JSON 数据、`data/metadata/` 的元数据表、`data/ground-truth/` 的评测真值点。
 数据盘不在也能完整重建。素材由 `scripts/make_assets.py` 从数据盘生成后入库。
 
 `_site/` 要能双击在 file:// 下打开，所以：不用 `fetch()`、不用 ES module，搜索索引是
@@ -309,8 +309,9 @@ def _fill(body: str, inputs: Inputs, root: str) -> str:
         .replace(SPLIT_TABLE, _split_table(inputs.rois, with_truth=False))
         .replace(ROI_TABLE, _roi_table(inputs.rois, root))
         .replace(SAMPLES, '<div id="samples" class="samples"></div>')
-        .replace(DIFFICULTY_TABLE, _difficulty_table(inputs))
     )
+    if DIFFICULTY_TABLE in body:
+        body = body.replace(DIFFICULTY_TABLE, _difficulty_table(inputs))
     return PROCESS_FIGURE.sub(lambda match: _process_figure(*match.groups()), body)
 
 
@@ -490,15 +491,23 @@ def _difficulty_table(inputs: Inputs) -> str:
     迷你曲线的横轴是 patch 编号：编号按铺窗顺序逐行递增，所以沿条带单调。
     表头点击排序由 `site.js` 按各行的 `data-*` 值做。
     """
-    rois = sorted((r for r in inputs.rois if r.roi in inputs.difficulty), key=lambda r: float(r.metadata["入射角_deg"]))
+    path = inputs.repo_root / ASSETS_RELDIR / "difficulty-roi-splits.json"
+    historical_splits = _json(path)
+    if not isinstance(historical_splits, dict) or any(split not in ("Val", "Test") for split in historical_splits.values()):
+        raise SiteInputUnreadable(f"样本难度的历史划分表格式错误：{path}")
+    missing = historical_splits.keys() - inputs.difficulty.keys()
+    if missing:
+        raise SiteInputUnreadable(f"样本难度的历史 ROI 缺少评测真值点：{'、'.join(sorted(missing))}")
+    rois = sorted((r for r in inputs.rois if r.roi in historical_splits), key=lambda r: float(r.metadata["入射角_deg"]))
     width, spark_height = 170, 30
     axis = "".join(f'<span style="left:{_log_x(t, width)}px">{t}</span>' for t in RANGE_TICKS)
     rows = []
     for r in rois:
+        split = historical_splits[r.roi]
         numbers, values = zip(*inputs.difficulty[r.roi])
         p10, p50, p90 = np.percentile(values, [10, 50, 90])
         incidence = float(r.metadata["入射角_deg"])
-        bar = (f'<svg class="range {r.split}" width="{width}" height="14" viewBox="0 0 {width} 14" aria-hidden="true">'
+        bar = (f'<svg class="range {split}" width="{width}" height="14" viewBox="0 0 {width} 14" aria-hidden="true">'
                f'<line x1="{_log_x(p10, width)}" y1="7" x2="{_log_x(p90, width)}" y2="7"/>'
                f'<line class="med" x1="{_log_x(p50, width)}" y1="1" x2="{_log_x(p50, width)}" y2="13"/></svg>')
         last = max(numbers) or 1
@@ -507,16 +516,16 @@ def _difficulty_table(inputs: Inputs) -> str:
             f'cy="{round(spark_height - 2 - _log_unit(v) * (spark_height - 4), 1)}" r="1.1"/>'
             for n, v in zip(numbers, values)
         )
-        spark = f'<svg class="spark {r.split}" width="{width}" height="{spark_height}" viewBox="0 0 {width} {spark_height}" aria-hidden="true">{dots}</svg>'
+        spark = f'<svg class="spark {split}" width="{width}" height="{spark_height}" viewBox="0 0 {width} {spark_height}" aria-hidden="true">{dots}</svg>'
         rows.append(
             f'<tr data-incidence="{incidence:.2f}" data-median="{p50:.3f}" data-patches="{len(values)}">'
-            f'<th scope="row">{r.roi}</th><td><span class="sw {r.split}"></span>{SPLITS[r.split]}</td>'
+            f'<th scope="row">{r.roi}</th><td><span class="sw {split}"></span>{SPLITS[split]}</td>'
             f'<td class="num">{incidence:.1f}°</td><td class="num">{len(values)}</td>'
             f'<td class="num">{p10:.1f}</td><td class="num"><b>{p50:.1f}</b></td><td class="num">{p90:.1f}</td>'
             f"<td>{bar}</td><td>{spark}</td></tr>"
         )
     return f"""<table class="difftable sortable">
-<thead><tr><th>ROI</th><th>划分</th><th class="num" data-key="incidence" aria-sort="ascending">入射角</th>
+<thead><tr><th>ROI</th><th>历史划分</th><th class="num" data-key="incidence" aria-sort="ascending">入射角</th>
 <th class="num" data-key="patches">patch 对</th><th class="num">10 分位</th><th class="num" data-key="median">中位数</th><th class="num">90 分位</th>
 <th>10–90 分位<div class="raxis" style="width:{width}px">{axis}</div></th><th>沿条带</th></tr></thead>
 <tbody>{"".join(rows)}</tbody>

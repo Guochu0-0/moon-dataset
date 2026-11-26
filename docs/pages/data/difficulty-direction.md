@@ -1,5 +1,7 @@
 # 错位的方向
 
+统计沿用 Git 修订 `0388796` 的历史分析，所用样本现均归入[测试集](statistics.md#划分与数量)。
+
 x 轴近似 SAR 的距离向，y 轴近似方位向。点上 RMSE 可以按坐标轴拆开：
 
 ![RMSE_x = √( (1/N) Σ dᵢ,ₓ² )，RMSE_y = √( (1/N) Σ dᵢ,ᵧ² )](../assets/difficulty/formula-xy.svg){.formula}
