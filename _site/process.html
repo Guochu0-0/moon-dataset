@@ -110,7 +110,7 @@
 <li>窗口四角经仿射映射到 SAR。</li>
 <li>剔除出界、重叠比低于 70%、含 nodata 的窗口。</li>
 <li>先行后列编号，从 <code>patch_0</code> 起。</li>
-<li>切片。</li>
+<li>按编号后排除表跳过指定的 patch 对，保留原编号。切出其余光学、SAR patch，并将实际写出的窗口记入 <code>windows.json</code>。训练集 ROI_017 的排除依据见<a href="data/statistics.html#roi_017-训练集修订">修订说明</a>。</li>
 </ol>
 <figure class="pfig" data-layers=""><div class="stepbtns" role="group" aria-label="逐步查看"><button type="button" aria-pressed="true">解算仿射</button><button type="button" aria-pressed="false">滑窗</button><button type="button" aria-pressed="false">映射</button><button type="button" aria-pressed="false">剔除</button><button type="button" aria-pressed="false">编号</button></div><div class="ppair"></div><figcaption>同一段，逐步点开。斜线格为剔除的窗口；指向一个窗口，另一侧的对应窗口同时高亮。</figcaption></figure></section></article>
 </div>

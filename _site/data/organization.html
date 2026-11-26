@@ -89,13 +89,13 @@
 </tbody>
 </table>
 <ul>
-<li>patch 是 GeoTIFF，按条带存储，Deflate 压缩，像元 7.5 m，带地理参考。光学 patch 共 1.27 GB，SAR patch 共 38.5 GB。</li>
+<li>patch 是 GeoTIFF，按条带存储，Deflate 压缩，像元 7.5 m，带地理参考。光学 patch 共 1.27 GB，SAR patch 共 38.4 GB。</li>
 <li>值域是全部 patch 上有效像素的最小、最大值。</li>
 </ul>
 <p>命名规则：</p>
 <ul>
 <li><code>Processed_Data/</code> 下的 ROI 目录名补零到三位（<code>ROI_006</code>）；<code>raw/</code> 下不补零（<code>ROI_6</code>）。</li>
-<li><code>patch_&lt;n&gt;</code> 在每个 ROI 内从 0 起编号，不补零。</li>
+<li><code>patch_&lt;n&gt;</code> 在每个 ROI 内从 0 起编号，不补零。编号后排除的 patch 对留下空号。</li>
 <li>同一个 ROI 里，同编号的光学、SAR、标签文件是一对。</li>
 </ul>
 <h2 id="标签文件">标签文件</h2>

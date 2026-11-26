@@ -14,7 +14,7 @@
 2. 在光学影像上 512×512、步长 512 铺窗，四角经仿射映射定出 SAR 窗口；
 3. 剔除：SAR 窗口出界、四边形与 SAR 窗口重叠比低于 70%、任一边含 nodata（0）、
    剔除表命中；
-4. 剩下的按铺窗顺序从 `patch_0` 起编号，逐窗口切出光学与 SAR。
+4. 剩下的按铺窗顺序从 `patch_0` 起编号；按编号后排除表留空号，再切出光学与 SAR。
 
 编号是评测真值点的钥匙（`data/ground-truth/` 里的点按 patch 编号绑定），所以第 3 步
 多丢或少丢一个窗口，其后全部编号错位、真值点全部作废。
@@ -46,13 +46,13 @@ from moondata.sources import load_roi_table, load_tie_points, padded_roi
 OPTICAL_DIRNAME, SAR_DIRNAME = "Optical", "SAR"
 WINDOWS_NAME = "windows.json"
 
-DELETED_NUMBERS: dict[str, frozenset[int]] = {"ROI_027": frozenset({95, 98, 99})}
-"""编号之后才删掉的 patch，编号留空。
-
-ROI_027 的 patch 95、98、99 是纯色废块（据作者回忆是光照原因基本全黑），当年切完编号
-才被删掉，其后的编号没有前移。所以这里也必须在编号之后删：跟着编号一起删，就等于把
-后面 138 个 patch 的编号全改了。
-"""
+DELETED_NUMBERS: dict[str, frozenset[int]] = {
+    # 成品光学覆盖与测试 ROI_054 有正面积交集，排除训练侧的整对 patch。
+    "ROI_017": frozenset({9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 61}),
+    # 历史成品在编号后删掉了纯色废块，后续编号沿用原样。
+    "ROI_027": frozenset({95, 98, 99}),
+}
+"""编号后排除的 patch。按原窗口编号查表，避免后续编号前移。"""
 
 
 def main(argv: list[str]) -> int:
@@ -108,7 +108,7 @@ def cut_roi(config: Config, roi: str, split: str) -> None:
     deleted = DELETED_NUMBERS.get(roi, frozenset())
     kept = [window for window in windows if window.index not in deleted]
     if deleted:
-        print(f"  编号后删掉纯色废块 {sorted(deleted)}，编号留空")
+        print(f"  编号后排除 {sorted(deleted)}，编号留空")
 
     out_dir = config.patches_dir(split, roi)
     # 整个 ROI 目录先清掉：窗口变少时，上一轮留下的 patch 会顶着正确的文件名冒充新产物。

@@ -42,6 +42,10 @@ python scripts/02_patches.py [ROI_054 ...]   # 协同切片
 | `01_overlap.py` | 数据根下的原始影像 | `work/01_overlap/ROI_<nnn>/{opt,sar}.tif` |
 | `02_patches.py` | 重叠区影像、`data/tie-points/ROI_<nnn>.pts` | `work/02_patches/<划分>/ROI_<nnn>/{Optical,SAR}/`、`windows.json` |
 
+### 修订已有成品
+
+服务器已有同版冻结成品时，可用 [ROI_017 文件补丁](docs/patch-roi-017.md) 派生修订版。
+
 ### 素材
 
 `docs/assets/` 下的配图与 `roi-facts.json` 由素材脚本从数据盘生成，按组单独重跑：
