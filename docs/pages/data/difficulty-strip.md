@@ -1,5 +1,7 @@
 # 沿条带的变化
 
+图表沿用 Git 修订 `0388796` 的历史分析和配色。这里的 13 个 ROI 现均归入[测试集](statistics.md#划分与数量)。
+
 每个 ROI 是 SAR 条带上的一段狭长区域，patch 对按行、列排列，行沿条带方向。
 
 ![13 个 ROI 沿条带的点上 RMSE](../assets/difficulty/strip.png)

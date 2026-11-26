@@ -91,7 +91,7 @@ SAMPLE_PROBE = 128
 
 
 def make_samples(config: Config) -> None:
-    """验证集、测试集每个 ROI 挑一对带评测真值点的 patch：没有无数据像素，真值点多、
+    """从有评测真值点的每个 ROI 挑一对 patch：没有无数据像素，真值点多、
     光学纹理丰富的优先。写 `samples/<ROI>_p<n>_{opt,sar}.jpg` 与 `samples.json`。
 
     真值点本身不复制：生成器从 `data/ground-truth/` 读。

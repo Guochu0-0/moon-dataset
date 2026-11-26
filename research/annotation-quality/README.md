@@ -2,6 +2,8 @@
 
 文档站「标注质量」页上的每个数、每张图都由本目录的三个脚本从头算出。
 
+分析沿用 Git 修订 `0388796` 的历史划分。复现时在该修订运行下列命令，配套使用[相同划分的成品目录](../../docs/roi-split-migration.md#复现旧划分)。
+
 ```sh
 PYTHONPATH=src python research/annotation-quality/windows.py [数据根]   # 需数据盘，写 windows.csv（已入库）
 PYTHONPATH=src python research/annotation-quality/estimate.py           # 只读仓库，写 tables.md、results.json

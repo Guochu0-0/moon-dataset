@@ -17,6 +17,7 @@
 <nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html">组织</a><a href="../data/imaging.html">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/annotation-quality.html" aria-current="page">标注质量</a><a href="../data/statistics.html">统计与分布</a><a href="../data/usage.html">使用建议</a><a href="../data/difficulty.html">样本难度</a></nav>
 <article class="prose"><h1 id="标注质量">标注质量</h1>
 <p>评测真值点由人工标注，每一对点都带有标注误差。在评测真值点上量出的配准误差，同时包含算法误差和标注误差；知道标注误差有多大，才能客观地判断算法的结果。</p>
+<p>本节保留 Git 修订 <code>0388796</code> 所记录的历史划分和分析。原验证集和原测试集中的评测真值点现均归入<a href="statistics.html#划分与数量">测试集</a>。</p>
 <h2 id="误差模型">误差模型</h2>
 <p>一对评测真值点，光学坐标为 p，SAR 坐标为 q，两者之差</p>
 <pre><code>d = q − p = g(p) + e

@@ -2,6 +2,8 @@
 
 由 `difficulty.py` 生成，页面上的数都出自这里。单位为像素。
 
+下表的验证集和测试集沿用 Git 修订 `0388796` 的历史划分。复现时在该修订运行 `research/sample-difficulty/difficulty.py`。这里的 1,605 对样本在当前划分中都属于测试集。
+
 ## 数据
 
 |  | patch 对 | ROI | 点对 | 每对点数 |

@@ -1,8 +1,7 @@
 """接缝二：站点生成器的整体输出。
 
-生成器只读仓库里的文件（文档正文、`docs/theme/`、`docs/assets/`、`data/metadata/`、
-`data/ground-truth/`），所以这里不接数据盘：用 3 个 ROI 的小型夹具驱动它，再对真实
-仓库跑一遍，核对入库的 `_site/` 就是它此刻的输出。
+生成器只读仓库里的文件，所以这里不接数据盘：用 3 个 ROI 的小型夹具驱动它，再对
+真实仓库跑一遍，核对入库的 `_site/` 就是它此刻的输出。
 """
 
 from __future__ import annotations
@@ -27,7 +26,7 @@ METADATA_HEADER = (
 METADATA_ROWS = [
     "ROI_6,Test,LSZ_00001_2CD_EKU_10S100_V1,1,NOMINAL MISSION,2009-10-01T00:00:01,ZOOM_S,2.3800,48.10,LEFT,270.00,EQUIRECTANGULAR,4096.0,7.4032,2765,52703,4",
     "ROI_27,Train,LSZ_00002_2CD_EKU_20N200_V1,2,NOMINAL MISSION,2009-11-01T00:00:02,ZOOM_S,2.3800,50.20,RIGHT,90.00,EQUIRECTANGULAR,4096.0,7.4032,3000,40000,4",
-    "ROI_35,Val,LSZ_00003_2CD_EKU_30S300_V1,3,NOMINAL MISSION,2009-12-01T00:00:03,ZOOM_S,2.3800,49.00,LEFT,270.00,EQUIRECTANGULAR,4096.0,7.4032,2500,30000,4",
+    "ROI_35,Test,LSZ_00003_2CD_EKU_30S300_V1,3,NOMINAL MISSION,2009-12-01T00:00:03,ZOOM_S,2.3800,49.00,LEFT,270.00,EQUIRECTANGULAR,4096.0,7.4032,2500,30000,4",
 ]
 
 
@@ -127,10 +126,11 @@ def fixture_repo(tmp_path_factory: pytest.TempPathFactory) -> Path:
     _write(root / "data" / "ground-truth" / "Test" / "ROI_006" / "patch_3.txt",
            "177.1\t-332.9\t262.6\t-333.8\r\n205.5\t-244.7\t297.3\t-244.8\r\n")
     # 点上 RMSE：patch_0 两对点都错开 5（3-4-5），patch_1 都错开 13（5-12-13）
-    _write(root / "data" / "ground-truth" / "Val" / "ROI_035" / "patch_0.txt",
+    _write(root / "data" / "ground-truth" / "Test" / "ROI_035" / "patch_0.txt",
            "10\t-10\t13\t-14\r\n100\t-50\t96\t-47\r\n")
-    _write(root / "data" / "ground-truth" / "Val" / "ROI_035" / "patch_1.txt",
+    _write(root / "data" / "ground-truth" / "Test" / "ROI_035" / "patch_1.txt",
            "10\t-10\t15\t-22\r\n200\t-300\t188\t-295\r\n")
+    _write(assets / "difficulty-roi-splits.json", json.dumps({"ROI_006": "Test", "ROI_035": "Val"}))
     return root
 
 
@@ -165,7 +165,7 @@ def test_patch_numbers_appear_only_when_they_have_gaps(fixture_site: dict[str, b
     assert "patch 编号" not in _text(fixture_site["rois/ROI_006.html"])
 
 
-def test_truth_points_are_shown_only_for_validation_and_test(fixture_site: dict[str, bytes]) -> None:
+def test_roi_page_shows_truth_points_when_available(fixture_site: dict[str, bytes]) -> None:
     assert "60，共 480 对点" in _text(fixture_site["rois/ROI_006.html"])
     assert "带评测真值点的 patch" not in _text(fixture_site["rois/ROI_027.html"])
     row = _table_row(fixture_site["data/statistics.html"], "ROI_027")
@@ -183,7 +183,7 @@ def test_difficulty_table_lists_rois_with_truth_points_by_incidence(fixture_site
     collector.feed(fixture_site["data/difficulty-rois.html"].decode("utf-8"))
     rows = [row for row in collector.rows if row and row[0].startswith("ROI_")]
     assert [row[0] for row in rows] == ["ROI_006", "ROI_035"]  # 入射角 48.10° 在 49.00° 之前；训练集不列
-    assert rows[1][2:7] == ["49.0°", "2", "5.8", "9.0", "12.2"]
+    assert rows[1][1:7] == ["验证集", "49.0°", "2", "5.8", "9.0", "12.2"]
 
 
 def test_difficulty_detail_pages_keep_the_section_highlighted(fixture_site: dict[str, bytes]) -> None:
@@ -288,16 +288,70 @@ def test_every_roi_in_the_metadata_table_has_a_page(real_site: dict[str, bytes])
         assert f"rois/{roi}.html" in home and f"../rois/{roi}.html" in table
 
 
-def test_site_reports_the_revised_patch_counts_and_roi_017_gaps(real_site: dict[str, bytes]) -> None:
+def test_site_reports_the_current_split_counts_and_roi_017_gaps(real_site: dict[str, bytes]) -> None:
     stats = real_site["data/statistics.html"]
-    expected_counts = {"训练集": "7889", "验证集": "825", "测试集": "1130", "合计": "9844"}
-    for page in (real_site["index.html"], stats):
-        for split, count in expected_counts.items():
-            assert _table_row(page, split)[2] == count
+    expected_counts = {
+        "训练集": ["47", "6909", "—", "—"],
+        "验证集": ["7", "980", "—", "—"],
+        "测试集": ["13", "1955", "1605", "13031"],
+        "合计": ["67", "9844", "1605", "13031"],
+    }
+    for split, counts in expected_counts.items():
+        assert _table_row(real_site["index.html"], split)[1:] == counts[:2]
+        assert _table_row(stats, split)[1:] == counts
     assert _table_row(stats, "ROI_017")[:3] == ["ROI_017", "训练集", "195"]
     roi = _text(real_site["rois/ROI_017.html"])
     assert "patch 对 195" in roi
     assert "0–212，缺 9、12、15、18、21、24、27、30、33、36、39、42、45、48、51、54、57、61" in roi
+
+
+def test_moved_rois_have_the_same_split_on_the_maps_and_roi_pages(real_site: dict[str, bytes]) -> None:
+    validation = {"ROI_001": 40, "ROI_009": 162, "ROI_018": 117, "ROI_050": 160,
+                  "ROI_055": 214, "ROI_067": 120, "ROI_078": 167}
+    former_validation = ("ROI_035", "ROI_049", "ROI_070", "ROI_071", "ROI_075", "ROI_080")
+    stats = real_site["data/statistics.html"]
+    maps = (real_site["index.html"].decode("utf-8"), stats.decode("utf-8"))
+    for roi in (*validation, *former_validation):
+        split, label = ("Val", "验证集") if roi in validation else ("Test", "测试集")
+        row = _table_row(stats, roi)
+        assert row[1] == label
+        map_label = f'aria-label="{roi}，{label}，{row[2]} 对 patch"'
+        assert all(map_label in page for page in maps)
+        page = real_site[f"rois/{roi}.html"]
+        assert f'<p class="split-tag"><span class="sw {split}"></span>{label}</p>' in page.decode("utf-8")
+        if split == "Val":
+            assert row[2:5] == [str(validation[roi]), "—", "—"]
+            assert "带评测真值点的 patch" not in _text(page)
+        else:
+            assert int(row[3]) > 0
+            assert f"带评测真值点的 patch {row[3]}，共 {row[4]} 对点" in _text(page)
+
+
+def test_moved_home_samples_still_show_their_truth_points(real_site: dict[str, bytes]) -> None:
+    payload = real_site["index.html"].decode("utf-8").split("window.SAMPLES=", 1)[1].split(";</script>", 1)[0]
+    samples = {sample["roi"]: sample for sample in json.loads(payload)}
+    examples = {
+        "ROI_035": (16, [222.4, 67.4, 318.2, 63.6]),
+        "ROI_049": (91, [198.1, 420.1, 170.0, 421.6]),
+        "ROI_070": (151, [81.1, 290.1, 187.5, 288.6]),
+        "ROI_071": (8, [414.9, 350.9, 456.5, 350.9]),
+        "ROI_075": (118, [198.3, 320.1, 134.5, 324.7]),
+        "ROI_080": (50, [338.7, 491.5, 306.8, 493.0]),
+    }
+    for roi, (patch, point) in examples.items():
+        sample = samples[roi]
+        assert (sample["split"], sample["patch"], sample["points"][0]) == ("Test", patch, point)
+        assert f'assets/{sample["opt"]}' in real_site and f'assets/{sample["sar"]}' in real_site
+
+
+def test_difficulty_table_keeps_the_historical_split_comparison(real_site: dict[str, bytes]) -> None:
+    collector = _Collector()
+    collector.feed(real_site["data/difficulty-rois.html"].decode("utf-8"))
+    rows = [row for row in collector.rows if row and row[0].startswith("ROI_")]
+    assert sum(int(row[3]) for row in rows if row[1] == "验证集") == 652
+    assert sum(int(row[3]) for row in rows if row[1] == "测试集") == 953
+    for roi, _, _, labeled, *_ in rows:
+        assert _table_row(real_site["data/statistics.html"], roi)[3] == labeled
 
 
 def test_committed_site_is_the_generator_output(real_site: dict[str, bytes]) -> None:

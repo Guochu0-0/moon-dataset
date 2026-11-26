@@ -21,7 +21,7 @@
  },
  {
   "roi": "ROI_035",
-  "split": "Val",
+  "split": "Test",
   "patch": 16
  },
  {
@@ -31,7 +31,7 @@
  },
  {
   "roi": "ROI_049",
-  "split": "Val",
+  "split": "Test",
   "patch": 91
  },
  {
@@ -46,22 +46,22 @@
  },
  {
   "roi": "ROI_070",
-  "split": "Val",
+  "split": "Test",
   "patch": 151
  },
  {
   "roi": "ROI_071",
-  "split": "Val",
+  "split": "Test",
   "patch": 8
  },
  {
   "roi": "ROI_075",
-  "split": "Val",
+  "split": "Test",
   "patch": 118
  },
  {
   "roi": "ROI_080",
-  "split": "Val",
+  "split": "Test",
   "patch": 50
  }
 ]

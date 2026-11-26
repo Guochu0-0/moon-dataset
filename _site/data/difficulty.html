@@ -17,7 +17,7 @@
 <nav class="sections" aria-label="数据说明"><a href="../data/sources.html">出处</a><a href="../data/organization.html">组织</a><a href="../data/imaging.html">成像特征</a><a href="../data/pairing.html">配对特征</a><a href="../data/annotation-quality.html">标注质量</a><a href="../data/statistics.html">统计与分布</a><a href="../data/usage.html">使用建议</a><a href="../data/difficulty.html" aria-current="page">样本难度</a></nav>
 <article class="prose wide"><h1 id="样本难度">样本难度</h1>
 <p>不同的 patch 对，配准的难度不一样。最直接的因素是两张图原本错开了多远：把光学 patch 和 SAR patch 叠在一起，同一个撞击坑在两张图上可能只差几个像素，也可能差上百个像素。我们用这个错开的距离来近似衡量样本难度，称为点上 RMSE：数越大，两张图错开得越多，配准越难。</p>
-<p>点上 RMSE 由评测真值点算出。只有验证集、测试集有评测真值点，训练集没有这个值。</p>
+<p>点上 RMSE 由评测真值点算出。这里保留 Git 修订 <code>0388796</code> 所记录的历史划分和分析。分析所用的 1,605 对带评测真值点的 patch 现均归入<a href="statistics.html#划分与数量">测试集</a>。</p>
 <h2 id="定义">定义</h2>
 <p>一对评测真值点，光学坐标为 p，SAR 坐标为 q，两者都是 patch 内的像素坐标，x 向右、y 向下。两者之差</p>
 <pre><code>d = q − p = g(p) + e
@@ -54,12 +54,12 @@
 <li>Borovec J. et al. ANHIR: Automatic Non-Rigid Histological Image Registration Challenge. <em>IEEE Transactions on Medical Imaging</em>, 39(10):3042–3052, 2020. doi:10.1109/TMI.2020.2986331</li>
 </ul>
 <h2 id="结果">结果</h2>
-<p>数据是验证集、测试集中有评测真值点的全部 1605 个 patch 对，共 13031 对点，每个 patch 对 7–11 对。</p>
+<p>数据是当时验证集和测试集中有评测真值点的全部 1,605 个 patch 对，共 13,031 对点，每个 patch 对 7–11 对。</p>
 <div class="cards">
-<div class="card"><b>1605</b><span>有点上 RMSE 的 patch 对：验证集 652，测试集 953</span></div>
+<div class="card"><b>1605</b><span>按历史划分，原验证集有 652 对，原测试集有 953 对</span></div>
 <div class="card"><b>27.1 <small>像素</small></b><span>1605 个值的中位数</span></div>
 <div class="card"><b>104.5 <small>像素</small></b><span>90 分位；最大值 268.3 像素</span></div>
-<div class="card"><b>24.7 / 30.0 <small>像素</small></b><span>验证集、测试集各自的中位数</span></div>
+<div class="card"><b>24.7 / 30.0 <small>像素</small></b><span>原验证集、原测试集各自的中位数</span></div>
 </div>
 
 <div class="tiles">
